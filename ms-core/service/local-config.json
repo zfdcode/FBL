@@ -1,0 +1,35 @@
+{
+  "server": {
+    "rootPath": "/api/*",
+    "applicationConnectors": [
+      {
+        "type": "http",
+        "port": 8444
+      }
+    ],
+    "adminConnectors": []
+  },
+  "logging": {
+    "level": "WARN",
+    "loggers": {
+      "com.tum.fbl.core": "INFO",
+      "io.dropwizard.jersey.DropwizardResourceConfig": "INFO"
+    },
+    "appenders": [
+      {
+        "type": "console",
+        "threshold": "ALL",
+        "timeZone": "UTC"
+      },
+      {
+        "type": "file",
+        "currentLogFilename": "./logs/server.log",
+        "threshold": "ERROR",
+        "archive": true,
+        "archivedLogFilenamePattern": "./logs/server-%d.log",
+        "archivedFileCount": 5,
+        "timeZone": "UTC"
+      }
+    ]
+  }
+}

@@ -1,4 +1,3 @@
-
 Functionality:
 
 * Virtual Queue: (Max)
@@ -11,7 +10,7 @@ Functionality:
     * Rest Own: Enters food information and Nutritional Value and Restaurant
     * User: See a list of Meals/ Filter results / Search 
     * Details of the meal 
-* QR Code: (FungDa)
+* QR Code: (Fangda)
     * Users: Show food Info on scanning of QR code
     * Users: Rate and feedback to the Food
 * Quick Choice: (Patrick)

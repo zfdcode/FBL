@@ -1,0 +1,68 @@
+
+Functionality:
+
+* Virtual Queue: (Max)
+    * Order to Restaurant Interface in a Queue
+    * User can see the Orders
+    * Rest owner edit Order: Fulfilment status
+    * User cancel order
+    * User see a list of Food with restaurant (Food Info) 
+* Food Info : (Malte)
+    * Rest Own: Enters food information and Nutritional Value and Restaurant
+    * User: See a list of Meals/ Filter results / Search 
+    * Details of the meal 
+* QR Code: (FungDa)
+    * Users: Show food Info on scanning of QR code
+    * Users: Rate and feedback to the Food
+* Quick Choice: (Patrick)
+    * User: Swipe left/right to like and unlike a food item 
+    * User: See the images of food 
+    * Statistics for restaurants
+    * Need Food Images and Rest location (Food Info)
+* Food Groups: (Sahil)
+    * Users: Enter their User data, health data
+    * Users: Matched to Groups of users with similar interest
+    * Users: Chat among themselves
+    * Users: Food recommendation (Food Info)
+    * Users: Food Feedback (Extension)
+* Vote Ingredients: (Marcel)
+    * System: Enter ingredients in the system
+    * User: See list of ingredients with images
+    * User: Like / unlike the ingredients
+    * Rest Owner: Statistics about ingredients
+    * Rest Owner: Can create Voting period for ingredients
+* Health Tracker: (Angus)
+    * Health Data of User
+
+
+Groups/Technology:
+Java Group:
+	1. Virtual Queue: (Max)
+	2. Food Info : (Malte)
+	3. QR Code: (FungDa)
+	4. Quick Choice: (Patrick)
+
+* Lang: Java and Dropwizard
+* DB: MariaDB
+
+Python: 
+	1. Food Groups: (Sahil)
+* Lang: Python and 
+* DB: MariaDB
+
+NodeJS:
+	1. Vote Ingredients: (Marcel)
+* Lang: NodeJS
+* DB: MongoDB 
+* API: Express for Rest API
+
+Health tracker:
+* 
+
+TODO:
+*	Add UML Diagram to https://docs.google.com/presentation/d/1UvBU3ZF6hwfjlnYo7F7jiJjJj5IKVLZwtEdav2NRSmg/edit?usp=sharing
+*	Add REST API endpoints with schema
+*	Deadline: 25 May Thursday end of day
+*	Next Meeting: 26 May Friday 10 AM
+
+

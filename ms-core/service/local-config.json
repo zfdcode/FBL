@@ -31,5 +31,8 @@
         "timeZone": "UTC"
       }
     ]
+  },
+  "swagger": {
+    "resourcePackage": "com.tum.fbl.core.service.resources"
   }
 }

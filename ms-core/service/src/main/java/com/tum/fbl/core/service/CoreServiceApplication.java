@@ -11,6 +11,8 @@ import io.dropwizard.auth.basic.BasicCredentialAuthFilter;
 import io.dropwizard.auth.basic.BasicCredentials;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
+import io.federecio.dropwizard.swagger.SwaggerBundle;
+import io.federecio.dropwizard.swagger.SwaggerBundleConfiguration;
 
 /**
  * Created by patrickmelchner on 23.05.17.
@@ -23,7 +25,12 @@ public class CoreServiceApplication extends Application<CoreServiceConfiguration
 
     @Override
     public void initialize(Bootstrap<CoreServiceConfiguration> bootstrap) {
-        // nothing to do yet
+        bootstrap.addBundle(new SwaggerBundle<CoreServiceConfiguration>() {
+            @Override
+            protected SwaggerBundleConfiguration getSwaggerBundleConfiguration(CoreServiceConfiguration configuration) {
+                return configuration.swaggerBundleConfiguration;
+            }
+        });
     }
 
     @Override

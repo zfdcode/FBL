@@ -2,17 +2,21 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <parent>
+        <artifactId>parent</artifactId>
+        <groupId>com.tum.fbl.core</groupId>
+        <relativePath>../</relativePath>
+        <version>0.1</version>
+    </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.tum.fbl.core</groupId>
-    <artifactId>parent</artifactId>
-    <packaging>pom</packaging>
-    <version>0.1</version>
-    <modules>
-        <module>service</module>
-        <module>persistence</module>
-        <module>imagestorage</module>
-    </modules>
+    <artifactId>imagestorage</artifactId>
+
+
+    <dependencies>
+
+    </dependencies>
 
 
 </project>

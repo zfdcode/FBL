@@ -30,7 +30,7 @@ Functionality:
     * User: Like / unlike the ingredients
     * Rest Owner: Statistics about ingredients
     * Rest Owner: Can create Voting period for ingredients
-* Health Tracker: (Angus)
+* Health Tracker: (Jie)
     *Device: wearable device info
     *User: Health Data of User, calories and heartbeat
 

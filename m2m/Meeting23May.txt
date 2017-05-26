@@ -30,8 +30,9 @@ Functionality:
     * User: Like / unlike the ingredients
     * Rest Owner: Statistics about ingredients
     * Rest Owner: Can create Voting period for ingredients
-* Health Tracker: (Angus)
-    * Health Data of User
+* Health Tracker: (Jie)
+    *Device: wearable device info
+    *User: Health Data of User, calories and heartbeat
 
 
 Groups/Technology:
@@ -40,6 +41,7 @@ Java Group:
 	2. Food Info : (Malte)
 	3. QR Code: (FungDa)
 	4. Quick Choice: (Patrick)
+	5. Health diet tracker: (Jie)
 
 * Lang: Java and Dropwizard
 * DB: MariaDB
@@ -55,8 +57,6 @@ NodeJS:
 * DB: MongoDB 
 * API: Express for Rest API
 
-Health tracker:
-* 
 
 TODO:
 *	Add UML Diagram to https://docs.google.com/presentation/d/1UvBU3ZF6hwfjlnYo7F7jiJjJj5IKVLZwtEdav2NRSmg/edit?usp=sharing

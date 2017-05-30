@@ -12,10 +12,16 @@ import io.dropwizard.auth.AuthValueFactoryProvider;
 import io.dropwizard.auth.Authenticator;
 import io.dropwizard.auth.basic.BasicCredentialAuthFilter;
 import io.dropwizard.auth.basic.BasicCredentials;
+import io.dropwizard.forms.MultiPartBundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import io.federecio.dropwizard.swagger.SwaggerBundle;
 import io.federecio.dropwizard.swagger.SwaggerBundleConfiguration;
+import org.eclipse.jetty.servlets.CrossOriginFilter;
+
+import javax.servlet.DispatcherType;
+import javax.servlet.FilterRegistration;
+import java.util.EnumSet;
 
 /**
  * Created by patrickmelchner on 23.05.17.
@@ -28,17 +34,22 @@ public class CoreServiceApplication extends Application<CoreServiceConfiguration
 
     @Override
     public void initialize(Bootstrap<CoreServiceConfiguration> bootstrap) {
+
         bootstrap.addBundle(new SwaggerBundle<CoreServiceConfiguration>() {
             @Override
             protected SwaggerBundleConfiguration getSwaggerBundleConfiguration(CoreServiceConfiguration configuration) {
                 return configuration.swaggerBundleConfiguration;
             }
         });
+
+        bootstrap.addBundle(new MultiPartBundle());
     }
 
     @Override
     public void run(CoreServiceConfiguration configuration,
                     Environment environment) {
+
+        configureCors(environment);
 
         registerAuthenticator(environment);
 
@@ -70,5 +81,15 @@ public class CoreServiceApplication extends Application<CoreServiceConfiguration
 
         final OrderResource orderResource = new OrderResource();
         environment.jersey().register(orderResource);
+    }
+
+    private void configureCors(Environment environment) {
+        FilterRegistration.Dynamic filter = environment.servlets().addFilter("CORS", CrossOriginFilter.class);
+        filter.addMappingForUrlPatterns(EnumSet.allOf(DispatcherType.class), true, "/*");
+        filter.setInitParameter(CrossOriginFilter.ALLOWED_METHODS_PARAM, "GET,PUT,POST,DELETE,OPTIONS");
+        filter.setInitParameter(CrossOriginFilter.ALLOWED_ORIGINS_PARAM, "*");
+        filter.setInitParameter(CrossOriginFilter.ACCESS_CONTROL_ALLOW_ORIGIN_HEADER, "*");
+        filter.setInitParameter("allowedHeaders", "Content-Type,Authorization,X-Requested-With,Content-Length,Accept,Origin");
+        filter.setInitParameter("allowCredentials", "true");
     }
 }

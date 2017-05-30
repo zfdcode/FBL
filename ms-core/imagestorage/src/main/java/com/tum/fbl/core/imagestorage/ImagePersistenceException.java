@@ -3,5 +3,5 @@ package com.tum.fbl.core.imagestorage;
 /**
  * Created by patrickmelchner on 26.05.17.
  */
-public class ImagePersistenceException {
+public class ImagePersistenceException extends Throwable{
 }

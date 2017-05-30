@@ -12,6 +12,7 @@
         <module>service</module>
         <module>persistence</module>
         <module>imagestorage</module>
+        <module>do</module>
     </modules>
 
     <build>

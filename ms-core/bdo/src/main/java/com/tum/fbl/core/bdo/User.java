@@ -1,4 +1,5 @@
 package com.tum.fbl.core.bdo;
+
 import java.util.Date;
 
 
@@ -18,7 +19,9 @@ public class User {
 
     private int weight;
 
-    public User(int user_id, String user_name, String user_password, String email, Date birthday, int height, int weight) {
+    private int role;
+
+    public User(int user_id, String user_name, String user_password, String email, Date birthday, int height, int weight, int role) {
         this.user_id = user_id;
         this.user_name = user_name;
         this.user_password = user_password;
@@ -26,6 +29,7 @@ public class User {
         this.birthday = birthday;
         this.height = height;
         this.weight = weight;
+        this.role = role;
     }
 
     public int getUser_id() {
@@ -84,4 +88,11 @@ public class User {
         this.weight = weight;
     }
 
+    public int getRole() {
+        return role;
+    }
+
+    public void setRole(int role) {
+        this.role = role;
+    }
 }

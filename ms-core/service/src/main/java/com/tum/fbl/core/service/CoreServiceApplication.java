@@ -14,7 +14,9 @@ import io.dropwizard.auth.AuthValueFactoryProvider;
 import io.dropwizard.auth.Authenticator;
 import io.dropwizard.auth.basic.BasicCredentialAuthFilter;
 import io.dropwizard.auth.basic.BasicCredentials;
+import io.dropwizard.db.DataSourceFactory;
 import io.dropwizard.forms.MultiPartBundle;
+import io.dropwizard.migrations.MigrationsBundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import io.federecio.dropwizard.swagger.SwaggerBundle;
@@ -41,6 +43,13 @@ public class CoreServiceApplication extends Application<CoreServiceConfiguration
             @Override
             protected SwaggerBundleConfiguration getSwaggerBundleConfiguration(CoreServiceConfiguration configuration) {
                 return configuration.getSwaggerBundleConfiguration();
+            }
+        });
+
+        bootstrap.addBundle(new MigrationsBundle<CoreServiceConfiguration>() {
+            @Override
+            public DataSourceFactory getDataSourceFactory(CoreServiceConfiguration configuration) {
+                return configuration.getDatabaseConfiguration();
             }
         });
 

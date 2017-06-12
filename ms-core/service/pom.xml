@@ -90,7 +90,6 @@
         <dependency>
             <groupId>io.dropwizard</groupId>
             <artifactId>dropwizard-core</artifactId>
-            <version>${dropwizard.version}</version>
         </dependency>
         <dependency>
             <groupId>io.dropwizard</groupId>
@@ -121,9 +120,14 @@
         <dependency>
             <groupId>com.smoketurner</groupId>
             <artifactId>dropwizard-swagger</artifactId>
-            <version>1.1.0-1</version>
         </dependency>
 
+
+        <dependency>
+            <groupId>com.tum.fbl.core</groupId>
+            <artifactId>config</artifactId>
+            <version>0.1</version>
+        </dependency>
         <dependency>
             <groupId>com.tum.fbl.core</groupId>
             <artifactId>imagestorage</artifactId>
@@ -132,6 +136,11 @@
         <dependency>
             <groupId>com.tum.fbl.core</groupId>
             <artifactId>persistence</artifactId>
+            <version>0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.tum.fbl.core</groupId>
+            <artifactId>local-env</artifactId>
             <version>0.1</version>
         </dependency>
     </dependencies>

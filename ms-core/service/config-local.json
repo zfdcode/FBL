@@ -34,5 +34,12 @@
   },
   "swagger": {
     "resourcePackage": "com.tum.fbl.core.service.resources"
+  },
+  "database": {
+    "driverClass": "org.h2.Driver",
+    "url": "jdbc:h2:C:/Temp/core-service",
+    "user": "",
+    "password": "",
+    "validationQuery": "/* MyService Health Check */ SELECT 1"
   }
 }

@@ -4,3 +4,6 @@ dependency-reduced-pom.xml
 
 # log files
 logs
+
+# local env
+local

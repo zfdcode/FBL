@@ -122,7 +122,6 @@
             <artifactId>dropwizard-swagger</artifactId>
         </dependency>
 
-
         <dependency>
             <groupId>com.tum.fbl.core</groupId>
             <artifactId>config</artifactId>

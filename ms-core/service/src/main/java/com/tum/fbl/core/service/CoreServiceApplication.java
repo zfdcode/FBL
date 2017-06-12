@@ -1,6 +1,7 @@
 package com.tum.fbl.core.service;
 
 import com.tum.fbl.core.config.CoreServiceConfiguration;
+import com.tum.fbl.core.persistence.ConnectionFactory;
 import com.tum.fbl.core.service.auth.BasicAuthenticator;
 import com.tum.fbl.core.service.auth.User;
 import com.tum.fbl.core.service.resources.FoodResource;
@@ -55,6 +56,9 @@ public class CoreServiceApplication extends Application<CoreServiceConfiguration
         registerAuthenticator(environment);
 
         registerResources(environment);
+
+        final ConnectionFactory dbiFactory = new ConnectionFactory(configuration, environment);
+
     }
 
 

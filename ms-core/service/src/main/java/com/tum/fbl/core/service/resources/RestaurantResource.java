@@ -1,7 +1,5 @@
 package com.tum.fbl.core.service.resources;
 
-import com.tum.fbl.core.service.auth.User;
-import io.dropwizard.auth.Auth;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 

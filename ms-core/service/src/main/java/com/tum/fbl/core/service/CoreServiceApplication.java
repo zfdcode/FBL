@@ -1,5 +1,6 @@
 package com.tum.fbl.core.service;
 
+import com.tum.fbl.core.config.CoreServiceConfiguration;
 import com.tum.fbl.core.service.auth.BasicAuthenticator;
 import com.tum.fbl.core.service.auth.User;
 import com.tum.fbl.core.service.resources.FoodResource;
@@ -38,7 +39,7 @@ public class CoreServiceApplication extends Application<CoreServiceConfiguration
         bootstrap.addBundle(new SwaggerBundle<CoreServiceConfiguration>() {
             @Override
             protected SwaggerBundleConfiguration getSwaggerBundleConfiguration(CoreServiceConfiguration configuration) {
-                return configuration.swaggerBundleConfiguration;
+                return configuration.getSwaggerBundleConfiguration();
             }
         });
 

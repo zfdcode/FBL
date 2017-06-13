@@ -1,3 +1,5 @@
+package com.tum.fbl.core.persistence.meal;
+
 import java.util.Date;
 
 public class Meal {

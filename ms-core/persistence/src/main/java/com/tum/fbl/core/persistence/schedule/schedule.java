@@ -1,3 +1,5 @@
+package com.tum.fbl.core.persistence.schedule;
+
 import java.util.Date;
 
 
@@ -49,4 +51,3 @@ public class Schedules {
     public void setSchedules_closing_time(Date schedules_closing_time) {
         this.schedules_closing_time = schedules_closing_time;
     }
-}

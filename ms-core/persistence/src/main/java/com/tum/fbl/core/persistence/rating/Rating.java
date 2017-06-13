@@ -1,3 +1,5 @@
+package com.tum.fbl.core.persistence.rating;
+
 public class Rating {
 
     private String user_id;

@@ -13,7 +13,7 @@ import javax.ws.rs.core.MediaType;
 
 @Path("/order")
 @Produces(MediaType.APPLICATION_JSON)
-@Api(value = "Order API", description = "Provides order functionality.")
+@Api(value = "com.tum.fbl.core.persistence.order.Order API", description = "Provides order functionality.")
 public class OrderResource {
 
     @GET

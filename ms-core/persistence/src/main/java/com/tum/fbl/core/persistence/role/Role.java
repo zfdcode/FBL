@@ -1,3 +1,5 @@
+package com.tum.fbl.core.persistence.role;
+
 public class Role {
 
     private String role_id;

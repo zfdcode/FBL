@@ -1,3 +1,5 @@
+package com.tum.fbl.core.persistence.ingredient;
+
 public class Ingredient {
 
     private String ingredient_id;

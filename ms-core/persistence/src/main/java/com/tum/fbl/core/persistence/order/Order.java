@@ -1,3 +1,7 @@
+package com.tum.fbl.core.persistence.order;
+
+import com.tum.fbl.core.persistence.meal.Meal;
+
 public class Order {
 
     private String order_id;

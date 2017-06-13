@@ -1,3 +1,5 @@
+package com.tum.fbl.core.persistence.healthdata;
+
 public class HealthData {
 
     private User user;

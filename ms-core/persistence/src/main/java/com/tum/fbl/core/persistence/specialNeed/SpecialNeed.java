@@ -1,3 +1,5 @@
+package com.tum.fbl.core.persistence.specialNeed;
+
 public class SpecialNeed {
 
     private String special_need_id;

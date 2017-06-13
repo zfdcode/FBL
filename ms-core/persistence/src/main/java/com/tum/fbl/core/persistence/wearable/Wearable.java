@@ -1,3 +1,5 @@
+package com.tum.fbl.core.persistence.wearable;
+
 public class Wearable {
 
     private String device_id;

@@ -1,1 +1,4 @@
 .DS_Store
+.idea
+foodgroups/env/
+__pycache__

@@ -1,4 +1,5 @@
 .DS_Store
 .idea
 foodgroups/env/
+foodgroups/static/
 __pycache__

@@ -1,15 +1,14 @@
 package com.tum.fbl.core.service.resources;
 
 import com.tum.fbl.core.service.auth.User;
+import com.tum.fbl.core.bdo.Order;
 import io.dropwizard.auth.Auth;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.PUT;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import java.util.List;
+import javax.ws.rs.*;
 
 @Path("/order")
 @Produces(MediaType.APPLICATION_JSON)
@@ -17,24 +16,51 @@ import javax.ws.rs.core.MediaType;
 public class OrderResource {
 
     @GET
-    @Path("/open")
-    @ApiOperation(value = "Get all open orders")
-    public String getOpenOrders (@Auth User user) {
-        return "running";
+    @Path("/all")
+    @ApiOperation(value = "Get all orders")
+    public List<Order> getAllOrders(@Auth User user) {
+        return null;
     }
 
     @GET
-    @Path("/restaurant")
-    @ApiOperation(value = "Get open oders of a restaurants")
-    public String getOrdersForRestaurant (@Auth User user) {
-        return "running";
+    @Path("/open")
+    @ApiOperation(value = "Get all open orders")
+    public Order getOpenOrders (@Auth User user) {
+        return null;
+    }
+
+    @GET
+    @Path("/{orderId}")
+    @ApiOperation(value = "Get information of a order")
+    public Order getOrder(@PathParam("orderId") int orderId){
+        return null;
+    }
+
+    @GET
+    @Path("/{restaurantId}")
+    @ApiOperation(value = "Get open orders of a restaurants")
+    public Order getOrdersForRestaurant (@PathParam("restaurantId") int restaurantId) {
+        return null;
     }
 
     @PUT
-    @ApiOperation(value = "Place new order")
-    public String placeOrder (@Auth User user) {
-        return "running";
+    @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    @ApiOperation(value = "Update an existing order")
+    public void placeOrder (Order order) {
+
     }
 
+    @POST
+    @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    @ApiOperation(value = "Add a new order to the store")
+    public void addOrder(Order order) {
+    }
+
+    @DELETE
+    @Path("/{orderId}")
+    @ApiOperation(value = "Deletes a order")
+    public void deleteOrder(@PathParam("orderId") int orderId) {
+
+    }
 
 }

@@ -4,6 +4,7 @@ import com.tum.fbl.core.imagestorage.ImagePersistenceException;
 import com.tum.fbl.core.imagestorage.ImageStatus;
 import com.tum.fbl.core.imagestorage.ImageStorage;
 import com.tum.fbl.core.imagestorage.ImageStorageImpl;
+import com.tum.fbl.core.bdo.Meal;
 import com.tum.fbl.core.service.auth.User;
 import io.dropwizard.auth.Auth;
 import io.swagger.annotations.Api;
@@ -17,25 +18,41 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.io.InputStream;
+import java.util.List;
 
 
-@Path("/food")
+@Path("/meal")
 @Produces(MediaType.APPLICATION_JSON)
-@Api(value = "Food API", description = "Provides offered food/menues.")
-public class FoodResource {
+@Api(value = "Meal API", description = "Provides offered meal/menues.")
+public class MealResource {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(FoodResource.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(MealResource.class);
 
     private ImageStorage imageStorage;
 
-    public FoodResource () {
+    public MealResource() {
         this.imageStorage = new ImageStorageImpl();
     }
 
     @GET
-    @ApiOperation(value = "Get all offered food/menues")
-    public String getAllMenus(@Auth User user) {
-        return "running";
+    @Path("/all")
+    @ApiOperation(value = "Get all offered meal/menues")
+    public List<Meal> getAllMeals(@Auth User user) {
+        return null;
+    }
+
+    @GET
+    @Path("/{mealId}")
+    @ApiOperation(value = "Get information of a meal")
+    public Meal getMeal(@PathParam("mealId") int mealId){
+        return null;
+    }
+
+    @DELETE
+    @Path("/{mealId}")
+    @ApiOperation(value = "Deletes a meal")
+    public void deleteMeal(@PathParam("mealId") int mealId) {
+
     }
 
     @Path("/img")
@@ -54,6 +71,15 @@ public class FoodResource {
         }
     }
 
+    @POST
+    @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    @ApiOperation(value = "Add a new meal to the store")
+    public void addMeal(Meal meal) {
+    }
 
-
+    @PUT
+    @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    @ApiOperation(value = "Update an existing meal")
+    public void updateMeal(Meal meal) {
+    }
 }

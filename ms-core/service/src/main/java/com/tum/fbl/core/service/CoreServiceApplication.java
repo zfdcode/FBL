@@ -4,7 +4,7 @@ import com.tum.fbl.core.config.CoreServiceConfiguration;
 import com.tum.fbl.core.persistence.ConnectionFactory;
 import com.tum.fbl.core.service.auth.BasicAuthenticator;
 import com.tum.fbl.core.service.auth.User;
-import com.tum.fbl.core.service.resources.FoodResource;
+import com.tum.fbl.core.service.resources.MealResource;
 import com.tum.fbl.core.service.resources.HealthResource;
 import com.tum.fbl.core.service.resources.OrderResource;
 import com.tum.fbl.core.service.resources.RestaurantResource;
@@ -87,8 +87,8 @@ public class CoreServiceApplication extends Application<CoreServiceConfiguration
         final HealthResource healthResource = new HealthResource();
         environment.jersey().register(healthResource);
 
-        final FoodResource foodResource = new FoodResource();
-        environment.jersey().register(foodResource);
+        final MealResource mealResource = new MealResource();
+        environment.jersey().register(mealResource);
 
         final RestaurantResource restaurantResource = new RestaurantResource();
         environment.jersey().register(restaurantResource);

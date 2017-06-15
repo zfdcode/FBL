@@ -2,28 +2,28 @@ package com.tum.fbl.core.persistence.specialNeed;
 
 public class SpecialNeed {
 
-    private String special_need_id;
+    private String specialNeedId;
 
-    private String special_need_name;
+    private String specialNeedName;
 
-    public SpecialNeed(String special_need_id, String special_need_name) {
-        this.special_need_id = special_need_id;
-        this.special_need_name = special_need_name;
+    public SpecialNeed(String specialNeedId, String specialNeedName) {
+        this.specialNeedId = specialNeedId;
+        this.specialNeedName = specialNeedName;
     }
 
-    public String getSpecial_need_id() {
-        return special_need_id;
+    public String getSpecialNeedId() {
+        return specialNeedId;
     }
 
-    public void setSpecial_need_id(String special_need_id) {
-        this.special_need_id = special_need_id;
+    public void setSpecialNeedId(String specialNeedId) {
+        this.specialNeedId = specialNeedId;
     }
 
-    public String getSpecial_need_name() {
-        return special_need_name;
+    public String getSpecialNeedName() {
+        return specialNeedName;
     }
 
-    public void setSpecial_need_name(String special_need_name) {
-        this.special_need_name = special_need_name;
+    public void setSpecialNeedName(String specialNeedName) {
+        this.specialNeedName = specialNeedName;
     }
 }

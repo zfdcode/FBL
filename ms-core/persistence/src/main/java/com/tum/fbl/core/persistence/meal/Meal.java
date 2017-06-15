@@ -4,149 +4,149 @@ import java.util.Date;
 
 public class Meal {
 
-    private String meal_id;
+    private String mealId;
 
-    private String meal_name;
+    private String mealName;
 
-    private byte[] meal_image;
+    private byte[] mealImage;
 
-    private float meal_rating;
+    private float mealRating;
 
-    private int meal_helath_value;
+    private int mealHelathValue;
 
-    private Date meal_preparation_time;
+    private Date mealPreparationTime;
 
-    private float meal_energy;
+    private float mealEnergy;
 
-    private float meal_protein;
+    private float mealProtein;
 
-    private float meal_total_fat;
+    private float mealTotalFat;
 
-    private float meal_saturated;
+    private float mealSaturated;
 
-    private float meal_total_carbohydrate;
+    private float mealTotalCarbohydrate;
 
-    private float meal_sugar;
+    private float mealSugar;
 
-    private float meal_sodium;
+    private float mealSodium;
 
-    public Meal(String meal_id, String meal_name, byte[] meal_image, float meal_rating, int meal_helath_value, Date meal_preparation_time, float meal_energy, float meal_protein, float meal_total_fat, float meal_saturated, float meal_total_carbohydrate, float meal_sugar, float meal_sodium) {
-        this.meal_id = meal_id;
-        this.meal_name = meal_name;
-        this.meal_image = meal_image;
-        this.meal_rating = meal_rating;
-        this.meal_helath_value = meal_helath_value;
-        this.meal_preparation_time = meal_preparation_time;
-        this.meal_energy = meal_energy;
-        this.meal_protein = meal_protein;
-        this.meal_total_fat = meal_total_fat;
-        this.meal_saturated = meal_saturated;
-        this.meal_total_carbohydrate = meal_total_carbohydrate;
-        this.meal_sugar = meal_sugar;
-        this.meal_sodium = meal_sodium;
+    public Meal(String mealId, String mealName, byte[] mealImage, float mealRating, int mealHelathValue, Date mealPreparationTime, float mealEnergy, float mealProtein, float mealTotalFat, float mealSaturated, float mealTotalCarbohydrate, float mealSugar, float mealSodium) {
+        this.mealId = mealId;
+        this.mealName = mealName;
+        this.mealImage = mealImage;
+        this.mealRating = mealRating;
+        this.mealHelathValue = mealHelathValue;
+        this.mealPreparationTime = mealPreparationTime;
+        this.mealEnergy = mealEnergy;
+        this.mealProtein = mealProtein;
+        this.mealTotalFat = mealTotalFat;
+        this.mealSaturated = mealSaturated;
+        this.mealTotalCarbohydrate = mealTotalCarbohydrate;
+        this.mealSugar = mealSugar;
+        this.mealSodium = mealSodium;
     }
 
-    public String getMeal_id() {
-        return meal_id;
+    public String getMealId() {
+        return mealId;
     }
 
-    public void setMeal_id(String meal_id) {
-        this.meal_id = meal_id;
+    public void setMealId(String mealId) {
+        this.mealId = mealId;
     }
 
-    public String getMeal_name() {
-        return meal_name;
+    public String getMealName() {
+        return mealName;
     }
 
-    public void setMeal_name(String meal_name) {
-        this.meal_name = meal_name;
+    public void setMealName(String mealName) {
+        this.mealName = mealName;
     }
 
-    public byte[] getMeal_image() {
-        return meal_image;
+    public byte[] getMealImage() {
+        return mealImage;
     }
 
-    public void setMeal_image(byte[] meal_image) {
-        this.meal_image = meal_image;
+    public void setMealImage(byte[] mealImage) {
+        this.mealImage = mealImage;
     }
 
-    public float getMeal_rating() {
-        return meal_rating;
+    public float getMealRating() {
+        return mealRating;
     }
 
-    public void setMeal_rating(float meal_rating) {
-        this.meal_rating = meal_rating;
+    public void setMealRating(float mealRating) {
+        this.mealRating = mealRating;
     }
 
-    public int getMeal_helath_value() {
-        return meal_helath_value;
+    public int getMealHelathValue() {
+        return mealHelathValue;
     }
 
-    public void setMeal_helath_value(int meal_helath_value) {
-        this.meal_helath_value = meal_helath_value;
+    public void setMealHelathValue(int mealHelathValue) {
+        this.mealHelathValue = mealHelathValue;
     }
 
-    public Date getMeal_preparation_time() {
-        return meal_preparation_time;
+    public Date getMealPreparationTime() {
+        return mealPreparationTime;
     }
 
-    public void setMeal_preparation_time(Date meal_preparation_time) {
-        this.meal_preparation_time = meal_preparation_time;
+    public void setMealPreparationTime(Date mealPreparationTime) {
+        this.mealPreparationTime = mealPreparationTime;
     }
 
-    public float getMeal_energy() {
-        return meal_energy;
+    public float getMealEnergy() {
+        return mealEnergy;
     }
 
-    public void setMeal_energy(float meal_energy) {
-        this.meal_energy = meal_energy;
+    public void setMealEnergy(float mealEnergy) {
+        this.mealEnergy = mealEnergy;
     }
 
-    public float getMeal_protein() {
-        return meal_protein;
+    public float getMealProtein() {
+        return mealProtein;
     }
 
-    public void setMeal_protein(float meal_protein) {
-        this.meal_protein = meal_protein;
+    public void setMealProtein(float mealProtein) {
+        this.mealProtein = mealProtein;
     }
 
-    public float getMeal_total_fat() {
-        return meal_total_fat;
+    public float getMealTotalFat() {
+        return mealTotalFat;
     }
 
-    public void setMeal_total_fat(float meal_total_fat) {
-        this.meal_total_fat = meal_total_fat;
+    public void setMealTotalFat(float mealTotalFat) {
+        this.mealTotalFat = mealTotalFat;
     }
 
-    public float getMeal_saturated() {
-        return meal_saturated;
+    public float getMealSaturated() {
+        return mealSaturated;
     }
 
-    public void setMeal_saturated(float meal_saturated) {
-        this.meal_saturated = meal_saturated;
+    public void setMealSaturated(float mealSaturated) {
+        this.mealSaturated = mealSaturated;
     }
 
-    public float getMeal_total_carbohydrate() {
-        return meal_total_carbohydrate;
+    public float getMealTotalCarbohydrate() {
+        return mealTotalCarbohydrate;
     }
 
-    public void setMeal_total_carbohydrate(float meal_total_carbohydrate) {
-        this.meal_total_carbohydrate = meal_total_carbohydrate;
+    public void setMealTotalCarbohydrate(float mealTotalCarbohydrate) {
+        this.mealTotalCarbohydrate = mealTotalCarbohydrate;
     }
 
-    public float getMeal_sugar() {
-        return meal_sugar;
+    public float getMealSugar() {
+        return mealSugar;
     }
 
-    public void setMeal_sugar(float meal_sugar) {
-        this.meal_sugar = meal_sugar;
+    public void setMealSugar(float mealSugar) {
+        this.mealSugar = mealSugar;
     }
 
-    public float getMeal_sodium() {
-        return meal_sodium;
+    public float getMealSodium() {
+        return mealSodium;
     }
 
-    public void setMeal_sodium(float meal_sodium) {
-        this.meal_sodium = meal_sodium;
+    public void setMealSodium(float mealSodium) {
+        this.mealSodium = mealSodium;
     }
 }

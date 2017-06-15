@@ -2,72 +2,72 @@ package com.tum.fbl.core.persistence.wearable;
 
 public class Wearable {
 
-    private String device_id;
+    private String deviceId;
 
-    private int divice_type;
+    private int diviceType;
 
-    private Date connection_time;
+    private Date connectionTime;
 
-    private Date exit_time;
+    private Date exitTime;
 
-    private String device_user_id;
+    private String deviceUserId;
 
-    private String device_user_password;
+    private String deviceUserPassword;
 
-    public Wearable(String device_id, int divice_type, Date connection_time, Date exit_time, String device_user_id, String device_user_password) {
-        this.device_id = device_id;
-        this.divice_type = divice_type;
-        this.connection_time = connection_time;
-        this.exit_time = exit_time;
-        this.device_user_id = device_user_id;
-        this.device_user_password = device_user_password;
+    public Wearable(String deviceId, int diviceType, Date connectionTime, Date exitTime, String deviceUserId, String deviceUserPassword) {
+        this.deviceId = deviceId;
+        this.diviceType = diviceType;
+        this.connectionTime = connectionTime;
+        this.exitTime = exitTime;
+        this.deviceUserId = deviceUserId;
+        this.deviceUserPassword = deviceUserPassword;
     }
 
-    public String getDevice_id() {
-        return device_id;
+    public String getDeviceId() {
+        return deviceId;
     }
 
-    public void setDevice_id(String device_id) {
-        this.device_id = device_id;
+    public void setDeviceId(String deviceId) {
+        this.deviceId = deviceId;
     }
 
-    public int getDivice_type() {
-        return divice_type;
+    public int getDiviceType() {
+        return diviceType;
     }
 
-    public void setDivice_type(int divice_type) {
-        this.divice_type = divice_type;
+    public void setDiviceType(int diviceType) {
+        this.diviceType = diviceType;
     }
 
-    public Date getConnection_time() {
-        return connection_time;
+    public Date getConnectionTime() {
+        return connectionTime;
     }
 
-    public void setConnection_time(Date connection_time) {
-        this.connection_time = connection_time;
+    public void setConnectionTime(Date connectionTime) {
+        this.connectionTime = connectionTime;
     }
 
-    public Date getExit_time() {
-        return exit_time;
+    public Date getExitTime() {
+        return exitTime;
     }
 
-    public void setExit_time(Date exit_time) {
-        this.exit_time = exit_time;
+    public void setExitTime(Date exitTime) {
+        this.exitTime = exitTime;
     }
 
-    public String getDevice_user_id() {
-        return device_user_id;
+    public String getDeviceUserId() {
+        return deviceUserId;
     }
 
-    public void setDevice_user_id(String device_user_id) {
-        this.device_user_id = device_user_id;
+    public void setDeviceUserId(String deviceUserId) {
+        this.deviceUserId = deviceUserId;
     }
 
-    public String getDevice_user_password() {
-        return device_user_password;
+    public String getDeviceUserPassword() {
+        return deviceUserPassword;
     }
 
-    public void setDevice_user_password(String device_user_password) {
-        this.device_user_password = device_user_password;
+    public void setDeviceUserPassword(String deviceUserPassword) {
+        this.deviceUserPassword = deviceUserPassword;
     }
 }

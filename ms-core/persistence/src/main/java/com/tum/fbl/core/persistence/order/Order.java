@@ -4,61 +4,61 @@ import com.tum.fbl.core.persistence.meal.Meal;
 
 public class Order {
 
-    private String order_id;
+    private String orderId;
 
-    private User order_user;
+    private User orderUser;
 
-    private Meal order_meal;
+    private Meal orderMeal;
 
-    private Date order_pickup_time;
+    private Date orderPickupTime;
 
-    private int order_status;
+    private int orderStatus;
 
-    public Order(String order_id, User order_user, Meal order_meal, Date order_pickup_time, int order_status) {
-        this.order_id = order_id;
-        this.order_user = order_user;
-        this.order_meal = order_meal;
-        this.order_pickup_time = order_pickup_time;
-        this.order_status = order_status;
+    public Order(String orderId, User orderUser, Meal orderMeal, Date orderPickupTime, int orderStatus) {
+        this.orderId = orderId;
+        this.orderUser = orderUser;
+        this.orderMeal = orderMeal;
+        this.orderPickupTime = orderPickupTime;
+        this.orderStatus = orderStatus;
     }
 
-    public String getOrder_id() {
-        return order_id;
+    public String getOrderId() {
+        return orderId;
     }
 
-    public void setOrder_id(String order_id) {
-        this.order_id = order_id;
+    public void setOrderId(String orderId) {
+        this.orderId = orderId;
     }
 
-    public User getOrder_user() {
-        return order_user;
+    public User getOrderUser() {
+        return orderUser;
     }
 
-    public void setOrder_user(User order_user) {
-        this.order_user = order_user;
+    public void setOrderUser(User orderUser) {
+        this.orderUser = orderUser;
     }
 
-    public Meal getOrder_meal() {
-        return order_meal;
+    public Meal getOrderMeal() {
+        return orderMeal;
     }
 
-    public void setOrder_meal(Meal order_meal) {
-        this.order_meal = order_meal;
+    public void setOrderMeal(Meal orderMeal) {
+        this.orderMeal = orderMeal;
     }
 
-    public Date getOrder_pickup_time() {
-        return order_pickup_time;
+    public Date getOrderPickupTime() {
+        return orderPickupTime;
     }
 
-    public void setOrder_pickup_time(Date order_pickup_time) {
-        this.order_pickup_time = order_pickup_time;
+    public void setOrderPickupTime(Date orderPickupTime) {
+        this.orderPickupTime = orderPickupTime;
     }
 
-    public int getOrder_status() {
-        return order_status;
+    public int getOrderStatus() {
+        return orderStatus;
     }
 
-    public void setOrder_status(int order_status) {
-        this.order_status = order_status;
+    public void setOrderStatus(int orderStatus) {
+        this.orderStatus = orderStatus;
     }
 }

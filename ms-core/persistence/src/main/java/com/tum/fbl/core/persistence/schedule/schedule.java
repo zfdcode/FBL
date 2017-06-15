@@ -5,49 +5,50 @@ import java.util.Date;
 
 public class Schedules {
 
-    private String user_id;
+    private String userId;
 
-    private int schedules_day_of_the_week;
+    private int schedulesDayOfTheWeek;
 
-    private Date schedules_opening_time;
+    private Date schedulesOpeningTime;
 
-    private Date schedules_closing_time;
+    private Date schedulesClosingTime;
 
-    public Schedules(String user_id, int schedules_day_of_the_week, Date schedules_opening_time, Date schedules_closing_time) {
-        this.user_id = user_id;
-        this.schedules_day_of_the_week = schedules_day_of_the_week;
-        this.schedules_opening_time = schedules_opening_time;
-        this.schedules_closing_time = schedules_closing_time;
+    public Schedules(String userId, int schedulesDayOfTheWeek, Date schedulesOpeningTime, Date schedulesClosingTime) {
+        this.userId = userId;
+        this.schedulesDayOfTheWeek = schedulesDayOfTheWeek;
+        this.schedulesOpeningTime = schedulesOpeningTime;
+        this.schedulesClosingTime = schedulesClosingTime;
     }
 
-    public String getUser_id() {
-        return user_id;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setUser_id(String user_id) {
-        this.user_id = user_id;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
-    public int getSchedules_day_of_the_week() {
-        return schedules_day_of_the_week;
+    public int getSchedulesDayOfTheWeek() {
+        return schedulesDayOfTheWeek;
     }
 
-    public void setSchedules_day_of_the_week(int schedules_day_of_the_week) {
-        this.schedules_day_of_the_week = schedules_day_of_the_week;
+    public void setSchedulesDayOfTheWeek(int schedulesDayOfTheWeek) {
+        this.schedulesDayOfTheWeek = schedulesDayOfTheWeek;
     }
 
-    public Date getSchedules_opening_time() {
-        return schedules_opening_time;
+    public Date getSchedulesOpeningTime() {
+        return schedulesOpeningTime;
     }
 
-    public void setSchedules_opening_time(Date schedules_opening_time) {
-        this.schedules_opening_time = schedules_opening_time;
+    public void setSchedulesOpeningTime(Date schedulesOpeningTime) {
+        this.schedulesOpeningTime = schedulesOpeningTime;
     }
 
-    public Date getSchedules_closing_time() {
-        return schedules_closing_time;
+    public Date getSchedulesClosingTime() {
+        return schedulesClosingTime;
     }
 
-    public void setSchedules_closing_time(Date schedules_closing_time) {
-        this.schedules_closing_time = schedules_closing_time;
+    public void setSchedulesClosingTime(Date schedulesClosingTime) {
+        this.schedulesClosingTime = schedulesClosingTime;
     }
+}

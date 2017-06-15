@@ -2,28 +2,28 @@ package com.tum.fbl.core.persistence.role;
 
 public class Role {
 
-    private String role_id;
+    private String roleId;
 
-    private String role_name;
+    private String roleName;
 
-    public Role(String role_id, String role_name) {
-        this.role_id = role_id;
-        this.role_name = role_name;
+    public Role(String roleId, String roleName) {
+        this.roleId = roleId;
+        this.roleName = roleName;
     }
 
-    public String getRole_id() {
-        return role_id;
+    public String getRoleId() {
+        return roleId;
     }
 
-    public void setRole_id(String role_id) {
-        this.role_id = role_id;
+    public void setRoleId(String roleId) {
+        this.roleId = roleId;
     }
 
-    public String getRole_name() {
-        return role_name;
+    public String getRoleName() {
+        return roleName;
     }
 
-    public void setRole_name(String role_name) {
-        this.role_name = role_name;
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
     }
 }

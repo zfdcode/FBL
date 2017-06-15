@@ -2,28 +2,28 @@ package com.tum.fbl.core.persistence.ingredient;
 
 public class Ingredient {
 
-    private String ingredient_id;
+    private String ingredientId;
 
-    private String ingredient_name;
+    private String ingredientName;
 
-    public Ingredient(String ingredient_id, String ingredient_name) {
-        this.ingredient_id = ingredient_id;
-        this.ingredient_name = ingredient_name;
+    public Ingredient(String ingredientId, String ingredientName) {
+        this.ingredientId = ingredientId;
+        this.ingredientName = ingredientName;
     }
 
-    public String getIngredient_id() {
-        return ingredient_id;
+    public String getIngredientId() {
+        return ingredientId;
     }
 
-    public void setIngredient_id(String ingredient_id) {
-        this.ingredient_id = ingredient_id;
+    public void setIngredientId(String ingredientId) {
+        this.ingredientId = ingredientId;
     }
 
-    public String getIngredient_name() {
-        return ingredient_name;
+    public String getIngredientName() {
+        return ingredientName;
     }
 
-    public void setIngredient_name(String ingredient_name) {
-        this.ingredient_name = ingredient_name;
+    public void setIngredientName(String ingredientName) {
+        this.ingredientName = ingredientName;
     }
 }

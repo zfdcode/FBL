@@ -2,32 +2,32 @@ package com.tum.fbl.core.persistence.rating;
 
 public class Rating {
 
-    private String user_id;
+    private String userId;
 
-    private String meal_id;
+    private String mealId;
 
     private float rate;
 
-    public Rating(String user_id, String meal_id, float rate) {
-        this.user_id = user_id;
-        this.meal_id = meal_id;
+    public Rating(String userId, String mealId, float rate) {
+        this.userId = userId;
+        this.mealId = mealId;
         this.rate = rate;
     }
 
-    public String getUser_id() {
-        return user_id;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setUser_id(String user_id) {
-        this.user_id = user_id;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
-    public String getMeal_id() {
-        return meal_id;
+    public String getMealId() {
+        return mealId;
     }
 
-    public void setMeal_id(String meal_id) {
-        this.meal_id = meal_id;
+    public void setMealId(String mealId) {
+        this.mealId = mealId;
     }
 
     public float getRate() {

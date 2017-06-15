@@ -1,13 +1,11 @@
 package com.tum.fbl.core.service;
 
+import com.tum.fbl.core.bdo.Rating;
 import com.tum.fbl.core.config.CoreServiceConfiguration;
 import com.tum.fbl.core.persistence.ConnectionFactory;
 import com.tum.fbl.core.service.auth.BasicAuthenticator;
 import com.tum.fbl.core.service.auth.User;
-import com.tum.fbl.core.service.resources.MealResource;
-import com.tum.fbl.core.service.resources.HealthResource;
-import com.tum.fbl.core.service.resources.OrderResource;
-import com.tum.fbl.core.service.resources.RestaurantResource;
+import com.tum.fbl.core.service.resources.*;
 import io.dropwizard.Application;
 import io.dropwizard.auth.AuthDynamicFeature;
 import io.dropwizard.auth.AuthValueFactoryProvider;
@@ -84,8 +82,8 @@ public class CoreServiceApplication extends Application<CoreServiceConfiguration
 
     private void registerResources (Environment environment) {
 
-        final HealthResource healthResource = new HealthResource();
-        environment.jersey().register(healthResource);
+        final HealthDataResource healthDataResource = new HealthDataResource();
+        environment.jersey().register(healthDataResource);
 
         final MealResource mealResource = new MealResource();
         environment.jersey().register(mealResource);
@@ -95,6 +93,18 @@ public class CoreServiceApplication extends Application<CoreServiceConfiguration
 
         final OrderResource orderResource = new OrderResource();
         environment.jersey().register(orderResource);
+
+        final IngredientResource ingredientResource = new IngredientResource();
+        environment.jersey().register(ingredientResource);
+
+        final RatingResource ratingResource = new RatingResource();
+        environment.jersey().register(ratingResource);
+
+        final SpecialNeedResource specialNeedResource = new SpecialNeedResource();
+        environment.jersey().register(specialNeedResource);
+
+        final UserResource userResource = new UserResource();
+        environment.jersey().register(userResource);
     }
 
     private void configureCors(Environment environment) {

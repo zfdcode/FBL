@@ -36,8 +36,22 @@ public class MealResource {
 
     @GET
     @Path("/all")
-    @ApiOperation(value = "Get all offered meal/menues")
+    @ApiOperation(value = "Get all offered meals")
     public List<Meal> getAllMeals(@Auth User user) {
+        return null;
+    }
+
+    @GET
+    @Path("/available")
+    @ApiOperation(value = "Get all available meals")
+    public List<Meal> getAvailableMeals(@Auth User user) {
+        return null;
+    }
+
+    @GET
+    @Path("/{userId}")
+    @ApiOperation(value = "Get information of meals by one user")
+    public List<Meal> getMealsByUser(@PathParam("userId") int userId){
         return null;
     }
 

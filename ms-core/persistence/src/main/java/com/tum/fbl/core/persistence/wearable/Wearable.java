@@ -1,5 +1,7 @@
 package com.tum.fbl.core.persistence.wearable;
 
+import java.sql.Date;
+
 public class Wearable {
 
     private String deviceId;

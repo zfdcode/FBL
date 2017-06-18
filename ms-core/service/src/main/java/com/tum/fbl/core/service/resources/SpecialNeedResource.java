@@ -14,8 +14,10 @@ import java.util.List;
  */
 @Path("/specialNeed")
 @Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
 @Api(value = "special need API", description = "Provides special needs.")
 public class SpecialNeedResource {
+
     @Path("/all")
     @ApiOperation(value = "Get all offered specialNeeds")
     public List<SpecialNeed> getAllSpecialNeeds(@Auth User user) {
@@ -36,13 +38,11 @@ public class SpecialNeedResource {
 
     }
 
-    @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @ApiOperation(value = "Add a new special need to the store")
     public void addSpecialNeed(SpecialNeed specialNeed) {
     }
 
     @PUT
-    @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @ApiOperation(value = "Update an existing special need")
     public void updateSpecialNeed(SpecialNeed specialNeed) {
     }

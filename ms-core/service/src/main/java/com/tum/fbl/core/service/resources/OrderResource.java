@@ -12,7 +12,8 @@ import javax.ws.rs.*;
 
 @Path("/order")
 @Produces(MediaType.APPLICATION_JSON)
-@Api(value = "com.tum.fbl.core.persistence.order.Order API", description = "Provides order functionality.")
+@Consumes(MediaType.APPLICATION_JSON)
+@Api(value = "Order API", description = "Provides order functionality.")
 public class OrderResource {
 
     @GET
@@ -30,28 +31,26 @@ public class OrderResource {
     }
 
     @GET
-    @Path("/{orderId}")
+    @Path("/order/{orderId}")
     @ApiOperation(value = "Get information of a order")
     public Order getOrder(@PathParam("orderId") int orderId){
         return null;
     }
 
     @GET
-    @Path("/{restaurantId}")
+    @Path("/restaurant/{restaurantId}")
     @ApiOperation(value = "Get open orders of a restaurants")
     public Order getOrdersForRestaurant (@PathParam("restaurantId") int restaurantId) {
         return null;
     }
 
     @PUT
-    @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @ApiOperation(value = "Update an existing order")
     public void placeOrder (Order order) {
 
     }
 
     @POST
-    @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @ApiOperation(value = "Add a new order to the store")
     public void addOrder(Order order) {
     }

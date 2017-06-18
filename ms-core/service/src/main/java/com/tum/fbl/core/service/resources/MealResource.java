@@ -23,6 +23,7 @@ import java.util.List;
 
 @Path("/meal")
 @Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
 @Api(value = "Meal API", description = "Provides offered meal/menues.")
 public class MealResource {
 
@@ -49,21 +50,21 @@ public class MealResource {
     }
 
     @GET
-    @Path("/{userId}")
+    @Path("/user/{userId}")
     @ApiOperation(value = "Get information of meals by one user")
     public List<Meal> getMealsByUser(@PathParam("userId") int userId){
         return null;
     }
 
     @GET
-    @Path("/{mealId}")
+    @Path("/meal/{mealId}")
     @ApiOperation(value = "Get information of a meal")
     public Meal getMeal(@PathParam("mealId") int mealId){
         return null;
     }
 
     @DELETE
-    @Path("/{mealId}")
+    @Path("/meal/{mealId}")
     @ApiOperation(value = "Deletes a meal")
     public void deleteMeal(@PathParam("mealId") int mealId) {
 
@@ -86,13 +87,11 @@ public class MealResource {
     }
 
     @POST
-    @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @ApiOperation(value = "Add a new meal to the store")
     public void addMeal(Meal meal) {
     }
 
     @PUT
-    @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @ApiOperation(value = "Update an existing meal")
     public void updateMeal(Meal meal) {
     }

@@ -14,8 +14,10 @@ import java.util.List;
 
 @Path("/user")
 @Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
 @Api(value = "User API", description = "Provides the user information.")
 public class UserResource {
+
     @GET
     @Path("/{userId}")
     @ApiOperation(value = "Get basic user information")
@@ -31,33 +33,31 @@ public class UserResource {
     }
 
     @POST
-    @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @ApiOperation(value = "Add a new user to the store")
     public void addUser(User user) {
     }
 
     @PUT
-    @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @ApiOperation(value = "Update an existing user")
     public void updateUser(User user) {
     }
 
     @GET
-    @Path("/{specialNeedId}")
+    @Path("/sn/{specialNeedId}")
     @ApiOperation(value = "Get users by special need")
     public List<User> getUsersBySpecialNeed(@PathParam("specialNeedId") int specialNeedId) {
         return null;
     }
 
     @GET
-    @Path("/{ingredientId}")
+    @Path("/ingredient/{ingredientId}")
     @ApiOperation(value = "Get users by selected ingredient")
     public List<User> getUsersByIngredient(@PathParam("ingredientId") int ingredientId) {
         return null;
     }
 
     @GET
-    @Path("/{mealId}")
+    @Path("/meal/{mealId}")
     @ApiOperation(value = "Get users by selected meal")
     public List<User> getUsersByMeal(@PathParam("mealId") int mealId) {
         return null;

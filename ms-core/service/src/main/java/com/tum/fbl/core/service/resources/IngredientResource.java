@@ -14,8 +14,10 @@ import java.util.List;
  */
 @Path("/ingredient")
 @Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
 @Api(value = "Ingredient API", description = "Provides ingredients.")
 public class IngredientResource {
+
     @Path("/all")
     @ApiOperation(value = "Get all offered ingredients")
     public List<Ingredient> getAllIngredients(@Auth User user) {
@@ -23,14 +25,14 @@ public class IngredientResource {
     }
 
     @GET
-    @Path("/{ingredientId}")
+    @Path("/id/{ingredientId}")
     @ApiOperation(value = "Get information of a ingredient")
     public Ingredient getIngredient(@PathParam("ingredientId") int ingredientId){
         return null;
     }
 
     @GET
-    @Path("/{ingredientTags}")
+    @Path("/tag/{ingredientTags}")
     @ApiOperation(value = "Get information of a ingredient")
     public Ingredient getIngredientByTags(@PathParam("ingredientTags") String ingredientTags){
         return null;
@@ -43,13 +45,11 @@ public class IngredientResource {
 
     }
 
-    @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @ApiOperation(value = "Add a new ingredient to the store")
     public void addIngredient(Ingredient ingredient) {
     }
 
     @PUT
-    @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @ApiOperation(value = "Update an existing ingredient")
     public void updateIngredient(Ingredient ingredient) {
     }

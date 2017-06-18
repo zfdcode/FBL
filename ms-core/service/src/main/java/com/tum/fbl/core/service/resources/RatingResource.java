@@ -13,24 +13,25 @@ import java.util.List;
  */
 @Path("/rating")
 @Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
 @Api(value = "Rating API", description = "Provides ratings.")
 public class RatingResource {
 
     @GET
-    @Path("/{userId}")
+    @Path("/user/{userId}")
     @ApiOperation(value = "Get ratings by user id")
     public List<Rating> getRatingsByUserId (@PathParam("userId") int userId) {
         return null;
     }
 
     @GET
-    @Path("/{mealId}")
+    @Path("/meal/{mealId}")
     @ApiOperation(value = "Get ratings by user id")
     public List<Rating> getRatingsByMealId (@PathParam("mealId") int mealId) {
         return null;
     }
 
-    @GET
+    @DELETE
     @Path("/{userId}/{mealId}")
     @ApiOperation(value = "Deletes a rating by user ID")
     public Rating getRating(@PathParam("userId") int userId, @PathParam("mealId") int mealId) {
@@ -45,13 +46,11 @@ public class RatingResource {
     }
 
     @POST
-    @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @ApiOperation(value = "Add a new rating to the store")
     public void addRating(Rating rating) {
     }
 
     @PUT
-    @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @ApiOperation(value = "Update an existing rating")
     public void updateRating(Rating rating) {
     }

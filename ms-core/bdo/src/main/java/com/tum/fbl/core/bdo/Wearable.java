@@ -1,5 +1,7 @@
 package com.tum.fbl.core.bdo;
 
+import java.util.Date;
+
 /**
  * Created by patrickmelchner on 30.05.17.
  */

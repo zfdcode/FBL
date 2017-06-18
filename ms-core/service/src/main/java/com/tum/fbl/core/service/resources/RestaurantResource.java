@@ -10,6 +10,7 @@ import java.util.List;
 
 @Path("/restaurant")
 @Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
 @Api(value = "Restaurant API", description = "Provides the core data of all restaurants.")
 public class RestaurantResource {
 
@@ -42,14 +43,12 @@ public class RestaurantResource {
     }
 
     @POST
-    @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @ApiOperation(value = "Add a new restaurant to the store")
     public void addRestaurant(Restaurant restaurant) {
 
     }
 
     @PUT
-    @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @ApiOperation(value = "Update an existing restaurant")
     public void updatePet(Restaurant restaurant) {
 

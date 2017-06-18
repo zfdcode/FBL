@@ -27,3 +27,5 @@ public class MealMapper implements ResultSetMapper<Meal> {
                 r.getFloat("mealSugar"),
                 r.getFloat("mealSodium"));
     }
+
+}

@@ -13,6 +13,7 @@ import javax.ws.rs.core.MediaType;
 
 @Path("/healthData")
 @Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
 @Api(value = "Health API", description = "Provides the health status of the service.")
 public class HealthDataResource {
 
@@ -31,13 +32,11 @@ public class HealthDataResource {
     }
 
     @POST
-    @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @ApiOperation(value = "Add a new healthData to the store")
     public void addHealthData(HealthData healthData) {
     }
 
     @PUT
-    @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @ApiOperation(value = "Update an existing healthData")
     public void updateHealthData(HealthData healthData) {
     }

@@ -8,7 +8,7 @@ public class HealthData {
 
     private String deviceUserId;
 
-    private int currentHearthbeat;
+    private float currentHearthbeat;
 
     private int heartbeatTimeRange;
 
@@ -18,7 +18,7 @@ public class HealthData {
 
     private int averageHeartbeatTimeRange;
 
-    public HealthData(String userId, String deviceUserPassword, String deviceUserId, int currentHearthbeat, int heartbeatTimeRange, float trackedCalorieToday, float trackedCaloriesTimeRange, int averageHeartbeatTimeRange) {
+    public HealthData(String userId, String deviceUserPassword, String deviceUserId, float currentHearthbeat, int heartbeatTimeRange, float trackedCalorieToday, float trackedCaloriesTimeRange, int averageHeartbeatTimeRange) {
         this.userId = userId;
         this.deviceUserPassword = deviceUserPassword;
         this.deviceUserId = deviceUserId;
@@ -53,11 +53,11 @@ public class HealthData {
         this.deviceUserId = deviceUserId;
     }
 
-    public int getCurrentHearthbeat() {
+    public float getCurrentHearthbeat() {
         return currentHearthbeat;
     }
 
-    public void setCurrentHearthbeat(int currentHearthbeat) {
+    public void setCurrentHearthbeat(float currentHearthbeat) {
         this.currentHearthbeat = currentHearthbeat;
     }
 

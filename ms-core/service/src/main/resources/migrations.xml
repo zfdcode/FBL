@@ -7,17 +7,254 @@
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
     <changeSet id="1" author="patrick">
-        <createTable tableName="user">
-            <column name="id" type="String" autoIncrement="true">
+        <createTable tableName="User">
+            <column name="userId" type="int" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="name" type="varchar(255)">
+            <column name="userName" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="userPassword" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
             <column name="email" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
-            <column name="password" type="varchar(255)">
+            <column name="birthday" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="height" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="weight" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="displayName" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="roleId" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="address" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="Schedules">
+            <column name="scheduleId" type="int" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="userId" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="dayOfTheWeek" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="openingTime" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="closingTime" type="date">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        
+        <createTable tableName="Role">
+            <column name="roleId" type="Int" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="roleName" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        
+        <createTable tableName="UserMeal">
+            <column name="userId" type="int">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="mealId" type="int">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="date" type="date">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="Order">
+            <column name="orderId" type="int" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="userId" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="mealId" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="pickupTime" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status" type="int">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        
+        <createTable tableName="HealthTrackerData">
+            <column name="userId" type="varchar(255)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="deviceUserPassword" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="deviceUserId" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="currentHeartbeat" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="heartbeatTimeRange" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="trackedCaloriesToday" type="float">
+                <constraints nullable="false"/>
+            </column>
+            <column name="trackedCaloriesRange" type="float">
+                <constraints nullable="false"/>
+            </column>
+            <column name="averageHeartbeatTimeRange" type="int">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        
+        <createTable tableName="Rating">
+            <column name="ratingId" type="int" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="userId" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="mealId" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="rate" type="float">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="MealRestaurant">
+            <column name="mealId" type="int">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="userId" type="int">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="date" type="date">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="Meal">
+            <column name="mealId" type="int" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="mealName" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="image" type="image">
+                <constraints nullable="false"/>
+            </column>
+            <column name="rating" type="float">
+                <constraints nullable="false"/>
+            </column>
+            <column name="healthValue" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="preparationTime" type="time">
+                <constraints nullable="false"/>
+            </column>
+            <column name="energy" type="float">
+                <constraints nullable="false"/>
+            </column>
+            <column name="protein" type="float">
+                <constraints nullable="false"/>
+            </column>
+            <column name="totalFat" type="float">
+                <constraints nullable="false"/>
+            </column>
+            <column name="saturated" type="float">
+                <constraints nullable="false"/>
+            </column>
+            <column name="totalCarbohydrate" type="float">
+                <constraints nullable="false"/>
+            </column>
+            <column name="sugar" type="float">
+                <constraints nullable="false"/>
+            </column>
+            <column name="sodium" type="float">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="WearableDevice">
+            <column name="deviceId" type="varchar(255)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="deviceType" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="connectionTime" type="time">
+                <constraints nullable="false"/>
+            </column>
+            <column name="exitTime" type="time">
+                <constraints nullable="false"/>
+            </column>
+            <column name="userId" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="devicePassword" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        
+        <createTable tableName="UserSpecialNeeds">
+            <column name="userId" type="int">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="specialNeedId" type="int">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="SpecialNeeds">
+            <column name="specialNeedId" type="int" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="specialNeedName" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        
+        <createTable tableName="MealSpecialNeeds">
+            <column name="mealId" type="int">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="specialNeedId" type="int">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+        </createTable>
+        
+        <createTable tableName="MealIngredient">
+            <column name="mealId" type="int">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="ingredientId" type="int">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+        </createTable>
+        
+        <createTable tableName="Ingredient">
+            <column name="ingredientId" type="int" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="ingredientName" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
         </createTable>

@@ -13,7 +13,7 @@ public class MealMapper implements ResultSetMapper<Meal> {
     @Override
     public Meal map(int index, ResultSet r, StatementContext ctx) throws SQLException {
         return new Meal(
-                r.getString("mealId"),
+                r.getInt("mealId"),
                 r.getString("mealName"),
                 r.getBytes("mealImage"),
                 r.getFloat("mealRating"),

@@ -1,4 +1,4 @@
-package com.tum.fbl.core.persistence.meal;
+package com.tum.fbl.core.persistence.healthdata;
 
 import com.tum.fbl.core.persistence.healthdata.HealthData;
 import org.skife.jdbi.v2.StatementContext;
@@ -14,9 +14,9 @@ public class HealthDataMapper implements ResultSetMapper<HealthData> {
     @Override
     public HealthData map(int index, ResultSet r, StatementContext ctx) throws SQLException {
         return new HealthData(
-                r.getString("userId"),
+                r.getInt("userId"),
                 r.getString("deviceUserPassword"),
-                r.getString("deviceUserId"),
+                r.getInt("deviceUserId"),
                 r.getFloat("currentHeartbeat"),
                 r.getInt("heartbeatTimeRange"),
                 r.getFloat("trackedCalorieToday"),

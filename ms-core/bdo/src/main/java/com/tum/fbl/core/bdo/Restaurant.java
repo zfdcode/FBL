@@ -7,149 +7,149 @@ import java.util.Date;
  */
 public class Restaurant {
 
-    private int restaurant_id;
+    private int restaurantId;
 
-    private String restaurant_password;
+    private String restaurantPassword;
 
-    private String restaurant_name;
+    private String restaurantName;
 
-    private String restaurant_email;
+    private String restaurantEmail;
 
-    private String restaurant_display_name;
+    private String restaurantDisplayName;
 
-    private String restaurant_address;
+    private String restaurantAddress;
 
-    private Date[] restaurant_opening_hour_monday;
+    private Date[] restaurantOpeningHourMonday;
 
-    private Date[] restaurant_opening_hour_tuesday;
+    private Date[] restaurantOpeningHourTuesday;
 
-    private Date[] restaurant_opening_hour_wednesday;
+    private Date[] restaurantOpeningHourWednesday;
 
-    private Date[] restaurant_opening_hour_thursday;
+    private Date[] restaurantOpeningHourThursday;
 
-    private Date[] restaurant_opening_hour_friday;
+    private Date[] restaurantOpeningHourFriday;
 
-    private Date[] restaurant_opening_hour_saturday;
+    private Date[] restaurantOpeningHourSaturday;
 
-    private Date[] restaurant_opening_hour_sunday;
+    private Date[] restaurantOpeningHourSunday;
 
-    public Restaurant(int restaurant_id, String restaurant_password, String restaurant_name, String restaurant_email, String restaurant_display_name, String restaurant_address, Date[] restaurant_opening_hour_monday, Date[] restaurant_opening_hour_tuesday, Date[] restaurant_opening_hour_wednesday, Date[] restaurant_opening_hour_thursday, Date[] restaurant_opening_hour_friday, Date[] restaurant_opening_hour_saturday, Date[] restaurant_opening_hour_sunday) {
-        this.restaurant_id = restaurant_id;
-        this.restaurant_password = restaurant_password;
-        this.restaurant_name = restaurant_name;
-        this.restaurant_email = restaurant_email;
-        this.restaurant_display_name = restaurant_display_name;
-        this.restaurant_address = restaurant_address;
-        this.restaurant_opening_hour_monday = restaurant_opening_hour_monday;
-        this.restaurant_opening_hour_tuesday = restaurant_opening_hour_tuesday;
-        this.restaurant_opening_hour_wednesday = restaurant_opening_hour_wednesday;
-        this.restaurant_opening_hour_thursday = restaurant_opening_hour_thursday;
-        this.restaurant_opening_hour_friday = restaurant_opening_hour_friday;
-        this.restaurant_opening_hour_saturday = restaurant_opening_hour_saturday;
-        this.restaurant_opening_hour_sunday = restaurant_opening_hour_sunday;
+    public Restaurant(int restaurantId, String restaurantPassword, String restaurantName, String restaurantEmail, String restaurantDisplayName, String restaurantAddress, Date[] restaurantOpeningHourMonday, Date[] restaurantOpeningHourTuesday, Date[] restaurantOpeningHourWednesday, Date[] restaurantOpeningHourThursday, Date[] restaurantOpeningHourFriday, Date[] restaurantOpeningHourSaturday, Date[] restaurantOpeningHourSunday) {
+        this.restaurantId = restaurantId;
+        this.restaurantPassword = restaurantPassword;
+        this.restaurantName = restaurantName;
+        this.restaurantEmail = restaurantEmail;
+        this.restaurantDisplayName = restaurantDisplayName;
+        this.restaurantAddress = restaurantAddress;
+        this.restaurantOpeningHourMonday = restaurantOpeningHourMonday;
+        this.restaurantOpeningHourTuesday = restaurantOpeningHourTuesday;
+        this.restaurantOpeningHourWednesday = restaurantOpeningHourWednesday;
+        this.restaurantOpeningHourThursday = restaurantOpeningHourThursday;
+        this.restaurantOpeningHourFriday = restaurantOpeningHourFriday;
+        this.restaurantOpeningHourSaturday = restaurantOpeningHourSaturday;
+        this.restaurantOpeningHourSunday = restaurantOpeningHourSunday;
     }
 
-    public int getRestaurant_id() {
-        return restaurant_id;
+    public int getRestaurantId() {
+        return restaurantId;
     }
 
-    public void setRestaurant_id(int restaurant_id) {
-        this.restaurant_id = restaurant_id;
+    public void setRestaurantId(int restaurantId) {
+        this.restaurantId = restaurantId;
     }
 
-    public String getRestaurant_password() {
-        return restaurant_password;
+    public String getRestaurantPassword() {
+        return restaurantPassword;
     }
 
-    public void setRestaurant_password(String restaurant_password) {
-        this.restaurant_password = restaurant_password;
+    public void setRestaurantPassword(String restaurantPassword) {
+        this.restaurantPassword = restaurantPassword;
     }
 
-    public String getRestaurant_name() {
-        return restaurant_name;
+    public String getRestaurantName() {
+        return restaurantName;
     }
 
-    public void setRestaurant_name(String restaurant_name) {
-        this.restaurant_name = restaurant_name;
+    public void setRestaurantName(String restaurantName) {
+        this.restaurantName = restaurantName;
     }
 
-    public String getRestaurant_email() {
-        return restaurant_email;
+    public String getRestaurantEmail() {
+        return restaurantEmail;
     }
 
-    public void setRestaurant_email(String restaurant_email) {
-        this.restaurant_email = restaurant_email;
+    public void setRestaurantEmail(String restaurantEmail) {
+        this.restaurantEmail = restaurantEmail;
     }
 
-    public String getRestaurant_display_name() {
-        return restaurant_display_name;
+    public String getRestaurantDisplayName() {
+        return restaurantDisplayName;
     }
 
-    public void setRestaurant_display_name(String restaurant_display_name) {
-        this.restaurant_display_name = restaurant_display_name;
+    public void setRestaurantDisplayName(String restaurantDisplayName) {
+        this.restaurantDisplayName = restaurantDisplayName;
     }
 
-    public String getRestaurant_address() {
-        return restaurant_address;
+    public String getRestaurantAddress() {
+        return restaurantAddress;
     }
 
-    public void setRestaurant_address(String restaurant_address) {
-        this.restaurant_address = restaurant_address;
+    public void setRestaurantAddress(String restaurantAddress) {
+        this.restaurantAddress = restaurantAddress;
     }
 
-    public Date[] getRestaurant_opening_hour_monday() {
-        return restaurant_opening_hour_monday;
+    public Date[] getRestaurantOpeningHourMonday() {
+        return restaurantOpeningHourMonday;
     }
 
-    public void setRestaurant_opening_hour_monday(Date[] restaurant_opening_hour_monday) {
-        this.restaurant_opening_hour_monday = restaurant_opening_hour_monday;
+    public void setRestaurantOpeningHourMonday(Date[] restaurantOpeningHourMonday) {
+        this.restaurantOpeningHourMonday = restaurantOpeningHourMonday;
     }
 
-    public Date[] getRestaurant_opening_hour_tuesday() {
-        return restaurant_opening_hour_tuesday;
+    public Date[] getRestaurantOpeningHourTuesday() {
+        return restaurantOpeningHourTuesday;
     }
 
-    public void setRestaurant_opening_hour_tuesday(Date[] restaurant_opening_hour_tuesday) {
-        this.restaurant_opening_hour_tuesday = restaurant_opening_hour_tuesday;
+    public void setRestaurantOpeningHourTuesday(Date[] restaurantOpeningHourTuesday) {
+        this.restaurantOpeningHourTuesday = restaurantOpeningHourTuesday;
     }
 
-    public Date[] getRestaurant_opening_hour_wednesday() {
-        return restaurant_opening_hour_wednesday;
+    public Date[] getRestaurantOpeningHourWednesday() {
+        return restaurantOpeningHourWednesday;
     }
 
-    public void setRestaurant_opening_hour_wednesday(Date[] restaurant_opening_hour_wednesday) {
-        this.restaurant_opening_hour_wednesday = restaurant_opening_hour_wednesday;
+    public void setRestaurantOpeningHourWednesday(Date[] restaurantOpeningHourWednesday) {
+        this.restaurantOpeningHourWednesday = restaurantOpeningHourWednesday;
     }
 
-    public Date[] getRestaurant_opening_hour_thursday() {
-        return restaurant_opening_hour_thursday;
+    public Date[] getRestaurantOpeningHourThursday() {
+        return restaurantOpeningHourThursday;
     }
 
-    public void setRestaurant_opening_hour_thursday(Date[] restaurant_opening_hour_thursday) {
-        this.restaurant_opening_hour_thursday = restaurant_opening_hour_thursday;
+    public void setRestaurantOpeningHourThursday(Date[] restaurantOpeningHourThursday) {
+        this.restaurantOpeningHourThursday = restaurantOpeningHourThursday;
     }
 
-    public Date[] getRestaurant_opening_hour_friday() {
-        return restaurant_opening_hour_friday;
+    public Date[] getRestaurantOpeningHourFriday() {
+        return restaurantOpeningHourFriday;
     }
 
-    public void setRestaurant_opening_hour_friday(Date[] restaurant_opening_hour_friday) {
-        this.restaurant_opening_hour_friday = restaurant_opening_hour_friday;
+    public void setRestaurantOpeningHourFriday(Date[] restaurantOpeningHourFriday) {
+        this.restaurantOpeningHourFriday = restaurantOpeningHourFriday;
     }
 
-    public Date[] getRestaurant_opening_hour_saturday() {
-        return restaurant_opening_hour_saturday;
+    public Date[] getRestaurantOpeningHourSaturday() {
+        return restaurantOpeningHourSaturday;
     }
 
-    public void setRestaurant_opening_hour_saturday(Date[] restaurant_opening_hour_saturday) {
-        this.restaurant_opening_hour_saturday = restaurant_opening_hour_saturday;
+    public void setRestaurantOpeningHourSaturday(Date[] restaurantOpeningHourSaturday) {
+        this.restaurantOpeningHourSaturday = restaurantOpeningHourSaturday;
     }
 
-    public Date[] getRestaurant_opening_hour_sunday() {
-        return restaurant_opening_hour_sunday;
+    public Date[] getRestaurantOpeningHourSunday() {
+        return restaurantOpeningHourSunday;
     }
 
-    public void setRestaurant_opening_hour_sunday(Date[] restaurant_opening_hour_sunday) {
-        this.restaurant_opening_hour_sunday = restaurant_opening_hour_sunday;
+    public void setRestaurantOpeningHourSunday(Date[] restaurantOpeningHourSunday) {
+        this.restaurantOpeningHourSunday = restaurantOpeningHourSunday;
     }
 }

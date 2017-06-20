@@ -7,46 +7,46 @@ import java.util.Date;
 
 public class Order {
 
-    private String orderId;
+    private int orderId;
 
-    private User orderUser;
+    private int orderUserId;
 
-    private Meal orderMeal;
+    private int orderMealId;
 
     private Date orderPickupTime;
 
     private int orderStatus;
 
-    public Order(String orderId, User orderUser, Meal orderMeal, Date orderPickupTime, int orderStatus) {
+    public Order(int orderId, int orderUserId, int orderMealId, Date orderPickupTime, int orderStatus) {
         this.orderId = orderId;
-        this.orderUser = orderUser;
-        this.orderMeal = orderMeal;
+        this.orderUserId = orderUserId;
+        this.orderMealId = orderMealId;
         this.orderPickupTime = orderPickupTime;
         this.orderStatus = orderStatus;
     }
 
-    public String getOrderId() {
+    public int getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(String orderId) {
+    public void setOrderId(int orderId) {
         this.orderId = orderId;
     }
 
-    public User getOrderUser() {
-        return orderUser;
+    public int getOrderUserId() {
+        return orderUserId;
     }
 
-    public void setOrderUser(User orderUser) {
-        this.orderUser = orderUser;
+    public void setOrderUserId(int orderUserId) {
+        this.orderUserId = orderUserId;
     }
 
-    public Meal getOrderMeal() {
-        return orderMeal;
+    public int getOrderMealId() {
+        return orderMealId;
     }
 
-    public void setOrderMeal(Meal orderMeal) {
-        this.orderMeal = orderMeal;
+    public void setOrderMealId(int orderMealId) {
+        this.orderMealId = orderMealId;
     }
 
     public Date getOrderPickupTime() {

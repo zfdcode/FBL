@@ -14,9 +14,10 @@ import java.util.Date;
 public interface MealDao extends AutoCloseable{
 
     @SqlQuery("select * from meal where mealId = :id")
-    Meal findMealById(@Bind("id") String id);
+    Meal findMealById(@Bind("id") int id);
 
-    @SqlUpdate("insert into meal ( mealName, mealImage, mealRating, mealHelathValue, mealPreparationTime, mealEnergy, mealProtein, mealTotalFat, mealSaturated, mealTotalCarbohydrate, mealSugar, mealSodium) values ( :mealName, :mealImage, :mealRating, :mealHelathValue, :mealPreparationTime, :mealEnergy, :mealProtein, :mealTotalFat, :mealSaturated, :mealTotalCarbohydrate, :mealSugar, :mealSodium")
+    @SqlUpdate("insert into meal ( mealName, mealImage, mealRating, mealHelathValue, mealPreparationTime, mealEnergy, mealProtein, mealTotalFat, mealSaturated, mealTotalCarbohydrate, mealSugar, mealSodium) " +
+            "values ( :mealName, :mealImage, :mealRating, :mealHelathValue, :mealPreparationTime, :mealEnergy, :mealProtein, :mealTotalFat, :mealSaturated, :mealTotalCarbohydrate, :mealSugar, :mealSodium")
     void newMeal(
             @Bind("mealName") String mealName,
             @Bind("mealImage") byte[] mealImage,
@@ -30,4 +31,7 @@ public interface MealDao extends AutoCloseable{
             @Bind("mealTotalCarbohydrate") float mealTotalCarbohydrate,
             @Bind("mealSugar") float mealSugar,
             @Bind("mealSodium") float mealSodium);
+
+    @SqlUpdate("delete from meal where mealId = :id")
+    Meal findMealById(@Bind("id") int id);
 }

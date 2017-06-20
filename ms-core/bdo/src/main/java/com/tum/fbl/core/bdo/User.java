@@ -5,11 +5,11 @@ import java.util.Date;
 
 public class User {
 
-    private int user_id;
+    private int userId;
 
-    private String user_name;
+    private String userName;
 
-    private String user_password;
+    private String userPassword;
 
     private String email;
 
@@ -19,41 +19,38 @@ public class User {
 
     private int weight;
 
-    private int role;
-
-    public User(int user_id, String user_name, String user_password, String email, Date birthday, int height, int weight, int role) {
-        this.user_id = user_id;
-        this.user_name = user_name;
-        this.user_password = user_password;
+    public User(int userId, String userName, String userPassword, String email, Date birthday, int height, int weight) {
+        this.userId = userId;
+        this.userName = userName;
+        this.userPassword = userPassword;
         this.email = email;
         this.birthday = birthday;
         this.height = height;
         this.weight = weight;
-        this.role = role;
     }
 
-    public int getUser_id() {
-        return user_id;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
-    public String getUser_name() {
-        return user_name;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setUser_name(String user_name) {
-        this.user_name = user_name;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
-    public String getUser_password() {
-        return user_password;
+    public String getUserPassword() {
+        return userPassword;
     }
 
-    public void setUser_password(String user_password) {
-        this.user_password = user_password;
+    public void setUserPassword(String userPassword) {
+        this.userPassword = userPassword;
     }
 
     public String getEmail() {
@@ -86,13 +83,5 @@ public class User {
 
     public void setWeight(int weight) {
         this.weight = weight;
-    }
-
-    public int getRole() {
-        return role;
-    }
-
-    public void setRole(int role) {
-        this.role = role;
     }
 }

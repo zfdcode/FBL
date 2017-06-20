@@ -2,39 +2,50 @@ package com.tum.fbl.core.persistence.rating;
 
 public class Rating {
 
-    private String userId;
+    private int ratingId;
 
-    private String mealId;
+    private int userId;
 
-    private float rate;
+    private int mealId;
 
-    public Rating(String userId, String mealId, float rate) {
+    private float rating;
+
+    public Rating(int ratingId, int userId, int mealId, float rating) {
+        this.ratingId = ratingId;
         this.userId = userId;
         this.mealId = mealId;
-        this.rate = rate;
+        this.rating = rating;
     }
 
-    public String getUserId() {
+    public int getRatingId() {
+        return ratingId;
+    }
+
+    public void setRatingId(int ratingId) {
+        this.ratingId = ratingId;
+    }
+
+    public int getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(int userId) {
         this.userId = userId;
     }
 
-    public String getMealId() {
+    public int getMealId() {
         return mealId;
     }
 
-    public void setMealId(String mealId) {
+    public void setMealId(int mealId) {
         this.mealId = mealId;
     }
 
-    public float getRate() {
-        return rate;
+    public float getRating() {
+        return rating;
     }
 
-    public void setRate(float rate) {
-        this.rate = rate;
+    public void setRating(float rating) {
+        this.rating = rating;
     }
 }

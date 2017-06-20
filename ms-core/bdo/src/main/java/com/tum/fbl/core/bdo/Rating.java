@@ -5,32 +5,43 @@ package com.tum.fbl.core.bdo;
  */
 public class Rating {
 
-    private int user_id;
+    private int ratingId
 
-    private int meal_id;
+    private User user;
+
+    private Meal meal;
 
     private float rate;
 
-    public Rating(int user_id, int meal_id, float rate) {
-        this.user_id = user_id;
-        this.meal_id = meal_id;
+    public Rating(int ratingId, User user, Meal meal, float rate) {
+        this.ratingId = ratingId;
+        this.user = user;
+        this.meal = meal;
         this.rate = rate;
     }
 
-    public int getUser_id() {
-        return user_id;
+    public int getRatingId() {
+        return ratingId;
     }
 
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
+    public void setRatingId(int ratingId) {
+        this.ratingId = ratingId;
     }
 
-    public int getMeal_id() {
-        return meal_id;
+    public User getUser() {
+        return user;
     }
 
-    public void setMeal_id(int meal_id) {
-        this.meal_id = meal_id;
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Meal getMeal() {
+        return meal;
+    }
+
+    public void setMeal(Meal meal) {
+        this.meal = meal;
     }
 
     public float getRate() {

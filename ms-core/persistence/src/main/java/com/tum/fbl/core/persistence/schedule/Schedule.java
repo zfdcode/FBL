@@ -5,7 +5,7 @@ import java.util.Date;
 
 public class Schedules {
 
-    private String userId;
+    private int userId;
 
     private int schedulesDayOfTheWeek;
 

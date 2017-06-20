@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class Meal {
 
-    private String mealId;
+    private int mealId;
 
     private String mealName;
 
@@ -30,7 +30,7 @@ public class Meal {
 
     private float mealSodium;
 
-    public Meal(String mealId, String mealName, byte[] mealImage, float mealRating, int mealHelathValue, Date mealPreparationTime, float mealEnergy, float mealProtein, float mealTotalFat, float mealSaturated, float mealTotalCarbohydrate, float mealSugar, float mealSodium) {
+    public Meal(int mealId, String mealName, byte[] mealImage, float mealRating, int mealHelathValue, Date mealPreparationTime, float mealEnergy, float mealProtein, float mealTotalFat, float mealSaturated, float mealTotalCarbohydrate, float mealSugar, float mealSodium) {
         this.mealId = mealId;
         this.mealName = mealName;
         this.mealImage = mealImage;
@@ -46,11 +46,11 @@ public class Meal {
         this.mealSodium = mealSodium;
     }
 
-    public String getMealId() {
+    public int getMealId() {
         return mealId;
     }
 
-    public void setMealId(String mealId) {
+    public void setMealId(int mealId) {
         this.mealId = mealId;
     }
 

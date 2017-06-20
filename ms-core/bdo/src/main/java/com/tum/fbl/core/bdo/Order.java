@@ -7,61 +7,62 @@ import java.util.Date;
  */
 public class Order {
 
-    private int order_id;
+    private int orderId;
 
-    private User order_user;
+    private User orderUser;
 
-    private Meal order_meal;
+    private Meal orderMeal;
 
-    private Date order_pickup_time;
+    private Date orderPickupTime;
 
-    private int order_status;
+    private int orderStatus;
 
-    public Order(int order_id, User order_user, Meal order_meal, Date order_pickup_time, int order_status) {
-        this.order_id = order_id;
-        this.order_user = order_user;
-        this.order_meal = order_meal;
-        this.order_pickup_time = order_pickup_time;
-        this.order_status = order_status;
+    public Order(int orderId, User orderUser, Meal orderMeal, Date orderPickupTime, int orderStatus) {
+        this.orderId = orderId;
+        this.orderUser = orderUser;
+        this.orderMeal = orderMeal;
+        this.orderPickupTime = orderPickupTime;
+        this.orderStatus = orderStatus;
     }
 
-    public int getOrder_id() {
-        return order_id;
+    public int getOrderId() {
+        return orderId;
     }
 
-    public void setOrder_id(int order_id) {
-        this.order_id = order_id;
+    public void setOrderId(int orderId) {
+        this.orderId = orderId;
     }
 
-    public User getOrder_user() {
-        return order_user;
+    public User getOrderUser() {
+        return orderUser;
     }
 
-    public void setOrder_user(User order_user) {
-        this.order_user = order_user;
+    public void setOrderUser(User orderUser) {
+        this.orderUser = orderUser;
     }
 
-    public Meal getOrder_meal() {
-        return order_meal;
+    public Meal getOrderMeal() {
+        return orderMeal;
     }
 
-    public void setOrder_meal(Meal order_meal) {
-        this.order_meal = order_meal;
+    public void setOrderMeal(Meal orderMeal) {
+        this.orderMeal = orderMeal;
     }
 
-    public Date getOrder_pickup_time() {
-        return order_pickup_time;
+    public Date getOrderPickupTime() {
+        return orderPickupTime;
     }
 
-    public void setOrder_pickup_time(Date order_pickup_time) {
-        this.order_pickup_time = order_pickup_time;
+    public void setOrderPickupTime(Date orderPickupTime) {
+        this.orderPickupTime = orderPickupTime;
     }
 
-    public int getOrder_status() {
-        return order_status;
+    public int getOrderStatus() {
+        return orderStatus;
     }
 
-    public void setOrder_status(int order_status) {
-        this.order_status = order_status;
+    public void setOrderStatus(int orderStatus) {
+        this.orderStatus = orderStatus;
     }
 }
+

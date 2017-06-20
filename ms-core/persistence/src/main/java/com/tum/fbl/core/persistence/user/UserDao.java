@@ -12,12 +12,24 @@ import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapper;
 @RegisterMapper(UserMapper.class)
 public interface UserDao extends AutoCloseable {
 
-    @SqlQuery("select * from user where id = :id")
-    User findNameById(@Bind("id") String id);
+    @SqlQuery("select * from user where userId = :id")
+    User findUserById(@Bind("id") int userId);
 
     @SqlQuery("select * from user where email = :email")
-    User findNameByEmail(@Bind("email") String email);
+    User findUserByEmail(@Bind("email") String email);
 
-    @SqlUpdate("insert into user (name, email, password) values (:name, :email, :password)")
-    void newUser(@Bind("name") String name, @Bind("email") String email, @Bind("password") String password);
+    @SqlUpdate("insert into user (userName, userPassword, email, birthday, height, weight, DisplayName, restaurantAddress, role) " +
+            "values (:userName, :userPassword, :email, :birthday, :height, :weight, :DisplayName, :restaurantAddress, :role)")
+    void newUser(@Bind("userName") String userName,
+                 @Bind("userPassword") String userPassword,
+                 @Bind("email") String email,
+                 @Bind("birthday") Date birthday,
+                 @Bind("height") int height,
+                 @Bind("weight") int weight,
+                 @Bind("DisplayName") String DisplayName,
+                 @Bind("restaurantAddress") String restaurantAddress,
+                 @Bind("role") String role);
+
+    @SqlQuery("delete from user where userId = :id")
+    void deleteUser(@Bind("id") int userId);
 }

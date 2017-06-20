@@ -4,7 +4,7 @@ import java.sql.Date;
 
 public class Wearable {
 
-    private String deviceId;
+    private int deviceId;
 
     private int diviceType;
 
@@ -12,11 +12,11 @@ public class Wearable {
 
     private Date exitTime;
 
-    private String deviceUserId;
+    private int deviceUserId;
 
     private String deviceUserPassword;
 
-    public Wearable(String deviceId, int diviceType, Date connectionTime, Date exitTime, String deviceUserId, String deviceUserPassword) {
+    public Wearable(int deviceId, int diviceType, Date connectionTime, Date exitTime, int deviceUserId, String deviceUserPassword) {
         this.deviceId = deviceId;
         this.diviceType = diviceType;
         this.connectionTime = connectionTime;
@@ -25,11 +25,11 @@ public class Wearable {
         this.deviceUserPassword = deviceUserPassword;
     }
 
-    public String getDeviceId() {
+    public int getDeviceId() {
         return deviceId;
     }
 
-    public void setDeviceId(String deviceId) {
+    public void setDeviceId(int deviceId) {
         this.deviceId = deviceId;
     }
 
@@ -57,11 +57,11 @@ public class Wearable {
         this.exitTime = exitTime;
     }
 
-    public String getDeviceUserId() {
+    public int getDeviceUserId() {
         return deviceUserId;
     }
 
-    public void setDeviceUserId(String deviceUserId) {
+    public void setDeviceUserId(int deviceUserId) {
         this.deviceUserId = deviceUserId;
     }
 

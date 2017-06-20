@@ -7,29 +7,29 @@ public class HealthData {
 
     private User user;
 
-    private String device_user_password;
+    private String deviceUserPassword;
 
-    private String device_user_id;
+    private int deviceUserId;
 
-    private int current_hearthbeat;
+    private int currentHearthbeat;
 
-    private int heartbeat_in_a_time_range;
+    private int heartbeatTimeRange;
 
-    private float tracked_calorie_today;
+    private float trackedCalorieToday;
 
-    private float tracked_calories_in_a_time_range;
+    private float trackedCaloriesTimeRange;
 
-    private int average_heartbeat_in_a_time_range;
+    private int averageHeartbeatTimeRange;
 
-    public HealthData(User user, String device_user_password, String device_user_id, int current_hearthbeat, int heartbeat_in_a_time_range, float tracked_calorie_today, float tracked_calories_in_a_time_range, int average_heartbeat_in_a_time_range) {
+    public HealthData(User user, String deviceUserPassword, int deviceUserId, int currentHearthbeat, int heartbeatTimeRange, float trackedCalorieToday, float trackedCaloriesTimeRange, int averageHeartbeatTimeRange) {
         this.user = user;
-        this.device_user_password = device_user_password;
-        this.device_user_id = device_user_id;
-        this.current_hearthbeat = current_hearthbeat;
-        this.heartbeat_in_a_time_range = heartbeat_in_a_time_range;
-        this.tracked_calorie_today = tracked_calorie_today;
-        this.tracked_calories_in_a_time_range = tracked_calories_in_a_time_range;
-        this.average_heartbeat_in_a_time_range = average_heartbeat_in_a_time_range;
+        this.deviceUserPassword = deviceUserPassword;
+        this.deviceUserId = deviceUserId;
+        this.currentHearthbeat = currentHearthbeat;
+        this.heartbeatTimeRange = heartbeatTimeRange;
+        this.trackedCalorieToday = trackedCalorieToday;
+        this.trackedCaloriesTimeRange = trackedCaloriesTimeRange;
+        this.averageHeartbeatTimeRange = averageHeartbeatTimeRange;
     }
 
     public User getUser() {
@@ -40,59 +40,59 @@ public class HealthData {
         this.user = user;
     }
 
-    public String getDevice_user_password() {
-        return device_user_password;
+    public String getDeviceUserPassword() {
+        return deviceUserPassword;
     }
 
-    public void setDevice_user_password(String device_user_password) {
-        this.device_user_password = device_user_password;
+    public void setDeviceUserPassword(String deviceUserPassword) {
+        this.deviceUserPassword = deviceUserPassword;
     }
 
-    public String getDevice_user_id() {
-        return device_user_id;
+    public int getDeviceUserId() {
+        return deviceUserId;
     }
 
-    public void setDevice_user_id(String device_user_id) {
-        this.device_user_id = device_user_id;
+    public void setDeviceUserId(int deviceUserId) {
+        this.deviceUserId = deviceUserId;
     }
 
-    public int getCurrent_hearthbeat() {
-        return current_hearthbeat;
+    public int getCurrentHearthbeat() {
+        return currentHearthbeat;
     }
 
-    public void setCurrent_hearthbeat(int current_hearthbeat) {
-        this.current_hearthbeat = current_hearthbeat;
+    public void setCurrentHearthbeat(int currentHearthbeat) {
+        this.currentHearthbeat = currentHearthbeat;
     }
 
-    public int getHeartbeat_in_a_time_range() {
-        return heartbeat_in_a_time_range;
+    public int getHeartbeatTimeRange() {
+        return heartbeatTimeRange;
     }
 
-    public void setHeartbeat_in_a_time_range(int heartbeat_in_a_time_range) {
-        this.heartbeat_in_a_time_range = heartbeat_in_a_time_range;
+    public void setHeartbeatTimeRange(int heartbeatTimeRange) {
+        this.heartbeatTimeRange = heartbeatTimeRange;
     }
 
-    public float getTracked_calorie_today() {
-        return tracked_calorie_today;
+    public float getTrackedCalorieToday() {
+        return trackedCalorieToday;
     }
 
-    public void setTracked_calorie_today(float tracked_calorie_today) {
-        this.tracked_calorie_today = tracked_calorie_today;
+    public void setTrackedCalorieToday(float trackedCalorieToday) {
+        this.trackedCalorieToday = trackedCalorieToday;
     }
 
-    public float getTracked_calories_in_a_time_range() {
-        return tracked_calories_in_a_time_range;
+    public float getTrackedCaloriesTimeRange() {
+        return trackedCaloriesTimeRange;
     }
 
-    public void setTracked_calories_in_a_time_range(float tracked_calories_in_a_time_range) {
-        this.tracked_calories_in_a_time_range = tracked_calories_in_a_time_range;
+    public void setTrackedCaloriesTimeRange(float trackedCaloriesTimeRange) {
+        this.trackedCaloriesTimeRange = trackedCaloriesTimeRange;
     }
 
-    public int getAverage_heartbeat_in_a_time_range() {
-        return average_heartbeat_in_a_time_range;
+    public int getAverageHeartbeatTimeRange() {
+        return averageHeartbeatTimeRange;
     }
 
-    public void setAverage_heartbeat_in_a_time_range(int average_heartbeat_in_a_time_range) {
-        this.average_heartbeat_in_a_time_range = average_heartbeat_in_a_time_range;
+    public void setAverageHeartbeatTimeRange(int averageHeartbeatTimeRange) {
+        this.averageHeartbeatTimeRange = averageHeartbeatTimeRange;
     }
 }

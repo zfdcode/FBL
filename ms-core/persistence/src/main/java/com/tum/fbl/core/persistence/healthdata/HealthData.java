@@ -2,11 +2,11 @@ package com.tum.fbl.core.persistence.healthdata;
 
 public class HealthData {
 
-    private String userId;
+    private int userId;
 
     private String deviceUserPassword;
 
-    private String deviceUserId;
+    private int deviceUserId;
 
     private float currentHearthbeat;
 
@@ -18,7 +18,7 @@ public class HealthData {
 
     private int averageHeartbeatTimeRange;
 
-    public HealthData(String userId, String deviceUserPassword, String deviceUserId, float currentHearthbeat, int heartbeatTimeRange, float trackedCalorieToday, float trackedCaloriesTimeRange, int averageHeartbeatTimeRange) {
+    public HealthData(int userId, String deviceUserPassword, int deviceUserId, float currentHearthbeat, int heartbeatTimeRange, float trackedCalorieToday, float trackedCaloriesTimeRange, int averageHeartbeatTimeRange) {
         this.userId = userId;
         this.deviceUserPassword = deviceUserPassword;
         this.deviceUserId = deviceUserId;
@@ -29,11 +29,11 @@ public class HealthData {
         this.averageHeartbeatTimeRange = averageHeartbeatTimeRange;
     }
 
-    public String getUserId() {
+    public int getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(int userId) {
         this.userId = userId;
     }
 
@@ -45,11 +45,11 @@ public class HealthData {
         this.deviceUserPassword = deviceUserPassword;
     }
 
-    public String getDeviceUserId() {
+    public int getDeviceUserId() {
         return deviceUserId;
     }
 
-    public void setDeviceUserId(String deviceUserId) {
+    public void setDeviceUserId(int deviceUserId) {
         this.deviceUserId = deviceUserId;
     }
 

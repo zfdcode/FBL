@@ -15,9 +15,9 @@ public class Order {
 
     private Date orderPickupTime;
 
-    private int orderStatus;
+    private String orderStatus;
 
-    public Order(int orderId, User orderUser, Meal orderMeal, Date orderPickupTime, int orderStatus) {
+    public Order(int orderId, User orderUser, Meal orderMeal, Date orderPickupTime, String orderStatus) {
         this.orderId = orderId;
         this.orderUser = orderUser;
         this.orderMeal = orderMeal;
@@ -57,11 +57,11 @@ public class Order {
         this.orderPickupTime = orderPickupTime;
     }
 
-    public int getOrderStatus() {
+    public String getOrderStatus() {
         return orderStatus;
     }
 
-    public void setOrderStatus(int orderStatus) {
+    public void setOrderStatus(String orderStatus) {
         this.orderStatus = orderStatus;
     }
 }

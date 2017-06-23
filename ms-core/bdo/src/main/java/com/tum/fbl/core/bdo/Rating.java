@@ -11,13 +11,16 @@ public class Rating {
 
     private Meal meal;
 
-    private float rate;
+    private boolean rate;
 
-    public Rating(int ratingId, User user, Meal meal, float rate) {
+    private Date ratingTimestamp;
+
+    public Rating(int ratingId, User user, Meal meal, boolean rate, Date ratingTimestamp) {
         this.ratingId = ratingId;
         this.user = user;
         this.meal = meal;
         this.rate = rate;
+        this.ratingTimestamp = ratingTimestamp;
     }
 
     public int getRatingId() {
@@ -44,11 +47,19 @@ public class Rating {
         this.meal = meal;
     }
 
-    public float getRate() {
+    public boolean isRate() {
         return rate;
     }
 
-    public void setRate(float rate) {
+    public void setRate(boolean rate) {
         this.rate = rate;
+    }
+
+    public Date getRatingTimestamp() {
+        return ratingTimestamp;
+    }
+
+    public void setRatingTimestamp(Date ratingTimestamp) {
+        this.ratingTimestamp = ratingTimestamp;
     }
 }

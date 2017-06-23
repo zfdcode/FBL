@@ -13,7 +13,7 @@ import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapper;
 public interface VoteDao extends AutoCloseable{
 
     @SqlQuery("select * from vote where voteId = :id")
-    Category findVoteById(@Bind("id") int voteId);
+    Vote findVoteById(@Bind("id") int voteId);
 
     @SqlUpdate("Insert into vote (ingredientId, votingId, userId, like) value (:ingredientId, :votingId, :userId, :like)")
     void newVote(@Bind("ingredientId") int ingredientId,

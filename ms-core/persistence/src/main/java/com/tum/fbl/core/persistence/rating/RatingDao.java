@@ -12,7 +12,7 @@ import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapper;
 public interface RatingDao extends AutoCloseable{
 
     @SqlQuery("select * from rating where ratingId = :id")
-    Category findRatingById(@Bind("id") int ratingId);
+    Rating findRatingById(@Bind("id") int ratingId);
 
     @SqlUpdate("Insert into rating (userId, mealId, rating) value (:userId, :mealId, :rating)")
     void newRating(@Bind("userId") int userId,

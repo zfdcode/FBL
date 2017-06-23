@@ -12,7 +12,7 @@ import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapper;
 public interface ScheduleDao extends AutoCloseable{
 
     @SqlQuery("select * from schedule where userId = :id")
-    Category findScheduleById(@Bind("id") int userId);
+    Schedule findScheduleById(@Bind("id") int userId);
 
     @SqlUpdate("Insert into schedule (schedulesDayOfTheWeek, schedulesOpeningTime, schedulesClosingTime) value (:schedulesDayOfTheWeek, :schedulesOpeningTime, :schedulesClosingTime)")
     void newSchedule(@Bind("schedulesDayOfTheWeek") int schedulesDayOfTheWeek,

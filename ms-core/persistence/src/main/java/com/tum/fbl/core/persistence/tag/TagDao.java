@@ -13,7 +13,7 @@ import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapper;
 public interface TagDao extends AutoCloseable{
 
     @SqlQuery("select * from tag where tagId = :id")
-    Category findTagById(@Bind("id") int tagId);
+    Tag findTagById(@Bind("id") int tagId);
 
     @SqlUpdate("Insert into tag (tagName) value (:tagName)")
     void newTag(@Bind("tagName") int tagName);

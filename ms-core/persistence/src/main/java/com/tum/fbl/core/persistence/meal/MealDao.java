@@ -16,14 +16,18 @@ public interface MealDao extends AutoCloseable{
     @SqlQuery("select * from meal where mealId = :id")
     Meal findMealById(@Bind("id") int id);
 
-    @SqlUpdate("insert into meal ( mealName, mealImage, mealRating, mealHelathValue, mealPreparationTime, mealEnergy, mealProtein, mealTotalFat, mealSaturated, mealTotalCarbohydrate, mealSugar, mealSodium) " +
-            "values ( :mealName, :mealImage, :mealRating, :mealHelathValue, :mealPreparationTime, :mealEnergy, :mealProtein, :mealTotalFat, :mealSaturated, :mealTotalCarbohydrate, :mealSugar, :mealSodium")
+    @SqlQuery("select * from meal where offerDate = :offerDate")
+    Meal getAllMealForDate(@Bind("offerDate") Date offerDate);
+
+    @SqlUpdate("insert into meal ( mealName, mealImage, mealRating, mealHelathValue, mealPreparationTime, offerDate, mealEnergy, mealProtein, mealTotalFat, mealSaturated, mealTotalCarbohydrate, mealSugar, mealSodium) " +
+            "values ( :mealName, :mealImage, :mealRating, :mealHelathValue, :mealPreparationTime, offerDate, :mealEnergy, :mealProtein, :mealTotalFat, :mealSaturated, :mealTotalCarbohydrate, :mealSugar, :mealSodium")
     void newMeal(
             @Bind("mealName") String mealName,
             @Bind("mealImage") byte[] mealImage,
             @Bind("mealRating") float mealRating,
             @Bind("mealHelathValue") int mealHelathValue,
             @Bind("mealPreparationTime") Date mealPreparationTime,
+            @Bind("offerDate") Date offerDate,
             @Bind("mealEnergy") float mealEnergy,
             @Bind("mealProtein") float mealProtein,
             @Bind("mealTotalFat") float mealTotalFat,
@@ -34,4 +38,5 @@ public interface MealDao extends AutoCloseable{
 
     @SqlUpdate("delete from meal where mealId = :id")
     Meal findMealById(@Bind("id") int id);
+
 }

@@ -14,10 +14,11 @@ public interface RatingDao extends AutoCloseable{
     @SqlQuery("select * from rating where ratingId = :id")
     Rating findRatingById(@Bind("id") int ratingId);
 
-    @SqlUpdate("Insert into rating (userId, mealId, rating) value (:userId, :mealId, :rating)")
+    @SqlUpdate("Insert into rating (userId, mealId, ratingTimestamp, rating) value (:userId, :mealId, :ratingTimestamp, :rating)")
     void newRating(@Bind("userId") int userId,
                   @Bind("mealId") int mealId,
-                  @Bind("rating") float rating);
+                   @Bind("ratingTimestamp") Date ratingTimestamp,
+                  @Bind("rating") boolean rating);
 
     @SqlUpdate("delete from rating where ratingId = :id")
     void deleteRatingById(@Bind("id") int ratingId);

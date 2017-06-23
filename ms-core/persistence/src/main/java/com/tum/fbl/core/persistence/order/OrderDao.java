@@ -18,8 +18,14 @@ public interface OrderDao extends AutoCloseable{
     void newOrder(@Bind("orderUserId") int orderUserId,
                   @Bind("orderMealId") int orderMealId,
                   @Bind("orderPickupTime") Date orderPickupTime,
-                  @Bind("orderStatus") int orderStatus,);
+                  @Bind("orderStatus") int orderStatus);
 
     @SqlUpdate("delete from order where orderId = :id")
     void findOrderById(@Bind("id") int orderId);
+
+    @SqlQuery("select * from order where NOT(status = 'pickedUp' or status = 'canceled')")
+    Order getOrderList();
+
+    @SqlUpdate("update order set status= :newStatus where orderId = :id”)
+    void setOrderStatus@Bind("orderStatus") int orderStatus, @Bind("id") int orderId);
 }

@@ -26,4 +26,5 @@ public interface IngredientDao extends AutoCloseable{
 
     @SqlUpdate("delete from ingredient where ingredientId = :id")
     void deleteIngredientById(@Bind("id") int ingredientId);
-}
+
+    }

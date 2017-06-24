@@ -1,4 +1,6 @@
-package com.tum.fbl.core.bdo;
+package com.tum.fbl.core.persistence.voting;
+
+import java.util.Date;
 
 public class Voting {
     private int votingId;

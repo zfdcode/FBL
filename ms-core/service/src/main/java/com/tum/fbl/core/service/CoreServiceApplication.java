@@ -58,13 +58,13 @@ public class CoreServiceApplication extends Application<CoreServiceConfiguration
     public void run(CoreServiceConfiguration configuration,
                     Environment environment) {
 
+        final ConnectionFactory connectionFactory = new ConnectionFactory(configuration, environment);
+
         configureCors(environment);
 
         registerAuthenticator(environment);
 
-        registerResources(environment);
-
-        final ConnectionFactory dbiFactory = new ConnectionFactory(configuration, environment);
+        registerResources(environment, connectionFactory);
 
     }
 
@@ -80,7 +80,7 @@ public class CoreServiceApplication extends Application<CoreServiceConfiguration
     }
 
 
-    private void registerResources (Environment environment) {
+    private void registerResources (Environment environment, ConnectionFactory connectionFactory) {
 
         final HealthDataResource healthDataResource = new HealthDataResource();
         environment.jersey().register(healthDataResource);
@@ -103,7 +103,7 @@ public class CoreServiceApplication extends Application<CoreServiceConfiguration
         final SpecialNeedResource specialNeedResource = new SpecialNeedResource();
         environment.jersey().register(specialNeedResource);
 
-        final UserResource userResource = new UserResource();
+        final UserResource userResource = new UserResource(connectionFactory);
         environment.jersey().register(userResource);
     }
 

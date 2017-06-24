@@ -1,5 +1,7 @@
 package com.tum.fbl.core.persistence.user;
 
+import java.util.Date;
+
 /**
  * Created by patrickmelchner on 12.06.17.
  */

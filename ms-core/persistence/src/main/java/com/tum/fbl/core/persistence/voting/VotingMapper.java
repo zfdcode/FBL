@@ -13,7 +13,7 @@ public class VotingMapper implements ResultSetMapper<Voting> {
 
     @Override
     public Voting map(int index, ResultSet r, StatementContext ctx) throws SQLException {
-        return new Vote(
+        return new Voting(
                 r.getInt("votingId"),
                 r.getInt("createdBy"),
                 r.getDate("createdOn"),

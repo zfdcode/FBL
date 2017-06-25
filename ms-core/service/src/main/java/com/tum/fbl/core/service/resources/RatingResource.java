@@ -1,6 +1,7 @@
 package com.tum.fbl.core.service.resources;
 
 import com.tum.fbl.core.bdo.Rating;
+import com.tum.fbl.core.persistence.ConnectionFactory;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
@@ -16,6 +17,12 @@ import java.util.List;
 @Consumes(MediaType.APPLICATION_JSON)
 @Api(value = "Rating API", description = "Provides ratings.")
 public class RatingResource {
+
+    private final ConnectionFactory connectionFactory;
+
+    public RatingResource (ConnectionFactory connectionFactory) {
+        this.connectionFactory = connectionFactory;
+    }
 
     @GET
     @Path("/user/{userId}")

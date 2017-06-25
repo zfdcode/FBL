@@ -1,6 +1,7 @@
 package com.tum.fbl.core.service.resources;
 
 import com.tum.fbl.core.bdo.SpecialNeed;
+import com.tum.fbl.core.persistence.ConnectionFactory;
 import com.tum.fbl.core.service.auth.User;
 import io.dropwizard.auth.Auth;
 import io.swagger.annotations.Api;
@@ -17,6 +18,12 @@ import java.util.List;
 @Consumes(MediaType.APPLICATION_JSON)
 @Api(value = "special need API", description = "Provides special needs.")
 public class SpecialNeedResource {
+
+    private final ConnectionFactory connectionFactory;
+
+    public SpecialNeedResource (ConnectionFactory connectionFactory) {
+        this.connectionFactory = connectionFactory;
+    }
 
     @Path("/all")
     @ApiOperation(value = "Get all offered specialNeeds")

@@ -82,25 +82,25 @@ public class CoreServiceApplication extends Application<CoreServiceConfiguration
 
     private void registerResources (Environment environment, ConnectionFactory connectionFactory) {
 
-        final HealthDataResource healthDataResource = new HealthDataResource();
+        final HealthDataResource healthDataResource = new HealthDataResource(connectionFactory);
         environment.jersey().register(healthDataResource);
 
-        final MealResource mealResource = new MealResource();
+        final MealResource mealResource = new MealResource(connectionFactory);
         environment.jersey().register(mealResource);
 
-        final RestaurantResource restaurantResource = new RestaurantResource();
+        final RestaurantResource restaurantResource = new RestaurantResource(connectionFactory);
         environment.jersey().register(restaurantResource);
 
-        final OrderResource orderResource = new OrderResource();
+        final OrderResource orderResource = new OrderResource(connectionFactory);
         environment.jersey().register(orderResource);
 
-        final IngredientResource ingredientResource = new IngredientResource();
+        final IngredientResource ingredientResource = new IngredientResource(connectionFactory);
         environment.jersey().register(ingredientResource);
 
-        final RatingResource ratingResource = new RatingResource();
+        final RatingResource ratingResource = new RatingResource(connectionFactory);
         environment.jersey().register(ratingResource);
 
-        final SpecialNeedResource specialNeedResource = new SpecialNeedResource();
+        final SpecialNeedResource specialNeedResource = new SpecialNeedResource(connectionFactory);
         environment.jersey().register(specialNeedResource);
 
         final UserResource userResource = new UserResource(connectionFactory);

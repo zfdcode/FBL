@@ -5,6 +5,7 @@ import com.tum.fbl.core.imagestorage.ImageStatus;
 import com.tum.fbl.core.imagestorage.ImageStorage;
 import com.tum.fbl.core.imagestorage.ImageStorageImpl;
 import com.tum.fbl.core.bdo.Meal;
+import com.tum.fbl.core.persistence.ConnectionFactory;
 import com.tum.fbl.core.service.auth.User;
 import io.dropwizard.auth.Auth;
 import io.swagger.annotations.Api;
@@ -31,7 +32,12 @@ public class MealResource {
 
     private ImageStorage imageStorage;
 
-    public MealResource() {
+    private final ConnectionFactory connectionFactory;
+
+
+    public MealResource(ConnectionFactory connectionFactory) {
+        this.connectionFactory = connectionFactory;
+
         this.imageStorage = new ImageStorageImpl();
     }
 

@@ -1,6 +1,7 @@
 package com.tum.fbl.core.service.resources;
 
 import com.tum.fbl.core.bdo.HealthData;
+import com.tum.fbl.core.persistence.ConnectionFactory;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
@@ -16,6 +17,12 @@ import javax.ws.rs.core.MediaType;
 @Consumes(MediaType.APPLICATION_JSON)
 @Api(value = "Health API", description = "Provides the health status of the service.")
 public class HealthDataResource {
+
+    private final ConnectionFactory connectionFactory;
+
+    public HealthDataResource (ConnectionFactory connectionFactory) {
+        this.connectionFactory = connectionFactory;
+    }
 
     @GET
     @Path("/{userId}")

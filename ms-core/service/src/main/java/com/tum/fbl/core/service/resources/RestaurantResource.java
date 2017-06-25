@@ -1,6 +1,7 @@
 package com.tum.fbl.core.service.resources;
 
 import com.tum.fbl.core.bdo.Restaurant;
+import com.tum.fbl.core.persistence.ConnectionFactory;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
@@ -13,6 +14,12 @@ import java.util.List;
 @Consumes(MediaType.APPLICATION_JSON)
 @Api(value = "Restaurant API", description = "Provides the core data of all restaurants.")
 public class RestaurantResource {
+
+    private final ConnectionFactory connectionFactory;
+
+    public RestaurantResource (ConnectionFactory connectionFactory) {
+        this.connectionFactory = connectionFactory;
+    }
 
     @GET
     @Path("/all")

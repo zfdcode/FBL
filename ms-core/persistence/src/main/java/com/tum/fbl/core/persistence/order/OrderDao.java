@@ -1,9 +1,12 @@
 package com.tum.fbl.core.persistence.order;
 
+import com.tum.fbl.core.persistence.category.Category;
 import org.skife.jdbi.v2.sqlobject.Bind;
 import org.skife.jdbi.v2.sqlobject.SqlQuery;
 import org.skife.jdbi.v2.sqlobject.SqlUpdate;
 import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapper;
+
+import java.util.Date;
 
 /**
  * Created by malte on 13.06.2017.
@@ -18,8 +21,8 @@ public interface OrderDao extends AutoCloseable{
     void newOrder(@Bind("orderUserId") int orderUserId,
                   @Bind("orderMealId") int orderMealId,
                   @Bind("orderPickupTime") Date orderPickupTime,
-                  @Bind("orderStatus") int orderStatus,);
+                  @Bind("orderStatus") int orderStatus);
 
     @SqlUpdate("delete from order where orderId = :id")
-    void findOrderById(@Bind("id") int orderId);
+    void deleteOrderById(@Bind("id") int orderId);
 }

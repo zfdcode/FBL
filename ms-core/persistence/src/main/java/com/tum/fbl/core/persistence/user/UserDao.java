@@ -5,6 +5,8 @@ import org.skife.jdbi.v2.sqlobject.SqlQuery;
 import org.skife.jdbi.v2.sqlobject.SqlUpdate;
 import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapper;
 
+import java.util.Date;
+
 /**
  * Created by patrickmelchner on 12.06.17.
  */
@@ -32,4 +34,6 @@ public interface UserDao extends AutoCloseable {
 
     @SqlQuery("delete from user where userId = :id")
     void deleteUser(@Bind("id") int userId);
+
+    public void close();
 }

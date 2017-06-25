@@ -3,9 +3,9 @@ package com.tum.fbl.core.persistence.schedule;
 import java.util.Date;
 
 
-public class Schedules {
+public class Schedule {
 
-    private int userId;
+    private String userId;
 
     private int schedulesDayOfTheWeek;
 
@@ -13,7 +13,7 @@ public class Schedules {
 
     private Date schedulesClosingTime;
 
-    public Schedules(String userId, int schedulesDayOfTheWeek, Date schedulesOpeningTime, Date schedulesClosingTime) {
+    public Schedule(String userId, int schedulesDayOfTheWeek, Date schedulesOpeningTime, Date schedulesClosingTime) {
         this.userId = userId;
         this.schedulesDayOfTheWeek = schedulesDayOfTheWeek;
         this.schedulesOpeningTime = schedulesOpeningTime;

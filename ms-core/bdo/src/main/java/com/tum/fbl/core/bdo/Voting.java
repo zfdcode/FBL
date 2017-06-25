@@ -1,5 +1,7 @@
 package com.tum.fbl.core.bdo;
 
+import java.util.Date;
+
 public class Voting {
     private int votingId;
 

@@ -5,7 +5,7 @@ package com.tum.fbl.core.bdo;
  */
 public class Rating {
 
-    private int ratingId
+    private int ratingId;
 
     private User user;
 

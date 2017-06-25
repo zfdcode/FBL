@@ -1,6 +1,5 @@
 package com.tum.fbl.core.persistence.schedule;
 
-import com.tum.fbl.core.persistence.schedule.Schedule;
 import org.skife.jdbi.v2.StatementContext;
 import org.skife.jdbi.v2.tweak.ResultSetMapper;
 
@@ -14,7 +13,7 @@ public class ScheduleMapper implements ResultSetMapper<Schedule> {
     @Override
     public Schedule map(int index, ResultSet r, StatementContext ctx) throws SQLException {
         return new Schedule(
-                r.getInt("userId"),
+                r.getString("userId"),
                 r.getInt("schedulesDayOfTheWeek"),
                 r.getDate("schedulesOpeningTime"),
                 r.getDate("schedulesClosingTime"));

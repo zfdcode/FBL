@@ -134,7 +134,10 @@
             <column name="mealId" type="int">
                 <constraints nullable="false"/>
             </column>
-            <column name="rate" type="float">
+            <column name="rating" type="boolean">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ratingTimestamp" type="date">
                 <constraints nullable="false"/>
             </column>
         </createTable>
@@ -169,6 +172,9 @@
             </column>
             <column name="preparationTime" type="time">
                 <constraints nullable="false"/>
+            </column>
+            <column name="offerDate" type="date">
+                <constraints nullable="false" />
             </column>
             <column name="energy" type="float">
                 <constraints nullable="false"/>
@@ -214,29 +220,29 @@
             </column>
         </createTable>
         
-        <createTable tableName="UserSpecialNeeds">
+        <createTable tableName="UserCategory">
             <column name="userId" type="int">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
-            <column name="specialNeedId" type="int">
+            <column name="categoryId" type="int">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
         </createTable>
 
-        <createTable tableName="SpecialNeeds">
-            <column name="specialNeedId" type="int" autoIncrement="true">
+        <createTable tableName="Category">
+            <column name="categoryId" type="int" autoIncrement="true">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
-            <column name="specialNeedName" type="varchar(255)">
+            <column name="categoryName" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
         </createTable>
         
-        <createTable tableName="MealSpecialNeeds">
+        <createTable tableName="MealCategory">
             <column name="mealId" type="int">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
-            <column name="specialNeedId" type="int">
+            <column name="categoryId" type="int">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
         </createTable>
@@ -255,6 +261,96 @@
                 <constraints nullable="false" primaryKey="true"/>
             </column>
             <column name="ingredientName" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="image" type="image">
+                <constraints nullable="false"/>
+            </column>
+            <column name="energy" type="float">
+                <constraints nullable="false"/>
+            </column>
+            <column name="totalFat" type="float">
+                <constraints nullable="false"/>
+            </column>
+            <column name="protein" type="float">
+                <constraints nullable="false"/>
+            </column>
+            <column name="totalCarbohydrate" type="float">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        
+        <createTable tableName="IngredientComment">
+            <column name="ingredientId" type="int">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="commentId" type="int">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="Comment">
+            <column name="commentId" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="comment" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="IngredientTag">
+            <column name="ingredientId" type="int">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="tagId" type="int">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+        </createTable>
+        
+        <createTable tableName="Tag">
+            <column name="tagId" type="int">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="tagName" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="Vote">
+            <column name="voteId" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="ingredientId" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="votingId" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="userId" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="like" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        
+        <createTable tableName="Voting">
+            <column name="votingId" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="createdBy" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="createdOn" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="startDate" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="location" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
         </createTable>

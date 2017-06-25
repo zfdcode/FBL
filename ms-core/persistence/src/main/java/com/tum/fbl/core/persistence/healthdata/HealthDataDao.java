@@ -26,6 +26,6 @@ public interface HealthDataDao extends AutoCloseable{
             @Bind("trackedCalorieTimeRange") float trackedCalorieTimeRange,
             @Bind("averageHeartbeatTimeRange") int averageHeartbeatTimeRange);
 
-    @SqlQuery("delte from healthTrackerData where userId = :id")
+    @SqlQuery("delete from healthTrackerData where userId = :id")
    void deleteHealthData(@Bind("id") int userId);
 }

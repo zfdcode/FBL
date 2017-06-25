@@ -34,6 +34,7 @@ class UserFoodPreferenceView(
     model = models.FoodPreference
     serializer_class = serializers.FoodPreferenceSerializer
     create_serializer_class = serializers.UserFoodPreferenceSerializer
+    user_id = 1         # TODO: Replace with authenticated user id later
 
     def get_queryset(self):
         return models.FoodPreference.objects.filter(users__user_id=1)
@@ -50,4 +51,4 @@ class UserFoodPreferenceView(
         )
 
     def perform_create(self, serializer):
-        serializer.save(user_id=1)
+        serializer.save(user_id=self.user_id)

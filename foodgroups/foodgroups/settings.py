@@ -25,7 +25,7 @@ SECRET_KEY = '&kk1%=aoenm+k01kmyg1fk$ck=mm1(a^f2(2@=$pv%!zy+t^cc'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['207.154.206.64']
+ALLOWED_HOSTS = ['207.154.206.64', 'localhost']
 
 
 # Application definition
@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'users',
     'events',
+    'groups',
 ]
 
 MIDDLEWARE = [
@@ -134,6 +135,9 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.TokenAuthentication',
     ),
     'DATETIME_FORMAT': "%d-%m-%Y %H:%M:%S",
+    'DATETIME_INPUT_FORMATS': ["%d-%m-%Y %H:%M:%S"],
     'DATE_FORMAT': "%d-%m-%Y",
+    'DATE_INPUT_FORMATS': ["%d-%m-%Y"],
     'TIME_FORMAT': "%H:%M:%S",
+    'TIME_INPUT_FORMATS': ["%H:%M:%S"],
 }

@@ -3,3 +3,4 @@
 foodgroups/env/
 foodgroups/static/
 __pycache__
+*.pyc

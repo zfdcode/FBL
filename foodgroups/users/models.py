@@ -4,8 +4,11 @@ from django.utils.text import slugify
 
 
 class FoodPreference(models.Model):
-    slug = models.SlugField(primary_key=True, max_length=50)
+    slug = models.SlugField(db_index=True, unique=True, max_length=50)
     name = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.name
 
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):

@@ -17,7 +17,10 @@ public interface MealDao extends AutoCloseable{
     Meal findMealById(@Bind("id") int id);
 
     @SqlQuery("select * from meal where offerDate = :offerDate")
-    Meal getAllMealForDate(@Bind("offerDate") Date offerDate);
+    List<Meal> getAllMealForDate(@Bind("offerDate") Date offerDate);
+
+    @SqlQuery("select * from (MealRestaurant join Meal) where userId =:id")
+    List<Meal> getMealsByUser(@Bind("id") int userId);
 
     @SqlUpdate("insert into meal ( mealName, mealImage, mealRating, mealHelathValue, mealPreparationTime, offerDate, mealEnergy, mealProtein, mealTotalFat, mealSaturated, mealTotalCarbohydrate, mealSugar, mealSodium) " +
             "values ( :mealName, :mealImage, :mealRating, :mealHelathValue, :mealPreparationTime, offerDate, :mealEnergy, :mealProtein, :mealTotalFat, :mealSaturated, :mealTotalCarbohydrate, :mealSugar, :mealSodium")
@@ -25,7 +28,7 @@ public interface MealDao extends AutoCloseable{
             @Bind("mealName") String mealName,
             @Bind("mealImage") byte[] mealImage,
             @Bind("mealRating") float mealRating,
-            @Bind("mealHelathValue") int mealHelathValue,
+            @Bind("mealHelathValue") int mealHealthValue,
             @Bind("mealPreparationTime") Date mealPreparationTime,
             @Bind("offerDate") Date offerDate,
             @Bind("mealEnergy") float mealEnergy,

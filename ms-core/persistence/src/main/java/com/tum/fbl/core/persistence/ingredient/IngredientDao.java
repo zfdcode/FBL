@@ -15,6 +15,9 @@ public interface IngredientDao extends AutoCloseable{
     @SqlQuery("select * from ingredient where ingredientId = :id")
     Ingredient findIngredientById(@Bind("id") int ingredientId);
 
+    @SqlQuery("select * from ingredient")
+    List<Ingredient> getAllIngredients();
+
     @SqlUpdate("Insert into ingredient (ingredientName, description, ingredientImage, energy, totalFat, protein, totalCarbohydrate) " +
             "value (:ingredientName, :description, :ingredientImage, :energy, :totalFat, :protein, :totalCarbohydrate)")
     void newIngredient(@Bind("ingredientName") String ingredientName,

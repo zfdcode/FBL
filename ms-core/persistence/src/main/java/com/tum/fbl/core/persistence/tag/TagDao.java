@@ -22,6 +22,6 @@ public interface TagDao extends AutoCloseable{
     @SqlUpdate("delete from tag where tagId = :id")
     void deleteTagById(@Bind("id") int tagId);
 
-    @SqlQuery("ingredients join (ingredientTag join (select * from tag where tagId = :tagId) on ingredientId")
+    @SqlQuery("select * from (ingredients join (ingredientTag join (select * from tag where tagId = :tagId)) on ingredientId)")
     Ingredient findIngredientByTag(@Bind("id") int tagId);
 }

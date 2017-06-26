@@ -34,4 +34,7 @@ public interface MealDao extends AutoCloseable{
 
     @SqlUpdate("delete from meal where mealId = :id")
     Meal delteMealById(@Bind("id") int id);
+    //TODO: void update()
+
+    public void close();
 }

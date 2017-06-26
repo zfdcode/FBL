@@ -5,13 +5,13 @@ package com.tum.fbl.core.bdo;
  */
 public class HealthData {
 
-    private User user;
+    private int userId;
 
     private String deviceUserPassword;
 
     private int deviceUserId;
 
-    private int currentHearthbeat;
+    private float currentHearthbeat;
 
     private int heartbeatTimeRange;
 
@@ -21,8 +21,8 @@ public class HealthData {
 
     private int averageHeartbeatTimeRange;
 
-    public HealthData(User user, String deviceUserPassword, int deviceUserId, int currentHearthbeat, int heartbeatTimeRange, float trackedCalorieToday, float trackedCaloriesTimeRange, int averageHeartbeatTimeRange) {
-        this.user = user;
+    public HealthData(int userId, String deviceUserPassword, int deviceUserId, float currentHearthbeat, int heartbeatTimeRange, float trackedCalorieToday, float trackedCaloriesTimeRange, int averageHeartbeatTimeRange) {
+        this.userId = userId;
         this.deviceUserPassword = deviceUserPassword;
         this.deviceUserId = deviceUserId;
         this.currentHearthbeat = currentHearthbeat;
@@ -32,12 +32,12 @@ public class HealthData {
         this.averageHeartbeatTimeRange = averageHeartbeatTimeRange;
     }
 
-    public User getUser() {
-        return user;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUser(int userId) {
+        this.userId = userId;
     }
 
     public String getDeviceUserPassword() {
@@ -56,11 +56,11 @@ public class HealthData {
         this.deviceUserId = deviceUserId;
     }
 
-    public int getCurrentHearthbeat() {
+    public float getCurrentHearthbeat() {
         return currentHearthbeat;
     }
 
-    public void setCurrentHearthbeat(int currentHearthbeat) {
+    public void setCurrentHearthbeat(float currentHearthbeat) {
         this.currentHearthbeat = currentHearthbeat;
     }
 
@@ -95,4 +95,5 @@ public class HealthData {
     public void setAverageHeartbeatTimeRange(int averageHeartbeatTimeRange) {
         this.averageHeartbeatTimeRange = averageHeartbeatTimeRange;
     }
+
 }

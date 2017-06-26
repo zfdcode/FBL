@@ -78,6 +78,7 @@ public class UserResource {
     @ApiOperation(value = "Update an existing user")
     public void updateUser(User user) {
         try (UserDao userDao = this.connectionFactory.getConnection().open(UserDao.class)) {
+            //TODO: userdao.updateUser
             userDao.newUser(
                     user.getUserName(),
                     user.getUserPassword(),

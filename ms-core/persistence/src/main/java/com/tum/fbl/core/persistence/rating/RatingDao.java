@@ -21,4 +21,8 @@ public interface RatingDao extends AutoCloseable{
 
     @SqlUpdate("delete from rating where ratingId = :id")
     void deleteRatingById(@Bind("id") int ratingId);
+
+    //TODO: void update()
+
+    public void close();
 }

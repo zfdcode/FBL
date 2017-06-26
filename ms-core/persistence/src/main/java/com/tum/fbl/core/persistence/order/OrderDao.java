@@ -25,4 +25,8 @@ public interface OrderDao extends AutoCloseable{
 
     @SqlUpdate("delete from order where orderId = :id")
     void deleteOrderById(@Bind("id") int orderId);
+
+    //TODO: void update()
+
+    public void close();
 }

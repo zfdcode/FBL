@@ -23,4 +23,8 @@ public interface ScheduleDao extends AutoCloseable{
 
     @SqlUpdate("delete from schedule where userId = :id")
     void deleteScheduleById(@Bind("id") int userId);
+
+    //TODO: void update()
+
+    public void close();
 }

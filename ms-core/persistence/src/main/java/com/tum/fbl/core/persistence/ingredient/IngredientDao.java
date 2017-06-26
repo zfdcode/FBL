@@ -10,7 +10,7 @@ import sun.jvm.hotspot.runtime.Bytes;
  * Created by malte on 13.06.2017.
  */
 @RegisterMapper(IngredientMapper.class)
-public interface IngredientDao extends AutoCloseable{
+public interface IngredientDao extends AutoCloseable {
 
     @SqlQuery("select * from ingredient where ingredientId = :id")
     Ingredient findIngredientById(@Bind("id") int ingredientId);
@@ -27,4 +27,8 @@ public interface IngredientDao extends AutoCloseable{
 
     @SqlUpdate("delete from ingredient where ingredientId = :id")
     void deleteIngredientById(@Bind("id") int ingredientId);
+
+    //TODO: void update()
+
+    public void close();
 }

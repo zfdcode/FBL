@@ -35,5 +35,7 @@ public interface UserDao extends AutoCloseable {
     @SqlQuery("delete from user where userId = :id")
     void deleteUser(@Bind("id") int userId);
 
+    //TODO: updateUser
+
     public void close();
 }

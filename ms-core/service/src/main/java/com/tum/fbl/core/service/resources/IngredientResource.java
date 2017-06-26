@@ -1,6 +1,7 @@
 package com.tum.fbl.core.service.resources;
 
 import com.tum.fbl.core.bdo.Ingredient;
+import com.tum.fbl.core.persistence.ConnectionFactory;
 import com.tum.fbl.core.service.auth.User;
 import io.dropwizard.auth.Auth;
 import io.swagger.annotations.Api;
@@ -17,6 +18,12 @@ import java.util.List;
 @Consumes(MediaType.APPLICATION_JSON)
 @Api(value = "Ingredient API", description = "Provides ingredients.")
 public class IngredientResource {
+
+    private final ConnectionFactory connectionFactory;
+
+    public IngredientResource (ConnectionFactory connectionFactory) {
+        this.connectionFactory = connectionFactory;
+    }
 
     @Path("/all")
     @ApiOperation(value = "Get all offered ingredients")

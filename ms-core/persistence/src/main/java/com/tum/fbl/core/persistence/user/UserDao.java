@@ -5,6 +5,8 @@ import org.skife.jdbi.v2.sqlobject.SqlQuery;
 import org.skife.jdbi.v2.sqlobject.SqlUpdate;
 import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapper;
 
+import java.util.Date;
+
 /**
  * Created by patrickmelchner on 12.06.17.
  */
@@ -16,7 +18,8 @@ public interface UserDao extends AutoCloseable {
     User findUserById(@Bind("id") int userId);
 
     @SqlQuery("select * from meals join user on mealRestaurant join mealRestaurant on user where userId = :id")
-    User findUserById(@Bind("id") int userId);
+    User findMealsByUser(@Bind("id") int userId);
+
 
     @SqlQuery("select * from user where email = :email")
     User findUserByEmail(@Bind("email") String email);
@@ -35,4 +38,6 @@ public interface UserDao extends AutoCloseable {
 
     @SqlQuery("delete from user where userId = :id")
     void deleteUser(@Bind("id") int userId);
+
+    public void close();
 }

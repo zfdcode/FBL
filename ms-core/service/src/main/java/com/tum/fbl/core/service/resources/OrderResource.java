@@ -1,5 +1,6 @@
 package com.tum.fbl.core.service.resources;
 
+import com.tum.fbl.core.persistence.ConnectionFactory;
 import com.tum.fbl.core.service.auth.User;
 import com.tum.fbl.core.bdo.Order;
 import io.dropwizard.auth.Auth;
@@ -15,6 +16,12 @@ import javax.ws.rs.*;
 @Consumes(MediaType.APPLICATION_JSON)
 @Api(value = "Order API", description = "Provides order functionality.")
 public class OrderResource {
+
+    private final ConnectionFactory connectionFactory;
+
+    public OrderResource (ConnectionFactory connectionFactory) {
+        this.connectionFactory = connectionFactory;
+    }
 
     @GET
     @Path("/all")

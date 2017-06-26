@@ -1,5 +1,6 @@
 package com.tum.fbl.core.persistence.tag;
 
+import com.tum.fbl.core.persistence.ingredient.Ingredient;
 import org.skife.jdbi.v2.sqlobject.Bind;
 import org.skife.jdbi.v2.sqlobject.SqlQuery;
 import org.skife.jdbi.v2.sqlobject.SqlUpdate;

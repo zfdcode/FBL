@@ -1,5 +1,7 @@
 package com.tum.fbl.core.persistence.rating;
 
+import java.util.Date;
+
 public class Rating {
 
     private int ratingId;
@@ -8,7 +10,7 @@ public class Rating {
 
     private int mealId;
 
-    private Date ratingTimestamp
+    private Date ratingTimestamp;
 
     private boolean rating;
 

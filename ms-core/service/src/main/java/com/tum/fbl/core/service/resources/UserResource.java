@@ -1,8 +1,11 @@
 package com.tum.fbl.core.service.resources;
 
 import com.tum.fbl.core.bdo.User;
+import com.tum.fbl.core.persistence.ConnectionFactory;
+import com.tum.fbl.core.persistence.user.UserDao;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.skife.jdbi.v2.DBI;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -18,11 +21,30 @@ import java.util.List;
 @Api(value = "User API", description = "Provides the user information.")
 public class UserResource {
 
+    private final ConnectionFactory connectionFactory;
+
+    public UserResource (ConnectionFactory connectionFactory) {
+        this.connectionFactory = connectionFactory;
+    }
+
     @GET
     @Path("/{userId}")
     @ApiOperation(value = "Get basic user information")
     public User getUser (@PathParam("userId") int userId) {
-        return null;
+
+         try (UserDao userDao = this.connectionFactory.getConnection().open(UserDao.class)) {
+             com.tum.fbl.core.persistence.user.User user = userDao.findUserById(userId);
+
+             return new User(
+                     user.getUserId(),
+                     user.getUserName(),
+                     user.getUserPassword(),
+                     user.getEmail(),
+                     user.getBirthday(),
+                     user.getHeight(),
+                     user.getWeight()
+             );
+         }
     }
 
     @DELETE

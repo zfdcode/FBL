@@ -37,6 +37,6 @@ public interface MealDao extends AutoCloseable{
             @Bind("mealSodium") float mealSodium);
 
     @SqlUpdate("delete from meal where mealId = :id")
-    Meal findMealById(@Bind("id") int id);
+    Meal deleteMealById(@Bind("id") int id);
 
 }

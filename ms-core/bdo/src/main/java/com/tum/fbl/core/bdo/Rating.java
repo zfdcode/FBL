@@ -1,11 +1,13 @@
 package com.tum.fbl.core.bdo;
 
+import java.util.Date;
+
 /**
  * Created by zfngd on 2017/6/4.
  */
 public class Rating {
 
-    private int ratingId
+    private int ratingId;
 
     private User user;
 

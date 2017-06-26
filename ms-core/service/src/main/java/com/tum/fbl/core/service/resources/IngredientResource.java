@@ -2,6 +2,7 @@ package com.tum.fbl.core.service.resources;
 
 import com.tum.fbl.core.bdo.Ingredient;
 import com.tum.fbl.core.persistence.ConnectionFactory;
+import com.tum.fbl.core.persistence.ingredient.IngredientDao;
 import com.tum.fbl.core.service.auth.User;
 import io.dropwizard.auth.Auth;
 import io.swagger.annotations.Api;
@@ -10,6 +11,7 @@ import io.swagger.annotations.ApiOperation;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
+
 /**
  * Created by zfngd on 2017/6/15.
  */
@@ -21,27 +23,45 @@ public class IngredientResource {
 
     private final ConnectionFactory connectionFactory;
 
-    public IngredientResource (ConnectionFactory connectionFactory) {
+    public IngredientResource(ConnectionFactory connectionFactory) {
         this.connectionFactory = connectionFactory;
     }
-c
+
     @Path("/all")
     @ApiOperation(value = "Get all offered ingredients")
     public List<Ingredient> getAllIngredients(@Auth User user) {
-        return null;
+        try (IngredientDao ingredientDao = this.connectionFactory.getConnection().open(IngredientDao.class)) {
+            List<com.tum.fbl.core.persistence.ingredient.Ingredient> ingredients = ingredientDao.findIngredients();
+            //TODO: return List<Ingredient>
+            return null;
+        }
     }
 
     @GET
     @Path("/id/{ingredientId}")
     @ApiOperation(value = "Get information of a ingredient")
-    public Ingredient getIngredient(@PathParam("ingredientId") int ingredientId){
-        return null;
+    public Ingredient getIngredient(@PathParam("ingredientId") int ingredientId) {
+        try (IngredientDao ingredientDao = this.connectionFactory.getConnection().open(IngredientDao.class)) {
+            com.tum.fbl.core.persistence.ingredient.Ingredient ingredient = ingredientDao.findIngredientById(ingredientId);
+            return new Ingredient(
+                    ingredient.getIngredientId(),
+                    ingredient.getIngredientName(),
+                    ingredient.getDescription(),
+                    ingredient.getIngredientImage(),
+                    ingredient.getEnergy(),
+                    ingredient.getTotalFat(),
+                    ingredient.getProtein(),
+                    ingredient.getTotalCarbohydrate(),
+                    ingredient.getTag()
+            );
+        }
+
     }
 
     @GET
     @Path("/tag/{ingredientTags}")
     @ApiOperation(value = "Get information of a ingredient")
-    public Ingredient getIngredientByTags(@PathParam("ingredientTags") String ingredientTags){
+    public Ingredient getIngredientByTags(@PathParam("ingredientTags") String ingredientTags) {
         return null;
     }
 
@@ -49,11 +69,25 @@ c
     @Path("/{ingredientId}")
     @ApiOperation(value = "Deletes a ingredient")
     public void deleteIngredient(@PathParam("ingredientId") int ingredientId) {
-
+        try (IngredientDao ingredientDao = this.connectionFactory.getConnection().open(IngredientDao.class)) {
+            ingredientDao.deleteIngredientById(ingredientId);
+        }
     }
 
     @ApiOperation(value = "Add a new ingredient to the store")
     public void addIngredient(Ingredient ingredient) {
+        try (IngredientDao ingredientDao = this.connectionFactory.getConnection().open(IngredientDao.class)) {
+            ingredientDao.newIngredient(
+                    ingredient.getIngredientName(),
+                    ingredient.getDescription(),
+                    ingredient.getIngredientImage(),
+                    ingredient.getEnergy(),
+                    ingredient.getTotalFat(),
+                    ingredient.getProtein(),
+                    ingredient.getTotalCarbohydrate(),
+                    ingredient.getTag()
+            );
+        }
     }
 
     @PUT

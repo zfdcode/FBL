@@ -16,6 +16,8 @@ public interface MealDao extends AutoCloseable{
     @SqlQuery("select * from meal where mealId = :id")
     Meal findMealById(@Bind("id") int id);
 
+    //TODO: add findMeals()
+
     @SqlUpdate("insert into meal ( mealName, mealImage, mealRating, mealHelathValue, mealPreparationTime, mealEnergy, mealProtein, mealTotalFat, mealSaturated, mealTotalCarbohydrate, mealSugar, mealSodium) " +
             "values ( :mealName, :mealImage, :mealRating, :mealHelathValue, :mealPreparationTime, :mealEnergy, :mealProtein, :mealTotalFat, :mealSaturated, :mealTotalCarbohydrate, :mealSugar, :mealSodium")
     void newMeal(

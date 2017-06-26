@@ -19,6 +19,12 @@ public class User {
 
     private int weight;
 
+    private String DisplayName;
+
+    private String restaurantAddress;
+
+    private String role;
+
     public User(int userId, String userName, String userPassword, String email, Date birthday, int height, int weight) {
         this.userId = userId;
         this.userName = userName;
@@ -83,5 +89,29 @@ public class User {
 
     public void setWeight(int weight) {
         this.weight = weight;
+    }
+
+    public String getDisplayName() {
+        return DisplayName;
+    }
+
+    public void setDisplayName(String displayName) {
+        DisplayName = displayName;
+    }
+
+    public String getRestaurantAddress() {
+        return restaurantAddress;
+    }
+
+    public void setRestaurantAddress(String restaurantAddress) {
+        this.restaurantAddress = restaurantAddress;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }

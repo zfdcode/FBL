@@ -23,45 +23,73 @@ public class UserResource {
 
     private final ConnectionFactory connectionFactory;
 
-    public UserResource (ConnectionFactory connectionFactory) {
+    public UserResource(ConnectionFactory connectionFactory) {
         this.connectionFactory = connectionFactory;
     }
 
     @GET
     @Path("/{userId}")
     @ApiOperation(value = "Get basic user information")
-    public User getUser (@PathParam("userId") int userId) {
+    public User getUser(@PathParam("userId") int userId) {
 
-         try (UserDao userDao = this.connectionFactory.getConnection().open(UserDao.class)) {
-             com.tum.fbl.core.persistence.user.User user = userDao.findUserById(userId);
+        try (UserDao userDao = this.connectionFactory.getConnection().open(UserDao.class)) {
+            com.tum.fbl.core.persistence.user.User user = userDao.findUserById(userId);
 
-             return new User(
-                     user.getUserId(),
-                     user.getUserName(),
-                     user.getUserPassword(),
-                     user.getEmail(),
-                     user.getBirthday(),
-                     user.getHeight(),
-                     user.getWeight()
-             );
-         }
+            return new User(
+                    user.getUserId(),
+                    user.getUserName(),
+                    user.getUserPassword(),
+                    user.getEmail(),
+                    user.getBirthday(),
+                    user.getHeight(),
+                    user.getWeight()
+            );
+        }
     }
 
     @DELETE
     @Path("/{userId}")
     @ApiOperation(value = "Deletes a user")
     public void deleteUser(@PathParam("userId") int userId) {
-
+        try (UserDao userDao = this.connectionFactory.getConnection().open(UserDao.class)) {
+            userDao.deleteUser(userId);
+        }
     }
 
     @POST
     @ApiOperation(value = "Add a new user to the store")
     public void addUser(User user) {
+        try (UserDao userDao = this.connectionFactory.getConnection().open(UserDao.class)) {
+            userDao.newUser(
+                    user.getUserName(),
+                    user.getUserPassword(),
+                    user.getEmail(),
+                    user.getBirthday(),
+                    user.getHeight(),
+                    user.getWeight(),
+                    user.getDisplayName(),
+                    user.getRestaurantAddress(),
+                    user.getRole()
+            );
+        }
     }
 
     @PUT
     @ApiOperation(value = "Update an existing user")
     public void updateUser(User user) {
+        try (UserDao userDao = this.connectionFactory.getConnection().open(UserDao.class)) {
+            userDao.newUser(
+                    user.getUserName(),
+                    user.getUserPassword(),
+                    user.getEmail(),
+                    user.getBirthday(),
+                    user.getHeight(),
+                    user.getWeight(),
+                    user.getDisplayName(),
+                    user.getRestaurantAddress(),
+                    user.getRole()
+            );
+        }
     }
 
     @GET

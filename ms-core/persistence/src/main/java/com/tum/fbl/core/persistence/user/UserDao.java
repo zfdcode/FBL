@@ -17,9 +17,9 @@ public interface UserDao extends AutoCloseable {
     @SqlQuery("select * from user where userId = :id")
     User findUserById(@Bind("id") int userId);
 
-    @SqlQuery("select * from meals join user on mealRestaurant join mealRestaurant on user where userId = :id")
-    User findMealsByUser(@Bind("id") int userId);
 
+    @SqlQuery("select * from (select * from user where userId = :id) natural join mealRestaurant natural join meal")
+    User findMealsById(@Bind("id") int userId);
 
     @SqlQuery("select * from user where email = :email")
     User findUserByEmail(@Bind("email") String email);
@@ -39,5 +39,4 @@ public interface UserDao extends AutoCloseable {
     @SqlQuery("delete from user where userId = :id")
     void deleteUser(@Bind("id") int userId);
 
-    public void close();
 }

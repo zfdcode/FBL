@@ -6,6 +6,7 @@ import org.skife.jdbi.v2.sqlobject.SqlUpdate;
 import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapper;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by malte on 13.06.2017.
@@ -18,9 +19,6 @@ public interface MealDao extends AutoCloseable{
 
     @SqlQuery("select * from meal where offerDate = :offerDate")
     List<Meal> getAllMealForDate(@Bind("offerDate") Date offerDate);
-
-    @SqlQuery("select * from (MealRestaurant join Meal) where userId =:id")
-    List<Meal> getMealsByUser(@Bind("id") int userId);
 
     @SqlUpdate("insert into meal ( mealName, mealImage, mealRating, mealHelathValue, mealPreparationTime, offerDate, mealEnergy, mealProtein, mealTotalFat, mealSaturated, mealTotalCarbohydrate, mealSugar, mealSodium) " +
             "values ( :mealName, :mealImage, :mealRating, :mealHelathValue, :mealPreparationTime, offerDate, :mealEnergy, :mealProtein, :mealTotalFat, :mealSaturated, :mealTotalCarbohydrate, :mealSugar, :mealSodium")

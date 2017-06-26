@@ -15,7 +15,8 @@ public class CategoryMapper implements ResultSetMapper<Category> {
     public Category map(int index, ResultSet r, StatementContext ctx) throws SQLException {
         return new Category(
                 r.getInt("categoryId"),
-                r.getString("categoryName"));
+                r.getString("categoryName"),
+                r.getString("categoryDescription"));
     }
 
 }

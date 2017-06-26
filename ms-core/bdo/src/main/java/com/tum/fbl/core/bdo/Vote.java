@@ -7,15 +7,15 @@ public class Vote {
 
     private int votingId;
 
-    private User user;
+    private int userId;
 
     private String like;
 
-    public Vote(int voteId, int ingredientId, int votingId, User user, String like) {
+    public Vote(int voteId, int ingredientId, int votingId, int userId, String like) {
         this.voteId = voteId;
         this.ingredientId = ingredientId;
         this.votingId = votingId;
-        this.user = user;
+        this.userId = userId;
         this.like = like;
     }
 
@@ -43,12 +43,12 @@ public class Vote {
         this.votingId = votingId;
     }
 
-    public User getUser() {
-        return user;
+    public int getUserId() {
+        return this.userId;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUser(int userId) {
+        this.userId = userId;
     }
 
     public String getLike() {

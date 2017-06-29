@@ -40,6 +40,7 @@ class EventView(
     mixins.ListModelMixin,
     mixins.RetrieveModelMixin,
     mixins.CreateModelMixin,
+    mixins.UpdateModelMixin,
     common_views.BaseGenericViewSet
 ):
     """
@@ -99,6 +100,9 @@ class EventView(
         return Response(status=status.HTTP_204_NO_CONTENT)
 
     def perform_create(self, serializer):
+        serializer.save(user_id=self.user_id)
+
+    def perform_update(self, serializer):
         serializer.save(user_id=self.user_id)
 
     def get_serializer_context(self):

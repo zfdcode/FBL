@@ -1,7 +1,13 @@
+import random
+import traceback
+
+from django.core.exceptions import ObjectDoesNotExist
 from rest_framework import (
     mixins,
+    status,
+    exceptions,
 )
-from rest_framework.decorators import list_route
+from rest_framework.decorators import list_route, detail_route
 from rest_framework.response import Response
 
 from commons import views as common_views
@@ -43,8 +49,12 @@ class EventView(
     """
     model = models.Event
     serializer_class = serializers.EventSerializer
+    users_serializer_class = serializers.EventUserSerializer
     queryset = models.Event.objects.prefetch_related('users', 'preferences', 'messages', 'shop_items', 'meals').all()
     user_id = 1     # TODO: Replace with authenticated user id later
+
+    def get_user_id(self):  # TODO: Replace with authenticated user id later
+        return random.choice([2, 3, 4, 5])
 
     @list_route()
     def all(self, request, *args, **kwargs):
@@ -52,6 +62,41 @@ class EventView(
         Returns all available events
         """
         return self.list(request, args, **kwargs)
+
+    @detail_route(methods=['post'])
+    def join(self, request, *args, **kwargs):
+        """
+        Add a user to the event
+        Returns new user of the Event
+        """
+        event_obj = self.get_object()
+        user_id = self.get_user_id()
+        try:
+            event_user = event_obj.users.get(user_id=user_id)
+        except ObjectDoesNotExist:
+            # Create a Event user object on POST
+            users_serializer = self.users_serializer_class(data={
+                'event': event_obj.id,
+                'user_id': user_id      # TODO: Replace with authenticated user id later
+            })
+
+            users_serializer.is_valid(raise_exception=True)
+            event_user = users_serializer.save()
+        return Response(
+            self.users_serializer_class(instance=event_user).data,
+            status=status.HTTP_201_CREATED
+        )
+
+    @detail_route(methods=['post'])
+    def leave(self, request, *args, **kwargs):
+        """
+        Delete a user from the event
+        Returns code 204
+        """
+        event_obj = self.get_object()
+        user_id = self.get_user_id()
+        models.EventUser.objects.filter(event=event_obj, user_id=user_id).delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
     def perform_create(self, serializer):
         serializer.save(user_id=self.user_id)

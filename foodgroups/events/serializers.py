@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from events.models import Event, EventLocation, EventShoppingItem, EventMessage, EventPreference
+from events.models import Event, EventLocation, EventShoppingItem, EventMessage, EventPreference, EventUser
 from users import (
     serializers as user_serializers
 )
@@ -61,6 +61,20 @@ class EventPreferenceSerializer(serializers.ModelSerializer):
 
     def to_representation(self, instance):
         return user_serializers.FoodPreferenceSerializer(instance=instance.food_preference).data
+
+
+class EventUserSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = EventUser
+        fields = ('event', 'user_id')
+
+    def to_representation(self, instance):
+        """
+        :param instance: EventUser instance
+        :return: UserSerializer data
+        """
+        return user_serializers.UserSerializer(instance=instance.user_id).data
 
 
 class EventSerializer(serializers.ModelSerializer):

@@ -1,6 +1,7 @@
 package com.tum.fbl.core.service.resources;
 
 import com.tum.fbl.core.persistence.ConnectionFactory;
+import com.tum.fbl.core.persistence.order.OrderDao;
 import com.tum.fbl.core.service.auth.User;
 import com.tum.fbl.core.bdo.Order;
 import io.dropwizard.auth.Auth;
@@ -41,7 +42,20 @@ public class OrderResource {
     @Path("/order/{orderId}")
     @ApiOperation(value = "Get information of a order")
     public Order getOrder(@PathParam("orderId") int orderId){
-        return null;
+        try (OrderDao orderDao = this.connectionFactory.getConnection().open(OrderDao.class)) {
+            com.tum.fbl.core.persistence.order.Order order = orderDao.findOrderById(orderId);
+            return null;
+            /*
+            return new Order(
+                    order.getOrderId(),
+                    order.getOrderUserId(),
+                    order.getOrderMealId(),
+                    order.getOrderPickupTime(),
+                    order.getOrderStatus()
+
+            )
+            */
+        }
     }
 
     @GET

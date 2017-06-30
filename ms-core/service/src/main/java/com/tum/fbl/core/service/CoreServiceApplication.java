@@ -1,12 +1,12 @@
 package com.tum.fbl.core.service;
 
-import com.tum.fbl.core.bdo.Rating;
 import com.tum.fbl.core.config.CoreServiceConfiguration;
 import com.tum.fbl.core.persistence.ConnectionFactory;
 import com.tum.fbl.core.service.auth.BasicAuthenticator;
 import com.tum.fbl.core.service.auth.User;
 import com.tum.fbl.core.service.resources.*;
 import io.dropwizard.Application;
+import io.dropwizard.assets.AssetsBundle;
 import io.dropwizard.auth.AuthDynamicFeature;
 import io.dropwizard.auth.AuthValueFactoryProvider;
 import io.dropwizard.auth.Authenticator;
@@ -52,6 +52,8 @@ public class CoreServiceApplication extends Application<CoreServiceConfiguration
         });
 
         bootstrap.addBundle(new MultiPartBundle());
+
+        bootstrap.addBundle(new AssetsBundle("/assets/", "/"));
     }
 
     @Override
@@ -71,12 +73,14 @@ public class CoreServiceApplication extends Application<CoreServiceConfiguration
 
     private void registerAuthenticator (Environment environment) {
         Authenticator<BasicCredentials, User> authenticator =  new BasicAuthenticator();
+
         final BasicCredentialAuthFilter<User> authFilter = new BasicCredentialAuthFilter.Builder<User>()
                 .setAuthenticator(authenticator)
                 .setRealm("Access Protected Ressource")
                 .buildAuthFilter();
         environment.jersey().register(new AuthDynamicFeature(authFilter));
         environment.jersey().register(new AuthValueFactoryProvider.Binder<>(User.class));
+
     }
 
 

@@ -1,0 +1,45 @@
+{
+  "server": {
+    "rootPath": "/core/*",
+    "applicationConnectors": [
+      {
+        "type": "http",
+        "port": 8888
+      }
+    ],
+    "adminConnectors": []
+  },
+  "logging": {
+    "level": "WARN",
+    "loggers": {
+      "com.tum.fbl.core": "INFO",
+      "io.dropwizard.jersey.DropwizardResourceConfig": "INFO"
+    },
+    "appenders": [
+      {
+        "type": "console",
+        "threshold": "ALL",
+        "timeZone": "UTC"
+      },
+      {
+        "type": "file",
+        "currentLogFilename": "./logs/server.log",
+        "threshold": "ERROR",
+        "archive": true,
+        "archivedLogFilenamePattern": "./logs/server-%d.log",
+        "archivedFileCount": 5,
+        "timeZone": "UTC"
+      }
+    ]
+  },
+  "swagger": {
+    "resourcePackage": "com.tum.fbl.core.service.resources"
+  },
+  "database": {
+    "driverClass": "org.h2.Driver",
+    "url": "jdbc:h2:./local/h2db",
+    "user": "",
+    "password": "",
+    "validationQuery": "/* MyService Health Check */ SELECT 1"
+  }
+}

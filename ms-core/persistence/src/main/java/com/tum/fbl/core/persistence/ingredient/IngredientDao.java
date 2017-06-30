@@ -1,10 +1,10 @@
 package com.tum.fbl.core.persistence.ingredient;
 
+import com.google.common.primitives.Bytes;
 import org.skife.jdbi.v2.sqlobject.Bind;
 import org.skife.jdbi.v2.sqlobject.SqlQuery;
 import org.skife.jdbi.v2.sqlobject.SqlUpdate;
 import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapper;
-import sun.jvm.hotspot.runtime.Bytes;
 
 /**
  * Created by malte on 13.06.2017.

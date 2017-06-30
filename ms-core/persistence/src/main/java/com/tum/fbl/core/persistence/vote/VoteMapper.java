@@ -1,6 +1,5 @@
 package com.tum.fbl.core.persistence.vote;
 
-import com.tum.fbl.core.bdo.Vote;
 import org.skife.jdbi.v2.StatementContext;
 import org.skife.jdbi.v2.tweak.ResultSetMapper;
 

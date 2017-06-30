@@ -18,6 +18,8 @@ public class Meal {
 
     private Date mealPreparationTime;
 
+    private Date offerDate;
+
     private float mealEnergy;
 
     private float mealProtein;
@@ -38,13 +40,14 @@ public class Meal {
 
     private Rating[] mealRatings;
 
-    public Meal(int mealId, String mealName, byte[] mealImage, float mealRating, int mealHelathValue, Date mealPreparationTime, float mealEnergy, float mealProtein, float mealTotalFat, float mealSaturated, float mealTotalCarbohydrate, float mealSugar, float mealSodium) {
+    public Meal(int mealId, String mealName, byte[] mealImage, float mealRating, int mealHelathValue, Date mealPreparationTime, Date offerDate, float mealEnergy, float mealProtein, float mealTotalFat, float mealSaturated, float mealTotalCarbohydrate, float mealSugar, float mealSodium, Ingredient[] mealIngredints, Category[] mealCategories, Rating[] mealRatings) {
         this.mealId = mealId;
         this.mealName = mealName;
         this.mealImage = mealImage;
         this.mealRating = mealRating;
         this.mealHelathValue = mealHelathValue;
         this.mealPreparationTime = mealPreparationTime;
+        this.offerDate = offerDate;
         this.mealEnergy = mealEnergy;
         this.mealProtein = mealProtein;
         this.mealTotalFat = mealTotalFat;
@@ -52,6 +55,9 @@ public class Meal {
         this.mealTotalCarbohydrate = mealTotalCarbohydrate;
         this.mealSugar = mealSugar;
         this.mealSodium = mealSodium;
+        this.mealIngredints = mealIngredints;
+        this.mealCategories = mealCategories;
+        this.mealRatings = mealRatings;
     }
 
     public int getMealId() {
@@ -100,6 +106,14 @@ public class Meal {
 
     public void setMealPreparationTime(Date mealPreparationTime) {
         this.mealPreparationTime = mealPreparationTime;
+    }
+
+    public Date getOfferDate() {
+        return offerDate;
+    }
+
+    public void setOfferDate(Date offerDate) {
+        this.offerDate = offerDate;
     }
 
     public float getMealEnergy() {
@@ -181,6 +195,4 @@ public class Meal {
     public void setMealRatings(Rating[] mealRatings) {
         this.mealRatings = mealRatings;
     }
-
-
 }

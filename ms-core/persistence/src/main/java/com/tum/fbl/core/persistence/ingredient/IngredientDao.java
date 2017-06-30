@@ -1,10 +1,10 @@
 package com.tum.fbl.core.persistence.ingredient;
 
+import com.google.common.primitives.Bytes;
 import org.skife.jdbi.v2.sqlobject.Bind;
 import org.skife.jdbi.v2.sqlobject.SqlQuery;
 import org.skife.jdbi.v2.sqlobject.SqlUpdate;
 import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapper;
-import sun.jvm.hotspot.runtime.Bytes;
 
 import java.util.List;
 
@@ -18,7 +18,7 @@ public interface IngredientDao extends AutoCloseable {
     Ingredient findIngredientById(@Bind("id") int ingredientId);
 
     @SqlQuery("select * from ingredient")
-    List<Ingredient> findIngredients();
+    List<Ingredient> getAllIngredients();
 
     @SqlUpdate("Insert into ingredient (ingredientName, description, ingredientImage, energy, totalFat, protein, totalCarbohydrate) " +
             "value (:ingredientName, :description, :ingredientImage, :energy, :totalFat, :protein, :totalCarbohydrate, :tag)")

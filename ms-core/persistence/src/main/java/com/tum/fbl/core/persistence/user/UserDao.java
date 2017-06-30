@@ -17,6 +17,10 @@ public interface UserDao extends AutoCloseable {
     @SqlQuery("select * from user where userId = :id")
     User findUserById(@Bind("id") int userId);
 
+
+    @SqlQuery("select * from (select * from user where userId = :id) natural join mealRestaurant natural join meal")
+    User findMealsById(@Bind("id") int userId);
+
     @SqlQuery("select * from user where email = :email")
     User findUserByEmail(@Bind("email") String email);
 

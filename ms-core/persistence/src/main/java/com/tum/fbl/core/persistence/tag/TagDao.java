@@ -1,5 +1,6 @@
 package com.tum.fbl.core.persistence.tag;
 
+import com.tum.fbl.core.persistence.ingredient.Ingredient;
 import org.skife.jdbi.v2.sqlobject.Bind;
 import org.skife.jdbi.v2.sqlobject.SqlQuery;
 import org.skife.jdbi.v2.sqlobject.SqlUpdate;
@@ -24,4 +25,6 @@ public interface TagDao extends AutoCloseable{
     //TODO: void update()
 
     public void close();
+    @SqlQuery("select * from (Select *  form IngredientTag where tagId = :id) natural join ingredient")
+    Ingredient findIngredientByTag(@Bind("id") int tagId);
 }

@@ -29,4 +29,12 @@ public interface OrderDao extends AutoCloseable{
     //TODO: void update()
 
     public void close();
+    void delteOrderById(@Bind("id") int orderId);
+
+    @SqlQuery("select * from order where NOT(status = 'pickedUp' or status = 'canceled')")
+    Order getOrderList();
+
+    @SqlUpdate("update order set status= :newStatus where orderId = :id")
+    void setOrderStatus(@Bind("orderStatus") int orderStatus, @Bind("id") int orderId);
+
 }

@@ -25,6 +25,7 @@ public class SpecialNeedResource {
         this.connectionFactory = connectionFactory;
     }
 
+    @GET
     @Path("/all")
     @ApiOperation(value = "Get all offered specialNeeds")
     public List<SpecialNeed> getAllSpecialNeeds(@Auth User user) {

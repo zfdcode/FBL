@@ -25,6 +25,7 @@ public class IngredientResource {
         this.connectionFactory = connectionFactory;
     }
 
+    @GET
     @Path("/all")
     @ApiOperation(value = "Get all offered ingredients")
     public List<Ingredient> getAllIngredients(@Auth User user) {
@@ -52,6 +53,7 @@ public class IngredientResource {
 
     }
 
+    @POST
     @ApiOperation(value = "Add a new ingredient to the store")
     public void addIngredient(Ingredient ingredient) {
     }

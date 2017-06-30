@@ -18,6 +18,17 @@
         <jersey.version>2.25.1</jersey.version>
     </properties>
 
+    <repositories>
+        <repository>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <id>central</id>
+            <name>bintray</name>
+            <url>https://jcenter.bintray.com</url>
+        </repository>
+    </repositories>
+
 
     <build>
         <finalName>coreservice</finalName>
@@ -122,6 +133,12 @@
         <dependency>
             <groupId>com.smoketurner</groupId>
             <artifactId>dropwizard-swagger</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>de.qaware</groupId>
+            <artifactId>heimdall</artifactId>
+            <version>1.4</version>
         </dependency>
 
         <dependency>

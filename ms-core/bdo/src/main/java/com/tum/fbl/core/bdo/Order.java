@@ -1,6 +1,7 @@
 package com.tum.fbl.core.bdo;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by patrickmelchner on 30.05.17.
@@ -11,16 +12,16 @@ public class Order {
 
     private User orderUser;
 
-    private Meal orderMeal;
+    private List<Meal> orderMeals;
 
     private Date orderPickupTime;
 
     private String orderStatus;
 
-    public Order(int orderId, User orderUser, Meal orderMeal, Date orderPickupTime, String orderStatus) {
+    public Order(int orderId, User orderUser, List<Meal> orderMeals, Date orderPickupTime, String orderStatus) {
         this.orderId = orderId;
         this.orderUser = orderUser;
-        this.orderMeal = orderMeal;
+        this.orderMeals = orderMeals;
         this.orderPickupTime = orderPickupTime;
         this.orderStatus = orderStatus;
     }
@@ -41,12 +42,12 @@ public class Order {
         this.orderUser = orderUser;
     }
 
-    public Meal getOrderMeal() {
-        return orderMeal;
+    public List<Meal> getOrderMeals() {
+        return orderMeals;
     }
 
-    public void setOrderMeal(Meal orderMeal) {
-        this.orderMeal = orderMeal;
+    public void setOrderMeals(List<Meal> orderMeals) {
+        this.orderMeals = orderMeals;
     }
 
     public Date getOrderPickupTime() {

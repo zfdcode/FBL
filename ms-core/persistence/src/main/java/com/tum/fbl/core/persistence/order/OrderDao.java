@@ -17,9 +17,9 @@ public interface OrderDao extends AutoCloseable{
     @SqlQuery("select * from order where orderId = :id")
     Order findOrderById(@Bind("id") int orderId);
 
-    @SqlUpdate("Insert into ingredient (orderUserId, orderMealId, orderPickupTime, orderStatus) value (:orderUserId, :orderMealId, :orderPickupTime, :orderStatus)")
+    @SqlUpdate("Insert into ingredient (orderUserId, orderMealIds, orderPickupTime, orderStatus) value (:orderUserId, :orderMealIds, :orderPickupTime, :orderStatus)")
     void newOrder(@Bind("orderUserId") int orderUserId,
-                  @Bind("orderMealId") int orderMealId,
+                  @Bind("orderMealId") int[] orderMealIds,
                   @Bind("orderPickupTime") Date orderPickupTime,
                   @Bind("orderStatus") int orderStatus);
 
@@ -29,7 +29,6 @@ public interface OrderDao extends AutoCloseable{
     //TODO: void update()
 
     public void close();
-    void delteOrderById(@Bind("id") int orderId);
 
     @SqlQuery("select * from order where NOT(status = 'pickedUp' or status = 'canceled')")
     Order getOrderList();

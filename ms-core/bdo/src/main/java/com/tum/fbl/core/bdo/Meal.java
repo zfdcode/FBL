@@ -58,6 +58,9 @@ public class Meal {
         this.mealIngredints = mealIngredints;
         this.mealCategories = mealCategories;
         this.mealRatings = mealRatings;
+        this.mealIngredints = mealIngredints;
+        this.mealCategories = mealCategories;
+        this.mealRatings = mealRatings;
     }
 
     public int getMealId() {
@@ -195,4 +198,5 @@ public class Meal {
     public void setMealRatings(Rating[] mealRatings) {
         this.mealRatings = mealRatings;
     }
+
 }

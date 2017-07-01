@@ -79,13 +79,18 @@ public class MealResource {
                     meal.getMealRating(),
                     meal.getMealHelathValue(),
                     meal.getMealPreparationTime(),
+                    meal.getOfferDate(),
                     meal.getMealEnergy(),
                     meal.getMealProtein(),
                     meal.getMealTotalFat(),
                     meal.getMealSaturated(),
                     meal.getMealTotalCarbohydrate(),
                     meal.getMealSugar(),
-                    meal.getMealSodium()
+                    meal.getMealSodium(),
+                    //TODO:
+                    null,
+                    null,
+                    null
             );
         }
     }
@@ -125,6 +130,7 @@ public class MealResource {
                     meal.getMealRating(),
                     meal.getMealHelathValue(),
                     meal.getMealPreparationTime(),
+                    meal.getOfferDate(),
                     meal.getMealEnergy(),
                     meal.getMealProtein(),
                     meal.getMealTotalFat(),
@@ -139,5 +145,8 @@ public class MealResource {
     @PUT
     @ApiOperation(value = "Update an existing meal")
     public void updateMeal(Meal meal) {
+        try (MealDao mealDao = this.connectionFactory.getConnection().open(MealDao.class)){
+            //TODO:update
+        }
     }
 }

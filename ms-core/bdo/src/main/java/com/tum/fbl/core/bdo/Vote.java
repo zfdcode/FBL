@@ -1,5 +1,9 @@
 package com.tum.fbl.core.bdo;
 
+/**
+ * Documented by jie on 01.07.2017.
+ */
+
 public class Vote {
     private int voteId;
 

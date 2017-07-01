@@ -2,6 +2,7 @@ package com.tum.fbl.core.bdo;
 
 /**
  * Created by zfngd on 2017/6/4.
+ * Documented by jie on 25.06.2017.
  */
 public class Ingredient {
 
@@ -23,6 +24,18 @@ public class Ingredient {
 
     private String[] tag;
 
+    /**
+     * Constructs Ingredient that are used in the meal offered in Mensa.
+     * @param ingredientId unique ID of the ingredient used in Mensa
+     * @param ingredientName name of the ingredient used in Mensa
+     * @param description description of the ingredient used in Mensa
+     * @param ingredientImage image of the ingredient used in Mensa
+     * @param energy energy of the ingredient used in Mensa
+     * @param totalFat total fat of the ingredient used in Mensa
+     * @param protein protein of the ingredient used in Mensa
+     * @param totalCarbohydrate total carbohydrate of the ingredient used in Mensa
+     * @param tag tag of the ingredient used in Mensa
+     */
     public Ingredient(int ingredientId, String ingredientName, String description, byte[] ingredientImage, float energy, float totalFat, float protein, float totalCarbohydrate, String[] tag) {
         this.ingredientId = ingredientId;
         this.ingredientName = ingredientName;
@@ -35,74 +48,146 @@ public class Ingredient {
         this.tag = tag;
     }
 
+    /**
+     * Gets IngredientId.
+     * @return ingredientId unique ID of the ingredient used in Mensa
+     */
     public int getIngredientId() {
         return ingredientId;
     }
 
+    /**
+     * Sets IngredientId.
+     * @param ingredientId unique ID of the ingredient used in Mensa
+     */
     public void setIngredientId(int ingredientId) {
         this.ingredientId = ingredientId;
     }
 
+    /**
+     * Gets IngredientName.
+     * @return ingredientName name of the ingredient used in Mensa
+     */
     public String getIngredientName() {
         return ingredientName;
     }
 
+    /**
+     * Sets IngredientName.
+     * @param ingredientName name of the ingredient used in Mensa
+     */
     public void setIngredientName(String ingredientName) {
         this.ingredientName = ingredientName;
     }
 
+    /**
+     * Gets Description.
+     * @return description description of the ingredient used in Mensa
+     */
     public String getDescription() {
         return description;
     }
 
+    /**
+     * Sets Description.
+     * @param description description of the ingredient used in Mensa
+     */
     public void setDescription(String description) {
         this.description = description;
     }
 
+    /**
+     * Gets IngredientImage.
+     * @return ingredientImage image of the ingredient used in Mensa
+     */
     public byte[] getIngredientImage() {
         return ingredientImage;
     }
 
+    /**
+     * Sets IngredientImage
+     * @param ingredientImage image of the ingredient used in Mensa
+     */
     public void setIngredientImage(byte[] ingredientImage) {
         this.ingredientImage = ingredientImage;
     }
 
+    /**
+     * Gets Energy.
+     * @return energy energy of the ingredient used in Mensa
+     */
     public float getEnergy() {
         return energy;
     }
 
+    /**
+     * Sets Energy.
+     * @param energy energy of the ingredient used in Mensa
+     */
     public void setEnergy(float energy) {
         this.energy = energy;
     }
 
+    /**
+     * Gets TotalFat.
+     * @return totalFat total fat of the ingredient used in Mensa
+     */
     public float getTotalFat() {
         return totalFat;
     }
 
+    /**
+     * Sets TotalFat.
+     * @param totalFat total fat of the ingredient used in Mensa
+     */
     public void setTotalFat(float totalFat) {
         this.totalFat = totalFat;
     }
 
+    /**
+     * Gets Protein.
+     * @return protein protein of the ingredient used in Mensa
+     */
     public float getProtein() {
         return protein;
     }
 
+    /**
+     * Sets Protein.
+     * @param protein protein of the ingredient used in Mensa
+     */
     public void setProtein(float protein) {
         this.protein = protein;
     }
 
+    /**
+     * Gets TotalCarbohydrate.
+     * @return totalCarbohydrate total carbohydrate of the ingredient used in Mensa
+     */
     public float getTotalCarbohydrate() {
         return totalCarbohydrate;
     }
 
+    /**
+     * Sets TotalCarbohydrate.
+     * @param totalCarbohydrate total carbohydrate of the ingredient used in Mensa
+     */
     public void setTotalCarbohydrate(float totalCarbohydrate) {
         this.totalCarbohydrate = totalCarbohydrate;
     }
 
+    /**
+     * Gets Tag.
+     * @return tag tag of the ingredient used in Mensa
+     */
     public String[] getTag() {
         return tag;
     }
 
+    /**
+     * Sets Tag.
+     * @param tag tag of the ingredient used in Mensa
+     */
     public void setTag(String[] tag) {
         this.tag = tag;
     }

@@ -4,6 +4,6 @@ import java.io.InputStream;
 
 public interface ImageStorage {
 
-    ImageStatus saveImage (InputStream uploadedInputStream) throws ImagePersistenceException;
+    ImageStatus saveImage (InputStream uploadedInputStream, String name) throws ImagePersistenceException;
 
 }

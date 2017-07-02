@@ -41,5 +41,11 @@
     "user": "",
     "password": "",
     "validationQuery": "/* MyService Health Check */ SELECT 1"
+  },
+  "storage": {
+    "name": "da2zlfduv",
+    "secret": "izFa8dQQkzrgryD-gRZ72cZSHCY",
+    "key": "372435213625795",
+    "path": "./upload/"
   }
 }

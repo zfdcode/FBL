@@ -1,6 +1,7 @@
 package com.tum.fbl.core.config;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.sun.javafx.iio.ImageStorage;
 import io.dropwizard.Configuration;
 import io.dropwizard.db.DataSourceFactory;
 import io.federecio.dropwizard.swagger.SwaggerBundleConfiguration;
@@ -16,6 +17,9 @@ public class CoreServiceConfiguration extends Configuration {
     @JsonProperty("database")
     private DataSourceFactory databaseConfiguration;
 
+    @JsonProperty("storage")
+    private ImageUploadConfiguration imageUploadConfiguration;
+
     public SwaggerBundleConfiguration getSwaggerBundleConfiguration () {
         return this.swaggerBundleConfiguration;
     }
@@ -23,4 +27,6 @@ public class CoreServiceConfiguration extends Configuration {
     public DataSourceFactory getDatabaseConfiguration () {
         return this.databaseConfiguration;
     }
+
+    public ImageUploadConfiguration getImageUploadConfiguration() {return this.imageUploadConfiguration;}
 }

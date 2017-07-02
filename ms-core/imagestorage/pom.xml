@@ -27,8 +27,25 @@
             </plugin>
         </plugins>
     </build>
-    <dependencies>
 
+
+    <dependencies>
+        <dependency>
+            <groupId>com.tum.fbl.core</groupId>
+            <artifactId>config</artifactId>
+            <version>0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.tum.fbl.core</groupId>
+            <artifactId>imagestorage</artifactId>
+            <version>0.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.cloudinary</groupId>
+            <artifactId>cloudinary-http44</artifactId>
+            <version>1.13.0</version>
+        </dependency>
     </dependencies>
 
 

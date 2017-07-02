@@ -1,5 +1,6 @@
 package com.tum.fbl.core.service.resources;
 
+import com.tum.fbl.core.config.ImageUploadConfiguration;
 import com.tum.fbl.core.imagestorage.ImagePersistenceException;
 import com.tum.fbl.core.imagestorage.ImageStatus;
 import com.tum.fbl.core.imagestorage.ImageStorage;
@@ -35,10 +36,10 @@ public class MealResource {
     private final ConnectionFactory connectionFactory;
 
 
-    public MealResource(ConnectionFactory connectionFactory) {
+    public MealResource(ConnectionFactory connectionFactory, ImageUploadConfiguration imageUploadConfiguration) {
         this.connectionFactory = connectionFactory;
 
-        this.imageStorage = new ImageStorageImpl();
+        this.imageStorage = new ImageStorageImpl(imageUploadConfiguration);
     }
 
     @GET
@@ -84,7 +85,7 @@ public class MealResource {
             @FormDataParam("file") FormDataContentDisposition fileDetail
     ){
         try {
-            final ImageStatus imageStatus = this.imageStorage.saveImage(uploadedInputStream);
+            final ImageStatus imageStatus = this.imageStorage.saveImage(uploadedInputStream, fileDetail.getFileName());
             return Response.ok().build();
         } catch (ImagePersistenceException e) {
             LOGGER.error("Image Upload failed");

@@ -66,7 +66,7 @@ public class CoreServiceApplication extends Application<CoreServiceConfiguration
 
         registerAuthenticator(environment);
 
-        registerResources(environment, connectionFactory);
+        registerResources(environment, connectionFactory, configuration);
 
     }
 
@@ -84,12 +84,12 @@ public class CoreServiceApplication extends Application<CoreServiceConfiguration
     }
 
 
-    private void registerResources (Environment environment, ConnectionFactory connectionFactory) {
+    private void registerResources (Environment environment, ConnectionFactory connectionFactory, CoreServiceConfiguration config) {
 
         final HealthDataResource healthDataResource = new HealthDataResource(connectionFactory);
         environment.jersey().register(healthDataResource);
 
-        final MealResource mealResource = new MealResource(connectionFactory);
+        final MealResource mealResource = new MealResource(connectionFactory, config.getImageUploadConfiguration());
         environment.jersey().register(mealResource);
 
         final RestaurantResource restaurantResource = new RestaurantResource(connectionFactory);

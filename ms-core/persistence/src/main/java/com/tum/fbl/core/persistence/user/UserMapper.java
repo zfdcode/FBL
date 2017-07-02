@@ -8,9 +8,18 @@ import java.sql.SQLException;
 
 /**
  * Created by patrickmelchner on 12.06.17.
+ * Documented bu jie on 02.07.2017.
  */
 public class UserMapper implements ResultSetMapper<User> {
 
+    /**
+     * Maps user data stored in db to User.
+     * @param index
+     * @param r
+     * @param ctx
+     * @return User
+     * @throws SQLException
+     */
     @Override
     public User map(int index, ResultSet r, StatementContext ctx) throws SQLException {
         return new User(r.getInt("userId"),

@@ -10,6 +10,7 @@ import javax.ws.rs.core.MediaType;
 
 /**
  * Created by patrickmelchner on 23.05.17.
+ * Documented by jie on 03.07.2017.
  */
 
 @Path("/healthData")
@@ -20,10 +21,19 @@ public class HealthDataResource {
 
     private final ConnectionFactory connectionFactory;
 
+    /**
+     * Connects the factory for health data resource.
+     * @param connectionFactory the connection factory
+     */
     public HealthDataResource (ConnectionFactory connectionFactory) {
         this.connectionFactory = connectionFactory;
     }
 
+    /**
+     * Gets HealthDataStatus.
+     * @param userId the user id
+     * @return health data status
+     */
     @GET
     @Path("/{userId}")
     @ApiOperation(value = "Get basic service status")
@@ -31,6 +41,10 @@ public class HealthDataResource {
         return null;
     }
 
+    /**
+     * Deletes Health Data By UserId.
+     * @param userId the user id
+     */
     @DELETE
     @Path("/{userId}")
     @ApiOperation(value = "Deletes a health data by user ID")
@@ -38,13 +52,20 @@ public class HealthDataResource {
 
     }
 
-
-
+    /**
+     * Adds health data.
+     * @param healthData the health data
+     */
     @POST
     @ApiOperation(value = "Add a new healthData to the store")
     public void addHealthData(HealthData healthData) {
     }
 
+
+    /**
+     * Updates health data.
+     * @param healthData the health data
+     */
     @PUT
     @ApiOperation(value = "Update an existing healthData")
     public void updateHealthData(HealthData healthData) {

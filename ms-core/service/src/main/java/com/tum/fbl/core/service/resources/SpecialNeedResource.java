@@ -20,11 +20,19 @@ import java.util.List;
 public class SpecialNeedResource {
 
     private final ConnectionFactory connectionFactory;
-
+    /**
+     * Connects the factory for special need resource.
+     * @param connectionFactory the connection factory
+     */
     public SpecialNeedResource (ConnectionFactory connectionFactory) {
         this.connectionFactory = connectionFactory;
     }
 
+    /**
+     * Gets all special needs.
+     * @param user the user
+     * @return List<SpecialNeed> the list of special needs
+     */
     @GET
     @Path("/all")
     @ApiOperation(value = "Get all offered specialNeeds")
@@ -32,6 +40,11 @@ public class SpecialNeedResource {
         return null;
     }
 
+    /**
+     * Gets special need.
+     * @param specialNeedId the special need id
+     * @return SpecialNeed the speical need
+     */
     @GET
     @Path("/{specialNeedId}")
     @ApiOperation(value = "Get information of a specialNeed")
@@ -39,6 +52,10 @@ public class SpecialNeedResource {
         return null;
     }
 
+    /**
+     * Deletes special need.
+     * @param specialNeedId the spcial need id
+     */
     @DELETE
     @Path("/{specialNeedId}")
     @ApiOperation(value = "Deletes a special need")
@@ -46,10 +63,18 @@ public class SpecialNeedResource {
 
     }
 
+    /**
+     * Adds special need.
+     * @param specialNeed the speical need
+     */
     @ApiOperation(value = "Add a new special need to the store")
     public void addSpecialNeed(SpecialNeed specialNeed) {
     }
 
+    /**
+     * Updates special need.
+     * @param specialNeed the special need
+     */
     @PUT
     @ApiOperation(value = "Update an existing special need")
     public void updateSpecialNeed(SpecialNeed specialNeed) {

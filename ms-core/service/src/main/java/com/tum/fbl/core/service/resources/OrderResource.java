@@ -11,6 +11,10 @@ import javax.ws.rs.core.MediaType;
 import java.util.List;
 import javax.ws.rs.*;
 
+/**
+ * Documented by jie on 03.07.2017.
+ */
+
 @Path("/order")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
@@ -19,10 +23,19 @@ public class OrderResource {
 
     private final ConnectionFactory connectionFactory;
 
+    /**
+     * Connects the factory for order resource.
+     * @param connectionFactory the connection factory
+     */
     public OrderResource (ConnectionFactory connectionFactory) {
         this.connectionFactory = connectionFactory;
     }
 
+    /**
+     * Gets all orders.
+     * @param user the user
+     * @return list of order
+     */
     @GET
     @Path("/all")
     @ApiOperation(value = "Get all orders")
@@ -30,6 +43,11 @@ public class OrderResource {
         return null;
     }
 
+    /**
+     * Gets open orders.
+     * @param user the user
+     * @return order
+     */
     @GET
     @Path("/open")
     @ApiOperation(value = "Get all open orders")
@@ -37,6 +55,11 @@ public class OrderResource {
         return null;
     }
 
+    /**
+     * Gets order.
+     * @param orderId the order id
+     * @return order
+     */
     @GET
     @Path("/order/{orderId}")
     @ApiOperation(value = "Get information of a order")
@@ -44,6 +67,11 @@ public class OrderResource {
         return null;
     }
 
+    /**
+     * Gets orders for restaurants.
+     * @param restaurantId the restaurant id
+     * @return order
+     */
     @GET
     @Path("/restaurant/{restaurantId}")
     @ApiOperation(value = "Get open orders of a restaurants")
@@ -51,17 +79,29 @@ public class OrderResource {
         return null;
     }
 
+    /**
+     * Updates order.
+     * @param order the order
+     */
     @PUT
     @ApiOperation(value = "Update an existing order")
     public void placeOrder (Order order) {
 
     }
 
+    /**
+     * Adds order.
+     * @param order the order
+     */
     @POST
     @ApiOperation(value = "Add a new order to the store")
     public void addOrder(Order order) {
     }
 
+    /**
+     * Deletes order.
+     * @param orderId the order id
+     */
     @DELETE
     @Path("/{orderId}")
     @ApiOperation(value = "Deletes a order")

@@ -9,6 +9,10 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
 
+/**
+ * Documented by jie on 03.07.2017.
+ */
+
 @Path("/restaurant")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
@@ -17,10 +21,18 @@ public class RestaurantResource {
 
     private final ConnectionFactory connectionFactory;
 
+    /**
+     * Connects the factory for restaurant resource.
+     * @param connectionFactory the connection factory
+     */
     public RestaurantResource (ConnectionFactory connectionFactory) {
         this.connectionFactory = connectionFactory;
     }
 
+    /**
+     * Gets all restaurants.
+     * @return List<Restaurant> list of restaurant
+     */
     @GET
     @Path("/all")
     @ApiOperation(value = "Get all Restaurants")
@@ -28,6 +40,10 @@ public class RestaurantResource {
         return null;
     }
 
+    /**
+     * Gets restaurants at campus.
+     * @return List<Restaurant> list of restaurant
+     */
     @GET
     @Path("/campus")
     @ApiOperation(value = "Get all restaurants at a campus")
@@ -35,6 +51,11 @@ public class RestaurantResource {
         return null;
     }
 
+    /**
+     * Gets restaurant.
+     * @param restaurantId the restaurant id
+     * @return restaurant
+     */
     @GET
     @Path("/{restaurantId}")
     @ApiOperation(value = "Get core information of a restaurant")
@@ -42,6 +63,10 @@ public class RestaurantResource {
         return null;
     }
 
+    /**
+     * Deletes restaurant.
+     * @param restaurantId the restaurant id
+     */
     @DELETE
     @Path("/{restaurantId}")
     @ApiOperation(value = "Delete a restaurant")
@@ -49,12 +74,20 @@ public class RestaurantResource {
 
     }
 
+    /**
+     * Adds restaurant.
+     * @param restaurant the restaurant
+     */
     @POST
     @ApiOperation(value = "Add a new restaurant to the store")
     public void addRestaurant(Restaurant restaurant) {
 
     }
 
+    /**
+     * Updates restaurant.
+     * @param restaurant the restaurant
+     */
     @PUT
     @ApiOperation(value = "Update an existing restaurant")
     public void updatePet(Restaurant restaurant) {

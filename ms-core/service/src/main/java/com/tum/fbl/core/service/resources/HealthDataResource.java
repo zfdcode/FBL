@@ -21,10 +21,19 @@ public class HealthDataResource {
 
     private final ConnectionFactory connectionFactory;
 
+    /**
+     * Connects to the factory for health data resource.
+     * @param connectionFactory the connection of factory
+     */
     public HealthDataResource(ConnectionFactory connectionFactory) {
         this.connectionFactory = connectionFactory;
     }
 
+    /**
+     * Gets health data status.
+     * @param userId the user id
+     * @return health data
+     */
     @GET
     @Path("/{userId}")
     @ApiOperation(value = "Get basic service status")
@@ -46,6 +55,10 @@ public class HealthDataResource {
 
     }
 
+    /**
+     * Deletes health data by user id.
+     * @param userId the user id
+     */
     @DELETE
     @Path("/{userId}")
     @ApiOperation(value = "Deletes a health data by user ID")
@@ -57,6 +70,10 @@ public class HealthDataResource {
     }
 
 
+    /**
+     * Adds health data.
+     * @param healthData the health data
+     */
     @POST
     @ApiOperation(value = "Add a new healthData to the store")
     public void addHealthData(HealthData healthData) {
@@ -74,6 +91,10 @@ public class HealthDataResource {
         }
     }
 
+    /**
+     * Updates health data.
+     * @param healthData the health data
+     */
     @PUT
     @ApiOperation(value = "Update an existing healthData")
     public void updateHealthData(HealthData healthData) {

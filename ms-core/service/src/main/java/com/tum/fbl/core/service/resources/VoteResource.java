@@ -22,10 +22,19 @@ public class VoteResource {
 
     private final ConnectionFactory connectionFactory;
 
+    /**
+     * Connects to the factory for vote resource.
+     * @param connectionFactory the connection of factory
+     */
     public VoteResource (ConnectionFactory connectionFactory) {
         this.connectionFactory = connectionFactory;
     }
 
+    /**
+     * Gets vote.
+     * @param voteId the vote id
+     * @return Vote
+     */
     @GET
     @Path("/{voteId}")
     @ApiOperation(value = "Get basic vote information")

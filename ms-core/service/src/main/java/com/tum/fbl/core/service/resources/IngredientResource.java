@@ -23,6 +23,10 @@ public class IngredientResource {
 
     private final ConnectionFactory connectionFactory;
 
+    /**
+     * Connects to the factory for ingredient resource.
+     * @param connectionFactory the connection of factory
+     */
     public IngredientResource(ConnectionFactory connectionFactory) {
         this.connectionFactory = connectionFactory;
     }
@@ -37,6 +41,11 @@ public class IngredientResource {
         }
     }
 
+    /**
+     * Gets ingredient.
+     * @param ingredientId the ingredient id
+     * @return Ingredient
+     */
     @GET
     @Path("/id/{ingredientId}")
     @ApiOperation(value = "Get information of a ingredient")
@@ -58,6 +67,11 @@ public class IngredientResource {
 
     }
 
+    /**
+     * Gets ingredient by tags
+     * @param ingredientTags the ingredient tags
+     * @return Ingredient
+     */
     @GET
     @Path("/tag/{ingredientTags}")
     @ApiOperation(value = "Get information of a ingredient")
@@ -65,6 +79,10 @@ public class IngredientResource {
         return null;
     }
 
+    /**
+     * Deletes ingredient.
+     * @param ingredientId the ingredient id
+     */
     @DELETE
     @Path("/{ingredientId}")
     @ApiOperation(value = "Deletes a ingredient")
@@ -74,6 +92,10 @@ public class IngredientResource {
         }
     }
 
+    /**
+     * Adds ingredient.
+     * @param ingredient the ingredient
+     */
     @ApiOperation(value = "Add a new ingredient to the store")
     public void addIngredient(Ingredient ingredient) {
         try (IngredientDao ingredientDao = this.connectionFactory.getConnection().open(IngredientDao.class)) {
@@ -90,6 +112,10 @@ public class IngredientResource {
         }
     }
 
+    /**
+     * Updates ingredient.
+     * @param ingredient the ingredient
+     */
     @PUT
     @ApiOperation(value = "Update an existing ingredient")
     public void updateIngredient(Ingredient ingredient) {

@@ -17,10 +17,18 @@ public class RestaurantResource {
 
     private final ConnectionFactory connectionFactory;
 
+    /**
+     * Connects to the factory for restaurant resource.
+     * @param connectionFactory the connection of factory
+     */
     public RestaurantResource (ConnectionFactory connectionFactory) {
         this.connectionFactory = connectionFactory;
     }
 
+    /**
+     * Gets all restaurants.
+     * @return List<Restaurant> the list of restaurants
+     */
     @GET
     @Path("/all")
     @ApiOperation(value = "Get all Restaurants")
@@ -28,6 +36,10 @@ public class RestaurantResource {
         return null;
     }
 
+    /**
+     * Gets restaurants at campus.
+     * @return List<Restaurant> the list of restaurants
+     */
     @GET
     @Path("/campus")
     @ApiOperation(value = "Get all restaurants at a campus")
@@ -35,6 +47,11 @@ public class RestaurantResource {
         return null;
     }
 
+    /**
+     * Gets restaurant.
+     * @param restaurantId the restaurant id
+     * @return Restaurant
+     */
     @GET
     @Path("/{restaurantId}")
     @ApiOperation(value = "Get core information of a restaurant")
@@ -42,6 +59,10 @@ public class RestaurantResource {
         return null;
     }
 
+    /**
+     * Deletes restaurant.
+     * @param restaurantId the restaurant id
+     */
     @DELETE
     @Path("/{restaurantId}")
     @ApiOperation(value = "Delete a restaurant")
@@ -49,12 +70,20 @@ public class RestaurantResource {
 
     }
 
+    /**
+     * Adds restaurant.
+     * @param restaurant the restaurant
+     */
     @POST
     @ApiOperation(value = "Add a new restaurant to the store")
     public void addRestaurant(Restaurant restaurant) {
 
     }
 
+    /**
+     * Updates restaurant.
+     * @param restaurant the restaurant
+     */
     @PUT
     @ApiOperation(value = "Update an existing restaurant")
     public void updatePet(Restaurant restaurant) {

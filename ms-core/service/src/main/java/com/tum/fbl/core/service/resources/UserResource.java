@@ -23,10 +23,19 @@ public class UserResource {
 
     private final ConnectionFactory connectionFactory;
 
+    /**
+     * Connects to the factory for user resource.
+     * @param connectionFactory the connection of factory
+     */
     public UserResource(ConnectionFactory connectionFactory) {
         this.connectionFactory = connectionFactory;
     }
 
+    /**
+     * Gets user.
+     * @param userId the user id
+     * @return User
+     */
     @GET
     @Path("/{userId}")
     @ApiOperation(value = "Get basic user information")
@@ -47,6 +56,10 @@ public class UserResource {
         }
     }
 
+    /**
+     * Deletes user.
+     * @param userId the user id
+     */
     @DELETE
     @Path("/{userId}")
     @ApiOperation(value = "Deletes a user")
@@ -56,6 +69,10 @@ public class UserResource {
         }
     }
 
+    /**
+     * Adds user.
+     * @param user the user
+     */
     @POST
     @ApiOperation(value = "Add a new user to the store")
     public void addUser(User user) {
@@ -74,6 +91,10 @@ public class UserResource {
         }
     }
 
+    /**
+     * Updates user.
+     * @param user the user
+     */
     @PUT
     @ApiOperation(value = "Update an existing user")
     public void updateUser(User user) {
@@ -93,6 +114,11 @@ public class UserResource {
         }
     }
 
+    /**
+     * Gets user by special need.
+     * @param specialNeedId the special need id
+     * @return List<User> the list of users
+     */
     @GET
     @Path("/sn/{specialNeedId}")
     @ApiOperation(value = "Get users by special need")
@@ -100,6 +126,11 @@ public class UserResource {
         return null;
     }
 
+    /**
+     * Gets users by ingredient
+     * @param ingredientId the ingredient id
+     * @return List<User> the list of users
+     */
     @GET
     @Path("/ingredient/{ingredientId}")
     @ApiOperation(value = "Get users by selected ingredient")
@@ -107,6 +138,11 @@ public class UserResource {
         return null;
     }
 
+    /**
+     * Gets users by meal
+     * @param mealId the meal id
+     * @return List<User> the list of users
+     */
     @GET
     @Path("/meal/{mealId}")
     @ApiOperation(value = "Get users by selected meal")

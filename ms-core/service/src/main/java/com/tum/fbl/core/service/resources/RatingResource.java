@@ -20,10 +20,19 @@ public class RatingResource {
 
     private final ConnectionFactory connectionFactory;
 
+    /**
+     * Connects to the factory for rating resource.
+     * @param connectionFactory the connection of factory
+     */
     public RatingResource (ConnectionFactory connectionFactory) {
         this.connectionFactory = connectionFactory;
     }
 
+    /**
+     * Gets ratings by user id.
+     * @param userId the user id
+     * @return List<Rating> the list of ratings
+     */
     @GET
     @Path("/user/{userId}")
     @ApiOperation(value = "Get ratings by user id")
@@ -31,6 +40,11 @@ public class RatingResource {
         return null;
     }
 
+    /**
+     * Gets raitings by meal id
+     * @param mealId the meal id
+     * @return List<Rating> the list of ratings
+     */
     @GET
     @Path("/meal/{mealId}")
     @ApiOperation(value = "Get ratings by user id")
@@ -38,13 +52,23 @@ public class RatingResource {
         return null;
     }
 
-    @GET
+    /**
+     * Gets rating.
+     * @param userId the user id
+     * @param mealId the meal id
+     * @return Rating
+     */
+    @DELETE
     @Path("/{userId}/{mealId}")
     @ApiOperation(value = "Deletes a rating by user ID")
     public Rating getRating(@PathParam("userId") int userId, @PathParam("mealId") int mealId) {
         return null;
     }
 
+    /**
+     * Deletes rating.
+     * @param ratingId the rating id
+     */
     @DELETE
     @Path("/{ratingId}")
     @ApiOperation(value = "Deletes a rating")
@@ -52,11 +76,19 @@ public class RatingResource {
 
     }
 
+    /**
+     * Adds rating.
+     * @param rating the rating
+     */
     @POST
     @ApiOperation(value = "Add a new rating to the store")
     public void addRating(Rating rating) {
     }
 
+    /**
+     * Updates rating.
+     * @param rating the rating
+     */
     @PUT
     @ApiOperation(value = "Update an existing rating")
     public void updateRating(Rating rating) {

@@ -23,10 +23,19 @@ public class OrderResource {
 
     private final ConnectionFactory connectionFactory;
 
+    /**
+     * Connects to the factory for order resource.
+     * @param connectionFactory the connection of factory
+     */
     public OrderResource(ConnectionFactory connectionFactory) {
         this.connectionFactory = connectionFactory;
     }
 
+    /**
+     * Gets all order.
+     * @param user the user
+     * @return List<Order> the list of orders
+     */
     @GET
     @Path("/all")
     @ApiOperation(value = "Get all orders")
@@ -34,6 +43,11 @@ public class OrderResource {
         return null;
     }
 
+    /**
+     * Gets open orders.
+     * @param user the user
+     * @return Order
+     */
     @GET
     @Path("/open")
     @ApiOperation(value = "Get all open orders")
@@ -100,6 +114,11 @@ public class OrderResource {
         }
     }
 
+    /**
+     * Gets orders for restaurant
+     * @param restaurantId the restaurant id
+     * @return Order
+     */
     @GET
     @Path("/restaurant/{restaurantId}")
     @ApiOperation(value = "Get open orders of a restaurants")
@@ -108,6 +127,10 @@ public class OrderResource {
         return null;
     }
 
+    /**
+     * Updates order.
+     * @param order the order
+     */
     @PUT
     @ApiOperation(value = "Update an existing order")
     public void placeOrder(Order order) {
@@ -116,6 +139,10 @@ public class OrderResource {
         }
     }
 
+    /**
+     * Adds order.
+     * @param order the order
+     */
     @POST
     @ApiOperation(value = "Add a new order to the store")
     public void addOrder(Order order) {
@@ -134,6 +161,10 @@ public class OrderResource {
         }
     }
 
+    /**
+     * Deletes order
+     * @param orderId the order id
+     */
     @DELETE
     @Path("/{orderId}")
     @ApiOperation(value = "Deletes a order")

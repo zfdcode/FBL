@@ -35,13 +35,21 @@ public class MealResource {
 
     private final ConnectionFactory connectionFactory;
 
-
+    /**
+     * Connects to the factory for meal resource.
+     * @param connectionFactory the connection of factory
+     */
     public MealResource(ConnectionFactory connectionFactory) {
         this.connectionFactory = connectionFactory;
 
         this.imageStorage = new ImageStorageImpl();
     }
 
+    /**
+     * Gets all meals.
+     * @param user the user
+     * @return List<Meal> the list of meals
+     */
     @GET
     @Path("/all")
     @ApiOperation(value = "Get all offered meals")
@@ -50,6 +58,11 @@ public class MealResource {
         return null;
     }
 
+    /**
+     * Gets available meals.
+     * @param user the user
+     * @return List<Meal> the list of meals
+     */
     @GET
     @Path("/available")
     @ApiOperation(value = "Get all available meals")
@@ -57,6 +70,11 @@ public class MealResource {
         return null;
     }
 
+    /**
+     * Gets meals by user.
+     * @param userId the user id
+     * @return List<Meal> the list of meals
+     */
     @GET
     @Path("/user/{userId}")
     @ApiOperation(value = "Get information of meals by one user")
@@ -65,6 +83,11 @@ public class MealResource {
         return null;
     }
 
+    /**
+     * Gets meal.
+     * @param mealId the meal id
+     * @return Meal
+     */
     @GET
     @Path("/meal/{mealId}")
     @ApiOperation(value = "Get information of a meal")
@@ -95,6 +118,10 @@ public class MealResource {
         }
     }
 
+    /**
+     * Deletes meal.
+     * @param mealId the meal id
+     */
     @DELETE
     @Path("/meal/{mealId}")
     @ApiOperation(value = "Deletes a meal")
@@ -104,6 +131,12 @@ public class MealResource {
         }
     }
 
+    /**
+     * Adds image of meal.
+     * @param uploadedInputStream the uploaded input stream
+     * @param fileDetail the file detail
+     * @return Response
+     */
     @Path("/img")
     @POST
     @Consumes(MediaType.MULTIPART_FORM_DATA)
@@ -120,6 +153,10 @@ public class MealResource {
         }
     }
 
+    /**
+     * Adds meal.
+     * @param meal the meal
+     */
     @POST
     @ApiOperation(value = "Add a new meal to the store")
     public void addMeal(Meal meal) {
@@ -142,6 +179,10 @@ public class MealResource {
         }
     }
 
+    /**
+     * Updates meal.
+     * @param meal the meal
+     */
     @PUT
     @ApiOperation(value = "Update an existing meal")
     public void updateMeal(Meal meal) {

@@ -38,7 +38,7 @@ public class RatingResource {
         return null;
     }
 
-    @DELETE
+    @GET
     @Path("/{userId}/{mealId}")
     @ApiOperation(value = "Deletes a rating by user ID")
     public Rating getRating(@PathParam("userId") int userId, @PathParam("mealId") int mealId) {

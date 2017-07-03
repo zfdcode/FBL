@@ -43,5 +43,9 @@ class UserFoodPreferenceSerializer(serializers.Serializer):
     def save(self, **kwargs):
         user_id = kwargs.get('user_id')
         for preference in self.data.get('preferences', ()):
-            if FoodPreference.objects.filter(slug=preference['slug']).exists():
-                UserFoodPreference.objects.get_or_create(user_id=user_id, preference__slug=preference['slug'])
+            try:
+                food_pref = FoodPreference.objects.get(slug=preference['slug'])
+            except FoodPreference.ObjectNotFound:
+                food_pref = None
+            else:
+                UserFoodPreference.objects.get_or_create(user_id=user_id, preference=food_pref)

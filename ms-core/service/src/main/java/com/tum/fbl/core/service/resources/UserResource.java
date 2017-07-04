@@ -40,21 +40,21 @@ public class UserResource {
     @GET
     @Path("/{userId}")
     @ApiOperation(value = "Get basic user information")
-    public User getUser (@PathParam("userId") int userId) {
+    public User getUser(@PathParam("userId") int userId) {
 
-         try (UserDao userDao = this.connectionFactory.getConnection().open(UserDao.class)) {
-             com.tum.fbl.core.persistence.user.User user = userDao.findUserById(userId);
+        try (UserDao userDao = this.connectionFactory.getConnection().open(UserDao.class)) {
+            com.tum.fbl.core.persistence.user.User user = userDao.findUserById(userId);
 
-             return new User(
-                     user.getUserId(),
-                     user.getUserName(),
-                     user.getUserPassword(),
-                     user.getEmail(),
-                     user.getBirthday(),
-                     user.getHeight(),
-                     user.getWeight()
-             );
-         }
+            return new User(
+                    user.getUserId(),
+                    user.getUserName(),
+                    user.getUserPassword(),
+                    user.getEmail(),
+                    user.getBirthday(),
+                    user.getHeight(),
+                    user.getWeight()
+            );
+        }
     }
 
     /**
@@ -65,7 +65,9 @@ public class UserResource {
     @Path("/{userId}")
     @ApiOperation(value = "Deletes a user")
     public void deleteUser(@PathParam("userId") int userId) {
-
+        try (UserDao userDao = this.connectionFactory.getConnection().open(UserDao.class)) {
+            userDao.deleteUser(userId);
+        }
     }
 
     /**
@@ -75,6 +77,19 @@ public class UserResource {
     @POST
     @ApiOperation(value = "Add a new user to the store")
     public void addUser(User user) {
+        try (UserDao userDao = this.connectionFactory.getConnection().open(UserDao.class)) {
+            userDao.newUser(
+                    user.getUserName(),
+                    user.getUserPassword(),
+                    user.getEmail(),
+                    user.getBirthday(),
+                    user.getHeight(),
+                    user.getWeight(),
+                    user.getDisplayName(),
+                    user.getRestaurantAddress(),
+                    user.getRole()
+            );
+        }
     }
 
     /**
@@ -84,12 +99,26 @@ public class UserResource {
     @PUT
     @ApiOperation(value = "Update an existing user")
     public void updateUser(User user) {
+        try (UserDao userDao = this.connectionFactory.getConnection().open(UserDao.class)) {
+            //TODO: userdao.updateUser
+            userDao.newUser(
+                    user.getUserName(),
+                    user.getUserPassword(),
+                    user.getEmail(),
+                    user.getBirthday(),
+                    user.getHeight(),
+                    user.getWeight(),
+                    user.getDisplayName(),
+                    user.getRestaurantAddress(),
+                    user.getRole()
+            );
+        }
     }
 
     /**
-     * Gets users by special need.
-     * @param specialNeedId the special need
-     * @return List<User> list of user
+     * Gets user by special need.
+     * @param specialNeedId the special need id
+     * @return List<User> the list of users
      */
     @GET
     @Path("/sn/{specialNeedId}")
@@ -99,9 +128,9 @@ public class UserResource {
     }
 
     /**
-     * Gets users by ingredient.
+     * Gets users by ingredient
      * @param ingredientId the ingredient id
-     * @return List<User> list of user
+     * @return List<User> the list of users
      */
     @GET
     @Path("/ingredient/{ingredientId}")
@@ -111,9 +140,9 @@ public class UserResource {
     }
 
     /**
-     * Gets users by meal.
+     * Gets users by meal
      * @param mealId the meal id
-     * @return List<User> list of user
+     * @return List<User> the list of users
      */
     @GET
     @Path("/meal/{mealId}")

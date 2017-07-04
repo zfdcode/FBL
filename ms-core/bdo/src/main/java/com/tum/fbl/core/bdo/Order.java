@@ -1,6 +1,7 @@
 package com.tum.fbl.core.bdo;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by patrickmelchner on 30.05.17.
@@ -12,11 +13,11 @@ public class Order {
 
     private User orderUser;
 
-    private Meal orderMeal;
+    private List<Meal> orderMeals;
 
     private Date orderPickupTime;
 
-    private int orderStatus;
+    private String orderStatus;
 
     /**
      * Constructs Order that is made by users with meal choices, pickup time and order status.
@@ -29,7 +30,7 @@ public class Order {
     public Order(int orderId, User orderUser, Meal orderMeal, Date orderPickupTime, int orderStatus) {
         this.orderId = orderId;
         this.orderUser = orderUser;
-        this.orderMeal = orderMeal;
+        this.orderMeals = orderMeals;
         this.orderPickupTime = orderPickupTime;
         this.orderStatus = orderStatus;
     }
@@ -67,19 +68,19 @@ public class Order {
     }
 
     /**
-     * Gets OrderMeal.
-     * @return orderMeal meal choices of the order
+     * Gets OrderMeals.
+     * @return orderMeal meals choices of the order
      */
-    public Meal getOrderMeal() {
-        return orderMeal;
+    public List<Meal> getOrderMeals() {
+        return orderMeals;
     }
 
     /**
-     * Sets OrderMeal.
+     * Sets OrderMeals.
      * @param orderMeal meal choices of the order
      */
-    public void setOrderMeal(Meal orderMeal) {
-        this.orderMeal = orderMeal;
+    public void setOrderMeals(List<Meal> orderMeals) {
+        this.orderMeals = orderMeals;
     }
 
     /**

@@ -1,4 +1,4 @@
-package com.tum.fbl.core.bdo;
+package com.tum.fbl.core.persistence.vote;
 
 public class Vote {
     private int voteId;

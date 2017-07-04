@@ -14,9 +14,12 @@ public interface CategoryDao extends AutoCloseable{
     @SqlQuery("select * from category where categoryId = :id")
     Category findCategoryById(@Bind("id") int categoryId);
 
-    @SqlUpdate("Insert into ingredient (categoryName) value (:categoryName)")
-    void newCategory(@Bind("categoryName") String categoryName);
+    @SqlUpdate("Insert into ingredient (categoryName, categoryDescription) value (:categoryName, :categoryDescription)")
+    void newCategory(@Bind("categoryName") String categoryName, @Bind("categoryDescription") String categoryDescription);
 
     @SqlUpdate("delete from category where categoryId = :id")
     void deleteCategoryById(@Bind("id") int categoryId);
+
+    @SqlUpdate("Select * from (select * from category where categroyId = :id) natural join categoryMeal natural join meal")
+    void getMealsByCategoryId(@Bind("id") int categoryId);
 }

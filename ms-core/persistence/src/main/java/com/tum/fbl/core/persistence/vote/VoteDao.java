@@ -1,6 +1,5 @@
 package com.tum.fbl.core.persistence.vote;
 
-import com.tum.fbl.core.bdo.Vote;
 import org.skife.jdbi.v2.sqlobject.Bind;
 import org.skife.jdbi.v2.sqlobject.SqlQuery;
 import org.skife.jdbi.v2.sqlobject.SqlUpdate;
@@ -11,7 +10,7 @@ import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapper;
  */
 
 @RegisterMapper(VoteMapper.class)
-public interface VoteDao extends AutoCloseable{
+public interface VoteDao extends AutoCloseable {
 
     @SqlQuery("select * from vote where voteId = :id")
     Vote findVoteById(@Bind("id") int voteId);
@@ -24,4 +23,8 @@ public interface VoteDao extends AutoCloseable{
 
     @SqlUpdate("delete from vote where voteId = :id")
     void deleteVoteById(@Bind("id") int voteId);
+
+    //TODO: void update()
+
+    public void close();
 }

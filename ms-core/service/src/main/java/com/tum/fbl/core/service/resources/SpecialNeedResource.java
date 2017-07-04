@@ -20,9 +20,10 @@ import java.util.List;
 public class SpecialNeedResource {
 
     private final ConnectionFactory connectionFactory;
+
     /**
-     * Connects the factory for special need resource.
-     * @param connectionFactory the connection factory
+     * Connects to the factory for speacial need resource.
+     * @param connectionFactory the connection of factory
      */
     public SpecialNeedResource (ConnectionFactory connectionFactory) {
         this.connectionFactory = connectionFactory;
@@ -53,7 +54,7 @@ public class SpecialNeedResource {
 
     /**
      * Deletes special need.
-     * @param specialNeedId the spcial need id
+     * @param specialNeedId the special need id
      */
     @DELETE
     @Path("/{specialNeedId}")

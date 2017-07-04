@@ -6,13 +6,13 @@ package com.tum.fbl.core.bdo;
  */
 public class HealthData {
 
-    private User user;
+    private int userId;
 
     private String deviceUserPassword;
 
     private int deviceUserId;
 
-    private int currentHearthbeat;
+    private float currentHearthbeat;
 
     private int heartbeatTimeRange;
 
@@ -172,4 +172,5 @@ public class HealthData {
     public void setAverageHeartbeatTimeRange(int averageHeartbeatTimeRange) {
         this.averageHeartbeatTimeRange = averageHeartbeatTimeRange;
     }
+
 }

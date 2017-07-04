@@ -22,8 +22,8 @@ public class RestaurantResource {
     private final ConnectionFactory connectionFactory;
 
     /**
-     * Connects the factory for restaurant resource.
-     * @param connectionFactory the connection factory
+     * Connects to the factory for restaurant resource.
+     * @param connectionFactory the connection of factory
      */
     public RestaurantResource (ConnectionFactory connectionFactory) {
         this.connectionFactory = connectionFactory;
@@ -31,7 +31,7 @@ public class RestaurantResource {
 
     /**
      * Gets all restaurants.
-     * @return List<Restaurant> list of restaurant
+     * @return List<Restaurant> the list of restaurants
      */
     @GET
     @Path("/all")
@@ -42,7 +42,7 @@ public class RestaurantResource {
 
     /**
      * Gets restaurants at campus.
-     * @return List<Restaurant> list of restaurant
+     * @return List<Restaurant> the list of restaurants
      */
     @GET
     @Path("/campus")
@@ -54,7 +54,7 @@ public class RestaurantResource {
     /**
      * Gets restaurant.
      * @param restaurantId the restaurant id
-     * @return restaurant
+     * @return Restaurant
      */
     @GET
     @Path("/{restaurantId}")

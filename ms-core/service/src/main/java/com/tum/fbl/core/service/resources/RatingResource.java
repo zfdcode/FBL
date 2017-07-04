@@ -22,17 +22,17 @@ public class RatingResource {
     private final ConnectionFactory connectionFactory;
 
     /**
-     * Connects the factory for rating resource.
-     * @param connectionFactory the connection factory
+     * Connects to the factory for rating resource.
+     * @param connectionFactory the connection of factory
      */
     public RatingResource (ConnectionFactory connectionFactory) {
         this.connectionFactory = connectionFactory;
     }
 
     /**
-     * Gets rating by userID.
+     * Gets ratings by user id.
      * @param userId the user id
-     * @return list of rating
+     * @return List<Rating> the list of ratings
      */
     @GET
     @Path("/user/{userId}")
@@ -42,9 +42,9 @@ public class RatingResource {
     }
 
     /**
-     * Gets ratings by mealID
+     * Gets raitings by meal id
      * @param mealId the meal id
-     * @return
+     * @return List<Rating> the list of ratings
      */
     @GET
     @Path("/meal/{mealId}")
@@ -57,7 +57,7 @@ public class RatingResource {
      * Gets rating.
      * @param userId the user id
      * @param mealId the meal id
-     * @return rating
+     * @return Rating
      */
     @DELETE
     @Path("/{userId}/{mealId}")
@@ -88,7 +88,7 @@ public class RatingResource {
 
     /**
      * Updates rating.
-     * @param rating rating
+     * @param rating the rating
      */
     @PUT
     @ApiOperation(value = "Update an existing rating")

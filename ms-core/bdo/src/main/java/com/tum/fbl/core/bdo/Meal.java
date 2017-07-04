@@ -19,6 +19,8 @@ public class Meal {
 
     private Date mealPreparationTime;
 
+    private Date offerDate;
+
     private float mealEnergy;
 
     private float mealProtein;
@@ -47,6 +49,7 @@ public class Meal {
         this.mealRating = mealRating;
         this.mealHelathValue = mealHelathValue;
         this.mealPreparationTime = mealPreparationTime;
+        this.offerDate = offerDate;
         this.mealEnergy = mealEnergy;
         this.mealProtein = mealProtein;
         this.mealTotalFat = mealTotalFat;
@@ -54,6 +57,9 @@ public class Meal {
         this.mealTotalCarbohydrate = mealTotalCarbohydrate;
         this.mealSugar = mealSugar;
         this.mealSodium = mealSodium;
+        this.mealIngredints = mealIngredints;
+        this.mealCategories = mealCategories;
+        this.mealRatings = mealRatings;
         this.mealIngredints = mealIngredints;
         this.mealCategories = mealCategories;
         this.mealRatings = mealRatings;

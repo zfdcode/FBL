@@ -1,5 +1,7 @@
 package com.tum.fbl.core.persistence.rating;
 
+import java.util.Date;
+
 public class Rating {
 
     private int ratingId;
@@ -8,12 +10,15 @@ public class Rating {
 
     private int mealId;
 
-    private float rating;
+    private Date ratingTimestamp;
 
-    public Rating(int ratingId, int userId, int mealId, float rating) {
+    private boolean rating;
+
+    public Rating(int ratingId, int userId, int mealId, Date ratingTimestamp, boolean rating) {
         this.ratingId = ratingId;
         this.userId = userId;
         this.mealId = mealId;
+        this.ratingTimestamp = ratingTimestamp;
         this.rating = rating;
     }
 
@@ -41,11 +46,19 @@ public class Rating {
         this.mealId = mealId;
     }
 
-    public float getRating() {
+    public Date getRatingTimestamp() {
+        return ratingTimestamp;
+    }
+
+    public void setRatingTimestamp(Date ratingTimestamp) {
+        this.ratingTimestamp = ratingTimestamp;
+    }
+
+    public boolean isRating() {
         return rating;
     }
 
-    public void setRating(float rating) {
+    public void setRating(boolean rating) {
         this.rating = rating;
     }
 }

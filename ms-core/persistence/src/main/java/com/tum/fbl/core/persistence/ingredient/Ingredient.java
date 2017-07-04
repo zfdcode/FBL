@@ -18,6 +18,8 @@ public class Ingredient {
 
     private float totalCarbohydrate;
 
+    private String[] tag;
+
     public Ingredient(int ingredientId, String ingredientName, String description, byte[] ingredientImage, float energy, float totalFat, float protein, float totalCarbohydrate) {
         this.ingredientId = ingredientId;
         this.ingredientName = ingredientName;
@@ -91,5 +93,13 @@ public class Ingredient {
 
     public void setTotalCarbohydrate(float totalCarbohydrate) {
         this.totalCarbohydrate = totalCarbohydrate;
+    }
+
+    public String[] getTag() {
+        return tag;
+    }
+
+    public void setTag(String[] tag) {
+        this.tag = tag;
     }
 }

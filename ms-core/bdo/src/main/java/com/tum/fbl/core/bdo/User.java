@@ -22,6 +22,12 @@ public class User {
 
     private int weight;
 
+    private String DisplayName;
+
+    private String restaurantAddress;
+
+    private String role;
+
     /**
      * Constructs User that specifies the user of the APP in terms of name, password, email, birthday, height and weight.
      * @param userId unique ID of the user
@@ -152,5 +158,29 @@ public class User {
      */
     public void setWeight(int weight) {
         this.weight = weight;
+    }
+
+    public String getDisplayName() {
+        return DisplayName;
+    }
+
+    public void setDisplayName(String displayName) {
+        DisplayName = displayName;
+    }
+
+    public String getRestaurantAddress() {
+        return restaurantAddress;
+    }
+
+    public void setRestaurantAddress(String restaurantAddress) {
+        this.restaurantAddress = restaurantAddress;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }

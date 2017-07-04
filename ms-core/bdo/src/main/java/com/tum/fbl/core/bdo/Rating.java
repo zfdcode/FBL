@@ -1,5 +1,7 @@
 package com.tum.fbl.core.bdo;
 
+import java.util.Date;
+
 /**
  * Created by zfngd on 2017/6/4.
  * Documented by jie on 27.06.2017.
@@ -12,7 +14,9 @@ public class Rating {
 
     private Meal meal;
 
-    private float rate;
+    private boolean rate;
+
+    private Date ratingTimestamp;
 
     /**
      * Constructs Rating that is made by the user for the meal
@@ -26,6 +30,7 @@ public class Rating {
         this.user = user;
         this.meal = meal;
         this.rate = rate;
+        this.ratingTimestamp = ratingTimestamp;
     }
 
     /**
@@ -88,5 +93,13 @@ public class Rating {
      */
     public void setRate(float rate) {
         this.rate = rate;
+    }
+
+    public Date getRatingTimestamp() {
+        return ratingTimestamp;
+    }
+
+    public void setRatingTimestamp(Date ratingTimestamp) {
+        this.ratingTimestamp = ratingTimestamp;
     }
 }

@@ -33,25 +33,23 @@ public class OrderResource {
 
     /**
      * Gets all orders.
-     * @param user the user
      * @return list of order
      */
     @GET
     @Path("/all")
     @ApiOperation(value = "Get all orders")
-    public List<Order> getAllOrders(@Auth User user) {
+    public List<Order> getAllOrders() {
         return null;
     }
 
     /**
      * Gets open orders.
-     * @param user the user
      * @return order
      */
     @GET
     @Path("/open")
     @ApiOperation(value = "Get all open orders")
-    public Order getOpenOrders (@Auth User user) {
+    public Order getOpenOrders () {
         return null;
     }
 

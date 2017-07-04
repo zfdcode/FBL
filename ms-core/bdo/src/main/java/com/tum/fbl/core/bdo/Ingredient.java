@@ -12,7 +12,7 @@ public class Ingredient {
 
     private String description;
 
-    private byte[] ingredientImage;
+    private String ingredientImage;
 
     private float energy;
 
@@ -36,7 +36,7 @@ public class Ingredient {
      * @param totalCarbohydrate total carbohydrate of the ingredient used in Mensa
      * @param tag tag of the ingredient used in Mensa
      */
-    public Ingredient(int ingredientId, String ingredientName, String description, byte[] ingredientImage, float energy, float totalFat, float protein, float totalCarbohydrate, String[] tag) {
+    public Ingredient(int ingredientId, String ingredientName, String description, String ingredientImage, float energy, float totalFat, float protein, float totalCarbohydrate, String[] tag) {
         this.ingredientId = ingredientId;
         this.ingredientName = ingredientName;
         this.description = description;
@@ -100,7 +100,7 @@ public class Ingredient {
      * Gets IngredientImage.
      * @return ingredientImage image of the ingredient used in Mensa
      */
-    public byte[] getIngredientImage() {
+    public String getIngredientImage() {
         return ingredientImage;
     }
 
@@ -108,7 +108,7 @@ public class Ingredient {
      * Sets IngredientImage
      * @param ingredientImage image of the ingredient used in Mensa
      */
-    public void setIngredientImage(byte[] ingredientImage) {
+    public void setIngredientImage(String ingredientImage) {
         this.ingredientImage = ingredientImage;
     }
 

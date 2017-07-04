@@ -32,13 +32,12 @@ public class IngredientResource {
 
     /**
      * Gets all ingredients.
-     * @param user the user
      * @return list of ingredient
      */
     @GET
     @Path("/all")
     @ApiOperation(value = "Get all offered ingredients")
-    public List<Ingredient> getAllIngredients(@Auth User user) {
+    public List<Ingredient> getAllIngredients() {
         return null;
     }
 

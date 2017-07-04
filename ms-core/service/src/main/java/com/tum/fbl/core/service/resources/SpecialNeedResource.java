@@ -30,13 +30,12 @@ public class SpecialNeedResource {
 
     /**
      * Gets all special needs.
-     * @param user the user
      * @return List<SpecialNeed> the list of special needs
      */
     @GET
     @Path("/all")
     @ApiOperation(value = "Get all offered specialNeeds")
-    public List<SpecialNeed> getAllSpecialNeeds(@Auth User user) {
+    public List<SpecialNeed> getAllSpecialNeeds() {
         return null;
     }
 

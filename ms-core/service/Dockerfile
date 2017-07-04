@@ -5,6 +5,8 @@ COPY config-prod.json /var/ms/config-prod.json
 
 WORKDIR /var/ms
 
+RUN mkdir upload
+
 RUN java -version
 
 CMD ["java","-jar","coreservice.jar","server","config-prod.json"]

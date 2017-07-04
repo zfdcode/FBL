@@ -15,6 +15,10 @@ import javax.ws.rs.core.MediaType;
 import java.util.List;
 import javax.ws.rs.*;
 
+/**
+ * Documented by jie on 03.07.2017.
+ */
+
 @Path("/order")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
@@ -55,6 +59,11 @@ public class OrderResource {
         return null;
     }
 
+    /**
+     * Gets order.
+     * @param orderId the order id
+     * @return order
+     */
     @GET
     @Path("/order/{orderId}")
     @ApiOperation(value = "Get information of a order")

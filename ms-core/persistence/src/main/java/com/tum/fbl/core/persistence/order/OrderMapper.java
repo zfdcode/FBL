@@ -8,9 +8,18 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 /**
  * Created by malte on 13.06.2017.
+ * Documented bu jie on 02.07.2017.
  */
 public class OrderMapper implements ResultSetMapper<Order> {
 
+    /**
+     * Maps order data stored in db to Order.
+     * @param index
+     * @param r
+     * @param ctx
+     * @return Order
+     * @throws SQLException
+     */
     @Override
     public Order map(int index, ResultSet r, StatementContext ctx) throws SQLException {
         return new Order(

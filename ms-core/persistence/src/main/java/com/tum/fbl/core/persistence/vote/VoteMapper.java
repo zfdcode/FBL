@@ -7,9 +7,18 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 /**
  * Created by malte on 13.06.2017.
+ * Documented bu jie on 02.07.2017.
  */
 public class VoteMapper implements ResultSetMapper<Vote> {
 
+    /**
+     * Maps vote data stored in db to Vote.
+     * @param index
+     * @param r
+     * @param ctx
+     * @return Vote
+     * @throws SQLException
+     */
     @Override
     public Vote map(int index, ResultSet r, StatementContext ctx) throws SQLException {
         return new Vote(

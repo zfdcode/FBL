@@ -1,5 +1,6 @@
 package com.tum.fbl.core.service.resources;
 
+import com.tum.fbl.core.config.ImageUploadConfiguration;
 import com.tum.fbl.core.imagestorage.ImagePersistenceException;
 import com.tum.fbl.core.imagestorage.ImageStatus;
 import com.tum.fbl.core.imagestorage.ImageStorage;
@@ -8,6 +9,7 @@ import com.tum.fbl.core.bdo.Meal;
 import com.tum.fbl.core.persistence.ConnectionFactory;
 import com.tum.fbl.core.persistence.meal.MealDao;
 import com.tum.fbl.core.service.auth.User;
+import com.tum.fbl.core.service.exceptions.ImageException;
 import io.dropwizard.auth.Auth;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -22,6 +24,9 @@ import javax.ws.rs.core.Response;
 import java.io.InputStream;
 import java.util.List;
 
+/**
+ * Documented by jie on 03.07.2017.
+ */
 
 @Path("/meal")
 @Produces(MediaType.APPLICATION_JSON)
@@ -42,7 +47,7 @@ public class MealResource {
     public MealResource(ConnectionFactory connectionFactory) {
         this.connectionFactory = connectionFactory;
 
-        this.imageStorage = new ImageStorageImpl();
+        this.imageStorage = new ImageStorageImpl(imageUploadConfiguration);
     }
 
     /**
@@ -140,16 +145,15 @@ public class MealResource {
     @Path("/img")
     @POST
     @Consumes(MediaType.MULTIPART_FORM_DATA)
-    public Response uploadFile(
+    public ImageStatus uploadFile(
             @FormDataParam("file") InputStream uploadedInputStream,
             @FormDataParam("file") FormDataContentDisposition fileDetail
     ) {
         try {
-            final ImageStatus imageStatus = this.imageStorage.saveImage(uploadedInputStream);
-            return Response.ok().build();
+            return this.imageStorage.saveImage(uploadedInputStream, fileDetail.getFileName());
         } catch (ImagePersistenceException e) {
             LOGGER.error("Image Upload failed");
-            return Response.serverError().build();
+            throw new ImageException("File could not be uploaded");
         }
     }
 

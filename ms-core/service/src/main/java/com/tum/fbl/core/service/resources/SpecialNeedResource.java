@@ -32,8 +32,9 @@ public class SpecialNeedResource {
     /**
      * Gets all special needs.
      * @param user the user
-     * @return List<SpecialNeed> the list of special need
+     * @return List<SpecialNeed> the list of special needs
      */
+    @GET
     @Path("/all")
     @ApiOperation(value = "Get all offered specialNeeds")
     public List<SpecialNeed> getAllSpecialNeeds(@Auth User user) {
@@ -43,7 +44,7 @@ public class SpecialNeedResource {
     /**
      * Gets special need.
      * @param specialNeedId the special need id
-     * @return SpecialNeed
+     * @return SpecialNeed the speical need
      */
     @GET
     @Path("/{specialNeedId}")
@@ -64,8 +65,8 @@ public class SpecialNeedResource {
     }
 
     /**
-     * Adds spcial need.
-     * @param specialNeed the special need
+     * Adds special need.
+     * @param specialNeed the speical need
      */
     @ApiOperation(value = "Add a new special need to the store")
     public void addSpecialNeed(SpecialNeed specialNeed) {

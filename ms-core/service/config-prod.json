@@ -1,10 +1,10 @@
 {
   "server": {
-    "rootPath": "/api/*",
+    "rootPath": "/core/*",
     "applicationConnectors": [
       {
         "type": "http",
-        "port": 8444
+        "port": 80
       }
     ],
     "adminConnectors": []

@@ -11,6 +11,7 @@ import java.util.List;
 
 /**
  * Created by zfngd on 2017/6/15.
+ * Documented by jie on 03.07.2017.
  */
 @Path("/rating")
 @Produces(MediaType.APPLICATION_JSON)

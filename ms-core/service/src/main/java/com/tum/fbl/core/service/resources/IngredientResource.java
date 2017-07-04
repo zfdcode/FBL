@@ -14,6 +14,7 @@ import java.util.List;
 
 /**
  * Created by zfngd on 2017/6/15.
+ * Documented by jie on 03.07.2017.
  */
 @Path("/ingredient")
 @Produces(MediaType.APPLICATION_JSON)
@@ -31,6 +32,12 @@ public class IngredientResource {
         this.connectionFactory = connectionFactory;
     }
 
+    /**
+     * Gets all ingredients.
+     * @param user the user
+     * @return list of ingredient
+     */
+    @GET
     @Path("/all")
     @ApiOperation(value = "Get all offered ingredients")
     public List<Ingredient> getAllIngredients(@Auth User user) {
@@ -96,6 +103,7 @@ public class IngredientResource {
      * Adds ingredient.
      * @param ingredient the ingredient
      */
+    @POST
     @ApiOperation(value = "Add a new ingredient to the store")
     public void addIngredient(Ingredient ingredient) {
         try (IngredientDao ingredientDao = this.connectionFactory.getConnection().open(IngredientDao.class)) {

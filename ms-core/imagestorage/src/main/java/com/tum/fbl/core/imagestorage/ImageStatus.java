@@ -7,13 +7,13 @@ import java.util.Optional;
  */
 public class ImageStatus {
 
-    public String id;
+    public final String path;
 
-    public ImageStatus (String id) {
-        this.id = id;
+    public ImageStatus (String path) {
+        this.path = path;
     }
 
     public Optional<String> getId () {
-        return Optional.of(id);
+        return Optional.of(this.path);
     }
 }

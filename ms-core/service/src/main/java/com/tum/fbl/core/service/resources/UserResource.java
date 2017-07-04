@@ -13,6 +13,7 @@ import java.util.List;
 
 /**
  * Created by zfngd on 2017/6/15.
+ * Documented by jie on 03.07.2017.
  */
 
 @Path("/user")
@@ -24,10 +25,10 @@ public class UserResource {
     private final ConnectionFactory connectionFactory;
 
     /**
-     * Connects to the factory for user resource.
-     * @param connectionFactory the connection of factory
+     * Connects the factory for user resource.
+     * @param connectionFactory the connection factory
      */
-    public UserResource(ConnectionFactory connectionFactory) {
+    public UserResource (ConnectionFactory connectionFactory) {
         this.connectionFactory = connectionFactory;
     }
 

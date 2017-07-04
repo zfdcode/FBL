@@ -11,6 +11,7 @@ import javax.ws.rs.core.MediaType;
 
 /**
  * Created by patrickmelchner on 23.05.17.
+ * Documented by jie on 03.07.2017.
  */
 
 @Path("/healthData")
@@ -68,7 +69,6 @@ public class HealthDataResource {
             healthDataDao.deleteHealthData(userId);
         }
     }
-
 
     /**
      * Adds health data.

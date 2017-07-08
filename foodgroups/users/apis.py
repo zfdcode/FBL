@@ -34,10 +34,14 @@ class UserFoodPreferenceView(
     model = models.FoodPreference
     serializer_class = serializers.FoodPreferenceSerializer
     create_serializer_class = serializers.UserFoodPreferenceSerializer
-    user_id = 1         # TODO: Replace with authenticated user id later
 
     def get_queryset(self):
-        return models.FoodPreference.objects.filter(users__user_id=1)
+        return models.FoodPreference.objects.filter(users__user_id=self.get_user_id())
+
+    @property
+    def user_id(self):
+        # TODO: Remove the default 1 when we add permission as IsAuthenticated
+        return 1 if self.request.user.is_anonymous else self.request.user.user_id
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
@@ -51,4 +55,5 @@ class UserFoodPreferenceView(
         )
 
     def perform_create(self, serializer):
-        serializer.save(user_id=self.user_id)
+        serializer.save(user_id=self.get_user_id())
+

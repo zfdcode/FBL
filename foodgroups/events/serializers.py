@@ -10,7 +10,7 @@ class EventLocationSerializer(serializers.ModelSerializer):
     class Meta:
         model = EventLocation
         fields = ('id', 'name', 'description', 'is_public', 'created_at')
-        read_only_fields = ('id', 'created_at', 'is_public')
+        read_only_fields = ('id', 'created_at', 'modified_at', 'is_public')
 
     def save(self, **kwargs):
         self._validated_data.update({
@@ -23,7 +23,8 @@ class EventShoppingItemSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = EventShoppingItem
-        fields = ('id', 'name', 'created_at')
+        fields = ('id', 'name', 'created_at', 'event')
+        read_only_fields = ('id', 'created_at', 'modified_at')
 
     def to_representation(self, instance):
         data = super(EventShoppingItemSerializer, self).to_representation(instance)
@@ -35,7 +36,8 @@ class EventMealSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = EventShoppingItem
-        fields = ('id', 'name', 'created_at')
+        fields = ('id', 'name', 'created_at', 'event')
+        read_only_fields = ('id', 'created_at', 'modified_at')
 
     def to_representation(self, instance):
         data = super(EventMealSerializer, self).to_representation(instance)
@@ -47,7 +49,8 @@ class EventMessageSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = EventMessage
-        fields = ('id', 'text', 'user_id')
+        fields = ('id', 'text', 'user_id', 'event')
+        read_only_fields = ('id', 'created_at', 'modified_at')
 
     def to_representation(self, instance):
         data = super(EventMessageSerializer, self).to_representation(instance)

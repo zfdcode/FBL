@@ -132,7 +132,7 @@ REST_FRAMEWORK = {
         'rest_framework.renderers.JSONRenderer',
     ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework.authentication.TokenAuthentication',
+        'users.authentication.FBLAuthentication',
     ),
     'DATETIME_FORMAT': "%d-%m-%Y %H:%M:%S",
     'DATETIME_INPUT_FORMATS': ["%d-%m-%Y %H:%M:%S"],

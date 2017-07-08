@@ -51,8 +51,15 @@ class EventView(
     model = models.Event
     serializer_class = serializers.EventSerializer
     users_serializer_class = serializers.EventUserSerializer
+    messages_serializer_class = serializers.EventMessageSerializer
+    meals_serializer_class = serializers.EventMealSerializer
+    shoppingitems_serializer_class = serializers.EventShoppingItemSerializer
     queryset = models.Event.objects.prefetch_related('users', 'preferences', 'messages', 'shop_items', 'meals').all()
-    user_id = 1     # TODO: Replace with authenticated user id later
+
+    @property
+    def user_id(self):
+        # TODO: Remove the default 1 when we add permission as IsAuthenticated
+        return 1 if self.request.user.is_anonymous else self.request.user.user_id
 
     def get_user_id(self):  # TODO: Replace with authenticated user id later
         return random.choice([2, 3, 4, 5])
@@ -99,6 +106,77 @@ class EventView(
         models.EventUser.objects.filter(event=event_obj, user_id=user_id).delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
+    @detail_route(methods=['get', 'post'])
+    def messages(self, request, *args, **kwargs):
+        """
+        GET: List all messages of a group
+        POST: Create new message for a group
+        """
+        event_obj = self.get_object()
+        if request.method.lower() == "get":
+            return Response(
+                self.messages_serializer_class(instance=event_obj.messages.all(), many=True).data
+            )
+        else:
+            data = request.data.copy()
+            data['user_id'] = self.user_id
+            data['event'] = event_obj.id
+            print(data)
+            messages_serializer = self.messages_serializer_class(data=data)
+            print(messages_serializer.initial_data)
+            messages_serializer.is_valid(raise_exception=True)
+            event_message = messages_serializer.save()
+            return Response(
+                self.messages_serializer_class(instance=event_message).data,
+                status=status.HTTP_201_CREATED
+            )
+
+    @detail_route(methods=['get', 'post'])
+    def meals(self, request, *args, **kwargs):
+        """
+        GET: List all meals of a group
+        POST: Create new meal for a group
+        """
+        event_obj = self.get_object()
+        if request.method.lower() == "get":
+            return Response(
+                self.meals_serializer_class(instance=event_obj.meals.all(), many=True).data
+            )
+        else:
+            data = request.data.copy()
+            data['user_id'] = self.user_id
+            data['event'] = event_obj.id
+            meals_serializer = self.messages_serializer_class(data=data)
+            meals_serializer.is_valid(raise_exception=True)
+            event_meal = meals_serializer.save()
+            return Response(
+                self.meals_serializer_class(instance=event_meal).data,
+                status=status.HTTP_201_CREATED
+            )
+
+    @detail_route(methods=['get', 'post'])
+    def shoppingitems(self, request, *args, **kwargs):
+        """
+        GET: List all Shopping items of a group
+        POST: Create new Shopping Item for a group
+        """
+        event_obj = self.get_object()
+        if request.method.lower() == "get":
+            return Response(
+                self.shoppingitems_serializer_class(instance=event_obj.shop_items.all(), many=True).data
+            )
+        else:
+            data = request.data.copy()
+            data['user_id'] = self.user_id
+            data['event'] = event_obj.id
+            shoppingitems_serializer = self.messages_serializer_class(data=data)
+            shoppingitems_serializer.is_valid(raise_exception=True)
+            event_shoppingitem = shoppingitems_serializer.save()
+            return Response(
+                self.shoppingitems_serializer_class(instance=event_shoppingitem).data,
+                status=status.HTTP_201_CREATED
+            )
+
     def perform_create(self, serializer):
         serializer.save(user_id=self.user_id)
 
@@ -126,7 +204,11 @@ class EventLocationView(
     """
     model = models.EventLocation
     serializer_class = serializers.EventLocationSerializer
-    user_id = 1     # TODO: Replace with authenticated user id later
+
+    @property
+    def user_id(self):
+        # TODO: Remove the default 1 when we add permission as IsAuthenticated
+        return 1 if self.request.user.is_anonymous else self.request.user.user_id
 
     def get_queryset(self):
         return models.EventLocation.objects.filter(user_id=self.user_id)

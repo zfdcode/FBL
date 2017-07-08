@@ -36,7 +36,7 @@ class UserFoodPreferenceView(
     create_serializer_class = serializers.UserFoodPreferenceSerializer
 
     def get_queryset(self):
-        return models.FoodPreference.objects.filter(users__user_id=self.get_user_id())
+        return models.FoodPreference.objects.filter(users__user_id=self.user_id)
 
     @property
     def user_id(self):
@@ -55,5 +55,5 @@ class UserFoodPreferenceView(
         )
 
     def perform_create(self, serializer):
-        serializer.save(user_id=self.get_user_id())
+        serializer.save(user_id=self.user_id)
 

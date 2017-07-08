@@ -223,3 +223,13 @@ class EventLocationView(
 
     def perform_create(self, serializer):
         serializer.save(user_id=self.user_id)
+
+
+class CampusView(
+    mixins.ListModelMixin,
+    mixins.RetrieveModelMixin,
+    common_views.BaseGenericViewSet
+):
+    model = models.Campus
+    serializer_class = serializers.CampusSerializer
+    queryset = models.Campus.objects.all()

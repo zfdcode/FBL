@@ -1,16 +1,30 @@
 from rest_framework import serializers
-from events.models import Event, EventLocation, EventShoppingItem, EventMessage, EventPreference, EventUser
+from events import models
 from users import (
     serializers as user_serializers
 )
 
 
+class CampusSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = models.Campus
+        fields = ('id', 'name', 'description')
+        read_only_fields = ('id', 'name', 'description')
+
+
 class EventLocationSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = EventLocation
-        fields = ('id', 'name', 'description', 'is_public', 'created_at')
+        model = models.EventLocation
+        fields = ('id', 'name', 'description', 'is_public', 'created_at', 'campus')
         read_only_fields = ('id', 'created_at', 'modified_at', 'is_public')
+
+    def to_representation(self, instance):
+        data = super(EventLocationSerializer, self).to_representation(instance)
+        if instance.campus:
+            data['campus'] = CampusSerializer(instance=instance.campus).data
+        return data
 
     def save(self, **kwargs):
         self._validated_data.update({
@@ -22,7 +36,7 @@ class EventLocationSerializer(serializers.ModelSerializer):
 class EventShoppingItemSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = EventShoppingItem
+        model = models.EventShoppingItem
         fields = ('id', 'name', 'created_at', 'event')
         read_only_fields = ('id', 'created_at', 'modified_at')
 
@@ -35,7 +49,7 @@ class EventShoppingItemSerializer(serializers.ModelSerializer):
 class EventMealSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = EventShoppingItem
+        model = models.EventShoppingItem
         fields = ('id', 'name', 'created_at', 'event')
         read_only_fields = ('id', 'created_at', 'modified_at')
 
@@ -48,7 +62,7 @@ class EventMealSerializer(serializers.ModelSerializer):
 class EventMessageSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = EventMessage
+        model = models.EventMessage
         fields = ('id', 'text', 'user_id', 'event')
         read_only_fields = ('id', 'created_at', 'modified_at')
 
@@ -60,7 +74,7 @@ class EventMessageSerializer(serializers.ModelSerializer):
 
 class EventPreferenceSerializer(serializers.ModelSerializer):
     class Meta:
-        model = EventPreference
+        model = models.EventPreference
 
     def to_representation(self, instance):
         return user_serializers.FoodPreferenceSerializer(instance=instance.food_preference).data
@@ -69,7 +83,7 @@ class EventPreferenceSerializer(serializers.ModelSerializer):
 class EventUserSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = EventUser
+        model = models.EventUser
         fields = ('event', 'user_id')
 
     def to_representation(self, instance):
@@ -83,7 +97,7 @@ class EventUserSerializer(serializers.ModelSerializer):
 class EventSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = Event
+        model = models.Event
         fields = ('id', 'title', 'description', 'start_at', 'end_at', 'created_at', 'capacity', 'user_id', 'location')
         read_only_fields = ('id', 'created_at', 'user_id')
 

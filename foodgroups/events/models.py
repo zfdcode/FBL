@@ -1,6 +1,21 @@
 from django.db import models
-
 from datetime import datetime
+
+
+class Campus(models.Model):
+    """
+    A campus will represent a university campus e.g. TUM Main Campus, TUM Garching campus
+    """
+    name = models.CharField(max_length=100)
+    description = models.TextField(blank=True)
+    created_at = models.DateTimeField(default=datetime.now)
+    modified_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name_plural = "Campuses"
+
+    def __str__(self):
+        return self.name
 
 
 class EventLocation(models.Model):
@@ -11,6 +26,7 @@ class EventLocation(models.Model):
     Private location: User's private Kitchen
     """
     name = models.CharField(max_length=100)
+    campus = models.ForeignKey(Campus, null=True, blank=True, help_text="Campus of the University")
     description = models.TextField(blank=True)
     is_public = models.BooleanField(default=False)
     created_at = models.DateTimeField(default=datetime.now)

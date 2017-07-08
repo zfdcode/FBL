@@ -34,9 +34,14 @@ class EventAdmin(admin.ModelAdmin):
 
 
 class EventLocationAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'is_public')
+    list_display = ('id', 'name', 'is_public', 'campus')
+
+
+class CampusAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name')
 
 
 # Register your models here.
 admin.site.register(models.Event, EventAdmin)
+admin.site.register(models.Campus, CampusAdmin)
 admin.site.register(models.EventLocation, EventLocationAdmin)

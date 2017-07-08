@@ -42,6 +42,8 @@ class UserFoodPreferenceSerializer(serializers.Serializer):
 
     def save(self, **kwargs):
         user_id = kwargs.get('user_id')
+        # Delete old preferences and add new ones
+        UserFoodPreference.objects.filter(user_id=user_id).delete()
         for preference in self.data.get('preferences', ()):
             try:
                 food_pref = FoodPreference.objects.get(slug=preference['slug'])

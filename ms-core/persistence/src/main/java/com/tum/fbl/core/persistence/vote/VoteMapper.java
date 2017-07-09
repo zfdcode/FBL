@@ -23,10 +23,9 @@ public class VoteMapper implements ResultSetMapper<Vote> {
     public Vote map(int index, ResultSet r, StatementContext ctx) throws SQLException {
         return new Vote(
                 r.getInt("voteId"),
-                r.getInt("ingredientId"),
-                r.getInt("votingId"),
+                r.getInt("votingIngItemId"),
                 r.getInt("userId"),
-                r.getString("like"));
+                r.getString("type"));
     }
 
 }

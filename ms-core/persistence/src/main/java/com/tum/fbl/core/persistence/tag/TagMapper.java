@@ -24,7 +24,8 @@ public class TagMapper implements ResultSetMapper<Tag> {
     public Tag map(int index, ResultSet r, StatementContext ctx) throws SQLException {
         return new Tag(
                 r.getInt("tagId"),
-                r.getString("tagName"));
+                r.getString("tagName"),
+                r.getString("tagDescription"));
     }
 
 }

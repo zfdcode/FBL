@@ -8,15 +8,17 @@ public class IngredientTag {
     private int tagId;
 
     private String tagName;
+    private String tagDescription;
 
     /**
      * Constructs IngredientTag that specifies the features of the ingredient.
      * @param tagId unique ID of the tag
      * @param tagName name of the tag for users to recognize the feature of the ingredient
      */
-    public IngredientTag(int tagId, String tagName) {
+    public IngredientTag(int tagId, String tagName, String tagDescription) {
         this.tagId = tagId;
         this.tagName = tagName;
+        this.tagDescription = tagDescription;
     }
 
     /**
@@ -50,4 +52,21 @@ public class IngredientTag {
     public void setTagName(String tagName) {
         this.tagName = tagName;
     }
+
+    /**
+     * Gets tagDescription.
+     * @return tagDescription of the tag for users to recognize the meaning of the tag
+     */
+    public String getTagDescription() {
+        return tagDescription;
+    }
+
+    /**
+     * Sets tagDescription.
+     * @param tagDescription of the tag for users to recognize the meaning of the tag
+     */
+    public void setTagDescription(String tagDescription) {
+        this.tagDescription = tagDescription;
+    }
+
 }

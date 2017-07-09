@@ -25,9 +25,8 @@ public class Voting {
      * @param startDate the data when the voting activity starts
      * @param location the location where the voting activity takes place
      */
-    public Voting(int votingId, User createdBy, Date createdOn, Date startDate, String location) {
+    public Voting(int votingId, Date createdOn, Date startDate, String location) {
         this.votingId = votingId;
-        this.createdBy = createdBy;
         this.createdOn = createdOn;
         this.startDate = startDate;
         this.location = location;

@@ -13,11 +13,11 @@ import java.sql.SQLException;
 public class VotingMapper implements ResultSetMapper<Voting> {
 
     /**
-     * Maps voting data stored in db to Voting.
+     * Maps voting data stored in db to VotingOrderList.
      * @param index
      * @param r
      * @param ctx
-     * @return Voting
+     * @return VotingOrderList
      * @throws SQLException
      */
     @Override

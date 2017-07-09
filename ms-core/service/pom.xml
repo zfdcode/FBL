@@ -166,5 +166,10 @@
             <artifactId>local-env</artifactId>
             <version>0.1</version>
         </dependency>
+        <dependency>
+            <groupId>com.tum.fbl.core</groupId>
+            <artifactId>fitbit</artifactId>
+            <version>0.1</version>
+        </dependency>
     </dependencies>
 </project>

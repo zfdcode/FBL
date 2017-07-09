@@ -16,6 +16,7 @@
         <module>config</module>
         <module>imagestorage</module>
         <module>service</module>
+        <module>fitbit</module>
     </modules>
 
     <properties>

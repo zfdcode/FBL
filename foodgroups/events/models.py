@@ -118,7 +118,20 @@ class EventMeal(models.Model):
     """
     event = models.ForeignKey(Event, related_name='meals')
     user_id = models.CharField(max_length=20, verbose_name="Meal Creator",  help_text="Id of the Meal creator")
-    # meal_id = models.CharField(max_length=20, verbose_name="Meal Id", help_text="Id of the Global Meal")
+    meal_id = models.CharField(max_length=20, verbose_name="Meal Id", help_text="Id of the Global Meal")
     created_at = models.DateTimeField(default=datetime.now)
     modified_at = models.DateTimeField(auto_now=True)
     name = models.CharField(max_length=100)
+
+
+class EventMealVote(models.Model):
+    """
+    An Event Meal Vote represent a vote on the Meal
+    """
+    meal = models.ForeignKey(EventMeal, related_name="votes")
+    user_id = models.CharField(max_length=20, verbose_name="Meal Creator",  help_text="Id of the Meal creator")
+    created_at = models.DateTimeField(default=datetime.now)
+    modified_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        unique_together = ('user_id', 'meal')

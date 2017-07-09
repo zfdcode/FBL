@@ -122,9 +122,7 @@ class EventView(
             data = request.data.copy()
             data['user_id'] = self.user_id
             data['event'] = event_obj.id
-            print(data)
             messages_serializer = self.messages_serializer_class(data=data)
-            print(messages_serializer.initial_data)
             messages_serializer.is_valid(raise_exception=True)
             event_message = messages_serializer.save()
             return Response(
@@ -147,7 +145,7 @@ class EventView(
             data = request.data.copy()
             data['user_id'] = self.user_id
             data['event'] = event_obj.id
-            meals_serializer = self.messages_serializer_class(data=data)
+            meals_serializer = self.meals_serializer_class(data=data)
             meals_serializer.is_valid(raise_exception=True)
             event_meal = meals_serializer.save()
             return Response(
@@ -170,7 +168,7 @@ class EventView(
             data = request.data.copy()
             data['user_id'] = self.user_id
             data['event'] = event_obj.id
-            shoppingitems_serializer = self.messages_serializer_class(data=data)
+            shoppingitems_serializer = self.shoppingitems_serializer_class(data=data)
             shoppingitems_serializer.is_valid(raise_exception=True)
             event_shoppingitem = shoppingitems_serializer.save()
             return Response(
@@ -190,6 +188,61 @@ class EventView(
             'is_list': self.action == 'list' or self.action == 'all',
         })
         return context
+
+
+class EventMessageView(
+    mixins.RetrieveModelMixin,
+    mixins.DestroyModelMixin,
+    common_views.BaseGenericViewSet
+):
+    model = models.EventMessage
+    serializer_class = serializers.EventMessageSerializer
+    queryset = models.EventMessage.objects.all()
+
+
+class EventShoppingItemView(
+    mixins.RetrieveModelMixin,
+    mixins.DestroyModelMixin,
+    common_views.BaseGenericViewSet
+):
+    model = models.EventShoppingItem
+    serializer_class = serializers.EventShoppingItemSerializer
+    queryset = models.EventShoppingItem.objects.all()
+
+
+class EventMealView(
+    mixins.RetrieveModelMixin,
+    mixins.DestroyModelMixin,
+    common_views.BaseGenericViewSet
+):
+    model = models.EventMeal
+    serializer_class = serializers.EventMealSerializer
+    vote_serializer_class = serializers.EventMealVoteSerializer
+    queryset = models.EventMeal.objects.all()
+
+    @property
+    def user_id(self):
+        # TODO: Remove the default 1 when we add permission as IsAuthenticated
+        return 1 if self.request.user.is_anonymous else self.request.user.user_id
+
+    @detail_route(methods=['post'])
+    def vote(self, request, *args, **kwargs):
+        """
+        User Vote/DeVote on a meal
+        Returns Meal Object
+        """
+        meal_obj = self.get_object()
+        save_data = {
+            'user_id': self.user_id,
+            'meal_obj': meal_obj
+        }
+        vote_serializer = self.vote_serializer_class(data=self.request.data)
+        vote_serializer.is_valid(raise_exception=True)
+        vote_serializer.save(**save_data)
+
+        return Response(
+            self.serializer_class(instance=meal_obj).data,
+        )
 
 
 class EventLocationView(

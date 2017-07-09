@@ -50,14 +50,34 @@ class EventShoppingItemSerializer(serializers.ModelSerializer):
 class EventMealSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = models.EventShoppingItem
-        fields = ('id', 'name', 'created_at', 'event')
+        model = models.EventMeal
+        fields = ('id', 'name', 'created_at', 'event', 'meal_id')
         read_only_fields = ('id', 'created_at', 'modified_at')
 
     def to_representation(self, instance):
         data = super(EventMealSerializer, self).to_representation(instance)
         data['creator'] = user_serializers.UserSerializer(instance=instance.user_id).data
+        data['voters'] = user_serializers.UserSerializer(
+            instance=instance.votes.values_list('user_id', flat=True),
+            many=True
+        ).data
+        data['votes'] = len(data['voters'])
         return data
+
+
+class EventMealVoteSerializer(serializers.Serializer):
+    vote = fields.BooleanField(required=True)
+
+    def save(self, **kwargs):
+        meal_obj = kwargs.pop('meal_obj')
+        user_id = kwargs.pop('user_id')
+        if self.validated_data.get('vote'):
+            # Create Vote
+            meal_obj.votes.create(user_id=user_id)
+        else:
+            # Delete Vote
+            meal_obj.votes.filter(user_id=user_id).delete()
+        return meal_obj
 
 
 class EventMessageSerializer(serializers.ModelSerializer):
@@ -128,7 +148,7 @@ class EventSerializer(serializers.ModelSerializer):
             data['num_members'] = len(data['members'])
             data['shoppingitems'] = EventShoppingItemSerializer(instance=instance.shop_items.all(), many=True).data
             data['meals'] = EventShoppingItemSerializer(instance=instance.meals.all(), many=True).data
-            data['messages'] = EventShoppingItemSerializer(instance=instance.shop_items.all(), many=True).data
+            data['messages'] = EventMessageSerializer(instance=instance.messages.all(), many=True).data
 
         data['preferences'] = EventPreferenceSerializer(
             instance=instance.preferences.all(),

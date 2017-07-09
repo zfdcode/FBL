@@ -41,6 +41,7 @@ class EventView(
     mixins.RetrieveModelMixin,
     mixins.CreateModelMixin,
     mixins.UpdateModelMixin,
+    mixins.DestroyModelMixin,
     common_views.BaseGenericViewSet
 ):
     """

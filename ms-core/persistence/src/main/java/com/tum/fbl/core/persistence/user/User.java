@@ -25,9 +25,13 @@ public class User {
 
     private String restaurantAddress;
 
+    private float longitude;
+
+    private float latitude;
+
     private String role;
 
-    public User(int userId, String userName, String userPassword, String email, Date birthday, int height, int weight, String displayName, String restaurantAddress, String role) {
+    public User(int userId, String userName, String userPassword, String email, Date birthday, int height, int weight, String displayName, String restaurantAddress, float longitude, float latitude, String role) {
         this.userId = userId;
         this.userName = userName;
         this.userPassword = userPassword;
@@ -37,6 +41,8 @@ public class User {
         this.weight = weight;
         DisplayName = displayName;
         this.restaurantAddress = restaurantAddress;
+        this.longitude = longitude;
+        this.latitude = latitude;
         this.role = role;
     }
 
@@ -110,6 +116,22 @@ public class User {
 
     public void setRestaurantAddress(String restaurantAddress) {
         this.restaurantAddress = restaurantAddress;
+    }
+
+    public float getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(float longitude) {
+        this.longitude = longitude;
+    }
+
+    public float getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(float latitude) {
+        this.latitude = latitude;
     }
 
     public String getRole() {

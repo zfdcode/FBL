@@ -6,7 +6,6 @@ package com.tum.fbl.core.bdo;
 
 public class IngredientTag {
     private int tagId;
-
     private String tagName;
     private String tagDescription;
 

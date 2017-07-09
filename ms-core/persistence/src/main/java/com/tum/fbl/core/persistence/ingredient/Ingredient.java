@@ -8,7 +8,7 @@ public class Ingredient {
 
     private String description;
 
-    private byte[] ingredientImage;
+    private String ingredientImage;
 
     private float energy;
 
@@ -18,11 +18,9 @@ public class Ingredient {
 
     private float totalCarbohydrate;
 
-    private String[] tag;
-
     private boolean isGarnish;
 
-    public Ingredient(int ingredientId, String ingredientName, String description, byte[] ingredientImage, float energy, float totalFat, float protein, float totalCarbohydrate, boolean isGarnish) {
+    public Ingredient(int ingredientId, String ingredientName, String description, String ingredientImage, float energy, float totalFat, float protein, float totalCarbohydrate, boolean isGarnish) {
         this.ingredientId = ingredientId;
         this.ingredientName = ingredientName;
         this.description = description;
@@ -58,11 +56,11 @@ public class Ingredient {
         this.description = description;
     }
 
-    public byte[] getIngredientImage() {
+    public String getIngredientImage() {
         return ingredientImage;
     }
 
-    public void setIngredientImage(byte[] ingredientImage) {
+    public void setIngredientImage(String ingredientImage) {
         this.ingredientImage = ingredientImage;
     }
 
@@ -98,15 +96,11 @@ public class Ingredient {
         this.totalCarbohydrate = totalCarbohydrate;
     }
 
-    public String[] getTag() {
-        return tag;
+    public boolean isGarnish() {
+        return isGarnish;
     }
 
-    public void setTag(String[] tag) {
-        this.tag = tag;
+    public void setGarnish(boolean garnish) {
+        isGarnish = garnish;
     }
-
-    public boolean getIsGarnish() {return isGarnish;}
-
-    public void setIsGarnish(boolean isGarnish){ this.isGarnish = isGarnish;}
 }

@@ -42,6 +42,7 @@ public class HealthDataResource {
         try (HealthDataDao healthDataDao = this.connectionFactory.getConnection().open(HealthDataDao.class)) {
             com.tum.fbl.core.persistence.healthdata.HealthData healthData = healthDataDao.findHealthDataById(userId);
 
+            /*
             return new HealthData(
                     healthData.getUserId(),
                     healthData.getDeviceUserPassword(),
@@ -52,8 +53,13 @@ public class HealthDataResource {
                     healthData.getTrackedCaloriesTimeRange(),
                     healthData.getAverageHeartbeatTimeRange()
             );
-        }
 
+        }
+        */
+
+            return null;
+
+        }
     }
 
     /**
@@ -77,6 +83,8 @@ public class HealthDataResource {
     @POST
     @ApiOperation(value = "Add a new healthData to the store")
     public void addHealthData(HealthData healthData) {
+
+        /*
         try (HealthDataDao healthDataDao = this.connectionFactory.getConnection().open(HealthDataDao.class)){
             healthDataDao.newHealthData(
                     healthData.getUserId(),
@@ -89,6 +97,8 @@ public class HealthDataResource {
                     healthData.getAverageHeartbeatTimeRange()
             );
         }
+        */
+
     }
 
     /**

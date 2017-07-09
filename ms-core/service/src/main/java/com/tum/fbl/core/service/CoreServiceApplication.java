@@ -104,8 +104,8 @@ public class CoreServiceApplication extends Application<CoreServiceConfiguration
         final RatingResource ratingResource = new RatingResource(connectionFactory);
         environment.jersey().register(ratingResource);
 
-        final SpecialNeedResource specialNeedResource = new SpecialNeedResource(connectionFactory);
-        environment.jersey().register(specialNeedResource);
+        final CategoryResource categoryResource = new CategoryResource(connectionFactory);
+        environment.jersey().register(categoryResource);
 
         final UserResource userResource = new UserResource(connectionFactory);
         environment.jersey().register(userResource);

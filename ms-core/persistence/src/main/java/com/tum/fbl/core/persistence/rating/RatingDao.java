@@ -19,7 +19,7 @@ public interface RatingDao extends AutoCloseable{
     @SqlUpdate("Insert into rating (userId, mealId, ratingTimestamp, rating) value (:userId, :mealId, :ratingTimestamp, :rating)")
     void newRating(@Bind("userId") int userId,
                   @Bind("mealId") int mealId,
-                   @Bind("ratingTimestamp") Date ratingTimestamp,
+                  @Bind("ratingTimestamp") Date ratingTimestamp,
                   @Bind("rating") boolean rating);
 
     @SqlUpdate("delete from rating where ratingId = :id")

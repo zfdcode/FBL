@@ -20,6 +20,10 @@ public class Restaurant {
 
     private String restaurantAddress;
 
+    private float longitude;
+
+    private float latitude;
+
     private Date[] restaurantOpeningHourMonday;
 
     private Date[] restaurantOpeningHourTuesday;
@@ -50,13 +54,15 @@ public class Restaurant {
      * @param restaurantOpeningHourSaturday opening hours of the restaurant on Saturday
      * @param restaurantOpeningHourSunday opening hours of the restaurant on Sunday
      */
-    public Restaurant(int restaurantId, String restaurantPassword, String restaurantName, String restaurantEmail, String restaurantDisplayName, String restaurantAddress, Date[] restaurantOpeningHourMonday, Date[] restaurantOpeningHourTuesday, Date[] restaurantOpeningHourWednesday, Date[] restaurantOpeningHourThursday, Date[] restaurantOpeningHourFriday, Date[] restaurantOpeningHourSaturday, Date[] restaurantOpeningHourSunday) {
+    public Restaurant(int restaurantId, String restaurantPassword, String restaurantName, String restaurantEmail, String restaurantDisplayName, String restaurantAddress, float longitude, float latitude, Date[] restaurantOpeningHourMonday, Date[] restaurantOpeningHourTuesday, Date[] restaurantOpeningHourWednesday, Date[] restaurantOpeningHourThursday, Date[] restaurantOpeningHourFriday, Date[] restaurantOpeningHourSaturday, Date[] restaurantOpeningHourSunday) {
         this.restaurantId = restaurantId;
         this.restaurantPassword = restaurantPassword;
         this.restaurantName = restaurantName;
         this.restaurantEmail = restaurantEmail;
         this.restaurantDisplayName = restaurantDisplayName;
         this.restaurantAddress = restaurantAddress;
+        this.longitude = longitude;
+        this.latitude = latitude;
         this.restaurantOpeningHourMonday = restaurantOpeningHourMonday;
         this.restaurantOpeningHourTuesday = restaurantOpeningHourTuesday;
         this.restaurantOpeningHourWednesday = restaurantOpeningHourWednesday;
@@ -160,6 +166,22 @@ public class Restaurant {
      */
     public void setRestaurantAddress(String restaurantAddress) {
         this.restaurantAddress = restaurantAddress;
+    }
+
+    public float getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(float longitude) {
+        this.longitude = longitude;
+    }
+
+    public float getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(float latitude) {
+        this.latitude = latitude;
     }
 
     /**

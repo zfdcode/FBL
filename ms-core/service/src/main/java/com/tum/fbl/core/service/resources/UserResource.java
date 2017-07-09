@@ -87,6 +87,8 @@ public class UserResource {
                     user.getWeight(),
                     user.getDisplayName(),
                     user.getRestaurantAddress(),
+                    0,
+                    0,
                     user.getRole()
             );
         }
@@ -110,6 +112,8 @@ public class UserResource {
                     user.getWeight(),
                     user.getDisplayName(),
                     user.getRestaurantAddress(),
+                    0,
+                    0,
                     user.getRole()
             );
         }

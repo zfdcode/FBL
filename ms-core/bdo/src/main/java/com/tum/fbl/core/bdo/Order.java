@@ -13,26 +13,31 @@ public class Order {
 
     private User orderUser;
 
-    private List<Meal> orderMeals;
+    private Meal[] orderMeals;
 
     private Date orderPickupTime;
 
-    private String orderStatus;
+    private int orderStatus;
+
+    private int orderNumber;
+
+
 
     /**
      * Constructs Order that is made by users with meal choices, pickup time and order status.
      * @param orderId unique ID of the order
      * @param orderUser user who makes the order
-     * @param orderMeal meal choices of the order
+     * @param orderMeals meal choices of the order
      * @param orderPickupTime pickup time of the order that are preferred by the user
      * @param orderStatus status of the order
      */
-    public Order(int orderId, User orderUser, Meal orderMeal, Date orderPickupTime, int orderStatus) {
+    public Order(int orderId, User orderUser, Meal[] orderMeals, Date orderPickupTime, int orderStatus, int orderNumber) {
         this.orderId = orderId;
         this.orderUser = orderUser;
         this.orderMeals = orderMeals;
         this.orderPickupTime = orderPickupTime;
         this.orderStatus = orderStatus;
+        this.orderNumber = orderNumber;
     }
 
     /**
@@ -68,18 +73,18 @@ public class Order {
     }
 
     /**
-     * Gets OrderMeals.
-     * @return orderMeal meals choices of the order
+     * Gets OrderMeal.
+     * @return orderMeals meals choices of the order
      */
-    public List<Meal> getOrderMeals() {
+    public Meal[] getOrderMeal() {
         return orderMeals;
     }
 
     /**
-     * Sets OrderMeals.
-     * @param orderMeal meal choices of the order
+     * Sets OrderMeal.
+     * @param orderMeals meal choices of the order
      */
-    public void setOrderMeals(List<Meal> orderMeals) {
+    public void setOrderMeal(Meal[] orderMeals) {
         this.orderMeals = orderMeals;
     }
 
@@ -114,5 +119,15 @@ public class Order {
     public void setOrderStatus(int orderStatus) {
         this.orderStatus = orderStatus;
     }
+
+    public int getOrderNumber() {
+        return orderNumber;
+    }
+
+    public void setOrderNumber(int orderNumber) {
+        this.orderNumber = orderNumber;
+    }
 }
+
+
 

@@ -43,13 +43,7 @@ public class VoteResource {
         try (VoteDao voteDao=this.connectionFactory.getConnection().open(VoteDao.class)) {
             com.tum.fbl.core.persistence.vote.Vote vote = voteDao.findVoteById(voteId);
 
-            return new Vote(
-                    vote.getVoteId(),
-                    vote.getIngredientId(),
-                    vote.getVotingId(),
-                    vote.getUserId(),
-                    vote.getLike()
-            );
+            return null;
         }
     }
 }

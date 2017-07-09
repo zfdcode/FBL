@@ -25,9 +25,10 @@ public class OrderMapper implements ResultSetMapper<Order> {
         return new Order(
                 r.getInt("orderId"),
                 r.getInt("orderUserId"),
-                r.getInt("orderMealId"),
                 r.getDate("orderPickupTime"),
-                r.getInt("orderStatus"));
+                r.getInt("orderStatus"),
+                r.getInt("orderNumber")
+                );
     }
 
 }

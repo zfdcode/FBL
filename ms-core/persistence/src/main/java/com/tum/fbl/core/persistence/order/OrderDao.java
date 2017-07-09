@@ -17,11 +17,11 @@ public interface OrderDao extends AutoCloseable{
     @SqlQuery("select * from order where orderId = :id")
     Order findOrderById(@Bind("id") int orderId);
 
-    @SqlUpdate("Insert into ingredient (orderUserId, orderMealIds, orderPickupTime, orderStatus) value (:orderUserId, :orderMealIds, :orderPickupTime, :orderStatus)")
+    @SqlUpdate("Insert into ingredient (orderUserId, orderPickupTime, orderStatus, orderNumber) value (:orderUserId, :orderPickupTime, :orderStatus, :orderNumber)")
     void newOrder(@Bind("orderUserId") int orderUserId,
-                  @Bind("orderMealId") int[] orderMealIds,
                   @Bind("orderPickupTime") Date orderPickupTime,
-                  @Bind("orderStatus") int orderStatus);
+                  @Bind("orderStatus") int orderStatus,
+                  @Bind("orderNumber") int orderNumber);
 
     @SqlUpdate("delete from order where orderId = :id")
     void deleteOrderById(@Bind("id") int orderId);

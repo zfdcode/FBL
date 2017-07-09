@@ -40,11 +40,16 @@ public class IngredientResource {
     @Path("/all")
     @ApiOperation(value = "Get all offered ingredients")
     public List<Ingredient> getAllIngredients() {
+        /*
         try (IngredientDao ingredientDao = this.connectionFactory.getConnection().open(IngredientDao.class)) {
             List<com.tum.fbl.core.persistence.ingredient.Ingredient> ingredients = ingredientDao.findIngredients();
             //TODO: return List<Ingredient>
             return null;
         }
+
+        */
+
+        return null;
     }
 
     /**
@@ -56,6 +61,7 @@ public class IngredientResource {
     @Path("/id/{ingredientId}")
     @ApiOperation(value = "Get information of a ingredient")
     public Ingredient getIngredient(@PathParam("ingredientId") int ingredientId) {
+        /*
         try (IngredientDao ingredientDao = this.connectionFactory.getConnection().open(IngredientDao.class)) {
             com.tum.fbl.core.persistence.ingredient.Ingredient ingredient = ingredientDao.findIngredientById(ingredientId);
             return new Ingredient(
@@ -70,6 +76,8 @@ public class IngredientResource {
                     ingredient.getTag()
             );
         }
+        */
+        return null;
 
     }
 
@@ -105,6 +113,7 @@ public class IngredientResource {
     @POST
     @ApiOperation(value = "Add a new ingredient to the store")
     public void addIngredient(Ingredient ingredient) {
+        /*
         try (IngredientDao ingredientDao = this.connectionFactory.getConnection().open(IngredientDao.class)) {
             ingredientDao.newIngredient(
                     ingredient.getIngredientName(),
@@ -117,6 +126,7 @@ public class IngredientResource {
                     ingredient.getTag()
             );
         }
+        */
     }
 
     /**

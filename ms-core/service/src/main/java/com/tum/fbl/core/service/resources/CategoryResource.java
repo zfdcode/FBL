@@ -1,6 +1,6 @@
 package com.tum.fbl.core.service.resources;
 
-import com.tum.fbl.core.bdo.SpecialNeed;
+import com.tum.fbl.core.bdo.Category;
 import com.tum.fbl.core.persistence.ConnectionFactory;
 import com.tum.fbl.core.service.auth.User;
 import io.dropwizard.auth.Auth;
@@ -13,11 +13,11 @@ import java.util.List;
 /**
  * Created by zfngd on 2017/6/15.
  */
-@Path("/specialNeed")
+@Path("/category")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-@Api(value = "special need API", description = "Provides special needs.")
-public class SpecialNeedResource {
+@Api(value = "Category API", description = "Provides meal categories.")
+public class CategoryResource {
 
     private final ConnectionFactory connectionFactory;
 
@@ -25,59 +25,59 @@ public class SpecialNeedResource {
      * Connects to the factory for speacial need resource.
      * @param connectionFactory the connection of factory
      */
-    public SpecialNeedResource (ConnectionFactory connectionFactory) {
+    public CategoryResource(ConnectionFactory connectionFactory) {
         this.connectionFactory = connectionFactory;
     }
 
     /**
      * Gets all special needs.
-     * @return List<SpecialNeed> the list of special needs
+     * @return List<Category> the list of special needs
      */
     @GET
     @Path("/all")
-    @ApiOperation(value = "Get all offered specialNeeds")
-    public List<SpecialNeed> getAllSpecialNeeds() {
+    @ApiOperation(value = "Get all offered categories")
+    public List<Category> getAllCategorys() {
         return null;
     }
 
     /**
      * Gets special need.
-     * @param specialNeedId the special need id
-     * @return SpecialNeed the speical need
+     * @param categoryId the special need id
+     * @return Category the speical need
      */
     @GET
-    @Path("/{specialNeedId}")
-    @ApiOperation(value = "Get information of a specialNeed")
-    public SpecialNeed getSpecialNeed(@PathParam("specialNeedId") int specialNeedId){
+    @Path("/{categoryId}")
+    @ApiOperation(value = "Get information of a category")
+    public Category getCategory(@PathParam("categoryId") int categoryId){
         return null;
     }
 
     /**
      * Deletes special need.
-     * @param specialNeedId the special need id
+     * @param categoryId the special need id
      */
     @DELETE
-    @Path("/{specialNeedId}")
+    @Path("/{categoryId}")
     @ApiOperation(value = "Deletes a special need")
-    public void deleteSpecialNeed(@PathParam("specialNeedId") int specialNeedId) {
+    public void deleteCategory(@PathParam("categoryId") int categoryId) {
 
     }
 
     /**
      * Adds special need.
-     * @param specialNeed the speical need
+     * @param category the speical need
      */
     @ApiOperation(value = "Add a new special need to the store")
-    public void addSpecialNeed(SpecialNeed specialNeed) {
+    public void addCategory(Category category) {
     }
 
     /**
      * Updates special need.
-     * @param specialNeed the special need
+     * @param category the special need
      */
     @PUT
     @ApiOperation(value = "Update an existing special need")
-    public void updateSpecialNeed(SpecialNeed specialNeed) {
+    public void updateCategory(Category category) {
     }
 
 

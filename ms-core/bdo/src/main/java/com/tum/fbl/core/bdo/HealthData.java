@@ -6,7 +6,7 @@ package com.tum.fbl.core.bdo;
  */
 public class HealthData {
 
-    private int userId;
+    private int user;
 
     private String deviceUserPassword;
 
@@ -19,6 +19,8 @@ public class HealthData {
     private float trackedCalorieToday;
 
     private float trackedCaloriesTimeRange;
+
+    private float calorieGoal;
 
     private int averageHeartbeatTimeRange;
 
@@ -34,7 +36,7 @@ public class HealthData {
      * @param averageHeartbeatTimeRange average heart beat of the user wearing the wearable device within a certain time range
      */
 
-    public HealthData(User user, String deviceUserPassword, int deviceUserId, int currentHearthbeat, int heartbeatTimeRange, float trackedCalorieToday, float trackedCaloriesTimeRange, int averageHeartbeatTimeRange) {
+    public HealthData(int user, String deviceUserPassword, int deviceUserId, float currentHearthbeat, int heartbeatTimeRange, float trackedCalorieToday, float trackedCaloriesTimeRange, float calorieGoal, int averageHeartbeatTimeRange) {
         this.user = user;
         this.deviceUserPassword = deviceUserPassword;
         this.deviceUserId = deviceUserId;
@@ -42,6 +44,7 @@ public class HealthData {
         this.heartbeatTimeRange = heartbeatTimeRange;
         this.trackedCalorieToday = trackedCalorieToday;
         this.trackedCaloriesTimeRange = trackedCaloriesTimeRange;
+        this.calorieGoal = calorieGoal;
         this.averageHeartbeatTimeRange = averageHeartbeatTimeRange;
     }
 
@@ -49,7 +52,7 @@ public class HealthData {
      * Gets User.
      * @return user the user connected with the device
      */
-    public User getUser() {
+    public int getUser() {
         return user;
     }
 
@@ -57,7 +60,7 @@ public class HealthData {
      * Sets the user profile.
      * @param user the user connected with the device
      */
-    public void setUser(User user) {
+    public void setUser(int user) {
         this.user = user;
     }
 
@@ -97,7 +100,7 @@ public class HealthData {
      * Gets CurrentHearthbeat.
      * @return currentHearthbeat real-time heart beat of the user wearing the wearable device
      */
-    public int getCurrentHearthbeat() {
+    public float getCurrentHearthbeat() {
         return currentHearthbeat;
     }
 
@@ -155,6 +158,18 @@ public class HealthData {
      */
     public void setTrackedCaloriesTimeRange(float trackedCaloriesTimeRange) {
         this.trackedCaloriesTimeRange = trackedCaloriesTimeRange;
+    }
+
+    public void setCurrentHearthbeat(float currentHearthbeat) {
+        this.currentHearthbeat = currentHearthbeat;
+    }
+
+    public float getCalorieGoal() {
+        return calorieGoal;
+    }
+
+    public void setCalorieGoal(float calorieGoal) {
+        this.calorieGoal = calorieGoal;
     }
 
     /**

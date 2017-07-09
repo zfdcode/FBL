@@ -44,7 +44,7 @@ public class MealResource {
      * Connects to the factory for meal resource.
      * @param connectionFactory the connection of factory
      */
-    public MealResource(ConnectionFactory connectionFactory) {
+    public MealResource(ConnectionFactory connectionFactory, ImageUploadConfiguration imageUploadConfiguration) {
         this.connectionFactory = connectionFactory;
 
         this.imageStorage = new ImageStorageImpl(imageUploadConfiguration);
@@ -98,6 +98,7 @@ public class MealResource {
     @ApiOperation(value = "Get information of a meal")
     public Meal getMeal(@PathParam("mealId") int mealId) {
 
+        /*
         try (MealDao mealDao = this.connectionFactory.getConnection().open(MealDao.class)) {
             com.tum.fbl.core.persistence.meal.Meal meal = mealDao.findMealById(mealId);
             return new Meal(
@@ -120,7 +121,9 @@ public class MealResource {
                     null,
                     null
             );
-        }
+            */
+        return null;
+
     }
 
     /**
@@ -164,6 +167,8 @@ public class MealResource {
     @POST
     @ApiOperation(value = "Add a new meal to the store")
     public void addMeal(Meal meal) {
+
+        /*
         try (MealDao mealDao = this.connectionFactory.getConnection().open(MealDao.class)) {
             mealDao.newMeal(
                     meal.getMealName(),
@@ -181,6 +186,7 @@ public class MealResource {
                     meal.getMealSodium()
             );
         }
+        */
     }
 
     /**

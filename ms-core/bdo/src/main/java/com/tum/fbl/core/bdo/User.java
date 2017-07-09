@@ -176,6 +176,8 @@ public class User {
         this.restaurantAddress = restaurantAddress;
     }
 
+
+
     public String getRole() {
         return role;
     }

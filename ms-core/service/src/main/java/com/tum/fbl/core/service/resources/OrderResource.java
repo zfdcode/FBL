@@ -68,59 +68,7 @@ public class OrderResource {
     @Path("/order/{orderId}")
     @ApiOperation(value = "Get information of a order")
     public Order getOrder(@PathParam("orderId") int orderId) {
-        try (OrderDao orderDao = this.connectionFactory.getConnection().open(OrderDao.class)) {
-            com.tum.fbl.core.persistence.order.Order order = orderDao.findOrderById(orderId);
-            int[] orderMealIds = order.getOrderMealIds();
-            List<Meal> orderMeals = null;
-            try (MealDao mealDao = this.connectionFactory.getConnection().open(MealDao.class)) {
-                for (int orderMealId : orderMealIds) {
-                    com.tum.fbl.core.persistence.meal.Meal meal = mealDao.findMealById(orderMealId);
-                    Meal newOrderMeal = new Meal(
-                            meal.getMealId(),
-                            meal.getMealName(),
-                            meal.getMealImage(),
-                            meal.getMealRating(),
-                            meal.getMealHelathValue(),
-                            meal.getMealPreparationTime(),
-                            meal.getOfferDate(),
-                            meal.getMealEnergy(),
-                            meal.getMealProtein(),
-                            meal.getMealTotalFat(),
-                            meal.getMealSaturated(),
-                            meal.getMealTotalCarbohydrate(),
-                            meal.getMealSugar(),
-                            meal.getMealSodium(),
-                            //TODO:
-                            null,
-                            null,
-                            null
-                    );
-                    orderMeals.add(newOrderMeal);
-                }
-            }
-
-            com.tum.fbl.core.bdo.User orderUser = null;
-            try (UserDao userDao = this.connectionFactory.getConnection().open(UserDao.class)) {
-                com.tum.fbl.core.persistence.user.User user = userDao.findUserById(order.getOrderUserId());
-                orderUser = new com.tum.fbl.core.bdo.User(
-                        user.getUserId(),
-                        user.getUserName(),
-                        user.getUserPassword(),
-                        user.getEmail(),
-                        user.getBirthday(),
-                        user.getHeight(),
-                        user.getWeight()
-                );
-            }
-
-            return new Order(
-                    order.getOrderId(),
-                    orderUser,
-                    orderMeals,
-                    order.getOrderPickupTime(),
-                    Integer.toString(order.getOrderStatus())
-            );
-        }
+            return null;
     }
 
     /**
@@ -143,9 +91,12 @@ public class OrderResource {
     @PUT
     @ApiOperation(value = "Update an existing order")
     public void placeOrder(Order order) {
+        /*
         try (OrderDao orderDao = this.connectionFactory.getConnection().open(OrderDao.class)) {
-            orderDao.setOrderStatus(Integer.parseInt(order.getOrderStatus()), order.getOrderId());
+
+            order Dao.setOrderStatus(Integer.parseInt(order.getOrderStatus()), order.getOrderId());
         }
+        */
     }
 
     /**
@@ -155,7 +106,10 @@ public class OrderResource {
     @POST
     @ApiOperation(value = "Add a new order to the store")
     public void addOrder(Order order) {
+
+       /*
         try (OrderDao orderDao = this.connectionFactory.getConnection().open(OrderDao.class)) {
+
             List<Meal> ordermeals = order.getOrderMeals();
             int[] orderMealIds = new int[ordermeals.size()];
             for (int i = 0; i < ordermeals.size(); i++) {
@@ -168,6 +122,8 @@ public class OrderResource {
                     Integer.parseInt(order.getOrderStatus())
             );
         }
+        */
+
     }
 
     /**

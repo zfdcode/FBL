@@ -26,11 +26,13 @@ public class IngredientMapper implements ResultSetMapper<Ingredient> {
                 r.getInt("ingredientId"),
                 r.getString("ingredientName"),
                 r.getString("description"),
-                r.getBytes("ingredientImage"),
+                r.getString("ingredientImage"),
                 r.getFloat("energy"),
                 r.getFloat("totalFat"),
                 r.getFloat("protein"),
-                r.getFloat("totalCarbohydrate"));
+                r.getFloat("totalCarbohydrate"),
+                r.getBoolean("isGarnish")
+                );
     }
 
 }

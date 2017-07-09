@@ -17,7 +17,7 @@ public interface MealDao extends AutoCloseable{
     @SqlQuery("select * from meal where mealId = :id")
     Meal findMealById(@Bind("id") int id);
 
-    @SqlQuery("select * from meal where offerDate = :offerDate")
+    @SqlQuery("select * from meal natural left join (select * from Offerdate where offerDate = :offerDate)")
     List<Meal> getAllMealForDate(@Bind("offerDate") Date offerDate);
 
     @SqlUpdate("insert into meal ( mealName, mealImage, mealRating, mealHelathValue, mealPreparationTime, offerDate, mealEnergy, mealProtein, mealTotalFat, mealSaturated, mealTotalCarbohydrate, mealSugar, mealSodium) " +

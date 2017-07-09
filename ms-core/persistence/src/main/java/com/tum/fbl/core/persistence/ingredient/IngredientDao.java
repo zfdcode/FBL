@@ -20,16 +20,16 @@ public interface IngredientDao extends AutoCloseable {
     @SqlQuery("select * from ingredient")
     List<Ingredient> getAllIngredients();
 
-    @SqlUpdate("Insert into ingredient (ingredientName, description, ingredientImage, energy, totalFat, protein, totalCarbohydrate) " +
-            "value (:ingredientName, :description, :ingredientImage, :energy, :totalFat, :protein, :totalCarbohydrate, :tag)")
+    @SqlUpdate("Insert into ingredient (ingredientName, description, ingredientImage, energy, totalFat, protein, totalCarbohydrate, isGarnish) " +
+            "value (:ingredientName, :description, :ingredientImage, :energy, :totalFat, :protein, :totalCarbohydrate, :isGarnish)")
     void newIngredient(@Bind("ingredientName") String ingredientName,
                        @Bind("description") String description,
-                       @Bind("ingredientImage") byte[] ingredientImage,
+                       @Bind("ingredientImage") String ingredientImage,
                        @Bind("energy") float energy,
                        @Bind("totalFat") float totalFat,
                        @Bind("protein") float protein,
                        @Bind("totalCarbohydrate") float totalCarbohydrate,
-                       @Bind("tag") String[] tag);
+                       @Bind("isGarnish") boolean isGarnish);
 
     @SqlUpdate("delete from ingredient where ingredientId = :id")
     void deleteIngredientById(@Bind("id") int ingredientId);

@@ -19,7 +19,7 @@ public class Meal {
 
     private Date mealPreparationTime;
 
-    private Date offerDate;
+    private Date[] offerDates;
 
     private float mealEnergy;
 
@@ -42,14 +42,14 @@ public class Meal {
     private Rating[] mealRatings;
 
 
-    public Meal(int mealId, String mealName, String mealImage, float mealRating, int mealHelathValue, Date mealPreparationTime, float mealEnergy, float mealProtein, float mealTotalFat, float mealSaturated, float mealTotalCarbohydrate, float mealSugar, float mealSodium, Ingredient[] mealIngredints, Category[] mealCategories, Rating[] mealRatings) {
+    public Meal(int mealId, String mealName, String url, float mealRating, int mealHelathValue, Date mealPreparationTime, Date[] offerDates, float mealEnergy, float mealProtein, float mealTotalFat, float mealSaturated, float mealTotalCarbohydrate, float mealSugar, float mealSodium, Ingredient[] mealIngredints, Category[] mealCategories, Rating[] mealRatings) {
         this.mealId = mealId;
         this.mealName = mealName;
-        this.url = mealImage;
+        this.url = url;
         this.mealRating = mealRating;
         this.mealHelathValue = mealHelathValue;
         this.mealPreparationTime = mealPreparationTime;
-        this.offerDate = offerDate;
+        this.offerDates = offerDates;
         this.mealEnergy = mealEnergy;
         this.mealProtein = mealProtein;
         this.mealTotalFat = mealTotalFat;
@@ -57,9 +57,6 @@ public class Meal {
         this.mealTotalCarbohydrate = mealTotalCarbohydrate;
         this.mealSugar = mealSugar;
         this.mealSodium = mealSodium;
-        this.mealIngredints = mealIngredints;
-        this.mealCategories = mealCategories;
-        this.mealRatings = mealRatings;
         this.mealIngredints = mealIngredints;
         this.mealCategories = mealCategories;
         this.mealRatings = mealRatings;
@@ -85,7 +82,7 @@ public class Meal {
         return url;
     }
 
-    public void setUrl(byte[] mealImage) {
+    public void setUrl(String url) {
         this.url = url;
     }
 
@@ -111,6 +108,14 @@ public class Meal {
 
     public void setMealPreparationTime(Date mealPreparationTime) {
         this.mealPreparationTime = mealPreparationTime;
+    }
+
+    public Date[] getOfferDates() {
+        return offerDates;
+    }
+
+    public void setOfferDates(Date[] offerDates) {
+        this.offerDates = offerDates;
     }
 
     public float getMealEnergy() {
@@ -192,5 +197,4 @@ public class Meal {
     public void setMealRatings(Rating[] mealRatings) {
         this.mealRatings = mealRatings;
     }
-
 }

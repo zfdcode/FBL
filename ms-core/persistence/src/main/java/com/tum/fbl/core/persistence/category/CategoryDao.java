@@ -11,8 +11,11 @@ import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapper;
 @RegisterMapper(CategoryMapper.class)
 public interface CategoryDao extends AutoCloseable{
 
-    @SqlQuery("select * from category where categoryId = :id")
-    Category findCategoryById(@Bind("id") int categoryId);
+    @SqlQuery("select * from category c where categoryId = :id")
+    Category findCategoryById(@Bind("id") int userId);
+
+    @SqlQuery("select c.categoryId, c.categoryName, categoryDescription from (select * from UserCategory where userId = :id) natural join category c")
+    Category getCategoriesOfUser(@Bind("id") int categoryId);
 
     @SqlUpdate("Insert into ingredient (categoryName, categoryDescription) value (:categoryName, :categoryDescription)")
     void newCategory(@Bind("categoryName") String categoryName, @Bind("categoryDescription") String categoryDescription);

@@ -30,6 +30,7 @@ public class HealthDataMapper implements ResultSetMapper<HealthData> {
                 r.getInt("heartbeatTimeRange"),
                 r.getFloat("trackedCalorieToday"),
                 r.getFloat("trackedCalorieTimeRange"),
+                r.getFloat("calorieGoal"),
                 r.getInt("averageHeartbeatTimeRange"));
     }
 

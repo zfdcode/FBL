@@ -14,7 +14,7 @@ public class Rating {
 
     private Meal meal;
 
-    private boolean rate;
+    private float rate;
 
     private Date ratingTimestamp;
 

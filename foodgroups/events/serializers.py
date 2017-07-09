@@ -84,7 +84,7 @@ class EventMessageSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.EventMessage
-        fields = ('id', 'text', 'user_id', 'event')
+        fields = ('id', 'text', 'user_id', 'event', 'created_at')
         read_only_fields = ('id', 'created_at', 'modified_at')
 
     def to_representation(self, instance):
@@ -147,7 +147,7 @@ class EventSerializer(serializers.ModelSerializer):
             ).data
             data['num_members'] = len(data['members'])
             data['shoppingitems'] = EventShoppingItemSerializer(instance=instance.shop_items.all(), many=True).data
-            data['meals'] = EventShoppingItemSerializer(instance=instance.meals.all(), many=True).data
+            data['meals'] = EventMealSerializer(instance=instance.meals.all(), many=True).data
             data['messages'] = EventMessageSerializer(instance=instance.messages.all(), many=True).data
 
         data['preferences'] = EventPreferenceSerializer(

@@ -38,6 +38,12 @@
             <column name="address" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
+            <column name="longtitude" type="float">
+                <constraints nullable="false"/>
+            </column>
+            <column name="latitude" type="float">
+                <constraints nullable="false"/>
+            </column>
         </createTable>
 
         <createTable tableName="Schedules">
@@ -57,7 +63,7 @@
                 <constraints nullable="false"/>
             </column>
         </createTable>
-        
+
         <createTable tableName="Role">
             <column name="roleId" type="Int" autoIncrement="true">
                 <constraints nullable="false" primaryKey="true"/>
@@ -66,7 +72,7 @@
                 <constraints nullable="false"/>
             </column>
         </createTable>
-        
+
         <createTable tableName="UserMeal">
             <column name="userId" type="int">
                 <constraints nullable="false" primaryKey="true"/>
@@ -95,8 +101,18 @@
             <column name="status" type="int">
                 <constraints nullable="false"/>
             </column>
+            <column name="orderNumber" type="int">
+              <constraints nullable="false"/>
+            </column>
         </createTable>
-        
+
+        <createTable tableName="OrderMeal">
+            <column name="orderId" type="int">
+                <constraints nullable="false" primaryKey="true" />
+            </column>
+            <column name="mealId" type="int">
+                <constraints nullable="false" primaryKey="true"/>
+
         <createTable tableName="HealthTrackerData">
             <column name="userId" type="varchar(255)">
                 <constraints nullable="false" primaryKey="true"/>
@@ -123,7 +139,7 @@
                 <constraints nullable="false"/>
             </column>
         </createTable>
-        
+
         <createTable tableName="Rating">
             <column name="ratingId" type="int" autoIncrement="true">
                 <constraints nullable="false" primaryKey="true"/>
@@ -219,7 +235,7 @@
                 <constraints nullable="false"/>
             </column>
         </createTable>
-        
+
         <createTable tableName="UserCategory">
             <column name="userId" type="int">
                 <constraints nullable="false" primaryKey="true"/>
@@ -237,7 +253,7 @@
                 <constraints nullable="false"/>
             </column>
         </createTable>
-        
+
         <createTable tableName="MealCategory">
             <column name="mealId" type="int">
                 <constraints nullable="false" primaryKey="true"/>
@@ -246,7 +262,7 @@
                 <constraints nullable="false" primaryKey="true"/>
             </column>
         </createTable>
-        
+
         <createTable tableName="MealIngredient">
             <column name="mealId" type="int">
                 <constraints nullable="false" primaryKey="true"/>
@@ -255,7 +271,7 @@
                 <constraints nullable="false" primaryKey="true"/>
             </column>
         </createTable>
-        
+
         <createTable tableName="Ingredient">
             <column name="ingredientId" type="int" autoIncrement="true">
                 <constraints nullable="false" primaryKey="true"/>
@@ -282,24 +298,6 @@
                 <constraints nullable="false"/>
             </column>
         </createTable>
-        
-        <createTable tableName="IngredientComment">
-            <column name="ingredientId" type="int">
-                <constraints nullable="false" primaryKey="true"/>
-            </column>
-            <column name="commentId" type="int">
-                <constraints nullable="false" primaryKey="true"/>
-            </column>
-        </createTable>
-
-        <createTable tableName="Comment">
-            <column name="commentId" type="int" autoIncrement="true">
-                <constraints primaryKey="true" nullable="false"/>
-            </column>
-            <column name="comment" type="varchar(255)">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
 
         <createTable tableName="IngredientTag">
             <column name="ingredientId" type="int">
@@ -309,7 +307,7 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
         </createTable>
-        
+
         <createTable tableName="Tag">
             <column name="tagId" type="int">
                 <constraints primaryKey="true" nullable="false"/>
@@ -323,34 +321,61 @@
             <column name="voteId" type="int" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="ingredientId" type="int">
-                <constraints nullable="false"/>
-            </column>
-            <column name="votingId" type="int">
+            <column name="votingIngItemId" type="int">
                 <constraints nullable="false"/>
             </column>
             <column name="userId" type="int">
                 <constraints nullable="false"/>
             </column>
-            <column name="like" type="varchar(255)">
+            <column name="type" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
         </createTable>
-        
-        <createTable tableName="Voting">
-            <column name="votingId" type="int" autoIncrement="true">
+
+        <createTable tableName="VotingIngItem">
+            <column name="votingIngItemId" type="int" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="createdBy" type="varchar(255)">
+            <column name="votingPeriodId" type="int">
                 <constraints nullable="false"/>
             </column>
-            <column name="createdOn" type="datetime">
+            <column name="isIgnored" type="boolean">
                 <constraints nullable="false"/>
             </column>
-            <column name="startDate" type="datetime">
+            <column name="ingredientId" type="int">
                 <constraints nullable="false"/>
             </column>
-            <column name="location" type="varchar(255)">
+        </createTable>
+
+        <createTable tableName="VotingOrderList">
+            <column name="votingOrderListId" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="orderedAmount" type="float">
+                <constraints nullable="false"/>
+            </column>
+            <column name="orderedAt" type="DateTime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="votingPeriodId" type="int">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="VotingPeriod">
+            <column name="votingPeriodId" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="startTime" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="endTime" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="isFinished" type="boolean">
+                <constraints nullable="false"/>
+            </column>
+            <column name="calendarWeek" type="int">
                 <constraints nullable="false"/>
             </column>
         </createTable>

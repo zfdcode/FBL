@@ -32,4 +32,6 @@ public interface VotingPeriodDao extends AutoCloseable{
 
     @SqlUpdate("delete from votingPeriod where votingPeriodId = :id")
     void deleteVotingById(@Bind("id") int votingPeriodId);
+
+    void close();
 }

@@ -24,4 +24,6 @@ public interface VotingOrderListDao extends AutoCloseable{
 
     @SqlUpdate("delete from votingOrderList where votingOrderList = :id")
     void deleteVotingOrderListById(@Bind("id") int votingOrderListId);
+
+    void close();
 }

@@ -8,6 +8,12 @@ The service is locally running at port 8444 (http://localhost:8444).The Api can 
 # Building Docker container
 - "mvn package" or explicitly "mvn dockerfile:build"
 
+# Database 
+- checking database state: java -jar target/coreservice.jar db status config-local.json
+- migrating database schemata: java -jar target/coreservice.jar db migrate config-local.json
+- dumbing data: java -jar target/coreservice.jar db drop-all --confirm-delete-everything config-local.json
+- dumbing database schemata: java -jar target/coreservice.jar db dump config-local.json
+
 # Documentation of the core libraries
 - Dropwizard: http://dropwizard.io
 - Swagger: http://swagger.io

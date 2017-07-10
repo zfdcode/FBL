@@ -24,8 +24,6 @@ public class User {
 
     private String DisplayName;
 
-    private String restaurantAddress;
-
     private String role;
 
     /**
@@ -167,15 +165,7 @@ public class User {
     public void setDisplayName(String displayName) {
         DisplayName = displayName;
     }
-
-    public String getRestaurantAddress() {
-        return restaurantAddress;
-    }
-
-    public void setRestaurantAddress(String restaurantAddress) {
-        this.restaurantAddress = restaurantAddress;
-    }
-
+    
 
 
     public String getRole() {

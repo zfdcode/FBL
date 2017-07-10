@@ -27,4 +27,6 @@ public interface VotingIngItemDao extends AutoCloseable{
 
     @SqlUpdate("delete from votingIngItem where votingIngItemId = :id")
     void deleteVotingIngItemById(@Bind("id") int votingIngItemId);
+
+    void close();
 }

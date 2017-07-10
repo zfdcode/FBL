@@ -6,162 +6,72 @@ package com.tum.fbl.core.bdo;
  */
 public class HealthData {
 
-    private int user;
+    private int userId;
 
     private String deviceUserPassword;
 
     private int deviceUserId;
 
-    private float currentHearthbeat;
-
-    private int heartbeatTimeRange;
-
-    private float trackedCalorieToday;
+    private float burnedCalorie;
 
     private float trackedCaloriesTimeRange;
 
     private float calorieGoal;
 
-    private int averageHeartbeatTimeRange;
-
     /**
      * Constructs HealthData that are retrieved from wearable devices.
-     * @param user the user connected with the device
      * @param deviceUserPassword the password of the user logged in on the wearable device
      * @param deviceUserId the unique ID of the user
-     * @param currentHearthbeat real-time heart beat of the user wearing the wearable device
-     * @param heartbeatTimeRange heart beat of the user wearing the wearable device within a certain time range
-     * @param trackedCalorieToday tracked consumed calorie of the user wearing the wearable device in the day
      * @param trackedCaloriesTimeRange tracked consumed calorie of the user wearing the wearable device within a certain time range
-     * @param averageHeartbeatTimeRange average heart beat of the user wearing the wearable device within a certain time range
      */
 
-    public HealthData(int user, String deviceUserPassword, int deviceUserId, float currentHearthbeat, int heartbeatTimeRange, float trackedCalorieToday, float trackedCaloriesTimeRange, float calorieGoal, int averageHeartbeatTimeRange) {
-        this.user = user;
+    public HealthData(int userId, String deviceUserPassword, int deviceUserId, float burnedCalorie, float trackedCaloriesTimeRange, float calorieGoal) {
+        this.userId = userId;
         this.deviceUserPassword = deviceUserPassword;
         this.deviceUserId = deviceUserId;
-        this.currentHearthbeat = currentHearthbeat;
-        this.heartbeatTimeRange = heartbeatTimeRange;
-        this.trackedCalorieToday = trackedCalorieToday;
+        this.burnedCalorie = burnedCalorie;
         this.trackedCaloriesTimeRange = trackedCaloriesTimeRange;
         this.calorieGoal = calorieGoal;
-        this.averageHeartbeatTimeRange = averageHeartbeatTimeRange;
     }
 
-    /**
-     * Gets User.
-     * @return user the user connected with the device
-     */
-    public int getUser() {
-        return user;
+    public int getUserId() {
+        return userId;
     }
 
-    /**
-     * Sets the user profile.
-     * @param user the user connected with the device
-     */
-    public void setUser(int user) {
-        this.user = user;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
-    /**
-     * Gets DeviceUserPassword.
-     * @return deviceUserPassword that complies with the userID of the device
-     */
     public String getDeviceUserPassword() {
         return deviceUserPassword;
     }
 
-    /**
-     * Sets DeviceUserPassword.
-     * @param deviceUserPassword the password of the user logged in on the wearable device
-     */
     public void setDeviceUserPassword(String deviceUserPassword) {
         this.deviceUserPassword = deviceUserPassword;
     }
 
-    /**
-     * Gets DeviceUserId.
-     * @return deviceUserId that complies with the UserID used in the wearable device APP
-     */
     public int getDeviceUserId() {
         return deviceUserId;
     }
 
-    /**
-     * Sets DeviceUserId.
-     * @param deviceUserId the unique ID of the user
-     */
     public void setDeviceUserId(int deviceUserId) {
         this.deviceUserId = deviceUserId;
     }
 
-    /**
-     * Gets CurrentHearthbeat.
-     * @return currentHearthbeat real-time heart beat of the user wearing the wearable device
-     */
-    public float getCurrentHearthbeat() {
-        return currentHearthbeat;
+    public float getBurnedCalorie() {
+        return burnedCalorie;
     }
 
-    /**
-     * Sets CurrentHearthbeat.
-     * @param currentHearthbeat real-time heart beat of the user wearing the wearable device
-     */
-    public void setCurrentHearthbeat(int currentHearthbeat) {
-        this.currentHearthbeat = currentHearthbeat;
+    public void setBurnedCalorie(float burnedCalorie) {
+        this.burnedCalorie = burnedCalorie;
     }
 
-    /**
-     * Gets HeartbeatTimeRange.
-     * @return heartbeatTimeRange heart beat of the user wearing the wearable device within a certain time range
-     */
-    public int getHeartbeatTimeRange() {
-        return heartbeatTimeRange;
-    }
-
-    /**
-     * Sets HeartbeatTimeRange.
-     * @param heartbeatTimeRange heart beat of the user wearing the wearable device within a certain time range
-     */
-    public void setHeartbeatTimeRange(int heartbeatTimeRange) {
-        this.heartbeatTimeRange = heartbeatTimeRange;
-    }
-
-    /**
-     * Gets TrackedCalorieToday.
-     * @return trackedCalorieToday tracked consumed calorie of the user wearing the wearable device in the day
-     */
-    public float getTrackedCalorieToday() {
-        return trackedCalorieToday;
-    }
-
-    /**
-     * Sets TrackedCalorieToday.
-     * @param trackedCalorieToday tracked consumed calorie of the user wearing the wearable device in the day
-     */
-    public void setTrackedCalorieToday(float trackedCalorieToday) {
-        this.trackedCalorieToday = trackedCalorieToday;
-    }
-
-    /**
-     * Gets TrackedCaloriesTimeRange.
-     * @return trackedCaloriesTimeRange tracked consumed calorie of the user wearing the wearable device within a certain time range
-     */
     public float getTrackedCaloriesTimeRange() {
         return trackedCaloriesTimeRange;
     }
 
-    /**
-     * Sets TrackedCaloriesTimeRange.
-     * @param trackedCaloriesTimeRange tracked consumed calorie of the user wearing the wearable device within a certain time range
-     */
     public void setTrackedCaloriesTimeRange(float trackedCaloriesTimeRange) {
         this.trackedCaloriesTimeRange = trackedCaloriesTimeRange;
-    }
-
-    public void setCurrentHearthbeat(float currentHearthbeat) {
-        this.currentHearthbeat = currentHearthbeat;
     }
 
     public float getCalorieGoal() {
@@ -171,21 +81,4 @@ public class HealthData {
     public void setCalorieGoal(float calorieGoal) {
         this.calorieGoal = calorieGoal;
     }
-
-    /**
-     * Gets AverageHeartbeatTimeRange.
-     * @return averageHeartbeatTimeRange average heart beat of the user wearing the wearable device within a certain time range
-     */
-    public int getAverageHeartbeatTimeRange() {
-        return averageHeartbeatTimeRange;
-    }
-
-    /**
-     * Sets AverageHeartbeatTimeRange.
-     * @param averageHeartbeatTimeRange average heart beat of the user wearing the wearable device within a certain time range
-     */
-    public void setAverageHeartbeatTimeRange(int averageHeartbeatTimeRange) {
-        this.averageHeartbeatTimeRange = averageHeartbeatTimeRange;
-    }
-
 }

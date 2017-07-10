@@ -64,15 +64,16 @@ public class CoreServiceApplication extends Application<CoreServiceConfiguration
 
         configureCors(environment);
 
-        Authenticator<BasicCredentials, User> authenticator = registerAuthenticator(environment);
+        Authenticator<BasicCredentials, User> authenticator =  new BasicAuthenticator(connectionFactory);
 
-        registerResources(environment, connectionFactory, configuration, authenticator);
+        this.registerAuthenticator(environment, authenticator);
+
+        this.registerResources(environment, connectionFactory, configuration, authenticator);
 
     }
 
 
-    private Authenticator<BasicCredentials, User> registerAuthenticator (Environment environment) {
-        Authenticator<BasicCredentials, User> authenticator =  new BasicAuthenticator();
+    private void registerAuthenticator (Environment environment, Authenticator<BasicCredentials, User> authenticator) {
 
         final BasicCredentialAuthFilter<User> authFilter = new BasicCredentialAuthFilter.Builder<User>()
                 .setAuthenticator(authenticator)
@@ -80,8 +81,6 @@ public class CoreServiceApplication extends Application<CoreServiceConfiguration
                 .buildAuthFilter();
         environment.jersey().register(new AuthDynamicFeature(authFilter));
         environment.jersey().register(new AuthValueFactoryProvider.Binder<>(User.class));
-
-        return authenticator;
     }
 
 

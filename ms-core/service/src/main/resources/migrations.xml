@@ -95,47 +95,26 @@
             <column name="mealId" type="int">
                 <constraints nullable="false"/>
             </column>
-            <column name="pickupTime" type="date">
-                <constraints nullable="false"/>
-            </column>
+            <column name="pickupTime" type="date"/>
             <column name="status" type="int">
                 <constraints nullable="false"/>
             </column>
-            <column name="orderNumber" type="int">
-              <constraints nullable="false"/>
-            </column>
+            <column name="orderNumber" type="int"/>
         </createTable>
-
-        <createTable tableName="OrderMeal">
-            <column name="orderId" type="int">
-                <constraints nullable="false" primaryKey="true" />
-            </column>
-            <column name="mealId" type="int">
-                <constraints nullable="false" primaryKey="true"/>
 
         <createTable tableName="HealthTrackerData">
             <column name="userId" type="varchar(255)">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
-            <column name="deviceUserPassword" type="varchar(255)">
+            <column name="deviceUserPassword" type="varchar(255)"/>
+            <column name="deviceUserId" type="varchar(255)"/>
+            <column name="calorieGoal" type="float">
                 <constraints nullable="false"/>
             </column>
-            <column name="deviceUserId" type="varchar(255)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="currentHeartbeat" type="int">
-                <constraints nullable="false"/>
-            </column>
-            <column name="heartbeatTimeRange" type="int">
-                <constraints nullable="false"/>
-            </column>
-            <column name="trackedCaloriesToday" type="float">
+            <column name="burntCalories" type="float">
                 <constraints nullable="false"/>
             </column>
             <column name="trackedCaloriesRange" type="float">
-                <constraints nullable="false"/>
-            </column>
-            <column name="averageHeartbeatTimeRange" type="int">
                 <constraints nullable="false"/>
             </column>
         </createTable>
@@ -213,25 +192,7 @@
             <column name="sodium" type="float">
                 <constraints nullable="false"/>
             </column>
-        </createTable>
-
-        <createTable tableName="WearableDevice">
-            <column name="deviceId" type="varchar(255)">
-                <constraints nullable="false" primaryKey="true"/>
-            </column>
-            <column name="deviceType" type="int">
-                <constraints nullable="false"/>
-            </column>
-            <column name="connectionTime" type="time">
-                <constraints nullable="false"/>
-            </column>
-            <column name="exitTime" type="time">
-                <constraints nullable="false"/>
-            </column>
-            <column name="userId" type="varchar(255)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="devicePassword" type="varchar(255)">
+            <column name="price" type="float">
                 <constraints nullable="false"/>
             </column>
         </createTable>
@@ -297,11 +258,20 @@
             <column name="totalCarbohydrate" type="float">
                 <constraints nullable="false"/>
             </column>
+            <column name="sugar" type="float">
+                <constraints nullable="false"/>
+            </column>
+            <column name="isGarnish" type="boolean">
+                <constraints nullable="false"/>
+            </column>
         </createTable>
 
         <createTable tableName="IngredientTag">
             <column name="ingredientId" type="int">
                 <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(255)">
+                <constraints nullable="false"/>
             </column>
             <column name="tagId" type="int">
                 <constraints primaryKey="true" nullable="false"/>

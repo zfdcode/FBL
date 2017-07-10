@@ -37,7 +37,6 @@ public class OrderResource {
 
     /**
      * Gets all order.
-     * @param user the user
      * @return List<Order> the list of orders
      */
     @GET
@@ -49,7 +48,6 @@ public class OrderResource {
 
     /**
      * Gets open orders.
-     * @param user the user
      * @return Order
      */
     @GET
@@ -123,6 +121,13 @@ public class OrderResource {
             );
         }
         */
+
+       try(OrderDao orderDao = this.connectionFactory.getConnection().open(OrderDao.class)){
+           orderDao.newOrder(order.getOrderUser().getUserId(),
+                   order.getOrderMeal().getMealId(),
+                   order.getOrderPickupTime(),
+                   order.getOrderStatus());
+       }
 
     }
 

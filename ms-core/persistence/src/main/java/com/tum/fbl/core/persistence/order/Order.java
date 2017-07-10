@@ -11,15 +11,18 @@ public class Order {
 
     private int orderUserId;
 
+    private int orderMealId;
+
     private Date orderPickupTime;
 
     private int orderStatus;
 
     private int orderNumber;
 
-    public Order(int orderId, int orderUserId, Date orderPickupTime, int orderStatus, int orderNumber) {
+    public Order(int orderId, int orderUserId, int orderMealId, Date orderPickupTime, int orderStatus, int orderNumber) {
         this.orderId = orderId;
         this.orderUserId = orderUserId;
+        this.orderMealId = orderMealId;
         this.orderPickupTime = orderPickupTime;
         this.orderStatus = orderStatus;
         this.orderNumber = orderNumber;
@@ -39,6 +42,14 @@ public class Order {
 
     public void setOrderUserId(int orderUserId) {
         this.orderUserId = orderUserId;
+    }
+
+    public int getOrderMealId() {
+        return orderMealId;
+    }
+
+    public void setOrderMealId(int orderMealId) {
+        this.orderMealId = orderMealId;
     }
 
     public Date getOrderPickupTime() {

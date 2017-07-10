@@ -17,8 +17,9 @@ public interface OrderDao extends AutoCloseable{
     @SqlQuery("select * from order where orderId = :id")
     Order findOrderById(@Bind("id") int orderId);
 
-    @SqlUpdate("Insert into ingredient (orderUserId, orderPickupTime, orderStatus, orderNumber) value (:orderUserId, :orderPickupTime, :orderStatus, :orderNumber)")
+    @SqlUpdate("Insert into ingredient (orderUserId, orderMealId, orderPickupTime, orderStatus, orderNumber) value (:orderUserId, :orderMealId, :orderPickupTime, :orderStatus, :orderNumber)")
     void newOrder(@Bind("orderUserId") int orderUserId,
+                  @Bind("orderMealId") int orderMealId,
                   @Bind("orderPickupTime") Date orderPickupTime,
                   @Bind("orderStatus") int orderStatus,
                   @Bind("orderNumber") int orderNumber);

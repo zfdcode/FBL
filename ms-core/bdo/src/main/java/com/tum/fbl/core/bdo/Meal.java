@@ -15,7 +15,7 @@ public class Meal {
 
     private float mealRating;
 
-    private int mealHelathValue;
+    private int mealHealthValue;
 
     private Date mealPreparationTime;
 
@@ -35,19 +35,20 @@ public class Meal {
 
     private float mealSodium;
 
-    private Ingredient[] mealIngredints;
+    private Ingredient[] mealIngredients;
 
     private Category[] mealCategories;
 
     private Rating[] mealRatings;
 
+    private Restaurant mealRestaurant;
 
-    public Meal(int mealId, String mealName, String url, float mealRating, int mealHelathValue, Date mealPreparationTime, Date[] offerDates, float mealEnergy, float mealProtein, float mealTotalFat, float mealSaturated, float mealTotalCarbohydrate, float mealSugar, float mealSodium, Ingredient[] mealIngredints, Category[] mealCategories, Rating[] mealRatings) {
+    public Meal(int mealId, String mealName, String url, float mealRating, int mealHealthValue, Date mealPreparationTime, Date[] offerDates, float mealEnergy, float mealProtein, float mealTotalFat, float mealSaturated, float mealTotalCarbohydrate, float mealSugar, float mealSodium, Ingredient[] mealIngredients, Category[] mealCategories, Rating[] mealRatings, Restaurant mealRestaurant) {
         this.mealId = mealId;
         this.mealName = mealName;
         this.url = url;
         this.mealRating = mealRating;
-        this.mealHelathValue = mealHelathValue;
+        this.mealHealthValue = mealHealthValue;
         this.mealPreparationTime = mealPreparationTime;
         this.offerDates = offerDates;
         this.mealEnergy = mealEnergy;
@@ -57,9 +58,10 @@ public class Meal {
         this.mealTotalCarbohydrate = mealTotalCarbohydrate;
         this.mealSugar = mealSugar;
         this.mealSodium = mealSodium;
-        this.mealIngredints = mealIngredints;
+        this.mealIngredients = mealIngredients;
         this.mealCategories = mealCategories;
         this.mealRatings = mealRatings;
+        this.mealRestaurant = mealRestaurant;
     }
 
     public int getMealId() {
@@ -94,12 +96,12 @@ public class Meal {
         this.mealRating = mealRating;
     }
 
-    public int getMealHelathValue() {
-        return mealHelathValue;
+    public int getMealHealthValue() {
+        return mealHealthValue;
     }
 
-    public void setMealHelathValue(int mealHelathValue) {
-        this.mealHelathValue = mealHelathValue;
+    public void setMealHealthValue(int mealHealthValue) {
+        this.mealHealthValue = mealHealthValue;
     }
 
     public Date getMealPreparationTime() {
@@ -174,12 +176,12 @@ public class Meal {
         this.mealSodium = mealSodium;
     }
 
-    public Ingredient[] getMealIngredints() {
-        return mealIngredints;
+    public Ingredient[] getMealIngredients() {
+        return mealIngredients;
     }
 
-    public void setMealIngredints(Ingredient[] mealIngredints) {
-        this.mealIngredints = mealIngredints;
+    public void setMealIngredients(Ingredient[] mealIngredients) {
+        this.mealIngredients = mealIngredients;
     }
 
     public Category[] getMealCategories() {
@@ -196,5 +198,13 @@ public class Meal {
 
     public void setMealRatings(Rating[] mealRatings) {
         this.mealRatings = mealRatings;
+    }
+
+    public Restaurant getMealRestaurant() {
+        return mealRestaurant;
+    }
+
+    public void setMealRestaurant(Restaurant mealRestaurant) {
+        this.mealRestaurant = mealRestaurant;
     }
 }

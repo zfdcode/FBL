@@ -8,28 +8,19 @@ public class HealthData {
 
     private int deviceUserId;
 
-    private float currentHearthbeat;
-
-    private int heartbeatTimeRange;
-
-    private float trackedCalorieToday;
+    private float burnedCalorie;
 
     private float trackedCaloriesTimeRange;
 
     private float calorieGoal;
 
-    private int averageHeartbeatTimeRange;
-
-    public HealthData(int userId, String deviceUserPassword, int deviceUserId, float currentHearthbeat, int heartbeatTimeRange, float trackedCalorieToday, float calorieGoal, float trackedCaloriesTimeRange, int averageHeartbeatTimeRange) {
+    public HealthData(int userId, String deviceUserPassword, int deviceUserId, float burnedCalorie, float trackedCaloriesTimeRange, float calorieGoal) {
         this.userId = userId;
         this.deviceUserPassword = deviceUserPassword;
         this.deviceUserId = deviceUserId;
-        this.currentHearthbeat = currentHearthbeat;
-        this.heartbeatTimeRange = heartbeatTimeRange;
-        this.trackedCalorieToday = trackedCalorieToday;
-        this.calorieGoal = calorieGoal;
+        this.burnedCalorie = burnedCalorie;
         this.trackedCaloriesTimeRange = trackedCaloriesTimeRange;
-        this.averageHeartbeatTimeRange = averageHeartbeatTimeRange;
+        this.calorieGoal = calorieGoal;
     }
 
     public int getUserId() {
@@ -56,36 +47,12 @@ public class HealthData {
         this.deviceUserId = deviceUserId;
     }
 
-    public float getCurrentHearthbeat() {
-        return currentHearthbeat;
+    public float getBurnedCalorie() {
+        return burnedCalorie;
     }
 
-    public void setCurrentHearthbeat(float currentHearthbeat) {
-        this.currentHearthbeat = currentHearthbeat;
-    }
-
-    public int getHeartbeatTimeRange() {
-        return heartbeatTimeRange;
-    }
-
-    public void setHeartbeatTimeRange(int heartbeatTimeRange) {
-        this.heartbeatTimeRange = heartbeatTimeRange;
-    }
-
-    public float getTrackedCalorieToday() {
-        return trackedCalorieToday;
-    }
-
-    public void setTrackedCalorieToday(float trackedCalorieToday) {
-        this.trackedCalorieToday = trackedCalorieToday;
-    }
-
-    public float getCalorieGoal() {
-        return calorieGoal;
-    }
-
-    public void setCalorieGoal(float calorieGoal) {
-        this.calorieGoal = calorieGoal;
+    public void setBurnedCalorie(float burnedCalorie) {
+        this.burnedCalorie = burnedCalorie;
     }
 
     public float getTrackedCaloriesTimeRange() {
@@ -96,11 +63,11 @@ public class HealthData {
         this.trackedCaloriesTimeRange = trackedCaloriesTimeRange;
     }
 
-    public int getAverageHeartbeatTimeRange() {
-        return averageHeartbeatTimeRange;
+    public float getCalorieGoal() {
+        return calorieGoal;
     }
 
-    public void setAverageHeartbeatTimeRange(int averageHeartbeatTimeRange) {
-        this.averageHeartbeatTimeRange = averageHeartbeatTimeRange;
+    public void setCalorieGoal(float calorieGoal) {
+        this.calorieGoal = calorieGoal;
     }
 }

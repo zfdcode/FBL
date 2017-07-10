@@ -26,12 +26,9 @@ public class HealthDataMapper implements ResultSetMapper<HealthData> {
                 r.getInt("userId"),
                 r.getString("deviceUserPassword"),
                 r.getInt("deviceUserId"),
-                r.getFloat("currentHeartbeat"),
-                r.getInt("heartbeatTimeRange"),
-                r.getFloat("trackedCalorieToday"),
+                r.getFloat("burnedCalorie"),
                 r.getFloat("trackedCalorieTimeRange"),
-                r.getFloat("calorieGoal"),
-                r.getInt("averageHeartbeatTimeRange"));
+                r.getFloat("calorieGoal"));
     }
 
 }

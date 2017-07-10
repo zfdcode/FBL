@@ -24,6 +24,8 @@ public class Ingredient {
 
     private String[] tag;
 
+    private float sugar;
+
     /**
      * Constructs Ingredient that are used in the meal offered in Mensa.
      * @param ingredientId unique ID of the ingredient used in Mensa
@@ -36,7 +38,7 @@ public class Ingredient {
      * @param totalCarbohydrate total carbohydrate of the ingredient used in Mensa
      * @param tag tag of the ingredient used in Mensa
      */
-    public Ingredient(int ingredientId, String ingredientName, String description, String ingredientImage, float energy, float totalFat, float protein, float totalCarbohydrate, String[] tag) {
+    public Ingredient(int ingredientId, String ingredientName, String description, String ingredientImage, float energy, float totalFat, float protein, float totalCarbohydrate, String[] tag, float sugar) {
         this.ingredientId = ingredientId;
         this.ingredientName = ingredientName;
         this.description = description;
@@ -46,6 +48,7 @@ public class Ingredient {
         this.protein = protein;
         this.totalCarbohydrate = totalCarbohydrate;
         this.tag = tag;
+        this.sugar = sugar;
     }
 
     /**
@@ -190,5 +193,13 @@ public class Ingredient {
      */
     public void setTag(String[] tag) {
         this.tag = tag;
+    }
+
+    public float getSugar() {
+        return sugar;
+    }
+
+    public void setSugar(float sugar) {
+        this.sugar = sugar;
     }
 }

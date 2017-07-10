@@ -14,18 +14,15 @@ public interface HealthDataDao extends AutoCloseable {
     @SqlQuery("select * from healthTrackerData where userId = :id")
     HealthData findHealthDataById(@Bind("id") int userId);
 
-    @SqlUpdate("Insert into healthTrackerData (userId, deviceUserPassword, deviceUserId, currentHeartbeat, heartbeatTimeRange, trackedCalorieToday, trackedCalorieTimeRange, calorieGoal, averageHeartbeatTimeRange) " +
-            "values (:userId, :deviceUserPassword, :deviceUserId, :currentHeartbeat, :heartbeatTimeRange, :trackedCalorieToday, :trackedCalorieTimeRange, :calorieGoal, :averageHeartbeatTimeRange)")
+    @SqlUpdate("Insert into healthTrackerData (userId, deviceUserPassword, deviceUserId, burnedCalorie, trackedCalorieTimeRange, calorieGoal) " +
+            "values (:userId, :deviceUserPassword, :deviceUserId, :burnedCalorie, :trackedCalorieTimeRange, :calorieGoal)")
     void newHealthData(
             @Bind("userId") int userId,
             @Bind("deviceUserPassword") String deviceUserPassword,
             @Bind("deviceUserId") int deviceUserId,
-            @Bind("currentHeartbeat") float currentHeartbeat,
-            @Bind("heartbeatTimeRange") int heartbeatTimeRange,
-            @Bind("trackedCalorieToday") float trackedCalorieToday,
+            @Bind("burnedCalorie") float burnedCalorie,
             @Bind("trackedCalorieTimeRange") float trackedCalorieTimeRange,
-            @Bind("calorieGoal") float calorieGoal,
-            @Bind("averageHeartbeatTimeRange") int averageHeartbeatTimeRange);
+            @Bind("calorieGoal") float calorieGoal);
 
     @SqlQuery("delete from healthTrackerData where userId = :id")
     void deleteHealthData(@Bind("id") int userId);

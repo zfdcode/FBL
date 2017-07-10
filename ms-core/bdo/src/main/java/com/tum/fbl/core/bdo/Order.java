@@ -13,7 +13,7 @@ public class Order {
 
     private User orderUser;
 
-    private Meal[] orderMeals;
+    private Meal orderMeal;
 
     private Date orderPickupTime;
 
@@ -27,14 +27,14 @@ public class Order {
      * Constructs Order that is made by users with meal choices, pickup time and order status.
      * @param orderId unique ID of the order
      * @param orderUser user who makes the order
-     * @param orderMeals meal choices of the order
+     * @param orderMeal meal choices of the order
      * @param orderPickupTime pickup time of the order that are preferred by the user
      * @param orderStatus status of the order
      */
-    public Order(int orderId, User orderUser, Meal[] orderMeals, Date orderPickupTime, int orderStatus, int orderNumber) {
+    public Order(int orderId, User orderUser, Meal orderMeal, Date orderPickupTime, int orderStatus, int orderNumber) {
         this.orderId = orderId;
         this.orderUser = orderUser;
-        this.orderMeals = orderMeals;
+        this.orderMeal = orderMeal;
         this.orderPickupTime = orderPickupTime;
         this.orderStatus = orderStatus;
         this.orderNumber = orderNumber;
@@ -74,18 +74,18 @@ public class Order {
 
     /**
      * Gets OrderMeal.
-     * @return orderMeals meals choices of the order
+     * @return orderMeal meals choices of the order
      */
-    public Meal[] getOrderMeal() {
-        return orderMeals;
+    public Meal getOrderMeal() {
+        return orderMeal;
     }
 
     /**
      * Sets OrderMeal.
-     * @param orderMeals meal choices of the order
+     * @param orderMeal meal choices of the order
      */
-    public void setOrderMeal(Meal[] orderMeals) {
-        this.orderMeals = orderMeals;
+    public void setOrderMeal(Meal orderMeal) {
+        this.orderMeal = orderMeal;
     }
 
     /**

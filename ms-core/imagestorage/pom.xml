@@ -35,11 +35,6 @@
             <artifactId>config</artifactId>
             <version>0.1</version>
         </dependency>
-        <dependency>
-            <groupId>com.tum.fbl.core</groupId>
-            <artifactId>imagestorage</artifactId>
-            <version>0.1</version>
-        </dependency>
 
         <dependency>
             <groupId>com.cloudinary</groupId>

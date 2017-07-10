@@ -30,9 +30,9 @@ public class UserMapper implements ResultSetMapper<User> {
                 r.getInt("height"),
                 r.getInt("weight"),
                 r.getString("DisplayName"),
-                r.getString("restaurantAddress"),
-                r.getFloat("longitude"),
+                r.getString("address"),
+                r.getFloat("longtitude"),
                 r.getFloat("latitude"),
-                r.getString("role"));
+                r.getInt("roleId"));
     }
 }

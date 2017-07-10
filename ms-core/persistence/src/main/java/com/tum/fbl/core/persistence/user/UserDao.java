@@ -6,6 +6,7 @@ import org.skife.jdbi.v2.sqlobject.SqlUpdate;
 import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapper;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by patrickmelchner on 12.06.17.
@@ -17,6 +18,8 @@ public interface UserDao extends AutoCloseable {
     @SqlQuery("select * from user where userId = :id")
     User findUserById(@Bind("id") int userId);
 
+    @SqlQuery("select * from user")
+    List<User> getAllUser();
 
     @SqlQuery("select * from (select * from user where userId = :id) natural join mealRestaurant natural join meal")
     User findMealsById(@Bind("id") int userId);
@@ -24,8 +27,7 @@ public interface UserDao extends AutoCloseable {
     @SqlQuery("select * from user where email = :email")
     User findUserByEmail(@Bind("email") String email);
 
-    @SqlUpdate("insert into user (userName, userPassword, email, birthday, height, weight, DisplayName, restaurantAddress, longitude, latitude role) " +
-            "values (:userName, :userPassword, :email, :birthday, :height, :weight, :DisplayName, :restaurantAddress, :longitude, :latitude, :role)")
+    @SqlUpdate("insert into user (userName, userPassword, email, birthday, height, weight, DisplayName, address, longtitude, latitude, roleId) values (:userName, :userPassword, :email, :birthday, :height, :weight, :DisplayName, :address, :longtitude, :latitude, :roleId)")
     void newUser(@Bind("userName") String userName,
                  @Bind("userPassword") String userPassword,
                  @Bind("email") String email,
@@ -33,12 +35,12 @@ public interface UserDao extends AutoCloseable {
                  @Bind("height") int height,
                  @Bind("weight") int weight,
                  @Bind("DisplayName") String DisplayName,
-                 @Bind("restaurantAddress") String restaurantAddress,
-                 @Bind("longitude") float longitude,
+                 @Bind("address") String address,
+                 @Bind("longtitude") float longtitude,
                  @Bind("latitude") float latitude,
-                 @Bind("role") String role);
+                 @Bind("roleId") int roleId);
 
-    @SqlQuery("delete from user where userId = :id")
+    @SqlUpdate("delete from user where userId = :id")
     void deleteUser(@Bind("id") int userId);
 
     //TODO: updateUser

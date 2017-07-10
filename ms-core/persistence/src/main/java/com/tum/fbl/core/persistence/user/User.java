@@ -29,9 +29,9 @@ public class User {
 
     private float latitude;
 
-    private String role;
+    private int role;
 
-    public User(int userId, String userName, String userPassword, String email, Date birthday, int height, int weight, String displayName, String restaurantAddress, float longitude, float latitude, String role) {
+    public User(int userId, String userName, String userPassword, String email, Date birthday, int height, int weight, String displayName, String restaurantAddress, float longitude, float latitude, int role) {
         this.userId = userId;
         this.userName = userName;
         this.userPassword = userPassword;
@@ -134,11 +134,11 @@ public class User {
         this.latitude = latitude;
     }
 
-    public String getRole() {
+    public int getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(int role) {
         this.role = role;
     }
 }

@@ -7,20 +7,17 @@ package com.tum.fbl.core.bdo;
 public class Vote {
     private int voteId;
 
-    private int ingredientId;
-
-    private int votingId;
+    private int votingIngItemId;
 
     private int userId;
 
-    private String like;
+    private String type;
 
-    public Vote(int voteId, int ingredientId, int votingId, int userId, String like) {
+    public Vote(int voteId, int votingIngItemId, int userId, String type) {
         this.voteId = voteId;
-        this.ingredientId = ingredientId;
-        this.votingId = votingId;
+        this.votingIngItemId = votingIngItemId;
         this.userId = userId;
-        this.like = like;
+        this.type = type;
     }
 
     public int getVoteId() {
@@ -31,35 +28,27 @@ public class Vote {
         this.voteId = voteId;
     }
 
-    public int getIngredientId() {
-        return ingredientId;
+    public int getVotingIngItemId() {
+        return votingIngItemId;
     }
 
-    public void setIngredientId(int ingredientId) {
-        this.ingredientId = ingredientId;
-    }
-
-    public int getVotingId() {
-        return votingId;
-    }
-
-    public void setVotingId(int votingId) {
-        this.votingId = votingId;
+    public void setVotingIngItemId(int votingIngItemId) {
+        this.votingIngItemId = votingIngItemId;
     }
 
     public int getUserId() {
-        return this.userId;
+        return userId;
     }
 
-    public void setUser(int userId) {
+    public void setUserId(int userId) {
         this.userId = userId;
     }
 
-    public String getLike() {
-        return like;
+    public String getType() {
+        return type;
     }
 
-    public void setLike(String like) {
-        this.like = like;
+    public void setType(String type) {
+        this.type = type;
     }
 }

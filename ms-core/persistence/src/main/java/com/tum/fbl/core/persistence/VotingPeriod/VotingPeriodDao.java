@@ -6,6 +6,7 @@ import org.skife.jdbi.v2.sqlobject.SqlUpdate;
 import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapper;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by malte on 13.06.2017.
@@ -13,6 +14,12 @@ import java.util.Date;
 
 @RegisterMapper( VotingPeriodMapper.class)
 public interface VotingPeriodDao extends AutoCloseable{
+
+    @SqlQuery("select * from votingPeriod where isFinished = :isFinished")
+    List<VotingPeriod> getAllVotingPeriodsByFinished(@Bind ("isFinished") boolean isFinished);
+
+    @SqlQuery("select * from votingPeriod")
+    List<VotingPeriod> getAllVotingPeriods();
 
     @SqlQuery("select * from votingPeriod where votingPeriodId = :id")
     VotingPeriod findVotingPeriodById(@Bind("id") int votingPeriodId);

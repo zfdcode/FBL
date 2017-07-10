@@ -64,14 +64,14 @@ public class CoreServiceApplication extends Application<CoreServiceConfiguration
 
         configureCors(environment);
 
-        registerAuthenticator(environment);
+        Authenticator<BasicCredentials, User> authenticator = registerAuthenticator(environment);
 
-        registerResources(environment, connectionFactory, configuration);
+        registerResources(environment, connectionFactory, configuration, authenticator);
 
     }
 
 
-    private void registerAuthenticator (Environment environment) {
+    private Authenticator<BasicCredentials, User> registerAuthenticator (Environment environment) {
         Authenticator<BasicCredentials, User> authenticator =  new BasicAuthenticator();
 
         final BasicCredentialAuthFilter<User> authFilter = new BasicCredentialAuthFilter.Builder<User>()
@@ -81,10 +81,11 @@ public class CoreServiceApplication extends Application<CoreServiceConfiguration
         environment.jersey().register(new AuthDynamicFeature(authFilter));
         environment.jersey().register(new AuthValueFactoryProvider.Binder<>(User.class));
 
+        return authenticator;
     }
 
 
-    private void registerResources (Environment environment, ConnectionFactory connectionFactory, CoreServiceConfiguration config) {
+    private void registerResources (Environment environment, ConnectionFactory connectionFactory, CoreServiceConfiguration config, Authenticator<BasicCredentials, User> authenticator) {
 
         final HealthDataResource healthDataResource = new HealthDataResource(connectionFactory);
         environment.jersey().register(healthDataResource);
@@ -109,6 +110,9 @@ public class CoreServiceApplication extends Application<CoreServiceConfiguration
 
         final UserResource userResource = new UserResource(connectionFactory);
         environment.jersey().register(userResource);
+
+        final AuthResource authResource = new AuthResource(authenticator);
+        environment.jersey().register(authResource);
     }
 
     private void configureCors(Environment environment) {

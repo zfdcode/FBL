@@ -47,16 +47,6 @@ public class OrderResource {
         return null;
     }
 
-    /**
-     * Gets open orders.
-     * @return Order
-     */
-    @GET
-    @Path("/open")
-    @ApiOperation(value = "Get all open orders")
-    public Order getOpenOrders () {
-        return null;
-    }
 
     /**
      * Gets order.

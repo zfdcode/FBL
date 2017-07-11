@@ -164,27 +164,16 @@ public class UserResource {
 
     /**
      * Gets user by special need.
-     * @param specialNeedId the special need id
+     * @param categoryId the special need id
      * @return List<User> the list of users
      */
     @GET
-    @Path("/sn/{specialNeedId}")
+    @Path("/category/{categoryId}")
     @ApiOperation(value = "Get users by special need")
-    public List<User> getUsersBySpecialNeed(@PathParam("specialNeedId") int specialNeedId) {
+    public List<User> getUsersByCategory(@PathParam("categoryId") int categoryId) {
         return null;
     }
 
-    /**
-     * Gets users by ingredient
-     * @param ingredientId the ingredient id
-     * @return List<User> the list of users
-     */
-    @GET
-    @Path("/ingredient/{ingredientId}")
-    @ApiOperation(value = "Get users by selected ingredient")
-    public List<User> getUsersByIngredient(@PathParam("ingredientId") int ingredientId) {
-        return null;
-    }
 
     /**
      * Gets users by meal

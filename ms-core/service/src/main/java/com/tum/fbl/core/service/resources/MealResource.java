@@ -52,7 +52,6 @@ public class MealResource {
 
     /**
      * Gets all meals.
-     * @param user the user
      * @return List<Meal> the list of meals
      */
     @GET
@@ -65,7 +64,6 @@ public class MealResource {
 
     /**
      * Gets available meals.
-     * @param user the user
      * @return List<Meal> the list of meals
      */
     @GET
@@ -75,6 +73,42 @@ public class MealResource {
         return null;
     }
 
+    @GET
+    @Path("/offerDate/{offerDate}/user/{userId}")
+    public List<Meal> getMealsByOfferDateAndUserId(){return null;}
+
+    @GET
+    @Path("/offerDate/{offerDate}/category/{categoryId}")
+    public List<Meal> getMealsByOfferDateAndCategory(){return null;}
+
+    @GET
+    @Path("/offerDate/{offerDate}")
+    public List<Meal> getMealsByOfferDate(){return null;}
+
+    @GET
+    @Path("/rating/{rating}")
+    public List<Meal> getMealsByRating(){return null;}
+
+    @GET
+    @Path("/calories/{calories}")
+    public List<Meal> getMealsByCalories(){return null;}
+
+    @GET
+    @Path("/order/{orderId}")
+    public List<Meal> getMealsByOrder(){return null;}
+
+    @GET
+    @Path("/ingredient/{ingredientId}")
+    public List<Meal> getMealsByIngredient(){return null;}
+
+    @GET
+    @Path("/ingredientException/{ingredientIds}")
+    public List<Meal> getMealsByIngredientExceptions(){return null;}
+
+    @GET
+    @Path("/name/{name}")
+    public List<Meal> getMealsByName(){return null;}
+
     /**
      * Gets meals by user.
      * @param userId the user id
@@ -82,9 +116,8 @@ public class MealResource {
      */
     @GET
     @Path("/user/{userId}")
-    @ApiOperation(value = "Get information of meals by one user")
+    @ApiOperation(value = "Get information of meals by a user id or restaurant id")
     public List<Meal> getMealsByUser(@PathParam("userId") int userId) {
-
         return null;
     }
 

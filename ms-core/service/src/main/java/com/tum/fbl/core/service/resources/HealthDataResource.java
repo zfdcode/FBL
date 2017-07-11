@@ -110,4 +110,11 @@ public class HealthDataResource {
     public void updateHealthData(HealthData healthData) {
     }
 
+    @GET
+    @Path("/leftCalories")
+    @ApiOperation(value = "get left calories by user")
+    public HealthData getLeftCalories(int userId){
+        return null;
+    }
+
 }

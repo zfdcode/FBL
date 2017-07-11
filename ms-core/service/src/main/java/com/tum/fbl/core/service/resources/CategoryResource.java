@@ -52,6 +52,10 @@ public class CategoryResource {
         return null;
     }
 
+    @GET
+    @Path("user/{userId}")
+    public List<Category> getCategoriesByUserId(){return null;}
+
     /**
      * Deletes special need.
      * @param categoryId the special need id
@@ -67,6 +71,7 @@ public class CategoryResource {
      * Adds special need.
      * @param category the speical need
      */
+    @POST
     @ApiOperation(value = "Add a new special need to the store")
     public void addCategory(Category category) {
     }
@@ -79,6 +84,7 @@ public class CategoryResource {
     @ApiOperation(value = "Update an existing special need")
     public void updateCategory(Category category) {
     }
+
 
 
 }

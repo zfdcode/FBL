@@ -36,6 +36,5 @@ public interface HealthDataDao extends AutoCloseable {
                           @Bind("trackedCalorieTimeRange") float trackedCalorieTimeRange,
                           @Bind("calorieGoal") float calorieGoal);
 
-
     public void close();
 }

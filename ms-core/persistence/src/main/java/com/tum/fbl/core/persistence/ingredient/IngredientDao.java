@@ -22,7 +22,7 @@ public interface IngredientDao extends AutoCloseable {
 
     @SqlUpdate("Insert into ingredient (ingredientName, description, ingredientImage, energy, totalFat, protein, totalCarbohydrate, isGarnish, sugar) " +
             "value (:ingredientName, :description, :ingredientImage, :energy, :totalFat, :protein, :totalCarbohydrate, :isGarnish, sugar)")
-    void newIngredient(@Bind("ingredientName") String ingredientName,
+    int newIngredient(@Bind("ingredientName") String ingredientName,
                        @Bind("description") String description,
                        @Bind("ingredientImage") String ingredientImage,
                        @Bind("energy") float energy,
@@ -35,7 +35,8 @@ public interface IngredientDao extends AutoCloseable {
     @SqlUpdate("delete from ingredient where ingredientId = :id")
     void deleteIngredientById(@Bind("id") int ingredientId);
 
-    //TODO: void update()
+    @SqlUpdate("Insert into IngredientTag (ingredientId, tagId) value (:ingredientId, : tagId) ")
+    void setIngredientTag(@Bind("ingredientId") int ingredientId, @Bind("tagId") int tagId);
 
     public void close();
 }

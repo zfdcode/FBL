@@ -270,9 +270,6 @@
             <column name="ingredientId" type="int">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="name" type="varchar(255)">
-                <constraints nullable="false"/>
-            </column>
             <column name="tagId" type="int">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -283,6 +280,9 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="tagName" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="tagDescription" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
         </createTable>

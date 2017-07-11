@@ -27,8 +27,8 @@ public interface UserDao extends AutoCloseable {
     @SqlQuery("select * from user where email = :email")
     User findUserByEmail(@Bind("email") String email);
 
-    @SqlUpdate("insert into user (userName, userPassword, email, birthday, height, weight, DisplayName, address, longtitude, latitude, roleId) values (:userName, :userPassword, :email, :birthday, :height, :weight, :DisplayName, :address, :longtitude, :latitude, :roleId)")
-    void newUser(@Bind("userName") String userName,
+    @SqlUpdate("insert into user (userName, userPassword, email, birthday, height, weight, DisplayName, address, longtitude, latitude, roleId)  values (:userName, :userPassword, :email, :birthday, :height, :weight, :DisplayName, :address, :longtitude, :latitude, :roleId)")
+    int newUser(@Bind("userName") String userName,
                  @Bind("userPassword") String userPassword,
                  @Bind("email") String email,
                  @Bind("birthday") Date birthday,

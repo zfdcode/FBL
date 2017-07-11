@@ -82,22 +82,18 @@ public class HealthDataResource {
      */
     @POST
     @ApiOperation(value = "Add a new healthData to the store")
-    public void addHealthData(HealthData healthData) {
+    public int addHealthData(HealthData healthData) {
 
-        /*
         try (HealthDataDao healthDataDao = this.connectionFactory.getConnection().open(HealthDataDao.class)){
-            healthDataDao.newHealthData(
+            return healthDataDao.newHealthData(
                     healthData.getUserId(),
                     healthData.getDeviceUserPassword(),
                     healthData.getDeviceUserId(),
-                    healthData.getCurrentHearthbeat(),
-                    healthData.getHeartbeatTimeRange(),
-                    healthData.getTrackedCalorieToday(),
+                    healthData.getBurnedCalories(),
                     healthData.getTrackedCaloriesTimeRange(),
-                    healthData.getAverageHeartbeatTimeRange()
+                    healthData.getCalorieGoal()
             );
         }
-        */
 
     }
 
@@ -111,9 +107,9 @@ public class HealthDataResource {
     }
 
     @GET
-    @Path("/leftCalories")
+    @Path("/leftCalories/{userId}")
     @ApiOperation(value = "get left calories by user")
-    public HealthData getLeftCalories(int userId){
+    public HealthData getLeftCalories(@PathParam("userId") int userId){
         return null;
     }
 

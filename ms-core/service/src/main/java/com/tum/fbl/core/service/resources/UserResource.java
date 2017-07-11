@@ -92,9 +92,9 @@ public class UserResource {
      */
     @POST
     @ApiOperation(value = "Add a new user to the store")
-    public void addUser(User user) {
+    public int addUser(User user) {
         try (UserDao userDao = this.connectionFactory.getConnection().open(UserDao.class)) {
-            userDao.newUser(
+              return userDao.newUser(
                     user.getUserName(),
                     user.getUserPassword(),
                     user.getEmail(),

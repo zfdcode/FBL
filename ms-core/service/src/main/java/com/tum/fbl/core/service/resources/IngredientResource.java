@@ -116,10 +116,11 @@ public class IngredientResource {
      */
     @POST
     @ApiOperation(value = "Add a new ingredient to the store")
-    public void addIngredient(Ingredient ingredient) {
+    public int addIngredient(Ingredient ingredient) {
+        return 0;
         /*
         try (IngredientDao ingredientDao = this.connectionFactory.getConnection().open(IngredientDao.class)) {
-            ingredientDao.newIngredient(
+           return ingredientDao.newIngredient(
                     ingredient.getIngredientName(),
                     ingredient.getDescription(),
                     ingredient.getIngredientImage(),
@@ -127,10 +128,10 @@ public class IngredientResource {
                     ingredient.getTotalFat(),
                     ingredient.getProtein(),
                     ingredient.getTotalCarbohydrate(),
-                    ingredient.getTag()
+                    ingredient.get
+                    ingredient.getSugar()
             );
-        }
-        */
+        } */
     }
 
     /**

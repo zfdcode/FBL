@@ -77,8 +77,8 @@ public class RestaurantResource {
      */
     @POST
     @ApiOperation(value = "Add a new restaurant to the store")
-    public void addRestaurant(Restaurant restaurant) {
-
+    public int addRestaurant(Restaurant restaurant) {
+        return 0;
     }
 
     /**

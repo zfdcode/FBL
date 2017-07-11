@@ -20,8 +20,8 @@ public interface VoteDao extends AutoCloseable {
     @SqlQuery("select * from vote where voteId = :id")
     Vote findVoteById(@Bind("id") int voteId);
 
-    @SqlUpdate("Insert into vote (votingIngItemId, userId, type) value (:votingIngItemId, :userId, :type)")
-    void newVote(@Bind("votingIngItemId") int votingIngItemId,
+    @SqlUpdate("Insert into vote (votingIngItemId, userId, type) value (:votingIngItemId, :userId, :type) ; SELECT LAST_INSERT_ID() from vote")
+    int newVote(@Bind("votingIngItemId") int votingIngItemId,
                  @Bind("userId") int userId,
                  @Bind("type") String like);
 

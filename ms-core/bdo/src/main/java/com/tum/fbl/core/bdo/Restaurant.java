@@ -72,6 +72,24 @@ public class Restaurant {
         this.restaurantOpeningHourSunday = restaurantOpeningHourSunday;
     }
 
+    public Restaurant(com.tum.fbl.core.persistence.user.User user){
+        this.restaurantId = user.getUserId();
+        this.restaurantPassword = user.getUserPassword();
+        this.restaurantName = user.getUserName();
+        this.restaurantEmail = user.getEmail();
+        this.restaurantDisplayName = user.getDisplayName();
+        this.restaurantAddress = user.getRestaurantAddress();
+        this.longitude = user.getLongitude();
+        this.latitude = user.getLatitude();
+        this.restaurantOpeningHourMonday = new Date[0];
+        this.restaurantOpeningHourTuesday = new Date[0];
+        this.restaurantOpeningHourWednesday = new Date[0];
+        this.restaurantOpeningHourThursday = new Date[0];
+        this.restaurantOpeningHourFriday = new Date[0];
+        this.restaurantOpeningHourSaturday = new Date[0];
+        this.restaurantOpeningHourSunday = new Date[0];
+    }
+
     /**
      * Gets RestaurantId.
      * @return restaurantId unique ID of the restaurant

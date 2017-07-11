@@ -35,15 +35,10 @@
             <column name="roleId" type="int">
                 <constraints nullable="false"/>
             </column>
-            <column name="address" type="varchar(255)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="longtitude" type="float">
-                <constraints nullable="false"/>
-            </column>
-            <column name="latitude" type="float">
-                <constraints nullable="false"/>
-            </column>
+            <column name="address" type="varchar(255)"/>
+            <column name="longitude" type="float"/>
+            <column name="latitude" type="float"/>
+
         </createTable>
 
         <createTable tableName="Schedules">
@@ -270,9 +265,6 @@
             <column name="ingredientId" type="int">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="name" type="varchar(255)">
-                <constraints nullable="false"/>
-            </column>
             <column name="tagId" type="int">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -283,6 +275,9 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="tagName" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="tagDescription" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
         </createTable>

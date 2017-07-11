@@ -8,9 +8,7 @@ import com.tum.fbl.core.imagestorage.ImageStorageImpl;
 import com.tum.fbl.core.bdo.Meal;
 import com.tum.fbl.core.persistence.ConnectionFactory;
 import com.tum.fbl.core.persistence.meal.MealDao;
-import com.tum.fbl.core.service.auth.User;
 import com.tum.fbl.core.service.exceptions.ImageException;
-import io.dropwizard.auth.Auth;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
@@ -20,8 +18,8 @@ import org.slf4j.LoggerFactory;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -52,7 +50,6 @@ public class MealResource {
 
     /**
      * Gets all meals.
-     * @param user the user
      * @return List<Meal> the list of meals
      */
     @GET
@@ -63,17 +60,53 @@ public class MealResource {
         return null;
     }
 
-    /**
-     * Gets available meals.
-     * @param user the user
-     * @return List<Meal> the list of meals
-     */
     @GET
-    @Path("/available")
-    @ApiOperation(value = "Get all available meals")
-    public List<Meal> getAvailableMeals() {
-        return null;
+    @Path("/{attributeName}/{attributeId}")
+    public List<Meal> getMealsByAttributeId(@PathParam("attributeName") String attributeName, @PathParam("attributeId") int attributeId){
+        try (MealDao mealDao = this.connectionFactory.getConnection().open(MealDao.class)) {
+            List<Meal> meals = new ArrayList<>();
+            for (com.tum.fbl.core.persistence.meal.Meal meal:mealDao.findMealsByAttributte(attributeName,attributeId)){
+                meals.add(new Meal(meal));
+            }
+            return meals;
+        }
     }
+
+    @GET
+    @Path("/offerDate/{offerDate}/user/{userId}")
+    public List<Meal> getMealsByOfferDateAndUserId(){return null;}
+
+    @GET
+    @Path("/offerDate/{offerDate}/category/{categoryId}")
+    public List<Meal> getMealsByOfferDateAndCategory(){return null;}
+
+    @GET
+    @Path("/offerDate/{offerDate}")
+    public List<Meal> getMealsByOfferDate(){return null;}
+
+    @GET
+    @Path("/rating/{rating}")
+    public List<Meal> getMealsByRating(){return null;}
+
+    @GET
+    @Path("/calories/{calories}")
+    public List<Meal> getMealsByCalories(){return null;}
+
+    @GET
+    @Path("/order/{orderId}")
+    public List<Meal> getMealsByOrder(){return null;}
+
+    @GET
+    @Path("/ingredient/{ingredientId}")
+    public List<Meal> getMealsByIngredient(){return null;}
+
+    @GET
+    @Path("/ingredientException/{ingredientIds}")
+    public List<Meal> getMealsByIngredientExceptions(){return null;}
+
+    @GET
+    @Path("/name/{name}")
+    public List<Meal> getMealsByName(){return null;}
 
     /**
      * Gets meals by user.
@@ -82,9 +115,8 @@ public class MealResource {
      */
     @GET
     @Path("/user/{userId}")
-    @ApiOperation(value = "Get information of meals by one user")
+    @ApiOperation(value = "Get information of meals by a user id or restaurant id")
     public List<Meal> getMealsByUser(@PathParam("userId") int userId) {
-
         return null;
     }
 
@@ -135,7 +167,7 @@ public class MealResource {
     @ApiOperation(value = "Deletes a meal")
     public void deleteMeal(@PathParam("mealId") int mealId) {
         try (MealDao mealDao = this.connectionFactory.getConnection().open(MealDao.class)) {
-            mealDao.delteMealById(mealId);
+            mealDao.deleteMealById(mealId);
         }
     }
 
@@ -166,17 +198,16 @@ public class MealResource {
      */
     @POST
     @ApiOperation(value = "Add a new meal to the store")
-    public void addMeal(Meal meal) {
+    public int addMeal(Meal meal) {
 
-        /*
         try (MealDao mealDao = this.connectionFactory.getConnection().open(MealDao.class)) {
-            mealDao.newMeal(
+           return mealDao.newMeal(
                     meal.getMealName(),
-                    meal.getMealImage(),
+                    null,
                     meal.getMealRating(),
-                    meal.getMealHelathValue(),
+                    0,
                     meal.getMealPreparationTime(),
-                    meal.getOfferDate(),
+                    null,
                     meal.getMealEnergy(),
                     meal.getMealProtein(),
                     meal.getMealTotalFat(),
@@ -186,7 +217,7 @@ public class MealResource {
                     meal.getMealSodium()
             );
         }
-        */
+
     }
 
     /**

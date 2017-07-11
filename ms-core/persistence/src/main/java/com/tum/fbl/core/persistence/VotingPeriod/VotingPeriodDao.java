@@ -16,7 +16,7 @@ import java.util.List;
 public interface VotingPeriodDao extends AutoCloseable{
 
     @SqlQuery("select * from votingPeriod where isFinished = :isFinished")
-    List<VotingPeriod> getAllVotingPeriodsByFinished(@Bind ("isFinished") boolean isFinished);
+    List<VotingPeriod> getAllVotingPeriodsByFinished(@Bind("isFinished") boolean isFinished);
 
     @SqlQuery("select * from votingPeriod")
     List<VotingPeriod> getAllVotingPeriods();

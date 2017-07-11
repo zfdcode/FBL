@@ -83,15 +83,19 @@ public class IngredientResource {
 
     /**
      * Gets ingredient by tags
-     * @param ingredientTags the ingredient tags
+     * @param ingredientTagID the ingredient tag id
      * @return Ingredient
      */
     @GET
-    @Path("/tag/{ingredientTags}")
-    @ApiOperation(value = "Get information of a ingredient")
-    public Ingredient getIngredientByTags(@PathParam("ingredientTags") String ingredientTags) {
+    @Path("/tag/{ingredientTagID}")
+    @ApiOperation(value = "Get information of a ingredient by tag id")
+    public Ingredient getIngredientByTagID(@PathParam("ingredientTagID") int ingredientTagID) {
         return null;
     }
+
+    @GET
+    @Path("/meal/{mealId}")
+    public Ingredient getIngredientByMealId(@PathParam("mealId") int mealId) {return null;}
 
     /**
      * Deletes ingredient.
@@ -112,10 +116,11 @@ public class IngredientResource {
      */
     @POST
     @ApiOperation(value = "Add a new ingredient to the store")
-    public void addIngredient(Ingredient ingredient) {
+    public int addIngredient(Ingredient ingredient) {
+        return 0;
         /*
         try (IngredientDao ingredientDao = this.connectionFactory.getConnection().open(IngredientDao.class)) {
-            ingredientDao.newIngredient(
+           return ingredientDao.newIngredient(
                     ingredient.getIngredientName(),
                     ingredient.getDescription(),
                     ingredient.getIngredientImage(),
@@ -123,10 +128,10 @@ public class IngredientResource {
                     ingredient.getTotalFat(),
                     ingredient.getProtein(),
                     ingredient.getTotalCarbohydrate(),
-                    ingredient.getTag()
+                    ingredient.get
+                    ingredient.getSugar()
             );
-        }
-        */
+        } */
     }
 
     /**

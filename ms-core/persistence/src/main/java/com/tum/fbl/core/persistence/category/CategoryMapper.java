@@ -11,6 +11,14 @@ import java.sql.SQLException;
  */
 public class CategoryMapper implements ResultSetMapper<Category> {
 
+    /**
+     * Maps Category data stored in database to Category
+     * @param index
+     * @param r
+     * @param ctx
+     * @return Category
+     * @throws SQLException
+     */
     @Override
     public Category map(int index, ResultSet r, StatementContext ctx) throws SQLException {
         return new Category(

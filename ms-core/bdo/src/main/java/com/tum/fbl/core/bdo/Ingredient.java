@@ -26,6 +26,8 @@ public class Ingredient {
 
     private float sugar;
 
+    private boolean isGarnish;
+
     /**
      * Constructs Ingredient that are used in the meal offered in Mensa.
      * @param ingredientId unique ID of the ingredient used in Mensa
@@ -49,6 +51,24 @@ public class Ingredient {
         this.totalCarbohydrate = totalCarbohydrate;
         this.tag = tag;
         this.sugar = sugar;
+    }
+
+    /**
+     *
+     * @param ingredient
+     */
+    public Ingredient(com.tum.fbl.core.persistence.ingredient.Ingredient ingredient){
+        this.ingredientId = ingredient.getIngredientId();
+        this.ingredientName = ingredient.getIngredientName();
+        this.description = ingredient.getDescription();
+        this.ingredientImage = ingredient.getIngredientImage();
+        this.energy = ingredient.getEnergy();
+        this.totalFat = ingredient.getTotalFat();
+        this.protein = ingredient.getProtein();
+        this.totalCarbohydrate = ingredient.getTotalCarbohydrate();
+        this.tag = new String[0];
+        //this.sugar = ingredient.getSugar();
+        this.isGarnish = ingredient.isGarnish();
     }
 
     /**

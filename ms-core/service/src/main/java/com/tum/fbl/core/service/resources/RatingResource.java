@@ -2,11 +2,13 @@ package com.tum.fbl.core.service.resources;
 
 import com.tum.fbl.core.bdo.Rating;
 import com.tum.fbl.core.persistence.ConnectionFactory;
+import com.tum.fbl.core.persistence.rating.RatingDao;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -38,7 +40,13 @@ public class RatingResource {
     @Path("/user/{userId}")
     @ApiOperation(value = "Get ratings by user id")
     public List<Rating> getRatingsByUserId (@PathParam("userId") int userId) {
-        return null;
+        try (RatingDao ratingDao = this.connectionFactory.getConnection().open(RatingDao.class)) {
+            List<Rating> ratings = new ArrayList<>();
+            for (com.tum.fbl.core.persistence.rating.Rating rating:ratingDao.findRatingsByUserId(userId)){
+                ratings.add(new Rating(rating));
+            }
+            return ratings;
+        }
     }
 
     /**
@@ -82,8 +90,10 @@ public class RatingResource {
      * @param rating the rating
      */
     @POST
+    @Consumes(MediaType.APPLICATION_JSON)
     @ApiOperation(value = "Add a new rating to the store")
-    public void addRating(Rating rating) {
+    public int addRating(@QueryParam("userId")int userId, @QueryParam("mealId")int mealId, @QueryParam("rating")float rating) {
+        return 0;
     }
 
     /**

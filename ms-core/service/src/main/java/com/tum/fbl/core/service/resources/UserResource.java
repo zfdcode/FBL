@@ -9,6 +9,7 @@ import org.skife.jdbi.v2.DBI;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,6 +22,8 @@ import java.util.List;
 @Consumes(MediaType.APPLICATION_JSON)
 @Api(value = "User API", description = "Provides the user information.")
 public class UserResource {
+
+    private final int role = 0;
 
     private final ConnectionFactory connectionFactory;
 
@@ -35,11 +38,14 @@ public class UserResource {
     @GET
     @Path("/all")
     @ApiOperation(value = "Get basic user information")
-    public List< com.tum.fbl.core.persistence.user.User> getUsers() {
+    public List< User> getUsers() {
 
         try (UserDao userDao = this.connectionFactory.getConnection().open(UserDao.class)) {
-           return userDao.getAllUser();
-
+            List<User> users = new ArrayList<User>();
+            for (com.tum.fbl.core.persistence.user.User user:userDao.getAllUser(this.role)){
+                users.add(new User(user));
+            }
+            return users;
         }
     }
     /**
@@ -56,17 +62,7 @@ public class UserResource {
             com.tum.fbl.core.persistence.user.User user = userDao.findUserById(userId);
 
             if (user != null) {
-                return new User(
-                        user.getUserId(),
-                        user.getUserName(),
-                        user.getUserPassword(),
-                        user.getEmail(),
-                        user.getBirthday(),
-                        user.getHeight(),
-                        user.getWeight(),
-                        user.getDisplayName(),
-                        user.getRole()
-                );
+                return new User(user);
             } else {
                 return null;
             }
@@ -92,9 +88,9 @@ public class UserResource {
      */
     @POST
     @ApiOperation(value = "Add a new user to the store")
-    public void addUser(User user) {
+    public int addUser(User user) {
         try (UserDao userDao = this.connectionFactory.getConnection().open(UserDao.class)) {
-            userDao.newUser(
+              return userDao.newUser(
                     user.getUserName(),
                     user.getUserPassword(),
                     user.getEmail(),
@@ -102,10 +98,11 @@ public class UserResource {
                     user.getHeight(),
                     user.getWeight(),
                     user.getDisplayName(),
+                    //TODO:
                     "",
                     0,
                     0,
-                    user.getRole()
+                    this.role
             );
         }
     }
@@ -119,17 +116,7 @@ public class UserResource {
             com.tum.fbl.core.persistence.user.User user = userDao.findUserByEmail(email);
 
             if (user != null) {
-                return new User(
-                        user.getUserId(),
-                        user.getUserName(),
-                        user.getUserPassword(),
-                        user.getEmail(),
-                        user.getBirthday(),
-                        user.getHeight(),
-                        user.getWeight(),
-                        user.getDisplayName(),
-                        user.getRole()
-                );
+                return new User(user);
             } else {
                 return null;
             }
@@ -146,55 +133,26 @@ public class UserResource {
     public void updateUser(User user) {
         try (UserDao userDao = this.connectionFactory.getConnection().open(UserDao.class)) {
             //TODO: userdao.updateUser
-            userDao.newUser(
-                    user.getUserName(),
-                    user.getUserPassword(),
-                    user.getEmail(),
-                    user.getBirthday(),
-                    user.getHeight(),
-                    user.getWeight(),
-                    user.getDisplayName(),
-                    "",
-                    0,
-                    0,
-                    user.getRole()
-            );
+
         }
     }
 
     /**
      * Gets user by special need.
-     * @param specialNeedId the special need id
+     * @param categoryId the special need id
      * @return List<User> the list of users
      */
     @GET
-    @Path("/sn/{specialNeedId}")
+    @Path("/category/{categoryId}")
     @ApiOperation(value = "Get users by special need")
-    public List<User> getUsersBySpecialNeed(@PathParam("specialNeedId") int specialNeedId) {
-        return null;
+    public List<User> getUsersByCategory(@PathParam("categoryId") int categoryId) {
+        try (UserDao userDao = this.connectionFactory.getConnection().open(UserDao.class)) {
+            List<User> users = new ArrayList<User>();
+            for (com.tum.fbl.core.persistence.user.User user : userDao.findUsersByCategory(categoryId)){
+                users.add(new User(user));
+            }
+            return users;
+        }
     }
 
-    /**
-     * Gets users by ingredient
-     * @param ingredientId the ingredient id
-     * @return List<User> the list of users
-     */
-    @GET
-    @Path("/ingredient/{ingredientId}")
-    @ApiOperation(value = "Get users by selected ingredient")
-    public List<User> getUsersByIngredient(@PathParam("ingredientId") int ingredientId) {
-        return null;
-    }
-
-    /**
-     * Gets users by meal
-     * @param mealId the meal id
-     * @return List<User> the list of users
-     */
-    @GET
-    @Path("/meal/{mealId}")
-    @ApiOperation(value = "Get users by selected meal")
-    public List<User> getUsersByMeal(@PathParam("mealId") int mealId) {
-        return null;
-    }
 }

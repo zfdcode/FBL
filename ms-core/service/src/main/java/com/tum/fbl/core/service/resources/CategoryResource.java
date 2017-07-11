@@ -2,6 +2,7 @@ package com.tum.fbl.core.service.resources;
 
 import com.tum.fbl.core.bdo.Category;
 import com.tum.fbl.core.persistence.ConnectionFactory;
+import com.tum.fbl.core.persistence.category.CategoryDao;
 import com.tum.fbl.core.service.auth.User;
 import io.dropwizard.auth.Auth;
 import io.swagger.annotations.Api;
@@ -9,6 +10,7 @@ import io.swagger.annotations.ApiOperation;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.util.ArrayList;
 import java.util.List;
 /**
  * Created by zfngd on 2017/6/15.
@@ -37,8 +39,18 @@ public class CategoryResource {
     @Path("/all")
     @ApiOperation(value = "Get all offered categories")
     public List<Category> getAllCategorys() {
-        return null;
+        try (CategoryDao categoryDao = this.connectionFactory.getConnection().open(CategoryDao.class)) {
+            List<com.tum.fbl.core.persistence.category.Category> categories = categoryDao.getallCategories();
+            List<Category> categoriesBdo = new ArrayList<Category>();
+            for(com.tum.fbl.core.persistence.category.Category category: categories) {
+                Category newCategory = new Category(category);
+                categoriesBdo.add(newCategory);
+            }
+
+            return categoriesBdo;
+            }
     }
+
 
     /**
      * Gets special need.

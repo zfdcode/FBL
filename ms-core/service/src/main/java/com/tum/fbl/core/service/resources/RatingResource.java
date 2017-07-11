@@ -82,8 +82,9 @@ public class RatingResource {
      * @param rating the rating
      */
     @POST
+    @Consumes(MediaType.APPLICATION_JSON)
     @ApiOperation(value = "Add a new rating to the store")
-    public void addRating(int userId, int mealId, float rating) {
+    public void addRating(@QueryParam("userId")int userId, @QueryParam("mealId")int mealId, @QueryParam("rating")float rating) {
     }
 
     /**

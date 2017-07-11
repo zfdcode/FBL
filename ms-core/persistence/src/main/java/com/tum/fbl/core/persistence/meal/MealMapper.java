@@ -28,6 +28,7 @@ public class MealMapper implements ResultSetMapper<Meal> {
                 r.getFloat("mealRating"),
                 r.getInt("mealHelathValue"),
                 r.getDate("mealPreparationTime"),
+                r.getDate("offerDate"),
                 r.getFloat("mealEnergy"),
                 r.getFloat("mealProtein"),
                 r.getFloat("mealTotalFat"),

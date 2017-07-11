@@ -35,15 +35,10 @@
             <column name="roleId" type="int">
                 <constraints nullable="false"/>
             </column>
-            <column name="address" type="varchar(255)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="longtitude" type="float">
-                <constraints nullable="false"/>
-            </column>
-            <column name="latitude" type="float">
-                <constraints nullable="false"/>
-            </column>
+            <column name="address" type="varchar(255)"/>
+            <column name="longitude" type="float"/>
+            <column name="latitude" type="float"/>
+
         </createTable>
 
         <createTable tableName="Schedules">

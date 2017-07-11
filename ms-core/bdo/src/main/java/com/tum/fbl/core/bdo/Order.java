@@ -40,6 +40,7 @@ public class Order {
         this.orderNumber = orderNumber;
     }
 
+
     /**
      * Gets OrderId.
      * @return orderId unique ID of the order

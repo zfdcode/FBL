@@ -20,6 +20,12 @@ public class IngredientTag {
         this.tagDescription = tagDescription;
     }
 
+    public IngredientTag(com.tum.fbl.core.persistence.tag.Tag tag){
+        this.tagId = tag.getTagId();
+        this.tagName = tag.getTagName();
+        this.tagDescription = tag.getTagDescription();
+    }
+
     /**
      * Gets TagId.
      * @return tagId unique ID of the tag

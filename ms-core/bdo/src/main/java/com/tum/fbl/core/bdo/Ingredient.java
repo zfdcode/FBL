@@ -50,7 +50,19 @@ public class Ingredient {
         this.tag = tag;
         this.sugar = sugar;
     }
-
+   /*
+    public Ingredient(com.tum.fbl.core.persistence.ingredient.Ingredient ingredient){
+        this.ingredientId = ingredient.getIngredientId();
+        this.ingredientName = ingredient.getIngredientName();
+        this.description = ingredient.getDescription();
+        this.ingredientImage = ingredient.getIngredientImage();
+        this.energy = ingredient.getEnergy();
+        this.totalFat = ingredient.getTotalFat();
+        this.protein = ingredient.getProtein();
+        this.totalCarbohydrate = ingredient.getTotalCarbohydrate();
+        this.tag = ingredient.get
+    }
+*/
     /**
      * Gets IngredientId.
      * @return ingredientId unique ID of the ingredient used in Mensa

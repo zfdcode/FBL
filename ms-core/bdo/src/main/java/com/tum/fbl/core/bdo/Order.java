@@ -13,6 +13,8 @@ public class Order {
 
     private User orderUser;
 
+    private Restaurant orderRestaurant;
+
     private Meal orderMeal;
 
     private Date orderPickupTime;
@@ -31,15 +33,15 @@ public class Order {
      * @param orderPickupTime pickup time of the order that are preferred by the user
      * @param orderStatus status of the order
      */
-    public Order(int orderId, User orderUser, Meal orderMeal, Date orderPickupTime, int orderStatus, int orderNumber) {
+    public Order(int orderId, User orderUser, Restaurant orderRestaurant, Meal orderMeal, Date orderPickupTime, int orderStatus, int orderNumber) {
         this.orderId = orderId;
         this.orderUser = orderUser;
+        this.orderRestaurant = orderRestaurant;
         this.orderMeal = orderMeal;
         this.orderPickupTime = orderPickupTime;
         this.orderStatus = orderStatus;
         this.orderNumber = orderNumber;
     }
-
 
     /**
      * Gets OrderId.
@@ -71,6 +73,14 @@ public class Order {
      */
     public void setOrderUser(User orderUser) {
         this.orderUser = orderUser;
+    }
+
+    public Restaurant getOrderRestaurant() {
+        return orderRestaurant;
+    }
+
+    public void setOrderRestaurant(Restaurant orderRestaurant) {
+        this.orderRestaurant = orderRestaurant;
     }
 
     /**

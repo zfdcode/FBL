@@ -20,21 +20,23 @@ public interface IngredientDao extends AutoCloseable {
     @SqlQuery("select * from ingredient")
     List<Ingredient> getAllIngredients();
 
-    @SqlUpdate("Insert into ingredient (ingredientName, description, ingredientImage, energy, totalFat, protein, totalCarbohydrate, isGarnish) " +
-            "value (:ingredientName, :description, :ingredientImage, :energy, :totalFat, :protein, :totalCarbohydrate, :isGarnish)")
-    void newIngredient(@Bind("ingredientName") String ingredientName,
+    @SqlUpdate("Insert into ingredient (ingredientName, description, ingredientImage, energy, totalFat, protein, totalCarbohydrate, isGarnish, sugar) " +
+            "value (:ingredientName, :description, :ingredientImage, :energy, :totalFat, :protein, :totalCarbohydrate, :isGarnish, sugar)")
+    int newIngredient(@Bind("ingredientName") String ingredientName,
                        @Bind("description") String description,
                        @Bind("ingredientImage") String ingredientImage,
                        @Bind("energy") float energy,
                        @Bind("totalFat") float totalFat,
                        @Bind("protein") float protein,
                        @Bind("totalCarbohydrate") float totalCarbohydrate,
-                       @Bind("isGarnish") boolean isGarnish);
+                       @Bind("isGarnish") boolean isGarnish,
+                       @Bind("sugar") float sugar);
 
     @SqlUpdate("delete from ingredient where ingredientId = :id")
     void deleteIngredientById(@Bind("id") int ingredientId);
 
-    //TODO: void update()
+    @SqlUpdate("Insert into IngredientTag (ingredientId, tagId) value (:ingredientId, : tagId) ")
+    void setIngredientTag(@Bind("ingredientId") int ingredientId, @Bind("tagId") int tagId);
 
     public void close();
 }

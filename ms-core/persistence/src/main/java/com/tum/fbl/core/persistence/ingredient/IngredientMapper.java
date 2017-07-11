@@ -31,7 +31,8 @@ public class IngredientMapper implements ResultSetMapper<Ingredient> {
                 r.getFloat("totalFat"),
                 r.getFloat("protein"),
                 r.getFloat("totalCarbohydrate"),
-                r.getBoolean("isGarnish")
+                r.getBoolean("isGarnish"),
+                r.getFloat("sugar")
                 );
     }
 

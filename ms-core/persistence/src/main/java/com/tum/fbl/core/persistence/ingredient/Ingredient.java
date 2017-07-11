@@ -20,6 +20,8 @@ public class Ingredient {
 
     private boolean isGarnish;
 
+    private float sugar;
+
     /**
      *
      * @param ingredientId the ingredient's unique ID
@@ -32,7 +34,7 @@ public class Ingredient {
      * @param totalCarbohydrate the ingredient's totalCarbohydrate
      * @param isGarnish true of the ingredient is a garnish/side dish, false otherwise
      */
-    public Ingredient(int ingredientId, String ingredientName, String description, String ingredientImage, float energy, float totalFat, float protein, float totalCarbohydrate, boolean isGarnish) {
+    public Ingredient(int ingredientId, String ingredientName, String description, String ingredientImage, float energy, float totalFat, float protein, float totalCarbohydrate, boolean isGarnish, float sugar) {
         this.ingredientId = ingredientId;
         this.ingredientName = ingredientName;
         this.description = description;
@@ -42,6 +44,7 @@ public class Ingredient {
         this.protein = protein;
         this.totalCarbohydrate = totalCarbohydrate;
         this.isGarnish = isGarnish;
+        this.sugar = sugar;
     }
 
     /**
@@ -186,5 +189,13 @@ public class Ingredient {
      */
     public void setGarnish(boolean garnish) {
         isGarnish = garnish;
+    }
+
+    public float getSugar() {
+        return sugar;
+    }
+
+    public void setSugar(float sugar) {
+        this.sugar = sugar;
     }
 }

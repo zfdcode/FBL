@@ -32,6 +32,16 @@ public class UserResource {
         this.connectionFactory = connectionFactory;
     }
 
+    @GET
+    @Path("/all")
+    @ApiOperation(value = "Get basic user information")
+    public List< com.tum.fbl.core.persistence.user.User> getUsers() {
+
+        try (UserDao userDao = this.connectionFactory.getConnection().open(UserDao.class)) {
+           return userDao.getAllUser();
+
+        }
+    }
     /**
      * Gets user.
      * @param userId the user id
@@ -45,15 +55,21 @@ public class UserResource {
         try (UserDao userDao = this.connectionFactory.getConnection().open(UserDao.class)) {
             com.tum.fbl.core.persistence.user.User user = userDao.findUserById(userId);
 
-            return new User(
-                    user.getUserId(),
-                    user.getUserName(),
-                    user.getUserPassword(),
-                    user.getEmail(),
-                    user.getBirthday(),
-                    user.getHeight(),
-                    user.getWeight()
-            );
+            if (user != null) {
+                return new User(
+                        user.getUserId(),
+                        user.getUserName(),
+                        user.getUserPassword(),
+                        user.getEmail(),
+                        user.getBirthday(),
+                        user.getHeight(),
+                        user.getWeight(),
+                        user.getDisplayName(),
+                        user.getRole()
+                );
+            } else {
+                return null;
+            }
         }
     }
 
@@ -86,13 +102,40 @@ public class UserResource {
                     user.getHeight(),
                     user.getWeight(),
                     user.getDisplayName(),
-                    user.getRestaurantAddress(),
+                    "",
                     0,
                     0,
                     user.getRole()
             );
         }
     }
+
+    @GET
+    @Path("/email/{email}")
+    @ApiOperation(value = "Get basic user information")
+    public User getUserByEmail(@PathParam("email") String email) {
+
+        try (UserDao userDao = this.connectionFactory.getConnection().open(UserDao.class)) {
+            com.tum.fbl.core.persistence.user.User user = userDao.findUserByEmail(email);
+
+            if (user != null) {
+                return new User(
+                        user.getUserId(),
+                        user.getUserName(),
+                        user.getUserPassword(),
+                        user.getEmail(),
+                        user.getBirthday(),
+                        user.getHeight(),
+                        user.getWeight(),
+                        user.getDisplayName(),
+                        user.getRole()
+                );
+            } else {
+                return null;
+            }
+        }
+    }
+
 
     /**
      * Updates user.
@@ -111,7 +154,7 @@ public class UserResource {
                     user.getHeight(),
                     user.getWeight(),
                     user.getDisplayName(),
-                    user.getRestaurantAddress(),
+                    "",
                     0,
                     0,
                     user.getRole()

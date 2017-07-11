@@ -24,7 +24,7 @@ public interface HealthDataDao extends AutoCloseable {
             @Bind("trackedCalorieTimeRange") float trackedCalorieTimeRange,
             @Bind("calorieGoal") float calorieGoal);
 
-    @SqlQuery("delete from healthTrackerData where userId = :id")
+    @SqlUpdate("delete from healthTrackerData where userId = :id")
     void deleteHealthData(@Bind("id") int userId);
 
     //TODO: updateHealtData

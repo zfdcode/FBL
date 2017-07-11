@@ -38,14 +38,31 @@ class EventShoppingItemSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.EventShoppingItem
-        fields = ('id', 'name', 'created_at', 'event', 'user_id')
+        fields = ('id', 'name', 'created_at', 'event', 'user_id', 'amount')
         read_only_fields = ('id', 'created_at', 'modified_at')
 
     def to_representation(self, instance):
         data = super(EventShoppingItemSerializer, self).to_representation(instance)
-        data['creator'] = instance.user_id
+        data['creator'] = instance.user_id if instance.user_id else None
+        data['bringer'] = instance.bringer_id if instance.bringer_id else None
         data.pop('user_id')
         return data
+
+
+class EventShoppingItemBringSerializer(serializers.Serializer):
+    bring = fields.BooleanField(required=True)
+
+    def save(self, **kwargs):
+        item_obj = kwargs.pop('item_obj')
+        user_id = kwargs.pop('user_id')
+        if self.validated_data.get('bring'):
+            # add bringer_id to shopping item object
+            item_obj.bringer_id = user_id
+        else:
+            # remove bringer_id to shopping item object
+            item_obj.bringer_id = ""
+        item_obj.save()
+        return item_obj
 
 
 class EventMealSerializer(serializers.ModelSerializer):
@@ -133,7 +150,7 @@ class EventSerializer(serializers.ModelSerializer):
     def to_representation(self, instance):
         data = super(EventSerializer, self).to_representation(instance)
         data['creator'] = instance.user_id
-
+        data.pop('user_id')
         if self.context.get('is_list', False):
             data['num_members'] = instance.users.count()
             data['members'] = []

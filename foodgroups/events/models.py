@@ -109,7 +109,10 @@ class EventShoppingItem(models.Model):
     user_id = models.CharField(max_length=20, verbose_name="Item Creator",  help_text="Id of the Shopping item creator")
     created_at = models.DateTimeField(default=datetime.now)
     modified_at = models.DateTimeField(auto_now=True)
+    amount = models.DecimalField(max_digits=5, decimal_places=2, null=True)
     name = models.CharField(max_length=100)
+    bringer_id = models.CharField(max_length=20, verbose_name="Item Bringer",
+                                  help_text="Id user who will bring the shopping item", blank=True)
 
 
 class EventMeal(models.Model):

@@ -207,7 +207,32 @@ class EventShoppingItemView(
 ):
     model = models.EventShoppingItem
     serializer_class = serializers.EventShoppingItemSerializer
+    bring_serializer_class = serializers.EventShoppingItemBringSerializer
     queryset = models.EventShoppingItem.objects.all()
+
+    @property
+    def user_id(self):
+        # TODO: Remove the default 1 when we add permission as IsAuthenticated
+        return 1 if self.request.user.is_anonymous else self.request.user.user_id
+
+    @detail_route(methods=['post'])
+    def bring(self, request, *args, **kwargs):
+        """
+        User brings ShoppingItem 
+        Returns ShoppingItem Object
+        """
+        item_obj = self.get_object()
+        save_data = {
+            'user_id': self.user_id,
+            'item_obj': item_obj
+        }
+        bring_serializer = self.bring_serializer_class(data=self.request.data)
+        bring_serializer.is_valid(raise_exception=True)
+        bring_serializer.save(**save_data)
+
+        return Response(
+            self.serializer_class(instance=item_obj).data,
+        )
 
 
 class EventMealView(

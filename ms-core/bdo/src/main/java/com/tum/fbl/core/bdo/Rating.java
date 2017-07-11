@@ -18,6 +18,8 @@ public class Rating {
 
     private Date ratingTimestamp;
 
+    public Rating(){}
+
     /**
      * Constructs Rating that is made by the user for the meal
      * @param ratingId unique ID of the rating action

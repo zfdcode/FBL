@@ -23,7 +23,7 @@ public class Order {
 
     private int orderNumber;
 
-
+    public Order(){}
 
     /**
      * Constructs Order that is made by users with meal choices, pickup time and order status.

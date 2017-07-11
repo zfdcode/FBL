@@ -28,6 +28,10 @@ public class Ingredient {
 
     private boolean isGarnish;
 
+    public Ingredient(){
+
+    }
+
     /**
      * Constructs Ingredient that are used in the meal offered in Mensa.
      * @param ingredientId unique ID of the ingredient used in Mensa
@@ -52,6 +56,8 @@ public class Ingredient {
         this.tag = tag;
         this.sugar = sugar;
     }
+
+
 
     /**
      *

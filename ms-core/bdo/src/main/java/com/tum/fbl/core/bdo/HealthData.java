@@ -18,6 +18,8 @@ public class HealthData {
 
     private float calorieGoal;
 
+    public HealthData(){}
+
     /**
      * Constructs HealthData that are retrieved from wearable devices.
      * @param deviceUserPassword the password of the user logged in on the wearable device

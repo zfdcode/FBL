@@ -17,6 +17,8 @@ public class Voting {
 
     private String location;
 
+    public Voting(){};
+
     /**
      * Constructs Voting that specifies the activity of voting started by the organising user.
      * @param votingId unique ID of the voting action

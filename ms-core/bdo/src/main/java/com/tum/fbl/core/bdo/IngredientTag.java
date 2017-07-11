@@ -9,6 +9,10 @@ public class IngredientTag {
     private String tagName;
     private String tagDescription;
 
+    public IngredientTag(){
+
+    }
+
     /**
      * Constructs IngredientTag that specifies the features of the ingredient.
      * @param tagId unique ID of the tag

@@ -38,6 +38,8 @@ public class Restaurant {
 
     private Date[] restaurantOpeningHourSunday;
 
+    public Restaurant(){}
+
     /**
      * Constructs Restaurant that is specified by ID, password, name, Email, display name, address and opening hours of each day.
      * @param restaurantId unique ID of the restaurant

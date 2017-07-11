@@ -13,6 +13,8 @@ public class Vote {
 
     private String type;
 
+    public Vote(){}
+
     public Vote(int voteId, int votingIngItemId, int userId, String type) {
         this.voteId = voteId;
         this.votingIngItemId = votingIngItemId;

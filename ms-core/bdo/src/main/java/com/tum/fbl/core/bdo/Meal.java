@@ -43,6 +43,11 @@ public class Meal {
 
     private Restaurant mealRestaurant;
 
+    public Meal (){
+
+    }
+
+
     public Meal(int mealId, String mealName, String url, float mealRating, int mealHealthValue, Date mealPreparationTime, Date[] offerDates, float mealEnergy, float mealProtein, float mealTotalFat, float mealSaturated, float mealTotalCarbohydrate, float mealSugar, float mealSodium, Ingredient[] mealIngredients, Category[] mealCategories, Rating[] mealRatings, Restaurant mealRestaurant) {
         this.mealId = mealId;
         this.mealName = mealName;
@@ -63,6 +68,8 @@ public class Meal {
         this.mealRatings = mealRatings;
         this.mealRestaurant = mealRestaurant;
     }
+
+
 
 
     public Meal(com.tum.fbl.core.persistence.meal.Meal meal){

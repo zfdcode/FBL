@@ -27,7 +27,7 @@ public interface OrderDao extends AutoCloseable{
     void deleteOrderById(@Bind("id") int orderId);
 
     //TODO: void update()
-    
+
 
     @SqlQuery("select * from order where NOT(status = 'pickedUp' or status = 'canceled')")
     Order getOrderList();

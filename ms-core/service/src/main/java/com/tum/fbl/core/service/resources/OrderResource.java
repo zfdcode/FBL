@@ -67,7 +67,8 @@ public class OrderResource {
     @Path("/order/{orderId}")
     @ApiOperation(value = "Get information of a order")
     public Order getOrder(@PathParam("orderId") int orderId) {
-        try (OrderDao orderDao = this.connectionFactory.getConnection().open(OrderDao.class)) {
+        return null;
+    /*    try (OrderDao orderDao = this.connectionFactory.getConnection().open(OrderDao.class)) {
             com.tum.fbl.core.persistence.order.Order order = orderDao.findOrderById(orderId);
 
             try (UserDao userDao = this.connectionFactory.getConnection().open(UserDao.class)) {
@@ -86,7 +87,7 @@ public class OrderResource {
 
         }
 
-
+*/
     }
 
     /**

@@ -24,11 +24,10 @@ public class MealMapper implements ResultSetMapper<Meal> {
         return new Meal(
                 r.getInt("mealId"),
                 r.getString("mealName"),
-                r.getBytes("mealImage"),
+                r.getString("mealImage"),
                 r.getFloat("mealRating"),
                 r.getInt("mealHelathValue"),
                 r.getDate("mealPreparationTime"),
-                r.getDate("offerDate"),
                 r.getFloat("mealEnergy"),
                 r.getFloat("mealProtein"),
                 r.getFloat("mealTotalFat"),

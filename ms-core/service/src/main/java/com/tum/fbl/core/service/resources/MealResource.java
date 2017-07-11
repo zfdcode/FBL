@@ -8,9 +8,7 @@ import com.tum.fbl.core.imagestorage.ImageStorageImpl;
 import com.tum.fbl.core.bdo.Meal;
 import com.tum.fbl.core.persistence.ConnectionFactory;
 import com.tum.fbl.core.persistence.meal.MealDao;
-import com.tum.fbl.core.service.auth.User;
 import com.tum.fbl.core.service.exceptions.ImageException;
-import io.dropwizard.auth.Auth;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
@@ -20,7 +18,6 @@ import org.slf4j.LoggerFactory;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 import java.io.InputStream;
 import java.util.List;
 
@@ -168,7 +165,7 @@ public class MealResource {
     @ApiOperation(value = "Deletes a meal")
     public void deleteMeal(@PathParam("mealId") int mealId) {
         try (MealDao mealDao = this.connectionFactory.getConnection().open(MealDao.class)) {
-            mealDao.delteMealById(mealId);
+            mealDao.deleteMealById(mealId);
         }
     }
 

@@ -42,7 +42,11 @@ public class VotingPeriodResource {
      * @param isFinished the variable of VotingPeriod
      * @return List of VotingPeriods
      */
+
 /*
+
+/**
+>>>>>>> 2e28125f60781b1cedf2edeeaf562a52ab0af4bf
     @GET
     @Path("/{isFinished}")
     @ApiOperation(value = "Get basic vote information")
@@ -125,6 +129,5 @@ public class VotingPeriodResource {
 
             return List;
         }
-    }
-}
-*/
+    }*/
+

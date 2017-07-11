@@ -11,6 +11,13 @@ public class VotingIngItem {
 
     private int ingredientId;
 
+    /**
+     *
+     * @param votingIngItemId the unique ID of the votingIngItem
+     * @param votingPeriodId the unique ID of the voting period
+     * @param isIgnored true if the voting is ignored, false otherwise
+     * @param ingredientId the ingredient's unique ID
+     */
     public VotingIngItem(int votingIngItemId, int votingPeriodId, boolean isIgnored, int ingredientId) {
         this.votingIngItemId = votingIngItemId;
         this.votingPeriodId = votingPeriodId;

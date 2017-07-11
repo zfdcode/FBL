@@ -13,6 +13,14 @@ public class Voting {
 
     private String location;
 
+    /**
+     *
+     * @param votingId the voting's unique ID
+     * @param createdBy the unique ID of the user who created the voting
+     * @param createdOn the date this voting was created on
+     * @param startDate the date this voting started
+     * @param location the location this voting has been placed
+     */
     public Voting(int votingId, int createdBy, Date createdOn, Date startDate, String location) {
         this.votingId = votingId;
         this.createdBy = createdBy;

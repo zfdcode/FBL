@@ -19,6 +19,7 @@ import org.slf4j.LoggerFactory;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -59,15 +60,16 @@ public class MealResource {
         return null;
     }
 
-    /**
-     * Gets available meals.
-     * @return List<Meal> the list of meals
-     */
     @GET
-    @Path("/available")
-    @ApiOperation(value = "Get all available meals")
-    public List<Meal> getAvailableMeals() {
-        return null;
+    @Path("/{attributeName}/{attributeId}")
+    public List<Meal> getMealsByAttributeId(@PathParam("attributeName") String attributeName, @PathParam("attributeId") int attributeId){
+        try (MealDao mealDao = this.connectionFactory.getConnection().open(MealDao.class)) {
+            List<Meal> meals = new ArrayList<>();
+            for (com.tum.fbl.core.persistence.meal.Meal meal:mealDao.findMealsByAttributte(attributeName,attributeId)){
+                meals.add(new Meal(meal));
+            }
+            return meals;
+        }
     }
 
     @GET
@@ -197,16 +199,15 @@ public class MealResource {
     @POST
     @ApiOperation(value = "Add a new meal to the store")
     public int addMeal(Meal meal) {
-        return 0;
-        /*
+
         try (MealDao mealDao = this.connectionFactory.getConnection().open(MealDao.class)) {
            return mealDao.newMeal(
                     meal.getMealName(),
-                    meal.getMealImage(),
+                    null,
                     meal.getMealRating(),
-                    meal.getMealHelathValue(),
+                    0,
                     meal.getMealPreparationTime(),
-                    meal.getOfferDate(),
+                    null,
                     meal.getMealEnergy(),
                     meal.getMealProtein(),
                     meal.getMealTotalFat(),
@@ -216,7 +217,7 @@ public class MealResource {
                     meal.getMealSodium()
             );
         }
-        */
+
     }
 
     /**

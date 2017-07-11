@@ -65,11 +65,13 @@ public interface MealDao extends AutoCloseable{
     /**
      * deletes an entry with specified unique ID from the Meal table in the database
       * @param id the id of the entry that will be deleted
-     * @return the deleted Meal object
      */
     @SqlUpdate("delete from meal where mealId = :id")
-    Meal deleteMealById(@Bind("id") int id);
+    void deleteMealById(@Bind("id") int id);
     //TODO: void update()
+
+    @SqlQuery("select * from Meal where :attributeName = :attributeId")
+    List<Meal> findMealsByAttributte(@Bind("attributeName") String attributeName, @Bind("attributeId") int id);
 
     public void close();
 }

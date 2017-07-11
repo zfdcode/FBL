@@ -38,12 +38,13 @@ class EventShoppingItemSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.EventShoppingItem
-        fields = ('id', 'name', 'created_at', 'event')
+        fields = ('id', 'name', 'created_at', 'event', 'user_id')
         read_only_fields = ('id', 'created_at', 'modified_at')
 
     def to_representation(self, instance):
         data = super(EventShoppingItemSerializer, self).to_representation(instance)
-        data['creator'] = user_serializers.UserSerializer(instance=instance.user_id).data
+        data['creator'] = instance.user_id
+        data.pop('user_id')
         return data
 
 
@@ -51,17 +52,15 @@ class EventMealSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.EventMeal
-        fields = ('id', 'name', 'created_at', 'event', 'meal_id')
+        fields = ('id', 'name', 'created_at', 'event', 'meal_id', 'user_id')
         read_only_fields = ('id', 'created_at', 'modified_at')
 
     def to_representation(self, instance):
         data = super(EventMealSerializer, self).to_representation(instance)
-        data['creator'] = user_serializers.UserSerializer(instance=instance.user_id).data
-        data['voters'] = user_serializers.UserSerializer(
-            instance=instance.votes.values_list('user_id', flat=True),
-            many=True
-        ).data
+        data['creator'] = instance.user_id
+        data['voters'] = instance.votes.values_list('user_id', flat=True)
         data['votes'] = len(data['voters'])
+        data.pop('user_id')
         return data
 
 
@@ -89,7 +88,8 @@ class EventMessageSerializer(serializers.ModelSerializer):
 
     def to_representation(self, instance):
         data = super(EventMessageSerializer, self).to_representation(instance)
-        data['creator'] = user_serializers.UserSerializer(instance=instance.user_id).data
+        data['creator'] = instance.user_id
+        data.pop('user_id')
         return data
 
 
@@ -132,7 +132,7 @@ class EventSerializer(serializers.ModelSerializer):
 
     def to_representation(self, instance):
         data = super(EventSerializer, self).to_representation(instance)
-        data['creator'] = user_serializers.UserSerializer(instance=instance.user_id).data
+        data['creator'] = instance.user_id
 
         if self.context.get('is_list', False):
             data['num_members'] = instance.users.count()
@@ -141,10 +141,7 @@ class EventSerializer(serializers.ModelSerializer):
             data['meals'] = []
             data['messages'] = []
         else:
-            data['members'] = user_serializers.UserSerializer(
-                instance=instance.users.all().values_list('user_id', flat=True),
-                many=True
-            ).data
+            data['members'] = instance.users.all().values_list('user_id', flat=True)
             data['num_members'] = len(data['members'])
             data['shoppingitems'] = EventShoppingItemSerializer(instance=instance.shop_items.all(), many=True).data
             data['meals'] = EventMealSerializer(instance=instance.meals.all(), many=True).data

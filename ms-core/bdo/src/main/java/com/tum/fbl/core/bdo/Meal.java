@@ -64,7 +64,7 @@ public class Meal {
         this.mealRestaurant = mealRestaurant;
     }
 
-    /*
+
     public Meal(com.tum.fbl.core.persistence.meal.Meal meal){
         this.mealId = meal.getMealId();
         this.mealName = meal.getMealName();
@@ -72,9 +72,24 @@ public class Meal {
         this.mealRating = meal.getMealRating();
         this.mealHealthValue = meal.getMealHealthValue();
         this.mealPreparationTime = meal.getMealPreparationTime();
-        this.offerDates = meal.;
+        this.offerDates = new Date[0];
+        this.mealEnergy = meal.getMealEnergy();
+        this.mealProtein = meal.getMealProtein();
+        this.mealTotalFat = meal.getMealTotalFat();
+        this.mealSaturated = meal.getMealSaturated();
+        this.mealTotalCarbohydrate = meal.getMealTotalCarbohydrate();
+        this.mealSugar = meal.getMealSugar();
+        this.mealSodium = meal.getMealSodium();
+        this.mealIngredients = new Ingredient[0];
+        this.mealCategories = new Category[0];
+        this.mealRatings = new Rating[0];
+        this.mealRestaurant = new Restaurant(0,null,null,null,
+                null,null,0,0,null,
+                null,null,null,
+                null,null,null);
+
     }
-    */
+
     public int getMealId() {
         return mealId;
     }

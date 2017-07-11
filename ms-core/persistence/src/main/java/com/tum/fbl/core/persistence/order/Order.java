@@ -19,6 +19,15 @@ public class Order {
 
     private int orderNumber;
 
+    /**
+     *
+     * @param orderId the unique orderId
+     * @param orderUserId the ordering user's ID
+     * @param orderMealId the ordered meal's ID
+     * @param orderPickupTime time when the meal is ready to be picked up
+     * @param orderStatus current status of the order
+     * @param orderNumber order's actual number at restaurant
+     */
     public Order(int orderId, int orderUserId, int orderMealId, Date orderPickupTime, int orderStatus, int orderNumber) {
         this.orderId = orderId;
         this.orderUserId = orderUserId;

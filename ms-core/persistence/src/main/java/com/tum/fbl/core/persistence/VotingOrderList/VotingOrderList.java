@@ -11,7 +11,13 @@ public class VotingOrderList {
 
     private int votingPeriodId;
 
-
+    /**
+     *
+     * @param votingOrderListId the votingOrderList's unique ID
+     * @param orderedAmount the amount that was ordered
+     * @param orderedAt when the order was placed
+     * @param votingPeriodId the unique ID of the voting period the order was placed in
+     */
     public VotingOrderList(int votingOrderListId, float orderedAmount, Date orderedAt, int votingPeriodId) {
         this.votingOrderListId = votingOrderListId;
         this.orderedAmount = orderedAmount;

@@ -84,8 +84,9 @@ public class CategoryResource {
      * @param category the speical need
      */
     @POST
-    @ApiOperation(value = "Add a new special need to the store")
-    public void addCategory(Category category) {
+    @ApiOperation(value = "Add a new category to the store")
+    public int addCategory(Category category) {
+        return 0;
     }
 
     /**
@@ -93,7 +94,7 @@ public class CategoryResource {
      * @param category the special need
      */
     @PUT
-    @ApiOperation(value = "Update an existing special need")
+    @ApiOperation(value = "Update an existing category")
     public void updateCategory(Category category) {
     }
 

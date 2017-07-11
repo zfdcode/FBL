@@ -104,9 +104,9 @@ public class RestaurantResource {
      */
     @POST
     @ApiOperation(value = "Add a new restaurant to the store")
-    public void addRestaurant(Restaurant restaurant) {
+    public int addRestaurant(Restaurant restaurant) {
         try (UserDao userDao = this.connectionFactory.getConnection().open(UserDao.class)){
-            userDao.newUser(
+            return userDao.newUser(
                     restaurant.getRestaurantName(),
                     restaurant.getRestaurantPassword(),
                     restaurant.getRestaurantEmail(),

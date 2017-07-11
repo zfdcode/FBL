@@ -17,8 +17,8 @@ public interface  VotingDao extends AutoCloseable{
     @SqlQuery("select * from voting where votingId = :id")
     Voting findVotingById(@Bind("id") int votingId);
 
-    @SqlUpdate("Insert into voting (createdBy, createdOn, userId, like) value (:createdBy, :createdOn, :startDate, :location)")
-    void newVoting(@Bind("createdBy") int createdBy,
+    @SqlUpdate("Insert into voting (createdBy, createdOn, userId, like) value (:createdBy, :createdOn, :startDate, :location) ; SELECT LAST_INSERT_ID() from voting")
+    int newVoting(@Bind("createdBy") int createdBy,
                  @Bind("createdOn") Date createdOn,
                  @Bind("startDate") Date startDate,
                  @Bind("location") String location);

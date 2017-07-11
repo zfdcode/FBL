@@ -196,11 +196,11 @@ public class MealResource {
      */
     @POST
     @ApiOperation(value = "Add a new meal to the store")
-    public void addMeal(Meal meal) {
-
+    public int addMeal(Meal meal) {
+        return 0;
         /*
         try (MealDao mealDao = this.connectionFactory.getConnection().open(MealDao.class)) {
-            mealDao.newMeal(
+           return mealDao.newMeal(
                     meal.getMealName(),
                     meal.getMealImage(),
                     meal.getMealRating(),

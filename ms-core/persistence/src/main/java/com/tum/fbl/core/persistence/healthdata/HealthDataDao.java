@@ -28,8 +28,8 @@ public interface HealthDataDao extends AutoCloseable {
      * @param calorieGoal
      */
     @SqlUpdate("Insert into healthTrackerData (userId, deviceUserPassword, deviceUserId, burnedCalorie, trackedCalorieTimeRange, calorieGoal) " +
-            "values (:userId, :deviceUserPassword, :deviceUserId, :burnedCalories, :trackedCalorieTimeRange, :calorieGoal)")
-    void newHealthData(
+            "values (:userId, :deviceUserPassword, :deviceUserId, :burnedCalories, :trackedCalorieTimeRange, :calorieGoal) ; SELECT LAST_INSERT_ID() from healthTrackerData")
+    int newHealthData(
             @Bind("userId") int userId,
             @Bind("deviceUserPassword") String deviceUserPassword,
             @Bind("deviceUserId") int deviceUserId,

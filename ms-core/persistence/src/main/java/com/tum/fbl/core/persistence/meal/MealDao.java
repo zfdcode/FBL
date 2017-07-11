@@ -46,8 +46,8 @@ public interface MealDao extends AutoCloseable{
      * @param mealSodium
      */
     @SqlUpdate("insert into meal ( mealName, mealImage, mealRating, mealHelathValue, mealPreparationTime, offerDate, mealEnergy, mealProtein, mealTotalFat, mealSaturated, mealTotalCarbohydrate, mealSugar, mealSodium) " +
-            "values ( :mealName, :mealImage, :mealRating, :mealHelathValue, :mealPreparationTime, offerDate, :mealEnergy, :mealProtein, :mealTotalFat, :mealSaturated, :mealTotalCarbohydrate, :mealSugar, :mealSodium")
-    void newMeal(
+            "values ( :mealName, :mealImage, :mealRating, :mealHelathValue, :mealPreparationTime, offerDate, :mealEnergy, :mealProtein, :mealTotalFat, :mealSaturated, :mealTotalCarbohydrate, :mealSugar, :mealSodium) ; SELECT LAST_INSERT_ID() from meal")
+    int newMeal(
             @Bind("mealName") String mealName,
             @Bind("mealImage") byte[] mealImage,
             @Bind("mealRating") float mealRating,

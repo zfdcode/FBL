@@ -42,7 +42,7 @@ public interface IngredientDao extends AutoCloseable {
      * @return the unique ID of the newly added ingredient
      */
     @SqlUpdate("Insert into ingredient (ingredientName, description, ingredientImage, energy, totalFat, protein, totalCarbohydrate, isGarnish, sugar) " +
-            "value (:ingredientName, :description, :ingredientImage, :energy, :totalFat, :protein, :totalCarbohydrate, :isGarnish, sugar)")
+            "value (:ingredientName, :description, :ingredientImage, :energy, :totalFat, :protein, :totalCarbohydrate, :isGarnish, sugar); SELECT LAST_INSERT_ID() from ingredient")
     int newIngredient(@Bind("ingredientName") String ingredientName,
                        @Bind("description") String description,
                        @Bind("ingredientImage") String ingredientImage,

@@ -21,6 +21,7 @@ public interface OrderDao extends AutoCloseable{
     @SqlQuery("select * from order where orderId = :id")
     Order findOrderById(@Bind("id") int orderId);
 
+
     /**
      * inserts a new entry into the Order table in the database
      * @param orderUserId the unique ID of the user who placed the order
@@ -28,8 +29,9 @@ public interface OrderDao extends AutoCloseable{
      * @param orderPickupTime the time the order is ready to be picked up
      * @param orderStatus the order's current status
      */
-    @SqlUpdate("Insert into order (orderUserId, orderMealId, orderPickupTime, orderStatus, orderNumber) value (:orderUserId, :orderMealId, :orderPickupTime, :orderStatus, :orderNumber)")
-    void newOrder(@Bind("orderUserId") int orderUserId,
+
+    @SqlUpdate("Insert into order (orderUserId, orderMealId, orderPickupTime, orderStatus, orderNumber) value (:orderUserId, :orderMealId, :orderPickupTime, :orderStatus, :orderNumber); SELECT LAST_INSERT_ID() from order")
+    int newOrder(@Bind("orderUserId") int orderUserId,
                   @Bind("orderMealId") int orderMealId,
                   @Bind("orderPickupTime") Date orderPickupTime,
                   @Bind("orderStatus") int orderStatus);

@@ -16,8 +16,8 @@ public interface ScheduleDao extends AutoCloseable{
     @SqlQuery("select * from schedule where userId = :id")
     Schedule findScheduleById(@Bind("id") int userId);
 
-    @SqlUpdate("Insert into schedule (schedulesDayOfTheWeek, schedulesOpeningTime, schedulesClosingTime) value (:schedulesDayOfTheWeek, :schedulesOpeningTime, :schedulesClosingTime)")
-    void newSchedule(@Bind("schedulesDayOfTheWeek") int schedulesDayOfTheWeek,
+    @SqlUpdate("Insert into schedule (schedulesDayOfTheWeek, schedulesOpeningTime, schedulesClosingTime) value (:schedulesDayOfTheWeek, :schedulesOpeningTime, :schedulesClosingTime) ; SELECT LAST_INSERT_ID() from schedule")
+    int newSchedule(@Bind("schedulesDayOfTheWeek") int schedulesDayOfTheWeek,
                      @Bind("schedulesOpeningTime") Date schedulesOpeningTime,
                      @Bind("schedulesClosingTime") Date schedulesClosingTime);
 

@@ -114,7 +114,7 @@ public class OrderResource {
      */
     @POST
     @ApiOperation(value = "Add a new order to the store")
-    public void addOrder(Order order) {
+    public int addOrder(Order order) {
 
        /*
         try (OrderDao orderDao = this.connectionFactory.getConnection().open(OrderDao.class)) {
@@ -134,7 +134,7 @@ public class OrderResource {
         */
 
        try(OrderDao orderDao = this.connectionFactory.getConnection().open(OrderDao.class)){
-           orderDao.newOrder(order.getOrderUser().getUserId(),
+           return orderDao.newOrder(order.getOrderUser().getUserId(),
                    order.getOrderMeal().getMealId(),
                    order.getOrderPickupTime(),
                    order.getOrderStatus());

@@ -18,6 +18,8 @@ import java.util.List;
 /**
  * Created by MS on 10.07.2017.
  */
+
+/*
 @Path("/votingPeriod")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
@@ -29,7 +31,7 @@ public class VotingPeriodResource {
     /**
      * Connects to the factory for VotingPeriod resource.
      * @param connectionFactory the connection of factory
-     */
+     /*
 
     public VotingPeriodResource(ConnectionFactory connectionFactory) {
         this.connectionFactory = connectionFactory;
@@ -40,7 +42,11 @@ public class VotingPeriodResource {
      * @param isFinished the variable of VotingPeriod
      * @return List of VotingPeriods
      */
+
+/*
+
 /**
+>>>>>>> 2e28125f60781b1cedf2edeeaf562a52ab0af4bf
     @GET
     @Path("/{isFinished}")
     @ApiOperation(value = "Get basic vote information")
@@ -124,4 +130,4 @@ public class VotingPeriodResource {
             return List;
         }
     }*/
-}
+

@@ -46,6 +46,17 @@ public class User {
         this.weight = weight;
     }
 
+    public User(com.tum.fbl.core.persistence.user.User user) {
+        this.userId = user.getUserId();
+        this.userName = user.getUserName();
+        this.userPassword = user.getUserPassword();
+        this.email = user.getEmail();
+        this.birthday = user.getBirthday();
+        this.height = user.getHeight();
+        this.weight = user.getWeight();
+        this.DisplayName = user.getDisplayName();
+        this.role = user.getRole();
+    }
     /**
      * Gets UserId.
      * @return userId unique ID of the user

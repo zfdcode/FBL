@@ -8,11 +8,11 @@ public class Meal {
 
     private String mealName;
 
-    private byte[] mealImage;
+    private String mealImage;
 
     private float mealRating;
 
-    private int mealHelathValue;
+    private int mealHealthValue;
 
     private Date mealPreparationTime;
 
@@ -32,12 +32,12 @@ public class Meal {
 
     private float mealSodium;
 
-    public Meal(int mealId, String mealName, byte[] mealImage, float mealRating, int mealHelathValue, Date mealPreparationTime, Date offerDate, float mealEnergy, float mealProtein, float mealTotalFat, float mealSaturated, float mealTotalCarbohydrate, float mealSugar, float mealSodium) {
+    public Meal(int mealId, String mealName, String mealImage, float mealRating, int mealHealthValue, Date mealPreparationTime, float mealEnergy, float mealProtein, float mealTotalFat, float mealSaturated, float mealTotalCarbohydrate, float mealSugar, float mealSodium) {
         this.mealId = mealId;
         this.mealName = mealName;
         this.mealImage = mealImage;
         this.mealRating = mealRating;
-        this.mealHelathValue = mealHelathValue;
+        this.mealHealthValue = mealHealthValue;
         this.mealPreparationTime = mealPreparationTime;
         this.offerDate = offerDate;
         this.mealEnergy = mealEnergy;
@@ -65,11 +65,11 @@ public class Meal {
         this.mealName = mealName;
     }
 
-    public byte[] getMealImage() {
+    public String getMealImage() {
         return mealImage;
     }
 
-    public void setMealImage(byte[] mealImage) {
+    public void setMealImage(String mealImage) {
         this.mealImage = mealImage;
     }
 
@@ -81,12 +81,12 @@ public class Meal {
         this.mealRating = mealRating;
     }
 
-    public int getMealHelathValue() {
-        return mealHelathValue;
+    public int getMealHealthValue() {
+        return mealHealthValue;
     }
 
     public void setMealHelathValue(int mealHelathValue) {
-        this.mealHelathValue = mealHelathValue;
+        this.mealHealthValue = mealHelathValue;
     }
 
     public Date getMealPreparationTime() {

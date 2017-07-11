@@ -12,6 +12,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 import javax.ws.rs.core.MediaType;
+import java.util.Date;
 import java.util.List;
 import javax.ws.rs.*;
 
@@ -66,7 +67,26 @@ public class OrderResource {
     @Path("/order/{orderId}")
     @ApiOperation(value = "Get information of a order")
     public Order getOrder(@PathParam("orderId") int orderId) {
-            return null;
+        try (OrderDao orderDao = this.connectionFactory.getConnection().open(OrderDao.class)) {
+            com.tum.fbl.core.persistence.order.Order order = orderDao.findOrderById(orderId);
+
+            try (UserDao userDao = this.connectionFactory.getConnection().open(UserDao.class)) {
+                com.tum.fbl.core.persistence.user.User user = userDao.findUserById(order.getOrderUserId());
+
+                com.tum.fbl.core.bdo.User userBdo = new com.tum.fbl.core.bdo.User(user);
+
+                try (MealDao mealDao = this.connectionFactory.getConnection().open(MealDao.class)) {
+                    com.tum.fbl.core.persistence.meal.Meal meal = mealDao.findMealById(order.getOrderMealId());
+
+                    com.tum.fbl.core.bdo.Meal mealBdo = new com.tum.fbl.core.bdo.Meal(meal);
+
+                    return new Order(orderId, userBdo, mealBdo, null, order.getOrderStatus(), order.getOrderNumber());
+                }
+            }
+
+        }
+
+
     }
 
     /**

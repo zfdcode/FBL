@@ -64,6 +64,17 @@ public class Meal {
         this.mealRestaurant = mealRestaurant;
     }
 
+    /*
+    public Meal(com.tum.fbl.core.persistence.meal.Meal meal){
+        this.mealId = meal.getMealId();
+        this.mealName = meal.getMealName();
+        this.url = meal.getMealImage();
+        this.mealRating = meal.getMealRating();
+        this.mealHealthValue = meal.getMealHealthValue();
+        this.mealPreparationTime = meal.getMealPreparationTime();
+        this.offerDates = meal.;
+    }
+    */
     public int getMealId() {
         return mealId;
     }

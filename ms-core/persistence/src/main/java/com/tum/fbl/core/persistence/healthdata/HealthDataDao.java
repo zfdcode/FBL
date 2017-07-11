@@ -15,12 +15,12 @@ public interface HealthDataDao extends AutoCloseable {
     HealthData findHealthDataById(@Bind("id") int userId);
 
     @SqlUpdate("Insert into healthTrackerData (userId, deviceUserPassword, deviceUserId, burnedCalorie, trackedCalorieTimeRange, calorieGoal) " +
-            "values (:userId, :deviceUserPassword, :deviceUserId, :burnedCalorie, :trackedCalorieTimeRange, :calorieGoal)")
+            "values (:userId, :deviceUserPassword, :deviceUserId, :burnedCalories, :trackedCalorieTimeRange, :calorieGoal)")
     void newHealthData(
             @Bind("userId") int userId,
             @Bind("deviceUserPassword") String deviceUserPassword,
             @Bind("deviceUserId") int deviceUserId,
-            @Bind("burnedCalorie") float burnedCalorie,
+            @Bind("burnedCalories") float burnedCalories,
             @Bind("trackedCalorieTimeRange") float trackedCalorieTimeRange,
             @Bind("calorieGoal") float calorieGoal);
 

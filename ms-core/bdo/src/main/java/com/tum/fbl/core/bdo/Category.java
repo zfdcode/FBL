@@ -17,6 +17,12 @@ public class Category {
         this.categoryDescription = categoryDescription;
     }
 
+    public Category(com.tum.fbl.core.persistence.category.Category category){
+        this.categoryId = category.getCategoryId();
+        this.categoryName = category.getCategoryName();
+        this.categoryDescription = category.getCatecoryDecription();
+    }
+
     public int getCategoryId() {
         return categoryId;
     }

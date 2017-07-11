@@ -8,17 +8,17 @@ public class HealthData {
 
     private int deviceUserId;
 
-    private float burnedCalorie;
+    private float burnedCalories;
 
     private float trackedCaloriesTimeRange;
 
     private float calorieGoal;
 
-    public HealthData(int userId, String deviceUserPassword, int deviceUserId, float burnedCalorie, float trackedCaloriesTimeRange, float calorieGoal) {
+    public HealthData(int userId, String deviceUserPassword, int deviceUserId, float burnedCalories, float trackedCaloriesTimeRange, float calorieGoal) {
         this.userId = userId;
         this.deviceUserPassword = deviceUserPassword;
         this.deviceUserId = deviceUserId;
-        this.burnedCalorie = burnedCalorie;
+        this.burnedCalories = burnedCalories;
         this.trackedCaloriesTimeRange = trackedCaloriesTimeRange;
         this.calorieGoal = calorieGoal;
     }
@@ -47,12 +47,12 @@ public class HealthData {
         this.deviceUserId = deviceUserId;
     }
 
-    public float getBurnedCalorie() {
-        return burnedCalorie;
+    public float getBurnedCalories() {
+        return burnedCalories;
     }
 
-    public void setBurnedCalorie(float burnedCalorie) {
-        this.burnedCalorie = burnedCalorie;
+    public void setBurnedCalories(float burnedCalories) {
+        this.burnedCalories = burnedCalories;
     }
 
     public float getTrackedCaloriesTimeRange() {

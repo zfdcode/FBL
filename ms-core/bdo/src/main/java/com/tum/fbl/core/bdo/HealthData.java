@@ -12,7 +12,7 @@ public class HealthData {
 
     private int deviceUserId;
 
-    private float burnedCalorie;
+    private float burnedCalories;
 
     private float trackedCaloriesTimeRange;
 
@@ -29,9 +29,18 @@ public class HealthData {
         this.userId = userId;
         this.deviceUserPassword = deviceUserPassword;
         this.deviceUserId = deviceUserId;
-        this.burnedCalorie = burnedCalorie;
+        this.burnedCalories = burnedCalorie;
         this.trackedCaloriesTimeRange = trackedCaloriesTimeRange;
         this.calorieGoal = calorieGoal;
+    }
+
+    public HealthData(com.tum.fbl.core.persistence.healthdata.HealthData healthData){
+        this.userId = healthData.getUserId();
+        this.deviceUserPassword = healthData.getDeviceUserPassword();
+        this.deviceUserId = healthData.getDeviceUserId();
+        this.burnedCalories = healthData.getBurnedCalories();
+        this.trackedCaloriesTimeRange = healthData.getTrackedCaloriesTimeRange();
+        this.calorieGoal = healthData.getCalorieGoal();
     }
 
     public int getUserId() {
@@ -58,12 +67,12 @@ public class HealthData {
         this.deviceUserId = deviceUserId;
     }
 
-    public float getBurnedCalorie() {
-        return burnedCalorie;
+    public float getBurnedCalories() {
+        return burnedCalories;
     }
 
-    public void setBurnedCalorie(float burnedCalorie) {
-        this.burnedCalorie = burnedCalorie;
+    public void setBurnedCalories(float burnedCalorie) {
+        this.burnedCalories = burnedCalorie;
     }
 
     public float getTrackedCaloriesTimeRange() {

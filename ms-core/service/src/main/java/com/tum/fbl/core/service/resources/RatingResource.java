@@ -83,7 +83,7 @@ public class RatingResource {
      */
     @POST
     @ApiOperation(value = "Add a new rating to the store")
-    public void addRating(Rating rating) {
+    public void addRating(int userId, int mealId, float rating) {
     }
 
     /**

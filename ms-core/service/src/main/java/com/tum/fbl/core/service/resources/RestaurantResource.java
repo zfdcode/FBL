@@ -41,17 +41,6 @@ public class RestaurantResource {
     }
 
     /**
-     * Gets restaurants at campus.
-     * @return List<Restaurant> the list of restaurants
-     */
-    @GET
-    @Path("/campus")
-    @ApiOperation(value = "Get all restaurants at a campus")
-    public List<Restaurant> getRestaurantsAtCampus () {
-        return null;
-    }
-
-    /**
      * Gets restaurant.
      * @param restaurantId the restaurant id
      * @return Restaurant
@@ -62,6 +51,14 @@ public class RestaurantResource {
     public Restaurant getRestaurant (@PathParam("restaurantId") int restaurantId) {
         return null;
     }
+
+    @GET
+    @Path("/meal/{mealId}")
+    public Restaurant getRestaurantByMeal(){return null;}
+
+    @GET
+    @Path("/order/{orderId}")
+    public Restaurant getRestaurantByOrder() {return null;}
 
     /**
      * Deletes restaurant.

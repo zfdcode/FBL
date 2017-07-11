@@ -9,6 +9,7 @@ import org.skife.jdbi.v2.DBI;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -35,11 +36,14 @@ public class UserResource {
     @GET
     @Path("/all")
     @ApiOperation(value = "Get basic user information")
-    public List< com.tum.fbl.core.persistence.user.User> getUsers() {
+    public List< User> getUsers() {
 
         try (UserDao userDao = this.connectionFactory.getConnection().open(UserDao.class)) {
-           return userDao.getAllUser();
-
+            List<User> users = new ArrayList<User>();
+            for (com.tum.fbl.core.persistence.user.User user:userDao.getAllUser()){
+                users.add(new User(user));
+            }
+            return users;
         }
     }
     /**
@@ -56,17 +60,7 @@ public class UserResource {
             com.tum.fbl.core.persistence.user.User user = userDao.findUserById(userId);
 
             if (user != null) {
-                return new User(
-                        user.getUserId(),
-                        user.getUserName(),
-                        user.getUserPassword(),
-                        user.getEmail(),
-                        user.getBirthday(),
-                        user.getHeight(),
-                        user.getWeight(),
-                        user.getDisplayName(),
-                        user.getRole()
-                );
+                return new User(user);
             } else {
                 return null;
             }
@@ -102,6 +96,7 @@ public class UserResource {
                     user.getHeight(),
                     user.getWeight(),
                     user.getDisplayName(),
+                    //TODO:
                     "",
                     0,
                     0,
@@ -119,17 +114,7 @@ public class UserResource {
             com.tum.fbl.core.persistence.user.User user = userDao.findUserByEmail(email);
 
             if (user != null) {
-                return new User(
-                        user.getUserId(),
-                        user.getUserName(),
-                        user.getUserPassword(),
-                        user.getEmail(),
-                        user.getBirthday(),
-                        user.getHeight(),
-                        user.getWeight(),
-                        user.getDisplayName(),
-                        user.getRole()
-                );
+                return new User(user);
             } else {
                 return null;
             }
@@ -146,19 +131,7 @@ public class UserResource {
     public void updateUser(User user) {
         try (UserDao userDao = this.connectionFactory.getConnection().open(UserDao.class)) {
             //TODO: userdao.updateUser
-            userDao.newUser(
-                    user.getUserName(),
-                    user.getUserPassword(),
-                    user.getEmail(),
-                    user.getBirthday(),
-                    user.getHeight(),
-                    user.getWeight(),
-                    user.getDisplayName(),
-                    "",
-                    0,
-                    0,
-                    user.getRole()
-            );
+
         }
     }
 
@@ -171,19 +144,13 @@ public class UserResource {
     @Path("/category/{categoryId}")
     @ApiOperation(value = "Get users by special need")
     public List<User> getUsersByCategory(@PathParam("categoryId") int categoryId) {
-        return null;
+        try (UserDao userDao = this.connectionFactory.getConnection().open(UserDao.class)) {
+            List<User> users = new ArrayList<User>();
+            for (com.tum.fbl.core.persistence.user.User user : userDao.findUsersByCategory(categoryId)){
+                users.add(new User(user));
+            }
+            return users;
+        }
     }
 
-
-    /**
-     * Gets users by meal
-     * @param mealId the meal id
-     * @return List<User> the list of users
-     */
-    @GET
-    @Path("/meal/{mealId}")
-    @ApiOperation(value = "Get users by selected meal")
-    public List<User> getUsersByMeal(@PathParam("mealId") int mealId) {
-        return null;
-    }
 }

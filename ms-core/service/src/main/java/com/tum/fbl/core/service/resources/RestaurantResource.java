@@ -1,12 +1,15 @@
 package com.tum.fbl.core.service.resources;
 
 import com.tum.fbl.core.bdo.Restaurant;
+import com.tum.fbl.core.bdo.User;
 import com.tum.fbl.core.persistence.ConnectionFactory;
+import com.tum.fbl.core.persistence.user.UserDao;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,6 +22,7 @@ import java.util.List;
 @Api(value = "Restaurant API", description = "Provides the core data of all restaurants.")
 public class RestaurantResource {
 
+    private final int role = 1;
     private final ConnectionFactory connectionFactory;
 
     /**
@@ -37,7 +41,13 @@ public class RestaurantResource {
     @Path("/all")
     @ApiOperation(value = "Get all Restaurants")
     public List<Restaurant> getAllRestaurants () {
-        return null;
+         try (UserDao userDao = this.connectionFactory.getConnection().open(UserDao.class)){
+             List<Restaurant> restaurants = new ArrayList<>();
+             for (com.tum.fbl.core.persistence.user.User restaurant:userDao.getAllUser(this.role)){
+                 restaurants.add(new Restaurant(restaurant));
+             }
+             return restaurants;
+         }
     }
 
     /**
@@ -49,16 +59,31 @@ public class RestaurantResource {
     @Path("/{restaurantId}")
     @ApiOperation(value = "Get core information of a restaurant")
     public Restaurant getRestaurant (@PathParam("restaurantId") int restaurantId) {
-        return null;
+        try (UserDao userDao = this.connectionFactory.getConnection().open(UserDao.class)) {
+            com.tum.fbl.core.persistence.user.User restaurant = userDao.findUserById(restaurantId);
+            return new Restaurant(restaurant);
+        }
     }
 
     @GET
     @Path("/meal/{mealId}")
-    public Restaurant getRestaurantByMeal(){return null;}
+    @ApiOperation(value = "Get information of a restaurant by offered meal")
+    public Restaurant getRestaurantByMeal(@PathParam("mealId") int mealId){
+        try (UserDao userDao = this.connectionFactory.getConnection().open(UserDao.class)) {
+            com.tum.fbl.core.persistence.user.User restaurant = userDao.findUserByMealId(mealId);
+            return new Restaurant(restaurant);
+        }
+    }
 
     @GET
     @Path("/order/{orderId}")
-    public Restaurant getRestaurantByOrder() {return null;}
+    @ApiOperation(value = "Get information of a restaurant by order")
+    public Restaurant getRestaurantByOrder(@PathParam("orderId") int orderId) {
+        try (UserDao userDao = this.connectionFactory.getConnection().open(UserDao.class)) {
+            com.tum.fbl.core.persistence.user.User restaurant = userDao.findUserByOrderId(orderId);
+            return new Restaurant(restaurant);
+        }
+    }
 
     /**
      * Deletes restaurant.
@@ -68,7 +93,9 @@ public class RestaurantResource {
     @Path("/{restaurantId}")
     @ApiOperation(value = "Delete a restaurant")
     public void deleteRestaurant (@PathParam("restaurantId") int restaurantId) {
-
+        try (UserDao userDao = this.connectionFactory.getConnection().open(UserDao.class)){
+            userDao.deleteUser(restaurantId);
+        }
     }
 
     /**
@@ -78,7 +105,21 @@ public class RestaurantResource {
     @POST
     @ApiOperation(value = "Add a new restaurant to the store")
     public void addRestaurant(Restaurant restaurant) {
-
+        try (UserDao userDao = this.connectionFactory.getConnection().open(UserDao.class)){
+            userDao.newUser(
+                    restaurant.getRestaurantName(),
+                    restaurant.getRestaurantPassword(),
+                    restaurant.getRestaurantEmail(),
+                    null,
+                    0,
+                    0,
+                    restaurant.getRestaurantDisplayName(),
+                    restaurant.getRestaurantAddress(),
+                    restaurant.getLongitude(),
+                    restaurant.getLatitude(),
+                    this.role
+            );
+        }
     }
 
     /**
@@ -87,8 +128,8 @@ public class RestaurantResource {
      */
     @PUT
     @ApiOperation(value = "Update an existing restaurant")
-    public void updatePet(Restaurant restaurant) {
-
+    public void updateRestaurant(Restaurant restaurant) {
+        //TODO:
     }
 
 }

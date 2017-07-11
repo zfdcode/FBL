@@ -23,6 +23,8 @@ import java.util.List;
 @Api(value = "User API", description = "Provides the user information.")
 public class UserResource {
 
+    private final int role = 0;
+
     private final ConnectionFactory connectionFactory;
 
     /**
@@ -40,7 +42,7 @@ public class UserResource {
 
         try (UserDao userDao = this.connectionFactory.getConnection().open(UserDao.class)) {
             List<User> users = new ArrayList<User>();
-            for (com.tum.fbl.core.persistence.user.User user:userDao.getAllUser()){
+            for (com.tum.fbl.core.persistence.user.User user:userDao.getAllUser(this.role)){
                 users.add(new User(user));
             }
             return users;
@@ -100,7 +102,7 @@ public class UserResource {
                     "",
                     0,
                     0,
-                    user.getRole()
+                    this.role
             );
         }
     }

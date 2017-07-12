@@ -4,6 +4,7 @@ import com.tum.fbl.core.bdo.Restaurant;
 import com.tum.fbl.core.bdo.User;
 import com.tum.fbl.core.persistence.ConnectionFactory;
 import com.tum.fbl.core.persistence.user.UserDao;
+import com.tum.fbl.core.service.exceptions.IllegalArgumentExpection;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
@@ -43,9 +44,14 @@ public class RestaurantResource {
     public List<Restaurant> getAllRestaurants () {
          try (UserDao userDao = this.connectionFactory.getConnection().open(UserDao.class)){
              List<Restaurant> restaurants = new ArrayList<>();
-             for (com.tum.fbl.core.persistence.user.User restaurant:userDao.getAllUser(this.role)){
-                 restaurants.add(new Restaurant(restaurant));
+
+             List<com.tum.fbl.core.persistence.user.User> restaurantList = userDao.getAllUser(this.role);
+             if (restaurantList != null) {
+                 for (com.tum.fbl.core.persistence.user.User restaurant : restaurantList) {
+                     restaurants.add(new Restaurant(restaurant));
+                 }
              }
+
              return restaurants;
          }
     }
@@ -61,7 +67,11 @@ public class RestaurantResource {
     public Restaurant getRestaurant (@PathParam("restaurantId") int restaurantId) {
         try (UserDao userDao = this.connectionFactory.getConnection().open(UserDao.class)) {
             com.tum.fbl.core.persistence.user.User restaurant = userDao.findUserById(restaurantId);
-            return new Restaurant(restaurant);
+            if (restaurant != null) {
+                return new Restaurant(restaurant);
+            } else {
+                return null;
+            }
         }
     }
 
@@ -71,7 +81,12 @@ public class RestaurantResource {
     public Restaurant getRestaurantByMeal(@PathParam("mealId") int mealId){
         try (UserDao userDao = this.connectionFactory.getConnection().open(UserDao.class)) {
             com.tum.fbl.core.persistence.user.User restaurant = userDao.findUserByMealId(mealId);
-            return new Restaurant(restaurant);
+
+            if (restaurant != null) {
+                return new Restaurant(restaurant);
+            } else {
+                return null;
+            }
         }
     }
 
@@ -81,7 +96,12 @@ public class RestaurantResource {
     public Restaurant getRestaurantByOrder(@PathParam("orderId") int orderId) {
         try (UserDao userDao = this.connectionFactory.getConnection().open(UserDao.class)) {
             com.tum.fbl.core.persistence.user.User restaurant = userDao.findUserByOrderId(orderId);
-            return new Restaurant(restaurant);
+
+            if (restaurant != null) {
+                return new Restaurant(restaurant);
+            } else {
+                return null;
+            }
         }
     }
 
@@ -104,22 +124,26 @@ public class RestaurantResource {
      */
     @POST
     @ApiOperation(value = "Add a new restaurant to the store")
-    public int addRestaurant(Restaurant restaurant) {
-        try (UserDao userDao = this.connectionFactory.getConnection().open(UserDao.class)){
-            return userDao.newUser(
-                    restaurant.getRestaurantName(),
-                    restaurant.getRestaurantPassword(),
-                    restaurant.getRestaurantEmail(),
-                    //TODO:
-                    null,
-                    0,
-                    0,
-                    restaurant.getRestaurantDisplayName(),
-                    restaurant.getRestaurantAddress(),
-                    restaurant.getLongitude(),
-                    restaurant.getLatitude(),
-                    this.role
-            );
+    public int addRestaurant(Restaurant restaurant) throws IllegalArgumentExpection {
+        if (restaurant != null) {
+            try (UserDao userDao = this.connectionFactory.getConnection().open(UserDao.class)) {
+                return userDao.newUser(
+                        restaurant.getRestaurantName(),
+                        restaurant.getRestaurantPassword(),
+                        restaurant.getRestaurantEmail(),
+                        //TODO:
+                        null,
+                        0,
+                        0,
+                        restaurant.getRestaurantDisplayName(),
+                        restaurant.getRestaurantAddress(),
+                        restaurant.getLongitude(),
+                        restaurant.getLatitude(),
+                        this.role
+                );
+            }
+        } else {
+            throw new IllegalArgumentExpection();
         }
     }
 
@@ -129,15 +153,20 @@ public class RestaurantResource {
      */
     @PUT
     @ApiOperation(value = "Update an existing restaurant")
-    public void updateRestaurant(Restaurant restaurant) {
-        try (UserDao userDao = this.connectionFactory.getConnection().open(UserDao.class)){
-            userDao.updateUser(
-                    restaurant.getRestaurantName(),
-                    restaurant.getRestaurantPassword(),
-                    restaurant.getRestaurantEmail(),
-                    0,
-                    restaurant.getRestaurantDisplayName()
-            );
+    public void updateRestaurant(Restaurant restaurant) throws IllegalArgumentExpection {
+
+        if (restaurant != null) {
+            try (UserDao userDao = this.connectionFactory.getConnection().open(UserDao.class)) {
+                userDao.updateUser(
+                        restaurant.getRestaurantName(),
+                        restaurant.getRestaurantPassword(),
+                        restaurant.getRestaurantEmail(),
+                        0,
+                        restaurant.getRestaurantDisplayName()
+                );
+            }
+        } else {
+            throw new IllegalArgumentExpection();
         }
     }
 

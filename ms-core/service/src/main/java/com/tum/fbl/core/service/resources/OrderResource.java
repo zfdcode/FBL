@@ -8,6 +8,7 @@ import com.tum.fbl.core.persistence.meal.MealDao;
 import com.tum.fbl.core.persistence.order.OrderDao;
 import com.tum.fbl.core.persistence.user.UserDao;
 import com.tum.fbl.core.bdo.Order;
+import com.tum.fbl.core.service.exceptions.IllegalArgumentExpection;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
@@ -50,12 +51,37 @@ public class OrderResource {
                 MealDao mealDao = this.connectionFactory.getConnection().open(MealDao.class)
         ) {
             List<Order> orders = new ArrayList<>();
-            for (com.tum.fbl.core.persistence.order.Order order : orderDao.getOrderList()) {
-                User user = new User(userDao.findUserById(order.getOrderUserId()));
-                Restaurant restaurant = new Restaurant(userDao.findUserById(order.getOrderRestaurantId()));
-                Meal meal = new Meal(mealDao.findMealById(order.getOrderMealId()));
-                orders.add(new Order(order,user,restaurant,meal));
+            List<com.tum.fbl.core.persistence.order.Order> orderList = orderDao.getOrderList();
+            if (orderList != null) {
+                for (com.tum.fbl.core.persistence.order.Order order : orderList) {
+
+                    com.tum.fbl.core.persistence.user.User userDb = userDao.findUserById(order.getOrderUserId());
+                    User user;
+                    if (userDb != null) {
+                        user = new User(userDb);
+                    } else {
+                        user = new User();
+                    }
+
+                    com.tum.fbl.core.persistence.user.User restaurantDb = userDao.findUserById(order.getOrderRestaurantId());
+                    Restaurant restaurant;
+                    if (restaurantDb != null) {
+                        restaurant = new Restaurant(restaurantDb);
+                    } else {
+                        restaurant = new Restaurant();
+                    }
+
+                    Meal meal;
+                    com.tum.fbl.core.persistence.meal.Meal mealDb = mealDao.findMealById(order.getOrderMealId());
+                    if (mealDb != null) {
+                        meal = new Meal(mealDb);
+                    } else {
+                        meal = new Meal();
+                    }
+                    orders.add(new Order(order, user, restaurant, meal));
+                }
             }
+
             return orders;
         }
     }
@@ -76,17 +102,44 @@ public class OrderResource {
                 UserDao userDao = this.connectionFactory.getConnection().open(UserDao.class);
                 MealDao mealDao = this.connectionFactory.getConnection().open(MealDao.class)
              ) {
-            com.tum.fbl.core.persistence.order.Order order = orderDao.findOrderById(orderId);
-            User user = new User(userDao.findUserById(order.getOrderUserId()));
-            Restaurant restaurant = new Restaurant(userDao.findUserById(order.getOrderRestaurantId()));
-            Meal meal = new Meal(mealDao.findMealById(order.getOrderMealId()));
-            return new Order(
-                    order,
-                    user,
-                    restaurant,
-                    meal);
-        }
 
+            com.tum.fbl.core.persistence.order.Order order = orderDao.findOrderById(orderId);
+
+            if (order != null) {
+
+                com.tum.fbl.core.persistence.user.User userDb = userDao.findUserById(order.getOrderUserId());
+                User user;
+                if (userDb != null) {
+                    user = new User(userDb);
+                } else {
+                    user = new User();
+                }
+
+                com.tum.fbl.core.persistence.user.User restaurantDb = userDao.findUserById(order.getOrderRestaurantId());
+                Restaurant restaurant;
+                if (restaurantDb != null) {
+                    restaurant = new Restaurant(restaurantDb);
+                } else {
+                    restaurant = new Restaurant();
+                }
+
+                com.tum.fbl.core.persistence.meal.Meal mealDb = mealDao.findMealById(order.getOrderMealId());
+                Meal meal;
+                if (mealDb != null) {
+                    meal = new Meal(mealDb);
+                } else {
+                    meal = new Meal();
+                }
+                return new Order(
+                        order,
+                        user,
+                        restaurant,
+                        meal);
+
+            } else {
+                return null;
+            }
+        }
     }
 
     /**
@@ -104,11 +157,38 @@ public class OrderResource {
                 MealDao mealDao = this.connectionFactory.getConnection().open(MealDao.class)
         ) {
             List<Order> orders = new ArrayList<>();
-            for (com.tum.fbl.core.persistence.order.Order order : orderDao.findOrdersByRestaurant(restaurantId)) {
-                User user = new User(userDao.findUserById(order.getOrderUserId()));
-                Restaurant restaurant = new Restaurant(userDao.findUserById(order.getOrderRestaurantId()));
-                Meal meal = new Meal(mealDao.findMealById(order.getOrderMealId()));
-                orders.add(new Order(order,user,restaurant,meal));
+
+            List<com.tum.fbl.core.persistence.order.Order> orderList = orderDao.findOrdersByRestaurant(restaurantId);
+            if (orderList != null) {
+                for (com.tum.fbl.core.persistence.order.Order order : orderList) {
+
+                    com.tum.fbl.core.persistence.user.User userDb = userDao.findUserById(order.getOrderUserId());
+                    User user;
+                    if (userDb != null) {
+                        user = new User(userDb);
+                    } else {
+                        user = new User();
+                    }
+
+
+                    com.tum.fbl.core.persistence.user.User restaurantDb = userDao.findUserById(order.getOrderRestaurantId());
+                    Restaurant restaurant;
+                    if (restaurantDb != null) {
+                        restaurant = new Restaurant(restaurantDb);
+                    } else {
+                        restaurant = new Restaurant();
+                    }
+
+                    com.tum.fbl.core.persistence.meal.Meal mealDb = mealDao.findMealById(order.getOrderMealId());
+                    Meal meal;
+                    if (mealDb != null) {
+                        meal = new Meal(mealDb);
+                    } else {
+                        meal = new Meal();
+                    }
+
+                    orders.add(new Order(order, user, restaurant, meal));
+                }
             }
             return orders;
         }
@@ -132,7 +212,7 @@ public class OrderResource {
      */
     @POST
     @ApiOperation(value = "Add a new order to the store")
-    public int addOrder(Order order) {
+    public int addOrder(Order order) throws IllegalArgumentExpection {
         /*
         try (OrderDao orderDao = this.connectionFactory.getConnection().open(OrderDao.class)) {
 
@@ -148,12 +228,17 @@ public class OrderResource {
                     Integer.parseInt(order.getOrderStatus())
             );
         }*/
-       try(OrderDao orderDao = this.connectionFactory.getConnection().open(OrderDao.class)){
-           return orderDao.newOrder(order.getOrderUser().getUserId(),
-                   order.getOrderMeal().getMealId(),
-                   order.getOrderPickupTime(),
-                   order.getOrderStatus());
-       }
+
+        if (order != null) {
+            try (OrderDao orderDao = this.connectionFactory.getConnection().open(OrderDao.class)) {
+                return orderDao.newOrder(order.getOrderUser().getUserId(),
+                        order.getOrderMeal().getMealId(),
+                        order.getOrderPickupTime(),
+                        order.getOrderStatus());
+            }
+        } else {
+            throw new IllegalArgumentExpection();
+        }
     }
 
     /**

@@ -1,7 +1,5 @@
-package com.tum.fbl.core.fitbit;
-
-
 import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -18,19 +16,16 @@ public class FitBitImpl implements FitBit {
     this.token=token;
     }
 
-    public void apiJson() {
-        String burnedCalories = this.apiCall("https://api.fitbit.com/1/user/-/activities/tracker/calories/date/today/1d.json");
-        String calorieGoal = this.apiCall ("https://api.fitbit.com/1/user/-/activities/goals/daily.json");
-    }
+    String a= this.apiCall("https://api.fitbit.com/1/user/-/activities/goals/caloriesOut/daily.json");
 
-    private String apiCall(String address) {
+
+    private void apiCall(String address) {
         CloseableHttpClient httpclient = HttpClients.createDefault();
        // HttpGet httpget = new HttpGet("https://api.fitbit.com/1/user/-/activities/goals/caloriesOut/daily.json");
         HttpGet httpget = new HttpGet(address);
         HttpGet.setHeader("Authorization","Beater "+token);
         CloseableHttpResponse response = httpclient.execute(httpget);
-        HttpEntity entity = response.getEntity();
-        String chunk="";
+        HttpEntity entity = HttpResponse.getEntity();
         byte[] buffer = new byte[1024];
         if (entity != null) {
             InputStream inputStream = entity.getContent();
@@ -38,8 +33,8 @@ public class FitBitImpl implements FitBit {
                 int bytesRead = 0;
                 BufferedInputStream bis = new BufferedInputStream(inputStream);
                 while ((bytesRead = bis.read(buffer)) != -1) {
-                    chunk = new String(buffer, 0, bytesRead);
-                    //System.out.println(chunk);
+                    String chunk = new String(buffer, 0, bytesRead);
+                    System.out.println(chunk);
                 }
             } catch (IOException ioException) {
                 // In case of an IOException the connection will be released
@@ -57,11 +52,13 @@ public class FitBitImpl implements FitBit {
                     inputStream.close();
                 } catch (Exception ignore) {
                 }
+            }finally{
+                response.close();
+                return (entity);
             }
-
         }
-        return (chunk);
     }
+
 
 
 }

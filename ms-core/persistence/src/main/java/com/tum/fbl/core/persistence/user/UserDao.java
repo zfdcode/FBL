@@ -50,6 +50,12 @@ public interface UserDao extends AutoCloseable {
                  @Bind("latitude") float latitude,
                  @Bind("roleId") int roleId);
 
+    @SqlUpdate("Insert into userCategory (userId,categoryId) values (:userId, :categoryId); SELECT LAST_INSERT_ID() from userCategory")
+    int newUserCategory(
+            @Bind("userId") int userId,
+            @Bind("categoryId") int categoryId
+    );
+
     @SqlUpdate("delete from user where userId = :id")
     void deleteUser(@Bind("id") int userId);
 

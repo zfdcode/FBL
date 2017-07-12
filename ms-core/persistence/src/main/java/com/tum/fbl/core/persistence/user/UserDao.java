@@ -36,15 +36,15 @@ public interface UserDao extends AutoCloseable {
     @SqlQuery("select u.* from (select * from UserCategory where categoryId = :categoryId) natural join user u ")
     List<User> findUsersByCategory(@Bind("categoryId") int categoryId);
 
-    @SqlUpdate("insert into user (userName, userPassword, email, birthday, height, weight, DisplayName, address, longitude, latitude, roleId) " +
-            " values (:userName, :userPassword, :email, :birthday, :height, :weight, :DisplayName, :address, :longitude, :latitude, :roleId); SELECT LAST_INSERT_ID() from user; ")
+    @SqlUpdate("insert into user (userName, userPassword, email, birthday, height, weight, displayName, address, longitude, latitude, roleId) " +
+            " values (:userName, :userPassword, :email, :birthday, :height, :weight, :displayName, :address, :longitude, :latitude, :roleId); SELECT LAST_INSERT_ID() from user; ")
     int newUser(@Bind("userName") String userName,
                  @Bind("userPassword") String userPassword,
                  @Bind("email") String email,
                  @Bind("birthday") Date birthday,
                  @Bind("height") int height,
                  @Bind("weight") int weight,
-                 @Bind("DisplayName") String DisplayName,
+                 @Bind("displayName") String DisplayName,
                  @Bind("address") String address,
                  @Bind("longitude") float longitude,
                  @Bind("latitude") float latitude,

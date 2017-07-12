@@ -14,6 +14,8 @@ import java.io.InputStream;
 public class FitBitImpl implements FitBit {
     private String token;
 
+    public void setToken(String token){ this.token = token; }
+
     public FitBitImpl(String token){
     this.token=token;
     }
@@ -23,17 +25,26 @@ public class FitBitImpl implements FitBit {
         String calorieGoal = this.apiCall ("https://api.fitbit.com/1/user/-/activities/goals/daily.json");
     }
 
-    private String apiCall(String address) {
+    public String apiCall(String address) {
         CloseableHttpClient httpclient = HttpClients.createDefault();
        // HttpGet httpget = new HttpGet("https://api.fitbit.com/1/user/-/activities/goals/caloriesOut/daily.json");
         HttpGet httpget = new HttpGet(address);
-        HttpGet.setHeader("Authorization","Beater "+token);
-        CloseableHttpResponse response = httpclient.execute(httpget);
+        httpget.setHeader("Authorization","Bearer "+token);
+        CloseableHttpResponse response = null;
+        try {
+            response = httpclient.execute(httpget);
+        }catch(IOException ioException){
+        };
         HttpEntity entity = response.getEntity();
         String chunk="";
+        InputStream inputStream = null;
         byte[] buffer = new byte[1024];
         if (entity != null) {
-            InputStream inputStream = entity.getContent();
+            try {
+                inputStream = entity.getContent();
+            }catch(IOException ioException){
+
+            };
             try {
                 int bytesRead = 0;
                 BufferedInputStream bis = new BufferedInputStream(inputStream);
@@ -49,7 +60,7 @@ public class FitBitImpl implements FitBit {
                 // In case of an unexpected exception you may want to abort
                 // the HTTP request in order to shut down the underlying
                 // connection immediately.
-                HttpGet.abort();
+                httpget.abort();
                 runtimeException.printStackTrace();
             } finally {
                 // Closing the input stream will trigger connection release

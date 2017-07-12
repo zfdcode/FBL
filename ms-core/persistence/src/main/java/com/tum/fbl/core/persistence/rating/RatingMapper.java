@@ -27,7 +27,7 @@ public class RatingMapper implements ResultSetMapper<Rating> {
                 r.getInt("userId"),
                 r.getInt("mealId"),
                 r.getDate("ratingTimestamp"),
-                r.getFloat("rating"));
+                r.getBoolean("rating"));
 
     }
 

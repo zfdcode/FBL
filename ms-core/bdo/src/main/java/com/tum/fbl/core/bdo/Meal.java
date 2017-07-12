@@ -19,7 +19,7 @@ public class Meal {
 
     private Date mealPreparationTime;
 
-    private Date[] offerDates;
+    private Date offerDate;
 
     private float mealEnergy;
 
@@ -35,6 +35,8 @@ public class Meal {
 
     private float mealSodium;
 
+    private float mealPrice;
+
     private Ingredient[] mealIngredients;
 
     private Category[] mealCategories;
@@ -43,14 +45,19 @@ public class Meal {
 
     private Restaurant mealRestaurant;
 
-    public Meal(int mealId, String mealName, String url, float mealRating, int mealHealthValue, Date mealPreparationTime, Date[] offerDates, float mealEnergy, float mealProtein, float mealTotalFat, float mealSaturated, float mealTotalCarbohydrate, float mealSugar, float mealSodium, Ingredient[] mealIngredients, Category[] mealCategories, Rating[] mealRatings, Restaurant mealRestaurant) {
+    public Meal (){
+
+    }
+
+
+    public Meal(int mealId, String mealName, String url, float mealRating, int mealHealthValue, Date mealPreparationTime, Date offerDate, float mealEnergy, float mealProtein, float mealTotalFat, float mealSaturated, float mealTotalCarbohydrate, float mealSugar, float mealSodium, float mealPrice, Ingredient[] mealIngredients, Category[] mealCategories, Rating[] mealRatings, Restaurant mealRestaurant) {
         this.mealId = mealId;
         this.mealName = mealName;
         this.url = url;
         this.mealRating = mealRating;
         this.mealHealthValue = mealHealthValue;
         this.mealPreparationTime = mealPreparationTime;
-        this.offerDates = offerDates;
+        this.offerDate = offerDate;
         this.mealEnergy = mealEnergy;
         this.mealProtein = mealProtein;
         this.mealTotalFat = mealTotalFat;
@@ -58,12 +65,12 @@ public class Meal {
         this.mealTotalCarbohydrate = mealTotalCarbohydrate;
         this.mealSugar = mealSugar;
         this.mealSodium = mealSodium;
+        this.mealPrice = mealPrice;
         this.mealIngredients = mealIngredients;
         this.mealCategories = mealCategories;
         this.mealRatings = mealRatings;
         this.mealRestaurant = mealRestaurant;
     }
-
 
     public Meal(com.tum.fbl.core.persistence.meal.Meal meal){
         this.mealId = meal.getMealId();
@@ -72,7 +79,7 @@ public class Meal {
         this.mealRating = meal.getMealRating();
         this.mealHealthValue = meal.getMealHealthValue();
         this.mealPreparationTime = meal.getMealPreparationTime();
-        this.offerDates = new Date[0];
+        this.offerDate = meal.getOfferDate();
         this.mealEnergy = meal.getMealEnergy();
         this.mealProtein = meal.getMealProtein();
         this.mealTotalFat = meal.getMealTotalFat();
@@ -138,12 +145,12 @@ public class Meal {
         this.mealPreparationTime = mealPreparationTime;
     }
 
-    public Date[] getOfferDates() {
-        return offerDates;
+    public Date getOfferDate() {
+        return offerDate;
     }
 
-    public void setOfferDates(Date[] offerDates) {
-        this.offerDates = offerDates;
+    public void setOfferDate(Date offerDate) {
+        this.offerDate = offerDate;
     }
 
     public float getMealEnergy() {
@@ -200,6 +207,14 @@ public class Meal {
 
     public void setMealSodium(float mealSodium) {
         this.mealSodium = mealSodium;
+    }
+
+        public float getMealPrice() {
+        return mealPrice;
+    }
+
+    public void setMealPrice(float mealPrice) {
+        this.mealPrice = mealPrice;
     }
 
     public Ingredient[] getMealIngredients() {

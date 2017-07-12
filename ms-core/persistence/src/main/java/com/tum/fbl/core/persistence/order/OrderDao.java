@@ -1,5 +1,6 @@
 package com.tum.fbl.core.persistence.order;
 
+import com.sun.org.apache.xpath.internal.operations.Or;
 import com.tum.fbl.core.persistence.order.Order;
 import org.skife.jdbi.v2.sqlobject.Bind;
 import org.skife.jdbi.v2.sqlobject.SqlQuery;
@@ -21,7 +22,8 @@ public interface OrderDao extends AutoCloseable{
     @SqlQuery("select * from order where orderId = :id")
     Order findOrderById(@Bind("id") int orderId);
 
-
+    @SqlQuery("select * from order where restaurant = :restaurant")
+    List<Order> findOrdersByRestaurant(@Bind("restaurant") int restaurant);
     /**
      * inserts a new entry into the Order table in the database
      * @param orderUserId the unique ID of the user who placed the order
@@ -29,7 +31,6 @@ public interface OrderDao extends AutoCloseable{
      * @param orderPickupTime the time the order is ready to be picked up
      * @param orderStatus the order's current status
      */
-
     @SqlUpdate("Insert into order (orderUserId, orderMealId, orderPickupTime, orderStatus, orderNumber) value (:orderUserId, :orderMealId, :orderPickupTime, :orderStatus, :orderNumber); SELECT LAST_INSERT_ID() from order")
     int newOrder(@Bind("orderUserId") int orderUserId,
                   @Bind("orderMealId") int orderMealId,
@@ -60,6 +61,6 @@ public interface OrderDao extends AutoCloseable{
     @SqlUpdate("update order set status= :newStatus where orderId = :id")
     void setOrderStatus(@Bind("orderStatus") int orderStatus, @Bind("id") int orderId);
 
-    public void close();
+    void close();
 
 }

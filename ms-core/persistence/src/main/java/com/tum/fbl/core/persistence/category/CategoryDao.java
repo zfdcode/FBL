@@ -45,7 +45,7 @@ public interface CategoryDao extends AutoCloseable{
      * @param categoryName the new category's name
      * @param categoryDescription the new category's description
      */
-    @SqlUpdate("Insert into ingredient (categoryName, categoryDescription) value (:categoryName, :categoryDescription); SELECT LAST_INSERT_ID() from category")
+    @SqlUpdate("Insert into ingredient (categoryName, categoryDescription) values (:categoryName, :categoryDescription); SELECT LAST_INSERT_ID() from category")
     int newCategory(@Bind("categoryName") String categoryName, @Bind("categoryDescription") String categoryDescription);
 
     /**

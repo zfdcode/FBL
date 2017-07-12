@@ -3,6 +3,7 @@ package com.tum.fbl.core.service.resources;
 import com.tum.fbl.core.bdo.User;
 import com.tum.fbl.core.persistence.ConnectionFactory;
 import com.tum.fbl.core.persistence.user.UserDao;
+import com.tum.fbl.core.service.exceptions.IllegalArgumentExpection;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.skife.jdbi.v2.DBI;
@@ -42,8 +43,12 @@ public class UserResource {
 
         try (UserDao userDao = this.connectionFactory.getConnection().open(UserDao.class)) {
             List<User> users = new ArrayList<User>();
-            for (com.tum.fbl.core.persistence.user.User user:userDao.getAllUser(this.role)){
-                users.add(new User(user));
+
+            List<com.tum.fbl.core.persistence.user.User> userList = userDao.getAllUser(this.role);
+            if (userList != null) {
+                for (com.tum.fbl.core.persistence.user.User user : userList) {
+                    users.add(new User(user));
+                }
             }
             return users;
         }
@@ -130,11 +135,19 @@ public class UserResource {
      */
     @PUT
     @ApiOperation(value = "Update an existing user")
-    public void updateUser(User user) {
-        try (UserDao userDao = this.connectionFactory.getConnection().open(UserDao.class)) {
-            //TODO: userdao.updateUser
+    public void updateUser(User user) throws IllegalArgumentExpection {
 
-        }
+        if (user != null) {
+            try (UserDao userDao = this.connectionFactory.getConnection().open(UserDao.class)) {
+                userDao.updateUser(
+                        user.getUserName(),
+                        user.getUserPassword(),
+                        user.getEmail(),
+                        user.getWeight(),
+                        user.getDisplayName()
+                );
+            }
+        } throw new IllegalArgumentExpection();
     }
 
     /**
@@ -147,9 +160,13 @@ public class UserResource {
     @ApiOperation(value = "Get users by special need")
     public List<User> getUsersByCategory(@PathParam("categoryId") int categoryId) {
         try (UserDao userDao = this.connectionFactory.getConnection().open(UserDao.class)) {
-            List<User> users = new ArrayList<User>();
-            for (com.tum.fbl.core.persistence.user.User user : userDao.findUsersByCategory(categoryId)){
-                users.add(new User(user));
+            List<User> users = new ArrayList<>();
+
+            List<com.tum.fbl.core.persistence.user.User> userList = userDao.findUsersByCategory(categoryId);
+            if (userList != null) {
+                for (com.tum.fbl.core.persistence.user.User user : userList) {
+                    users.add(new User(user));
+                }
             }
             return users;
         }

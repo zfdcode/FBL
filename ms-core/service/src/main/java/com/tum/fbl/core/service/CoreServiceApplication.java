@@ -20,6 +20,8 @@ import io.dropwizard.setup.Environment;
 import io.federecio.dropwizard.swagger.SwaggerBundle;
 import io.federecio.dropwizard.swagger.SwaggerBundleConfiguration;
 import org.eclipse.jetty.servlets.CrossOriginFilter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.DispatcherType;
 import javax.servlet.FilterRegistration;
@@ -29,6 +31,8 @@ import java.util.EnumSet;
  * Created by patrickmelchner on 23.05.17.
  */
 public class CoreServiceApplication extends Application<CoreServiceConfiguration> {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(CoreServiceApplication.class);
 
     public static void main(String[] args) throws Exception {
         new CoreServiceApplication().run(args);
@@ -60,15 +64,21 @@ public class CoreServiceApplication extends Application<CoreServiceConfiguration
     public void run(CoreServiceConfiguration configuration,
                     Environment environment) {
 
-        final ConnectionFactory connectionFactory = new ConnectionFactory(configuration, environment);
+        try {
+            final ConnectionFactory connectionFactory = new ConnectionFactory(configuration, environment);
 
-        configureCors(environment);
+            configureCors(environment);
 
-        Authenticator<BasicCredentials, User> authenticator =  new BasicAuthenticator(connectionFactory);
+            Authenticator<BasicCredentials, User> authenticator = new BasicAuthenticator(connectionFactory);
 
-        this.registerAuthenticator(environment, authenticator);
+            this.registerAuthenticator(environment, authenticator);
 
-        this.registerResources(environment, connectionFactory, configuration, authenticator);
+            this.registerResources(environment, connectionFactory, configuration, authenticator);
+
+        } catch (Exception e) {
+            //Catching and logging all exception
+            LOGGER.error(e.getMessage(), e.getCause());
+        }
 
     }
 

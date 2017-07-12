@@ -18,6 +18,8 @@ public class Rating {
 
     private Date ratingTimestamp;
 
+    public Rating(){}
+
     /**
      * Constructs Rating that is made by the user for the meal
      * @param ratingId unique ID of the rating action
@@ -30,19 +32,8 @@ public class Rating {
         this.user = user;
         this.meal = meal;
         this.rate = rate;
-        this.ratingTimestamp = ratingTimestamp;
-    }
-
-    public Rating(com.tum.fbl.core.persistence.rating.Rating rating){
-        this.ratingId = rating.getRatingId();
-        this.user = new User(0,null,null,null,null,0,0,
-                null,0);
-        this.meal = new Meal( 0,null,null,0,0,
-                null,null,0,0,0,0,
-                0,0,0,null,null,null,
-                null);
-        this.rate = 0;
-        this.ratingTimestamp = rating.getRatingTimestamp();
+        //TODO:
+        this.ratingTimestamp = new Date();
     }
 
     /**

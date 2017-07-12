@@ -21,13 +21,50 @@ public interface MealDao extends AutoCloseable{
     @SqlQuery("select * from meal where mealId = :id")
     Meal findMealById(@Bind("id") int id);
 
+    @SqlQuery("select * from meal where mealName = :name")
+    Meal getMealByName(@Bind("name") int name);
+
+    @SqlQuery("select * from meal where rating > :rating")
+    Meal getMealByRating(@Bind("rating") int rating);
+
+    @SqlQuery("select * from meal where energy < :energy")
+    Meal getMealMaxCalories(@Bind("energy") int energy);
+
     /**
      * gets all meals offered on a specified date from the database
      * @param offerDate the specified date
      * @return List of Meal objects
      */
-    @SqlQuery("select * from meal natural left join (select * from Offerdate where offerDate = :offerDate)")
+    @SqlQuery("select * from meal where offerDate = :offerDate)")
     List<Meal> getAllMealForDate(@Bind("offerDate") Date offerDate);
+
+    @SqlQuery("select * from meal")
+    List<Meal> getAllMeals();
+
+    @SqlQuery("select m.mealId, m.mealName, m.image, m.rating, m.healthValue, m.preparationTime, m.offerDate, m.energy, m.protein, m.totalFat, m.saturated, m.totalCarbohydrate, m.sugar, m.sodium, m.price " +
+            "from Meal m natural join (Select * from MealIngredient where ingredientId= :id)")
+    List<Meal> getMealsByIngredient(@Bind("id") int id);
+
+    @SqlQuery("select m.mealId, m.mealName, m.image, m.rating, m.healthValue, m.preparationTime, m.offerDate, m.energy, m.protein, m.totalFat, m.saturated, m.totalCarbohydrate, m.sugar, m.sodium, m.price " +
+            "from Meal m natural join (Select * from MealIngredient where NOT(ingredientId= :id))")
+    List<Meal> getMealsWithIngredientExeption(@Bind("id") int id);
+
+    @SqlQuery("select m.mealId, m.mealName, m.image, m.rating, m.healthValue, m.preparationTime, m.offerDate, m.energy, m.protein, m.totalFat, m.saturated, m.totalCarbohydrate, m.sugar, m.sodium, m.price " +
+            "from Meal m natural join (Select * from MealRestaurant where userId= :id)")
+    List<Meal> getMealsByUser(@Bind("id") int id);
+
+    @SqlQuery("select m.mealId, m.mealName, m.image, m.rating, m.healthValue, m.preparationTime, m.offerDate, m.energy, m.protein, m.totalFat, m.saturated, m.totalCarbohydrate, m.sugar, m.sodium, m.price " +
+            "from Meal m where offerDate = :date natural join (Select * from MealRestaurant where userId= :id)")
+    List<Meal> getMealsByUserAndDate(@Bind("date") Date date, @Bind("id") int id);
+
+    @SqlQuery("select m.mealId, m.mealName, m.image, m.rating, m.healthValue, m.preparationTime, m.offerDate, m.energy, m.protein, m.totalFat, m.saturated, m.totalCarbohydrate, m.sugar, m.sodium, m.price " +
+            "from Meal m where offerDate = :date natural join (Select * from MealCategory where categoryId= :id)")
+    List<Meal> getMealsByCategoryAndDate(@Bind("date") Date date, @Bind("id") int id);
+
+    @SqlQuery("select m.mealId, m.mealName, m.image, m.rating, m.healthValue, m.preparationTime, m.offerDate, m.energy, m.protein, m.totalFat, m.saturated, m.totalCarbohydrate, m.sugar, m.sodium, m.price " +
+            "from Meal m natural join (Select * from Order where orderId= :id)")
+    Meal getMealsByOrder(@Bind("id") int orderId);
+
 
     /**
      * inserts a new entry into the Meal table in the database
@@ -45,22 +82,33 @@ public interface MealDao extends AutoCloseable{
      * @param mealSugar
      * @param mealSodium
      */
-    @SqlUpdate("insert into meal ( mealName, mealImage, mealRating, mealHelathValue, mealPreparationTime, offerDate, mealEnergy, mealProtein, mealTotalFat, mealSaturated, mealTotalCarbohydrate, mealSugar, mealSodium) " +
-            "values ( :mealName, :mealImage, :mealRating, :mealHelathValue, :mealPreparationTime, offerDate, :mealEnergy, :mealProtein, :mealTotalFat, :mealSaturated, :mealTotalCarbohydrate, :mealSugar, :mealSodium) ; SELECT LAST_INSERT_ID() from meal")
+    @SqlUpdate("insert into meal ( mealName, image, rating, healthValue, preparationTime, offerDate, energy, protein, totalFat, saturated, totalCarbohydrate, sugar, sodium, price) " +
+            "values ( :mealName, :image, :rating, :healthValue, :preparationTime, :offerDate, :energy, :protein, :totalFat, :saturated, :totalCarbohydrate, :sugar, :sodium, :price) ; SELECT LAST_INSERT_ID()")
     int newMeal(
             @Bind("mealName") String mealName,
-            @Bind("mealImage") byte[] mealImage,
-            @Bind("mealRating") float mealRating,
-            @Bind("mealHelathValue") int mealHealthValue,
-            @Bind("mealPreparationTime") Date mealPreparationTime,
+            @Bind("image") String image,
+            @Bind("rating") float rating,
+            @Bind("healthValue") int healthValue,
+            @Bind("preparationTime") Date preparationTime,
             @Bind("offerDate") Date offerDate,
-            @Bind("mealEnergy") float mealEnergy,
-            @Bind("mealProtein") float mealProtein,
-            @Bind("mealTotalFat") float mealTotalFat,
-            @Bind("mealSaturated") float mealSaturated,
-            @Bind("mealTotalCarbohydrate") float mealTotalCarbohydrate,
-            @Bind("mealSugar") float mealSugar,
-            @Bind("mealSodium") float mealSodium);
+            @Bind("energy") float energy,
+            @Bind("protein") float protein,
+            @Bind("totalFat") float totalFat,
+            @Bind("saturated") float saturated,
+            @Bind("totalCarbohydrate") float totalCarbohydrate,
+            @Bind("sugar") float sugar,
+            @Bind("sodium") float sodium,
+            @Bind("price") float price);
+
+
+    @SqlUpdate("insert into mealRestaurant (mealId, userId, date) values (:mealId, :userId, :date)")
+    void newRestaurantMeal(@Bind("mealId") int mealId, @Bind("userId") int userId, @Bind("date") Date date);
+
+    @SqlUpdate("Insert into MealCategory (mealId,categoryId) values (:mealId, :categoryId); SELECT LAST_INSERT_ID() from userCategory")
+    int newMealCategory(
+            @Bind("mealId") int mealId,
+            @Bind("categoryId") int categoryId
+    );
 
     /**
      * deletes an entry with specified unique ID from the Meal table in the database

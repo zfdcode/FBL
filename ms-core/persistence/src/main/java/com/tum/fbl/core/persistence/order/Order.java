@@ -9,6 +9,8 @@ public class Order {
 
     private int orderId;
 
+    private int orderRestaurantId;
+
     private int orderUserId;
 
     private int orderMealId;
@@ -83,5 +85,13 @@ public class Order {
 
     public void setOrderNumber(int orderNumber) {
         this.orderNumber = orderNumber;
+    }
+
+    public int getOrderRestaurantId() {
+        return orderRestaurantId;
+    }
+
+    public void setOrderRestaurantId(int orderRestaurantId) {
+        this.orderRestaurantId = orderRestaurantId;
     }
 }

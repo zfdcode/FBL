@@ -23,10 +23,10 @@
       },
       {
         "type": "file",
-        "currentLogFilename": "./logs/server.log",
+        "currentLogFilename": "/tmp/server.log",
         "threshold": "ERROR",
         "archive": true,
-        "archivedLogFilenamePattern": "./logs/server-%d.log",
+        "archivedLogFilenamePattern": "/tmp/server-%d.log",
         "archivedFileCount": 5,
         "timeZone": "UTC"
       }
@@ -37,7 +37,7 @@
   },
   "database": {
     "driverClass": "org.h2.Driver",
-    "url": "jdbc:h2:./local/h2db",
+    "url": "jdbc:h2:/tmp/h2db",
     "user": "",
     "password": "",
     "validationQuery": "/* MyService Health Check */ SELECT 1"

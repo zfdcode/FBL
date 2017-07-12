@@ -3,6 +3,7 @@ package com.tum.fbl.core.service.resources;
 import com.tum.fbl.core.bdo.HealthData;
 import com.tum.fbl.core.persistence.ConnectionFactory;
 import com.tum.fbl.core.persistence.healthdata.HealthDataDao;
+import com.tum.fbl.core.service.exceptions.IllegalArgumentExpection;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
@@ -41,7 +42,12 @@ public class HealthDataResource {
     public HealthData getHealthDataStatus(@PathParam("userId") int userId) {
         try (HealthDataDao healthDataDao = this.connectionFactory.getConnection().open(HealthDataDao.class)) {
             com.tum.fbl.core.persistence.healthdata.HealthData healthData = healthDataDao.findHealthDataById(userId);
-            return new HealthData(healthData);
+
+            if (healthData != null) {
+                return new HealthData(healthData);
+            } else {
+                return null;
+            }
 
         }
     }
@@ -65,17 +71,21 @@ public class HealthDataResource {
      */
     @POST
     @ApiOperation(value = "Add a new healthData to the store")
-    public int addHealthData(HealthData healthData) {
+    public int addHealthData(HealthData healthData) throws IllegalArgumentExpection {
 
-        try (HealthDataDao healthDataDao = this.connectionFactory.getConnection().open(HealthDataDao.class)){
-            return healthDataDao.newHealthData(
-                    healthData.getUserId(),
-                    healthData.getDeviceUserPassword(),
-                    healthData.getDeviceUserId(),
-                    healthData.getBurnedCalories(),
-                    healthData.getTrackedCaloriesTimeRange(),
-                    healthData.getCalorieGoal()
-            );
+        if (healthData != null) {
+            try (HealthDataDao healthDataDao = this.connectionFactory.getConnection().open(HealthDataDao.class)) {
+                return healthDataDao.newHealthData(
+                        healthData.getUserId(),
+                        healthData.getDeviceUserPassword(),
+                        healthData.getDeviceUserId(),
+                        healthData.getBurnedCalories(),
+                        healthData.getTrackedCaloriesTimeRange(),
+                        healthData.getCalorieGoal()
+                );
+            }
+        } else {
+            throw new IllegalArgumentExpection();
         }
 
     }
@@ -86,25 +96,36 @@ public class HealthDataResource {
      */
     @PUT
     @ApiOperation(value = "Update an existing healthData")
-    public void updateHealthData(HealthData healthData) {
-        try (HealthDataDao healthDataDao = this.connectionFactory.getConnection().open(HealthDataDao.class)){
-            healthDataDao.updateHealthData(
-                    healthData.getUserId(),
-                    healthData.getDeviceUserPassword(),
-                    healthData.getDeviceUserId(),
-                    healthData.getBurnedCalories(),
-                    healthData.getTrackedCaloriesTimeRange(),
-                    healthData.getCalorieGoal());
+    public void updateHealthData(HealthData healthData) throws IllegalArgumentExpection {
+        if (healthData != null) {
+            try (HealthDataDao healthDataDao = this.connectionFactory.getConnection().open(HealthDataDao.class)) {
+                healthDataDao.updateHealthData(
+                        healthData.getUserId(),
+                        healthData.getDeviceUserPassword(),
+                        healthData.getDeviceUserId(),
+                        healthData.getBurnedCalories(),
+                        healthData.getTrackedCaloriesTimeRange(),
+                        healthData.getCalorieGoal());
+            }
+        } else {
+            throw new IllegalArgumentExpection();
         }
     }
 
     @GET
     @Path("/leftCalories/{userId}")
     @ApiOperation(value = "get left calories by user")
-    public float getLeftCalories(@PathParam("userId") int userId){
+    public float getLeftCalories(@PathParam("userId") int userId) throws IllegalArgumentExpection {
         try (HealthDataDao healthDataDao = this.connectionFactory.getConnection().open(HealthDataDao.class)){
-            HealthData healthData = new HealthData(healthDataDao.findHealthDataById(userId));
-            return healthData.getCalorieGoal()-healthData.getBurnedCalories();
+
+            com.tum.fbl.core.persistence.healthdata.HealthData healthDataDb = healthDataDao.findHealthDataById(userId);
+
+            if (healthDataDb != null) {
+                HealthData healthData = new HealthData(healthDataDao.findHealthDataById(userId));
+                return healthData.getCalorieGoal() - healthData.getBurnedCalories();
+            } else {
+                throw new IllegalArgumentExpection();
+            }
         }
     }
 

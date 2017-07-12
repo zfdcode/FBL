@@ -8,6 +8,7 @@ import com.tum.fbl.core.imagestorage.ImageStorageImpl;
 import com.tum.fbl.core.bdo.Meal;
 import com.tum.fbl.core.persistence.ConnectionFactory;
 import com.tum.fbl.core.persistence.meal.MealDao;
+import com.tum.fbl.core.service.exceptions.IllegalArgumentExpection;
 import com.tum.fbl.core.service.exceptions.ImageException;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -40,6 +41,7 @@ public class MealResource {
 
     /**
      * Connects to the factory for meal resource.
+     *
      * @param connectionFactory the connection of factory
      */
     public MealResource(ConnectionFactory connectionFactory, ImageUploadConfiguration imageUploadConfiguration) {
@@ -50,16 +52,21 @@ public class MealResource {
 
     /**
      * Gets all meals.
+     *
      * @return List<Meal> the list of meals
      */
     @GET
     @Path("/all")
     @ApiOperation(value = "Get all offered meals")
     public List<Meal> getAllMeals() {
-        try (MealDao mealDao = this.connectionFactory.getConnection().open(MealDao.class)){
-            List<Meal> users = new ArrayList<Meal>();
-            for (com.tum.fbl.core.persistence.meal.Meal meal:mealDao.getAllMeals()){
-                users.add(new Meal(meal));
+        try (MealDao mealDao = this.connectionFactory.getConnection().open(MealDao.class)) {
+            List<Meal> users = new ArrayList<>();
+
+            List<com.tum.fbl.core.persistence.meal.Meal> meals = mealDao.getAllMeals();
+            if (meals != null) {
+                for (com.tum.fbl.core.persistence.meal.Meal meal : meals) {
+                    users.add(new Meal(meal));
+                }
             }
             return users;
         }
@@ -69,11 +76,16 @@ public class MealResource {
 
     @GET
     @Path("/{attributeName}/{attributeId}")
-    public List<Meal> getMealsByAttributeId(@PathParam("attributeName") String attributeName, @PathParam("attributeId") int attributeId){
+    public List<Meal> getMealsByAttributeId(@PathParam("attributeName") String attributeName, @PathParam("attributeId") int attributeId) {
         try (MealDao mealDao = this.connectionFactory.getConnection().open(MealDao.class)) {
             List<Meal> meals = new ArrayList<>();
-            for (com.tum.fbl.core.persistence.meal.Meal meal:mealDao.findMealsByAttributte(attributeName,attributeId)){
-                meals.add(new Meal(meal));
+
+            List<com.tum.fbl.core.persistence.meal.Meal> mealList = mealDao.findMealsByAttributte(attributeName, attributeId);
+
+            if (mealList != null) {
+                for (com.tum.fbl.core.persistence.meal.Meal meal : mealList) {
+                    meals.add(new Meal(meal));
+                }
             }
             return meals;
         }
@@ -81,35 +93,51 @@ public class MealResource {
 
     @GET
     @Path("/offerDate/{offerDate}/user/{userId}")
-    public List<Meal> getMealsByOfferDateAndUserId(){return null;}
+    public List<Meal> getMealsByOfferDateAndUserId() {
+        return null;
+    }
 
     @GET
     @Path("/offerDate/{offerDate}/category/{categoryId}")
-    public List<Meal> getMealsByOfferDateAndCategory(){return null;}
+    public List<Meal> getMealsByOfferDateAndCategory() {
+        return null;
+    }
 
     @GET
     @Path("/offerDate/{offerDate}")
-    public List<Meal> getMealsByOfferDate(){return null;}
+    public List<Meal> getMealsByOfferDate() {
+        return null;
+    }
 
     @GET
     @Path("/rating/{rating}")
-    public List<Meal> getMealsByRating(){return null;}
+    public List<Meal> getMealsByRating() {
+        return null;
+    }
 
     @GET
     @Path("/calories/{calories}")
-    public List<Meal> getMealsByCalories(){return null;}
+    public List<Meal> getMealsByCalories() {
+        return null;
+    }
 
     @GET
     @Path("/order/{orderId}")
-    public List<Meal> getMealsByOrder(){return null;}
+    public List<Meal> getMealsByOrder() {
+        return null;
+    }
 
     @GET
     @Path("/ingredient/{ingredientId}")
-    public List<Meal> getMealsByIngredient(@PathParam("ingredientId") int ingredientId){
-        try (MealDao mealDao = this.connectionFactory.getConnection().open(MealDao.class)){
-            List<Meal> users = new ArrayList<Meal>();
-            for (com.tum.fbl.core.persistence.meal.Meal meal:mealDao.getMealsByIngredient(ingredientId)){
-                users.add(new Meal(meal));
+    public List<Meal> getMealsByIngredient(@PathParam("ingredientId") int ingredientId) {
+        try (MealDao mealDao = this.connectionFactory.getConnection().open(MealDao.class)) {
+            List<Meal> users = new ArrayList<>();
+
+            List<com.tum.fbl.core.persistence.meal.Meal> mealList = mealDao.getMealsByIngredient(ingredientId);
+            if (mealList != null) {
+                for (com.tum.fbl.core.persistence.meal.Meal meal : mealList) {
+                    users.add(new Meal(meal));
+                }
             }
             return users;
         }
@@ -117,14 +145,19 @@ public class MealResource {
 
     @GET
     @Path("/ingredientException/{ingredientIds}")
-    public List<Meal> getMealsByIngredientExceptions(){return null;}
+    public List<Meal> getMealsByIngredientExceptions() {
+        return null;
+    }
 
     @GET
     @Path("/name/{name}")
-    public List<Meal> getMealsByName(){return null;}
+    public List<Meal> getMealsByName() {
+        return null;
+    }
 
     /**
      * Gets meals by user.
+     *
      * @param userId the user id
      * @return List<Meal> the list of meals
      */
@@ -137,6 +170,7 @@ public class MealResource {
 
     /**
      * Gets meal.
+     *
      * @param mealId the meal id
      * @return Meal
      */
@@ -175,6 +209,7 @@ public class MealResource {
 
     /**
      * Deletes meal.
+     *
      * @param mealId the meal id
      */
     @DELETE
@@ -188,8 +223,9 @@ public class MealResource {
 
     /**
      * Adds image of meal.
+     *
      * @param uploadedInputStream the uploaded input stream
-     * @param fileDetail the file detail
+     * @param fileDetail          the file detail
      * @return Response
      */
     @Path("/img")
@@ -209,42 +245,48 @@ public class MealResource {
 
     /**
      * Adds meal.
+     *
      * @param meal the meal
      */
     @POST
     @ApiOperation(value = "Add a new meal to the store")
-    public int addMeal(Meal meal) {
+    public int addMeal(Meal meal) throws IllegalArgumentExpection {
 
-        try (MealDao mealDao = this.connectionFactory.getConnection().open(MealDao.class)) {
+        if (meal != null) {
+            try (MealDao mealDao = this.connectionFactory.getConnection().open(MealDao.class)) {
 
-           return mealDao.newMeal(
-                    meal.getMealName(),
-                    "",
-                    meal.getMealRating(),
-                    0,
-                    meal.getMealPreparationTime(),
-                    meal.getOfferDate(),
-                    meal.getMealEnergy(),
-                    meal.getMealProtein(),
-                    meal.getMealTotalFat(),
-                    meal.getMealSaturated(),
-                    meal.getMealTotalCarbohydrate(),
-                    meal.getMealSugar(),
-                    meal.getMealSodium(),
-                    meal.getMealPrice()
-            );
+                return mealDao.newMeal(
+                        meal.getMealName(),
+                        "",
+                        meal.getMealRating(),
+                        0,
+                        meal.getMealPreparationTime(),
+                        meal.getOfferDate(),
+                        meal.getMealEnergy(),
+                        meal.getMealProtein(),
+                        meal.getMealTotalFat(),
+                        meal.getMealSaturated(),
+                        meal.getMealTotalCarbohydrate(),
+                        meal.getMealSugar(),
+                        meal.getMealSodium(),
+                        meal.getMealPrice()
+                );
+            }
+        } else {
+            throw new IllegalArgumentExpection();
         }
 
     }
 
     /**
      * Updates meal.
+     *
      * @param meal the meal
      */
     @PUT
     @ApiOperation(value = "Update an existing meal")
     public void updateMeal(Meal meal) {
-        try (MealDao mealDao = this.connectionFactory.getConnection().open(MealDao.class)){
+        try (MealDao mealDao = this.connectionFactory.getConnection().open(MealDao.class)) {
             //TODO:update
         }
     }

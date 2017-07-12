@@ -1,18 +1,18 @@
 package com.tum.fbl.core.service.resources;
 
 import com.tum.fbl.core.bdo.Meal;
+import com.tum.fbl.core.bdo.Restaurant;
+import com.tum.fbl.core.bdo.User;
 import com.tum.fbl.core.persistence.ConnectionFactory;
 import com.tum.fbl.core.persistence.meal.MealDao;
 import com.tum.fbl.core.persistence.order.OrderDao;
 import com.tum.fbl.core.persistence.user.UserDao;
-import com.tum.fbl.core.service.auth.User;
 import com.tum.fbl.core.bdo.Order;
-import io.dropwizard.auth.Auth;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 import javax.ws.rs.core.MediaType;
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ws.rs.*;
 
@@ -44,7 +44,20 @@ public class OrderResource {
     @Path("/all")
     @ApiOperation(value = "Get all orders")
     public List<Order> getAllOrders() {
-        return null;
+        try (
+                OrderDao orderDao = this.connectionFactory.getConnection().open(OrderDao.class);
+                UserDao userDao = this.connectionFactory.getConnection().open(UserDao.class);
+                MealDao mealDao = this.connectionFactory.getConnection().open(MealDao.class)
+        ) {
+            List<Order> orders = new ArrayList<>();
+            for (com.tum.fbl.core.persistence.order.Order order : orderDao.getOrderList()) {
+                User user = new User(userDao.findUserById(order.getOrderUserId()));
+                Restaurant restaurant = new Restaurant(userDao.findUserById(order.getOrderRestaurantId()));
+                Meal meal = new Meal(mealDao.findMealById(order.getOrderMealId()));
+                orders.add(new Order(order,user,restaurant,meal));
+            }
+            return orders;
+        }
     }
 
 
@@ -57,27 +70,23 @@ public class OrderResource {
     @Path("/order/{orderId}")
     @ApiOperation(value = "Get information of a order")
     public Order getOrder(@PathParam("orderId") int orderId) {
-        return null;
-    /*    try (OrderDao orderDao = this.connectionFactory.getConnection().open(OrderDao.class)) {
+
+        try (
+                OrderDao orderDao = this.connectionFactory.getConnection().open(OrderDao.class);
+                UserDao userDao = this.connectionFactory.getConnection().open(UserDao.class);
+                MealDao mealDao = this.connectionFactory.getConnection().open(MealDao.class)
+             ) {
             com.tum.fbl.core.persistence.order.Order order = orderDao.findOrderById(orderId);
-
-            try (UserDao userDao = this.connectionFactory.getConnection().open(UserDao.class)) {
-                com.tum.fbl.core.persistence.user.User user = userDao.findUserById(order.getOrderUserId());
-
-                com.tum.fbl.core.bdo.User userBdo = new com.tum.fbl.core.bdo.User(user);
-
-                try (MealDao mealDao = this.connectionFactory.getConnection().open(MealDao.class)) {
-                    com.tum.fbl.core.persistence.meal.Meal meal = mealDao.findMealById(order.getOrderMealId());
-
-                    com.tum.fbl.core.bdo.Meal mealBdo = new com.tum.fbl.core.bdo.Meal(meal);
-
-                    return new Order(orderId, userBdo, mealBdo, null, order.getOrderStatus(), order.getOrderNumber());
-                }
-            }
-
+            User user = new User(userDao.findUserById(order.getOrderUserId()));
+            Restaurant restaurant = new Restaurant(userDao.findUserById(order.getOrderRestaurantId()));
+            Meal meal = new Meal(mealDao.findMealById(order.getOrderMealId()));
+            return new Order(
+                    order,
+                    user,
+                    restaurant,
+                    meal);
         }
 
-*/
     }
 
     /**
@@ -88,9 +97,21 @@ public class OrderResource {
     @GET
     @Path("/restaurant/{restaurantId}")
     @ApiOperation(value = "Get open orders of a restaurants")
-    public Order getOrdersForRestaurant(@PathParam("restaurantId") int restaurantId) {
-        //TODO:
-        return null;
+    public List<Order> getOrdersForRestaurant(@PathParam("restaurantId") int restaurantId) {
+        try (
+                OrderDao orderDao = this.connectionFactory.getConnection().open(OrderDao.class);
+                UserDao userDao = this.connectionFactory.getConnection().open(UserDao.class);
+                MealDao mealDao = this.connectionFactory.getConnection().open(MealDao.class)
+        ) {
+            List<Order> orders = new ArrayList<>();
+            for (com.tum.fbl.core.persistence.order.Order order : orderDao.findOrdersByRestaurant(restaurantId)) {
+                User user = new User(userDao.findUserById(order.getOrderUserId()));
+                Restaurant restaurant = new Restaurant(userDao.findUserById(order.getOrderRestaurantId()));
+                Meal meal = new Meal(mealDao.findMealById(order.getOrderMealId()));
+                orders.add(new Order(order,user,restaurant,meal));
+            }
+            return orders;
+        }
     }
 
     /**
@@ -100,12 +121,9 @@ public class OrderResource {
     @PUT
     @ApiOperation(value = "Update an existing order")
     public void placeOrder(Order order) {
-        /*
         try (OrderDao orderDao = this.connectionFactory.getConnection().open(OrderDao.class)) {
-
-            order Dao.setOrderStatus(Integer.parseInt(order.getOrderStatus()), order.getOrderId());
+            orderDao.setOrderStatus(order.getOrderStatus(), order.getOrderId());
         }
-        */
     }
 
     /**
@@ -115,8 +133,7 @@ public class OrderResource {
     @POST
     @ApiOperation(value = "Add a new order to the store")
     public int addOrder(Order order) {
-
-       /*
+        /*
         try (OrderDao orderDao = this.connectionFactory.getConnection().open(OrderDao.class)) {
 
             List<Meal> ordermeals = order.getOrderMeals();
@@ -130,16 +147,13 @@ public class OrderResource {
                     order.getOrderPickupTime(),
                     Integer.parseInt(order.getOrderStatus())
             );
-        }
-        */
-
+        }*/
        try(OrderDao orderDao = this.connectionFactory.getConnection().open(OrderDao.class)){
            return orderDao.newOrder(order.getOrderUser().getUserId(),
                    order.getOrderMeal().getMealId(),
                    order.getOrderPickupTime(),
                    order.getOrderStatus());
        }
-
     }
 
     /**

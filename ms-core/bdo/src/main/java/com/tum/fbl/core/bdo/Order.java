@@ -42,23 +42,16 @@ public class Order {
         this.orderStatus = orderStatus;
         this.orderNumber = orderNumber;
     }
-    /*
-    public Order(com.tum.fbl.core.persistence.order.Order order){
+
+    public Order(com.tum.fbl.core.persistence.order.Order order, User user, Restaurant restaurant, Meal meal){
         this.orderId = order.getOrderId();
-        this.orderUser = new User(0, null, null, null, null,
-                0,0,null,0);
-        this.orderRestaurant = new Restaurant(0,null,null,null,
-                null,null, 0,0,null,
-                null,null,null,
-                null,null,null);
-        this.orderMeal = new Meal(0,null,null,0,0,
-                null,null,0,0,0,0,
-                0,0,0,null,null,null,
-                null);
+        this.orderUser = user;
+        this.orderRestaurant = restaurant;
+        this.orderMeal = meal;
         this.orderStatus = order.getOrderStatus();
         this.orderNumber = order.getOrderNumber();
     }
-    */
+
     /**
      * Gets OrderId.
      * @return orderId unique ID of the order

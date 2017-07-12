@@ -46,11 +46,9 @@ public class CategoryResource {
                 Category newCategory = new Category(category);
                 categoriesBdo.add(newCategory);
             }
-
             return categoriesBdo;
             }
     }
-
 
     /**
      * Gets special need.
@@ -61,12 +59,23 @@ public class CategoryResource {
     @Path("/{categoryId}")
     @ApiOperation(value = "Get information of a category")
     public Category getCategory(@PathParam("categoryId") int categoryId){
-        return null;
+        try (CategoryDao categoryDao = this.connectionFactory.getConnection().open(CategoryDao.class)) {
+            return new Category(categoryDao.findCategoryById(categoryId));
+        }
     }
 
     @GET
     @Path("user/{userId}")
-    public List<Category> getCategoriesByUserId(){return null;}
+    @ApiOperation(value = "Get information of categories by uerId")
+    public List<Category> getCategoriesByUserId(@PathParam("userId") int userId){
+        try (CategoryDao categoryDao = this.connectionFactory.getConnection().open(CategoryDao.class)) {
+            List<Category> categories = new ArrayList<>();
+            for (com.tum.fbl.core.persistence.category.Category category : categoryDao.getCategoriesOfUser(userId)){
+                categories.add(new Category(category));
+            }
+            return  categories;
+        }
+    }
 
     /**
      * Deletes special need.
@@ -76,7 +85,9 @@ public class CategoryResource {
     @Path("/{categoryId}")
     @ApiOperation(value = "Deletes a special need")
     public void deleteCategory(@PathParam("categoryId") int categoryId) {
-
+        try (CategoryDao categoryDao = this.connectionFactory.getConnection().open(CategoryDao.class)) {
+            categoryDao.deleteCategoryById(categoryId);
+        }
     }
 
     /**
@@ -86,7 +97,10 @@ public class CategoryResource {
     @POST
     @ApiOperation(value = "Add a new category to the store")
     public int addCategory(Category category) {
-        return 0;
+        try (CategoryDao categoryDao = this.connectionFactory.getConnection().open(CategoryDao.class)) {
+            return categoryDao.newCategory(category.getCategoryName(),
+                    category.getCategoryDescription());
+        }
     }
 
     /**
@@ -96,8 +110,12 @@ public class CategoryResource {
     @PUT
     @ApiOperation(value = "Update an existing category")
     public void updateCategory(Category category) {
+        try (CategoryDao categoryDao = this.connectionFactory.getConnection().open(CategoryDao.class)){
+            categoryDao.updateCategory(
+                    category.getCategoryName(),
+                    category.getCategoryDescription(),
+                    category.getCategoryId());
+        }
     }
-
-
 
 }

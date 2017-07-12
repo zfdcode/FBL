@@ -110,6 +110,7 @@ public class RestaurantResource {
                     restaurant.getRestaurantName(),
                     restaurant.getRestaurantPassword(),
                     restaurant.getRestaurantEmail(),
+                    //TODO:
                     null,
                     0,
                     0,

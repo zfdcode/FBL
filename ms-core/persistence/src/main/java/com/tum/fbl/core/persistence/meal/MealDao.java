@@ -66,6 +66,12 @@ public interface MealDao extends AutoCloseable{
             @Bind("sodium") float sodium,
             @Bind("price") float price);
 
+    @SqlUpdate("Insert into MealCategory (mealId,categoryId) values (:mealId, :categoryId); SELECT LAST_INSERT_ID() from userCategory")
+    int newMealCategory(
+            @Bind("mealId") int mealId,
+            @Bind("categoryId") int categoryId
+    );
+
     /**
      * deletes an entry with specified unique ID from the Meal table in the database
       * @param id the id of the entry that will be deleted

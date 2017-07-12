@@ -124,7 +124,7 @@
             <column name="mealId" type="int">
                 <constraints nullable="false"/>
             </column>
-            <column name="rating" type="float">
+            <column name="rating" type="boolean">
                 <constraints nullable="false"/>
             </column>
             <column name="ratingTimestamp" type="date">

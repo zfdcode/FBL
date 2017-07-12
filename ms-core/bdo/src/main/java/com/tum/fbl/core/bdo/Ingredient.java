@@ -228,4 +228,12 @@ public class Ingredient {
     public void setSugar(float sugar) {
         this.sugar = sugar;
     }
+
+    public boolean isGarnish() {
+        return isGarnish;
+    }
+
+    public void setGarnish(boolean garnish) {
+        isGarnish = garnish;
+    }
 }

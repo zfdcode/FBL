@@ -68,5 +68,14 @@ public interface IngredientDao extends AutoCloseable {
     @SqlUpdate("Insert into IngredientTag (ingredientId, tagId) value (:ingredientId, : tagId) ")
     void setIngredientTag(@Bind("ingredientId") int ingredientId, @Bind("tagId") int tagId);
 
-    public void close();
+    @SqlUpdate("update ingredient set description= :description where ingredientId= : ingredientId")
+    void updateIngredient(@Bind("ingredientId") int ingredientId, @Bind("description") String description);
+
+    @SqlUpdate("Insert into ingredientTag (ingredientId, tagId) values (:ingredientId, :tagId); SELECT LAST_INSERT_ID() from ingredientTag")
+    int newIngredientTag(@Bind("ingredientId") int ingredientID, @Bind("tagId") int tagId);
+
+    @SqlUpdate("delete from ingredientTag where ingredientId= :ingredientId and tagId = :tagId")
+    void deleteAllIngredientTag(@Bind("ingredientId") int ingredientId, @Bind("tagId") int tagId);
+
+    void close();
 }

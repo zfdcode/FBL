@@ -109,7 +109,7 @@
             <column name="calorieGoal" type="float">
                 <constraints nullable="false"/>
             </column>
-            <column name="burntCalories" type="float">
+            <column name="burnedCalories" type="float">
                 <constraints nullable="false"/>
             </column>
             <column name="trackedCaloriesRange" type="float">

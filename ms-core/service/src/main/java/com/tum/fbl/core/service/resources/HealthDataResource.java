@@ -41,23 +41,7 @@ public class HealthDataResource {
     public HealthData getHealthDataStatus(@PathParam("userId") int userId) {
         try (HealthDataDao healthDataDao = this.connectionFactory.getConnection().open(HealthDataDao.class)) {
             com.tum.fbl.core.persistence.healthdata.HealthData healthData = healthDataDao.findHealthDataById(userId);
-
-            /*
-            return new HealthData(
-                    healthData.getUserId(),
-                    healthData.getDeviceUserPassword(),
-                    healthData.getDeviceUserId(),
-                    healthData.getCurrentHearthbeat(),
-                    healthData.getHeartbeatTimeRange(),
-                    healthData.getTrackedCalorieToday(),
-                    healthData.getTrackedCaloriesTimeRange(),
-                    healthData.getAverageHeartbeatTimeRange()
-            );
-
-        }
-        */
-
-            return null;
+            return new HealthData(healthData);
 
         }
     }
@@ -71,7 +55,6 @@ public class HealthDataResource {
     @ApiOperation(value = "Deletes a health data by user ID")
     public void deleteHealthDataByUserId(@PathParam("userId") int userId) {
         try (HealthDataDao healthDataDao = this.connectionFactory.getConnection().open(HealthDataDao.class)){
-            com.tum.fbl.core.persistence.healthdata.HealthData healthData = healthDataDao.findHealthDataById(userId);
             healthDataDao.deleteHealthData(userId);
         }
     }
@@ -104,13 +87,25 @@ public class HealthDataResource {
     @PUT
     @ApiOperation(value = "Update an existing healthData")
     public void updateHealthData(HealthData healthData) {
+        try (HealthDataDao healthDataDao = this.connectionFactory.getConnection().open(HealthDataDao.class)){
+            healthDataDao.updateHealthData(
+                    healthData.getUserId(),
+                    healthData.getDeviceUserPassword(),
+                    healthData.getDeviceUserId(),
+                    healthData.getBurnedCalories(),
+                    healthData.getTrackedCaloriesTimeRange(),
+                    healthData.getCalorieGoal());
+        }
     }
 
     @GET
     @Path("/leftCalories/{userId}")
     @ApiOperation(value = "get left calories by user")
-    public HealthData getLeftCalories(@PathParam("userId") int userId){
-        return null;
+    public float getLeftCalories(@PathParam("userId") int userId){
+        try (HealthDataDao healthDataDao = this.connectionFactory.getConnection().open(HealthDataDao.class)){
+            HealthData healthData = new HealthData(healthDataDao.findHealthDataById(userId));
+            return healthData.getCalorieGoal()-healthData.getBurnedCalories();
+        }
     }
 
 }

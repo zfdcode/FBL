@@ -10,6 +10,7 @@ import io.swagger.annotations.ApiOperation;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -40,16 +41,14 @@ public class IngredientResource {
     @Path("/all")
     @ApiOperation(value = "Get all offered ingredients")
     public List<Ingredient> getAllIngredients() {
-        /*
+
         try (IngredientDao ingredientDao = this.connectionFactory.getConnection().open(IngredientDao.class)) {
-            List<com.tum.fbl.core.persistence.ingredient.Ingredient> ingredients = ingredientDao.findIngredients();
-            //TODO: return List<Ingredient>
-            return null;
+            List<Ingredient> ingredients = new ArrayList<>();
+            for (com.tum.fbl.core.persistence.ingredient.Ingredient ingredient : ingredientDao.getAllIngredients()) {
+                ingredients.add(new Ingredient(ingredient));
+            }
+            return ingredients;
         }
-
-        */
-
-        return null;
     }
 
     /**
@@ -61,24 +60,10 @@ public class IngredientResource {
     @Path("/id/{ingredientId}")
     @ApiOperation(value = "Get information of a ingredient")
     public Ingredient getIngredient(@PathParam("ingredientId") int ingredientId) {
-        /*
         try (IngredientDao ingredientDao = this.connectionFactory.getConnection().open(IngredientDao.class)) {
             com.tum.fbl.core.persistence.ingredient.Ingredient ingredient = ingredientDao.findIngredientById(ingredientId);
-            return new Ingredient(
-                    ingredient.getIngredientId(),
-                    ingredient.getIngredientName(),
-                    ingredient.getDescription(),
-                    ingredient.getIngredientImage(),
-                    ingredient.getEnergy(),
-                    ingredient.getTotalFat(),
-                    ingredient.getProtein(),
-                    ingredient.getTotalCarbohydrate(),
-                    ingredient.getTag()
-            );
+            return new Ingredient(ingredient);
         }
-        */
-        return null;
-
     }
 
     /**
@@ -117,8 +102,7 @@ public class IngredientResource {
     @POST
     @ApiOperation(value = "Add a new ingredient to the store")
     public int addIngredient(Ingredient ingredient) {
-        return 0;
-        /*
+
         try (IngredientDao ingredientDao = this.connectionFactory.getConnection().open(IngredientDao.class)) {
            return ingredientDao.newIngredient(
                     ingredient.getIngredientName(),
@@ -128,10 +112,10 @@ public class IngredientResource {
                     ingredient.getTotalFat(),
                     ingredient.getProtein(),
                     ingredient.getTotalCarbohydrate(),
-                    ingredient.get
+                    ingredient.isGarnish(),
                     ingredient.getSugar()
             );
-        } */
+        }
     }
 
     /**
@@ -139,9 +123,12 @@ public class IngredientResource {
      * @param ingredient the ingredient
      */
     @PUT
-    @ApiOperation(value = "Update an existing ingredient")
+    @ApiOperation(value = "Update an existing ingredient (description only so far)")
     public void updateIngredient(Ingredient ingredient) {
+        try (IngredientDao ingredientDao = this.connectionFactory.getConnection().open(IngredientDao.class)) {
+            ingredientDao.updateIngredient(ingredient.getIngredientId(),
+                    ingredient.getDescription());
+        }
     }
-
 
 }

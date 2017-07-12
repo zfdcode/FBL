@@ -12,7 +12,7 @@ public class Rating {
 
     private Date ratingTimestamp;
 
-    private float rating;
+    private boolean rating;
 
     /**
      *
@@ -22,7 +22,7 @@ public class Rating {
      * @param ratingTimestamp timestamp when the rating was posted
      * @param rating the actual rating
      */
-    public Rating(int ratingId, int userId, int mealId, Date ratingTimestamp, float rating) {
+    public Rating(int ratingId, int userId, int mealId, Date ratingTimestamp, boolean rating) {
         this.ratingId = ratingId;
         this.userId = userId;
         this.mealId = mealId;
@@ -98,7 +98,7 @@ public class Rating {
      * gets rating
      * @return rating
      */
-    public float getRating() {
+    public boolean isRating() {
         return rating;
     }
 
@@ -106,7 +106,7 @@ public class Rating {
      * sets rating
      * @param rating
      */
-    public void setRating(float rating) {
+    public void setRating(boolean rating) {
         this.rating = rating;
     }
 }

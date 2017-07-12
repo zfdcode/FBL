@@ -54,7 +54,7 @@ public class RatingResource {
             for (com.tum.fbl.core.persistence.rating.Rating rating:ratingDao.findRatingsByUserId(userId)){
                 User user = new User(userDao.findUserById(rating.getUserId()));
                 Meal meal = new Meal(mealDao.findMealById(rating.getMealId()));
-                ratings.add(new Rating(rating,user,meal));
+                ratings.add(new Rating(rating.getRatingId(),user,meal,rating.isRating()? 1:0));
             }
             return ratings;
         }
@@ -78,7 +78,7 @@ public class RatingResource {
             for (com.tum.fbl.core.persistence.rating.Rating rating:ratingDao.findRatingsByMealId(mealId)){
                 User user = new User(userDao.findUserById(rating.getUserId()));
                 Meal meal = new Meal(mealDao.findMealById(rating.getMealId()));
-                ratings.add(new Rating(rating,user,meal));
+                ratings.add(new Rating(rating.getRatingId(),user,meal,rating.isRating()? 1:0));
             }
             return ratings;
         }
@@ -101,7 +101,7 @@ public class RatingResource {
             com.tum.fbl.core.persistence.rating.Rating rating = ratingDao.findRatingById(ratingId);
             User user = new User(userDao.findUserById(rating.getUserId()));
             Meal meal = new Meal(mealDao.findMealById(rating.getMealId()));
-            return new Rating(rating,user,meal);
+            return new Rating(rating.getRatingId(),user,meal,rating.isRating()? 1:0);
         }
     }
 

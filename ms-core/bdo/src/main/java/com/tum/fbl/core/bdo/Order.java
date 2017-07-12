@@ -42,7 +42,7 @@ public class Order {
         this.orderStatus = orderStatus;
         this.orderNumber = orderNumber;
     }
-
+    /*
     public Order(com.tum.fbl.core.persistence.order.Order order){
         this.orderId = order.getOrderId();
         this.orderUser = new User(0, null, null, null, null,
@@ -58,7 +58,7 @@ public class Order {
         this.orderStatus = order.getOrderStatus();
         this.orderNumber = order.getOrderNumber();
     }
-
+    */
     /**
      * Gets OrderId.
      * @return orderId unique ID of the order

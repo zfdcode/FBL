@@ -32,6 +32,8 @@ public class Meal {
 
     private float mealSodium;
 
+    private float price;
+
     /**
      *
      * @param mealId
@@ -49,7 +51,7 @@ public class Meal {
      * @param mealSugar
      * @param mealSodium
      */
-    public Meal(int mealId, String mealName, String mealImage, float mealRating, int mealHealthValue, Date mealPreparationTime, Date offerDate, float mealEnergy, float mealProtein, float mealTotalFat, float mealSaturated, float mealTotalCarbohydrate, float mealSugar, float mealSodium) {
+    public Meal(int mealId, String mealName, String mealImage, float mealRating, int mealHealthValue, Date mealPreparationTime, Date offerDate, float mealEnergy, float mealProtein, float mealTotalFat, float mealSaturated, float mealTotalCarbohydrate, float mealSugar, float mealSodium, float price) {
         this.mealId = mealId;
         this.mealName = mealName;
         this.mealImage = mealImage;
@@ -64,6 +66,7 @@ public class Meal {
         this.mealTotalCarbohydrate = mealTotalCarbohydrate;
         this.mealSugar = mealSugar;
         this.mealSodium = mealSodium;
+        this.price = price;
     }
 
     /**
@@ -142,7 +145,7 @@ public class Meal {
      * Sets the mealHealthValue
      * @param mealHealthValue
      */
-    public void setMealHelathValue(int mealHealthValue) {
+    public void setMealHealthValue(int mealHealthValue) {
         this.mealHealthValue = mealHealthValue;
     }
 
@@ -288,5 +291,13 @@ public class Meal {
      */
     public void setMealSodium(float mealSodium) {
         this.mealSodium = mealSodium;
+    }
+
+    public float getPrice() {
+        return price;
+    }
+
+    public void setPrice(float price) {
+        this.price = price;
     }
 }

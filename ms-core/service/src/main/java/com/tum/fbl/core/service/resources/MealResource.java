@@ -201,20 +201,22 @@ public class MealResource {
     public int addMeal(Meal meal) {
 
         try (MealDao mealDao = this.connectionFactory.getConnection().open(MealDao.class)) {
+
            return mealDao.newMeal(
                     meal.getMealName(),
-                    null,
+                    "",
                     meal.getMealRating(),
                     0,
                     meal.getMealPreparationTime(),
-                    null,
+                    meal.getOfferDate(),
                     meal.getMealEnergy(),
                     meal.getMealProtein(),
                     meal.getMealTotalFat(),
                     meal.getMealSaturated(),
                     meal.getMealTotalCarbohydrate(),
                     meal.getMealSugar(),
-                    meal.getMealSodium()
+                    meal.getMealSodium(),
+                    meal.getMealPrice()
             );
         }
 

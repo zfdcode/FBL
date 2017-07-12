@@ -34,7 +34,7 @@ public class Rating {
         this.rate = rate;
         this.ratingTimestamp = ratingTimestamp;
     }
-
+    /*
     public Rating(com.tum.fbl.core.persistence.rating.Rating rating){
         this.ratingId = rating.getRatingId();
         this.user = new User(0,null,null,null,null,0,0,
@@ -42,10 +42,10 @@ public class Rating {
         this.meal = new Meal( 0,null,null,0,0,
                 null,null,0,0,0,0,
                 0,0,0,null,null,null,
-                null);
+                null,0);
         this.rate = 0;
         this.ratingTimestamp = rating.getRatingTimestamp();
-    }
+    }*/
 
     /**
      * Gets RatingId.

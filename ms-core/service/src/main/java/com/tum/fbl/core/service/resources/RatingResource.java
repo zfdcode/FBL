@@ -39,14 +39,14 @@ public class RatingResource {
     @GET
     @Path("/user/{userId}")
     @ApiOperation(value = "Get ratings by user id")
-    public List<Rating> getRatingsByUserId (@PathParam("userId") int userId) {
+    public List<Rating> getRatingsByUserId (@PathParam("userId") int userId) {/*
         try (RatingDao ratingDao = this.connectionFactory.getConnection().open(RatingDao.class)) {
             List<Rating> ratings = new ArrayList<>();
             for (com.tum.fbl.core.persistence.rating.Rating rating:ratingDao.findRatingsByUserId(userId)){
                 ratings.add(new Rating(rating));
             }
             return ratings;
-        }
+        }*/return null;
     }
 
     /**

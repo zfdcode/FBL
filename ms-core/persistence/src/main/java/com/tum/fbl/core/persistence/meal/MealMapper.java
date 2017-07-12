@@ -35,7 +35,8 @@ public class MealMapper implements ResultSetMapper<Meal> {
                 r.getFloat("mealSaturated"),
                 r.getFloat("mealTotalCarbohydrate"),
                 r.getFloat("mealSugar"),
-                r.getFloat("mealSodium"));
+                r.getFloat("mealSodium"),
+                r.getFloat("price"));
     }
 
 }

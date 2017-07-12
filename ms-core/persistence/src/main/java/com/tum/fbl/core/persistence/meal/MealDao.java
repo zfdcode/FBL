@@ -45,22 +45,23 @@ public interface MealDao extends AutoCloseable{
      * @param mealSugar
      * @param mealSodium
      */
-    @SqlUpdate("insert into meal ( mealName, mealImage, mealRating, mealHelathValue, mealPreparationTime, offerDate, mealEnergy, mealProtein, mealTotalFat, mealSaturated, mealTotalCarbohydrate, mealSugar, mealSodium) " +
-            "values ( :mealName, :mealImage, :mealRating, :mealHelathValue, :mealPreparationTime, offerDate, :mealEnergy, :mealProtein, :mealTotalFat, :mealSaturated, :mealTotalCarbohydrate, :mealSugar, :mealSodium) ; SELECT LAST_INSERT_ID() from meal")
+    @SqlUpdate("insert into meal ( mealName, image, rating, healthValue, preparationTime, offerDate, energy, protein, totalFat, saturated, totalCarbohydrate, sugar, sodium, price) " +
+            "values ( :mealName, :image, :rating, :healthValue, :preparationTime, :offerDate, :energy, :protein, :totalFat, :saturated, :totalCarbohydrate, :sugar, :sodium, :price) ; SELECT LAST_INSERT_ID()")
     int newMeal(
             @Bind("mealName") String mealName,
-            @Bind("mealImage") byte[] mealImage,
-            @Bind("mealRating") float mealRating,
-            @Bind("mealHelathValue") int mealHealthValue,
-            @Bind("mealPreparationTime") Date mealPreparationTime,
+            @Bind("image") String image,
+            @Bind("rating") float rating,
+            @Bind("healthValue") int healthValue,
+            @Bind("preparationTime") Date preparationTime,
             @Bind("offerDate") Date offerDate,
-            @Bind("mealEnergy") float mealEnergy,
-            @Bind("mealProtein") float mealProtein,
-            @Bind("mealTotalFat") float mealTotalFat,
-            @Bind("mealSaturated") float mealSaturated,
-            @Bind("mealTotalCarbohydrate") float mealTotalCarbohydrate,
-            @Bind("mealSugar") float mealSugar,
-            @Bind("mealSodium") float mealSodium);
+            @Bind("energy") float energy,
+            @Bind("protein") float protein,
+            @Bind("totalFat") float totalFat,
+            @Bind("saturated") float saturated,
+            @Bind("totalCarbohydrate") float totalCarbohydrate,
+            @Bind("sugar") float sugar,
+            @Bind("sodium") float sodium,
+            @Bind("price") float price);
 
     /**
      * deletes an entry with specified unique ID from the Meal table in the database

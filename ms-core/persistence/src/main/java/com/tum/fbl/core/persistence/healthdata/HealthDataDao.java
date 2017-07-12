@@ -14,26 +14,26 @@ public interface HealthDataDao extends AutoCloseable {
     @SqlQuery("select * from healthTrackerData where userId = :id")
     HealthData findHealthDataById(@Bind("id") int userId);
 
-    @SqlUpdate("Insert into healthTrackerData (userId, deviceUserPassword, deviceUserId, burnedCalorie, trackedCalorieTimeRange, calorieGoal) " +
-            "values (:userId, :deviceUserPassword, :deviceUserId, :burnedCalories, :trackedCalorieTimeRange, :calorieGoal) ; SELECT LAST_INSERT_ID() from healthTrackerData")
+    @SqlUpdate("Insert into healthTrackerData (userId, deviceUserPassword, deviceUserId, burnedCalories, trackedCaloriesRange, calorieGoal) " +
+            "values (:userId, :deviceUserPassword, :deviceUserId, :burnedCalories, :trackedCaloriesRange, :calorieGoal) ; SELECT LAST_INSERT_ID() from healthTrackerData")
     int newHealthData(
             @Bind("userId") int userId,
             @Bind("deviceUserPassword") String deviceUserPassword,
             @Bind("deviceUserId") int deviceUserId,
             @Bind("burnedCalories") float burnedCalories,
-            @Bind("trackedCalorieTimeRange") float trackedCalorieTimeRange,
+            @Bind("trackedCaloriesRange") float trackedCalorieTimeRange,
             @Bind("calorieGoal") float calorieGoal);
 
     @SqlUpdate("delete from healthTrackerData where userId = :id")
     void deleteHealthData(@Bind("id") int userId);
 
-    @SqlUpdate("update healthTrackerData set deviceUserPassword = :deviceUserPassword, deviceUserId = :deviceUserId, burnedCalorie = :burnedCalorie, trackedCalorieTimeRange = :trackedCalorieTimeRange, calorieGoal= :calorieGoal where userId = :id")
+    @SqlUpdate("update healthTrackerData set deviceUserPassword = :deviceUserPassword, deviceUserId = :deviceUserId, burnedCalorie = :burnedCalories, trackedCaloriesRange = :trackedCaloriesRange, calorieGoal= :calorieGoal where userId = :id")
     void updateHealthData(@Bind("userId") int userId,
                           @Bind("deviceUserPassword") String deviceUserPassword,
                           @Bind("deviceUserId") int deviceUserId,
                           @Bind("burnedCalories") float burnedCalories,
-                          @Bind("trackedCalorieTimeRange") float trackedCalorieTimeRange,
+                          @Bind("trackedCaloriesRange") float trackedCalorieTimeRange,
                           @Bind("calorieGoal") float calorieGoal);
 
-    public void close();
+    void close();
 }

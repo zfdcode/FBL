@@ -59,7 +59,14 @@ public interface UserDao extends AutoCloseable {
     @SqlUpdate("delete from user where userId = :id")
     void deleteUser(@Bind("id") int userId);
 
-    //TODO: updateUser
+    @SqlUpdate("update user set userName=:userName, userPassword=:userPassword, userEmail=:userEmail, weight=:weight, displayName=:displayName where userId=:userId")
+    void updateUser(
+            @Bind("userName") String userName,
+            @Bind("userPassword") String userPassword,
+            @Bind("userEmail") String userEmail,
+            @Bind("weight") int weight,
+            @Bind("displayName") String displayName
+    );
 
     public void close();
 }

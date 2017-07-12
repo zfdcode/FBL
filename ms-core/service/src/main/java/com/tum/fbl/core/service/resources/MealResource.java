@@ -105,7 +105,15 @@ public class MealResource {
 
     @GET
     @Path("/ingredient/{ingredientId}")
-    public List<Meal> getMealsByIngredient(){return null;}
+    public List<Meal> getMealsByIngredient(@PathParam("ingredientId") int ingredientId){
+        try (MealDao mealDao = this.connectionFactory.getConnection().open(MealDao.class)){
+            List<Meal> users = new ArrayList<Meal>();
+            for (com.tum.fbl.core.persistence.meal.Meal meal:mealDao.getMealsByIngredient(ingredientId)){
+                users.add(new Meal(meal));
+            }
+            return users;
+        }
+    }
 
     @GET
     @Path("/ingredientException/{ingredientIds}")

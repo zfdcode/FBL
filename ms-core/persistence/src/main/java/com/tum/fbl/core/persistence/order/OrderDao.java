@@ -31,11 +31,11 @@ public interface OrderDao extends AutoCloseable{
      * @param orderPickupTime the time the order is ready to be picked up
      * @param orderStatus the order's current status
      */
-    @SqlUpdate("Insert into order (orderUserId, orderMealId, orderPickupTime, orderStatus, orderNumber) value (:orderUserId, :orderMealId, :orderPickupTime, :orderStatus, :orderNumber); SELECT LAST_INSERT_ID() from order")
-    int newOrder(@Bind("orderUserId") int orderUserId,
-                  @Bind("orderMealId") int orderMealId,
-                  @Bind("orderPickupTime") Date orderPickupTime,
-                  @Bind("orderStatus") int orderStatus);
+    @SqlUpdate("Insert into Order (userId, mealId, pickupTime, status, orderNumber) value (:userId, :mealId, :pickupTime, :status, :number); SELECT LAST_INSERT_ID() from order")
+    int newOrder(@Bind("userId") int orderUserId,
+                  @Bind("mealId") int orderMealId,
+                  @Bind("pickupTime") Date orderPickupTime,
+                  @Bind("status") int orderStatus);
 
     /**
      * deletes an entry with specified unique ID in the Order table
@@ -58,8 +58,8 @@ public interface OrderDao extends AutoCloseable{
      * @param orderStatus the new status
      * @param orderId the unique ID of the order
      */
-    @SqlUpdate("update order set status= :newStatus where orderId = :id")
-    void setOrderStatus(@Bind("orderStatus") int orderStatus, @Bind("id") int orderId);
+    @SqlUpdate("update order set status= :status where orderId = :id")
+    void setOrderStatus(@Bind("status") int orderStatus, @Bind("id") int orderId);
 
     void close();
 

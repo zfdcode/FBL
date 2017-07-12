@@ -18,14 +18,14 @@ public interface IngredientDao extends AutoCloseable {
      * @param ingredientId the unique ID of the ingredient
      * @return Ingredient object
      */
-    @SqlQuery("select * from ingredient where ingredientId = :id")
+    @SqlQuery("select * from Ingredient where ingredientId = :id")
     Ingredient findIngredientById(@Bind("id") int ingredientId);
 
     /**
      * gets all ingredients
      * @return List of Ingredient objects
      */
-    @SqlQuery("select * from ingredient")
+    @SqlQuery("select * from Ingredient")
     List<Ingredient> getAllIngredients();
 
     /**
@@ -41,11 +41,11 @@ public interface IngredientDao extends AutoCloseable {
      * @param sugar the total amount of sugar the ingredient contains
      * @return the unique ID of the newly added ingredient
      */
-    @SqlUpdate("Insert into ingredient (ingredientName, description, ingredientImage, energy, totalFat, protein, totalCarbohydrate, isGarnish, sugar) " +
-            "value (:ingredientName, :description, :ingredientImage, :energy, :totalFat, :protein, :totalCarbohydrate, :isGarnish, sugar); SELECT LAST_INSERT_ID() from ingredient")
+    @SqlUpdate("Insert into Ingredient (ingredientName, description, image, energy, totalFat, protein, totalCarbohydrate, isGarnish, sugar) " +
+            "value (:ingredientName, :description, :image, :energy, :totalFat, :protein, :totalCarbohydrate, :isGarnish, :sugar); SELECT LAST_INSERT_ID() from Ingredient")
     int newIngredient(@Bind("ingredientName") String ingredientName,
                        @Bind("description") String description,
-                       @Bind("ingredientImage") String ingredientImage,
+                       @Bind("image") String ingredientImage,
                        @Bind("energy") float energy,
                        @Bind("totalFat") float totalFat,
                        @Bind("protein") float protein,
@@ -57,7 +57,7 @@ public interface IngredientDao extends AutoCloseable {
      * deletes an entry with specified unique ID from the database
      * @param ingredientId the ID of the entry that will be deleted
      */
-    @SqlUpdate("delete from ingredient where ingredientId = :id")
+    @SqlUpdate("delete from Ingredient where ingredientId = :id")
     void deleteIngredientById(@Bind("id") int ingredientId);
 
     /**
@@ -68,13 +68,13 @@ public interface IngredientDao extends AutoCloseable {
     @SqlUpdate("Insert into IngredientTag (ingredientId, tagId) value (:ingredientId, : tagId) ")
     void setIngredientTag(@Bind("ingredientId") int ingredientId, @Bind("tagId") int tagId);
 
-    @SqlUpdate("update ingredient set description= :description where ingredientId= : ingredientId")
+    @SqlUpdate("update Ingredient set description= :description where ingredientId= : ingredientId")
     void updateIngredient(@Bind("ingredientId") int ingredientId, @Bind("description") String description);
 
-    @SqlUpdate("Insert into ingredientTag (ingredientId, tagId) values (:ingredientId, :tagId); SELECT LAST_INSERT_ID() from ingredientTag")
+    @SqlUpdate("Insert into IngredientTag (ingredientId, tagId) values (:ingredientId, :tagId); SELECT LAST_INSERT_ID() from ingredientTag")
     int newIngredientTag(@Bind("ingredientId") int ingredientID, @Bind("tagId") int tagId);
 
-    @SqlUpdate("delete from ingredientTag where ingredientId= :ingredientId and tagId = :tagId")
+    @SqlUpdate("delete from IngredientTag where ingredientId= :ingredientId and tagId = :tagId")
     void deleteAllIngredientTag(@Bind("ingredientId") int ingredientId, @Bind("tagId") int tagId);
 
     void close();

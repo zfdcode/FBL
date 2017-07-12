@@ -26,7 +26,7 @@ public class IngredientMapper implements ResultSetMapper<Ingredient> {
                 r.getInt("ingredientId"),
                 r.getString("ingredientName"),
                 r.getString("description"),
-                r.getString("ingredientImage"),
+                r.getString("image"),
                 r.getFloat("energy"),
                 r.getFloat("totalFat"),
                 r.getFloat("protein"),

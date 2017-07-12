@@ -30,9 +30,10 @@ public class Order {
      * @param orderStatus current status of the order
      * @param orderNumber order's actual number at restaurant
      */
-    public Order(int orderId, int orderUserId, int orderMealId, Date orderPickupTime, int orderStatus, int orderNumber) {
+    public Order(int orderId, int orderUserId, int orderRestaurantId, int orderMealId, Date orderPickupTime, int orderStatus, int orderNumber) {
         this.orderId = orderId;
         this.orderUserId = orderUserId;
+        this.orderRestaurantId = orderRestaurantId;
         this.orderMealId = orderMealId;
         this.orderPickupTime = orderPickupTime;
         this.orderStatus = orderStatus;

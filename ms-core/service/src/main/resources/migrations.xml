@@ -84,7 +84,7 @@
             <column name="orderId" type="int" autoIncrement="true">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
-            <column name="restaurant" type="int">
+            <column name="restaurantId" type="int">
                 <constraints nullable="false"/>
             </column>
             <column name="userId" type="int">

@@ -26,8 +26,8 @@ public class HealthDataMapper implements ResultSetMapper<HealthData> {
                 r.getInt("userId"),
                 r.getString("deviceUserPassword"),
                 r.getInt("deviceUserId"),
-                r.getFloat("burnedCalorie"),
-                r.getFloat("trackedCalorieTimeRange"),
+                r.getFloat("burnedCalories"),
+                r.getFloat("trackedCaloriesRange"),
                 r.getFloat("calorieGoal"));
     }
 

@@ -84,7 +84,7 @@
             <column name="orderId" type="int" autoIncrement="true">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
-            <column name="restaurant" type="int">
+            <column name="restaurantId" type="int">
                 <constraints nullable="false"/>
             </column>
             <column name="userId" type="int">
@@ -109,7 +109,7 @@
             <column name="calorieGoal" type="float">
                 <constraints nullable="false"/>
             </column>
-            <column name="burntCalories" type="float">
+            <column name="burnedCalories" type="float">
                 <constraints nullable="false"/>
             </column>
             <column name="trackedCaloriesRange" type="float">
@@ -209,6 +209,9 @@
                 <constraints nullable="false" primaryKey="true"/>
             </column>
             <column name="categoryName" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="categoryDescription" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
         </createTable>

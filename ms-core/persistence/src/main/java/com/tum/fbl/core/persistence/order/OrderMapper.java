@@ -24,11 +24,12 @@ public class OrderMapper implements ResultSetMapper<Order> {
     public Order map(int index, ResultSet r, StatementContext ctx) throws SQLException {
         return new Order(
                 r.getInt("orderId"),
-                r.getInt("orderUserId"),
-                r.getInt("orderMealId"),
-                r.getDate("orderPickupTime"),
-                r.getInt("orderStatus"),
-                r.getInt("orderNumber")
+                r.getInt("userId"),
+                r.getInt("restaurantId"),
+                r.getInt("mealId"),
+                r.getDate("pickupTime"),
+                r.getInt("status"),
+                r.getInt("number")
                 );
     }
 

@@ -56,8 +56,15 @@ public class MealResource {
     @Path("/all")
     @ApiOperation(value = "Get all offered meals")
     public List<Meal> getAllMeals() {
-        //TODO: return list meal
-        return null;
+        try (MealDao mealDao = this.connectionFactory.getConnection().open(MealDao.class)){
+            List<Meal> users = new ArrayList<Meal>();
+            for (com.tum.fbl.core.persistence.meal.Meal meal:mealDao.getAllMeals()){
+                users.add(new Meal(meal));
+            }
+            return users;
+        }
+
+
     }
 
     @GET

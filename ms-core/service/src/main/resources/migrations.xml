@@ -211,6 +211,9 @@
             <column name="categoryName" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
+            <column name="categoryDescription" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
         </createTable>
 
         <createTable tableName="MealCategory">

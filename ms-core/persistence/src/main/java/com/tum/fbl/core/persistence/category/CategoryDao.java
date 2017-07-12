@@ -14,7 +14,7 @@ import java.util.List;
 public interface CategoryDao extends AutoCloseable{
 
 
-    @SqlQuery("select * from category c where categoryId = :id")
+    @SqlQuery("select * from Category c where categoryId = :id")
     Category findCategoryById(@Bind("id") int categoryId);
 
     /**
@@ -45,7 +45,7 @@ public interface CategoryDao extends AutoCloseable{
      * @param categoryName the new category's name
      * @param categoryDescription the new category's description
      */
-    @SqlUpdate("Insert into ingredient (categoryName, categoryDescription) values (:categoryName, :categoryDescription); SELECT LAST_INSERT_ID() from category")
+    @SqlUpdate("Insert into Category (categoryName, categoryDescription) values (:categoryName, :categoryDescription); SELECT LAST_INSERT_ID() from userCategory")
     int newCategory(@Bind("categoryName") String categoryName, @Bind("categoryDescription") String categoryDescription);
 
     /**
@@ -54,14 +54,14 @@ public interface CategoryDao extends AutoCloseable{
      * @param categoryDescription the new description of the category
      * @param categoryId the unique ID of the category that will be updated
      */
-    @SqlUpdate("update category set categoryName= :categoryName, categoryDescription= :categoryDescription  where categoryId = :id")
+    @SqlUpdate("update Category set categoryName= :categoryName, categoryDescription= :categoryDescription  where categoryId = :id")
     void updateCategory(@Bind("categoryName") String categoryName, @Bind("categoryDescription") String categoryDescription, @Bind("id") int categoryId);
 
     /**
      * deletes an entry in the category table in the database
      * @param categoryId the unique ID of the category that will be deleted
      */
-    @SqlUpdate("delete from category where categoryId = :id")
+    @SqlUpdate("delete from Category where categoryId = :id")
     void deleteCategoryById(@Bind("id") int categoryId);
 
 

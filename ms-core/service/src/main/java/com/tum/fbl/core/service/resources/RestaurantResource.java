@@ -130,7 +130,15 @@ public class RestaurantResource {
     @PUT
     @ApiOperation(value = "Update an existing restaurant")
     public void updateRestaurant(Restaurant restaurant) {
-        //TODO:
+        try (UserDao userDao = this.connectionFactory.getConnection().open(UserDao.class)){
+            userDao.updateUser(
+                    restaurant.getRestaurantName(),
+                    restaurant.getRestaurantPassword(),
+                    restaurant.getRestaurantEmail(),
+                    0,
+                    restaurant.getRestaurantDisplayName()
+            );
+        }
     }
 
 }

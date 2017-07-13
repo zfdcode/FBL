@@ -20,9 +20,19 @@ public class FitBitImpl implements FitBit {
     this.token=token;
     }
 
-    public void apiJson() {
+    public String getBurnedCaloriesValue (){
+        String json = this.burnedCalories();
+
+    }
+
+    public String burnedCalories () {
         String burnedCalories = this.apiCall("https://api.fitbit.com/1/user/-/activities/tracker/calories/date/today/1d.json");
+        return (burnedCalories);
+    }
+
+    public String calorieGoal () {
         String calorieGoal = this.apiCall ("https://api.fitbit.com/1/user/-/activities/goals/daily.json");
+        return (calorieGoal);
     }
 
     public String apiCall(String address) {

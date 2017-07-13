@@ -98,6 +98,24 @@ public class CategoryResource {
         }
     }
 
+    @GET
+    @Path("meal/{mealId}")
+    @ApiOperation(value = "Get categories of one Meal")
+    public List<Category> getCategoriesByMealId(@PathParam("mealId") int mealId) {
+        try (CategoryDao categoryDao = this.connectionFactory.getConnection().open(CategoryDao.class)) {
+            List<Category> categories = new ArrayList<>();
+
+            List<com.tum.fbl.core.persistence.category.Category> categoriesDb = categoryDao.getCategoriesByMeal(mealId);
+            if (categoriesDb != null) {
+                for (com.tum.fbl.core.persistence.category.Category category : categoriesDb) {
+                    categories.add(new Category(category));
+                }
+            }
+
+            return categories;
+        }
+    }
+
     /**
      * Deletes special need.
      *

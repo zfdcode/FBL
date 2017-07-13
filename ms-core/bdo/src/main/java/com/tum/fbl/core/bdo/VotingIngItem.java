@@ -16,24 +16,24 @@ public class VotingIngItem {
 
     private Ingredient ingredient;
 
-    private List<Vote> votes;
+    private Vote[] votes;
 
-    public VotingIngItem(int votingIngItemId, int votingPeriodId, boolean isIgnored, int ingredientId, Ingredient ingredient, List<Vote> votes) {
+    public VotingIngItem(int votingIngItemId, int votingPeriodId, boolean isIgnored, int ingredientId, Ingredient ingredient) {
         this.votingIngItemId = votingIngItemId;
         this.votingPeriodId = votingPeriodId;
         this.isIgnored = isIgnored;
         this.ingredientId = ingredientId;
         this.ingredient = ingredient;
-        this.votes = votes;
+        this.votes = new Vote[0];
     }
 
-    public VotingIngItem(com.tum.fbl.core.persistence.VotingIngItem.VotingIngItem votingIngItem, Ingredient Ingredient, List<Vote> votes) {
+    public VotingIngItem(com.tum.fbl.core.persistence.VotingIngItem.VotingIngItem votingIngItem, Ingredient Ingredient) {
         this.votingIngItemId = votingIngItem.getVotingIngItemId();
         this.votingPeriodId = votingIngItem.getVotingPeriodId();
         this.isIgnored = votingIngItem.getIsIgnored();
         this.ingredientId = votingIngItem.getIngredientId();
         this.ingredient = Ingredient;
-        this.votes = votes;
+        this.votes = new Vote[0];
     }
 
     public int getVotingIngItemId() {
@@ -76,11 +76,11 @@ public class VotingIngItem {
         this.ingredient = ingredient;
     }
 
-    public List<Vote> getVotes() {
+    public Vote[] getVotes() {
         return votes;
     }
 
-    public void setVotes(List<Vote> votes) {
+    public void setVotes(Vote[] votes) {
         this.votes = votes;
     }
 

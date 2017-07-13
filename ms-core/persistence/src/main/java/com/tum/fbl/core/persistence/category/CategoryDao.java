@@ -29,7 +29,7 @@ public interface CategoryDao extends AutoCloseable{
      * @param userId the user's unique ID
      * @return List of Category objects
      */
-    @SqlQuery("select c.categoryId, c.categoryName, categoryDescription from (select * from UserCategory where userId = :id) natural join category c")
+    @SqlQuery("select c.categoryId, c.categoryName, c.categoryDescription from category c natural join (select * from UserCategory where userId = :id)  ")
     List<Category> getCategoriesOfUser(@Bind("id") int userId);
 
     /**
@@ -37,7 +37,7 @@ public interface CategoryDao extends AutoCloseable{
      * @param mealId the meal's unique ID
      * @return List of Category objects
      */
-    @SqlQuery("select c.categoryId, c.categoryName, categoryDescription from (select * from MealCategory where mealId = :id) natural join category c")
+    @SqlQuery("select c.categoryId, c.categoryName, c.categoryDescription from category c natural join (select * from MealCategory where mealId = :id)")
     List<Category> getCategoriesByMeal(@Bind("id") int mealId);
 
     /**

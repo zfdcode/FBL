@@ -1,5 +1,8 @@
 package com.tum.fbl.core.service.resources;
 
+import com.tum.fbl.core.bdo.Category;
+import com.tum.fbl.core.bdo.Ingredient;
+import com.tum.fbl.core.bdo.Restaurant;
 import com.tum.fbl.core.config.ImageUploadConfiguration;
 import com.tum.fbl.core.imagestorage.ImagePersistenceException;
 import com.tum.fbl.core.imagestorage.ImageStatus;
@@ -303,6 +306,9 @@ public class MealResource {
     public void deleteMeal(@PathParam("mealId") int mealId) {
         try (MealDao mealDao = this.connectionFactory.getConnection().open(MealDao.class)) {
             mealDao.deleteMealById(mealId);
+            mealDao.deleteMealRestaurantById(mealId);
+            mealDao.deleteMealIngredientById(mealId);
+            mealDao.deleteMealIngredientById(mealId);
         }
     }
 
@@ -341,23 +347,39 @@ public class MealResource {
         if (meal != null) {
             try (MealDao mealDao = this.connectionFactory.getConnection().open(MealDao.class)) {
 
-
-                  return mealDao.newMeal(
-                        meal.getMealName(),
-                        "",
-                        meal.getMealRating(),
-                        0,
-                        meal.getMealPreparationTime(),
-                        meal.getOfferDate(),
-                        meal.getMealEnergy(),
-                        meal.getMealProtein(),
-                        meal.getMealTotalFat(),
-                        meal.getMealSaturated(),
-                        meal.getMealTotalCarbohydrate(),
-                        meal.getMealSugar(),
-                        meal.getMealSodium(),
-                        meal.getMealPrice()
+                int mealId = mealDao.newMeal(
+                            meal.getMealName(),
+                            "",
+                            meal.getMealRating(),
+                            0,
+                            meal.getMealPreparationTime(),
+                            meal.getOfferDate(),
+                            meal.getMealEnergy(),
+                            meal.getMealProtein(),
+                            meal.getMealTotalFat(),
+                            meal.getMealSaturated(),
+                            meal.getMealTotalCarbohydrate(),
+                            meal.getMealSugar(),
+                            meal.getMealSodium(),
+                            meal.getMealPrice()
                 );
+                Restaurant restaurant = meal.getMealRestaurant();
+
+                Category[] categories = meal.getMealCategories();
+
+                Ingredient[] ingredients = meal.getMealIngredients();
+
+                mealDao.newRestaurantMeal(mealId, restaurant.getRestaurantId(), meal.getOfferDate());
+
+                for(Category c: categories){
+                    mealDao.newMealCategory(mealId, c.getCategoryId());
+                }
+
+                for(Ingredient i: ingredients){
+                    mealDao.newMealIngredient(mealId, i.getIngredientId());
+                }
+
+                return mealId;
             }
         } else {
             throw new IllegalArgumentExpection();

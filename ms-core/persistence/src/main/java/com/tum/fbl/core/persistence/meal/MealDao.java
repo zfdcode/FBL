@@ -109,11 +109,18 @@ public interface MealDao extends AutoCloseable{
     @SqlUpdate("insert into mealRestaurant (mealId, userId, date) values (:mealId, :userId, :date)")
     void newRestaurantMeal(@Bind("mealId") int mealId, @Bind("userId") int userId, @Bind("date") Date date);
 
-    @SqlUpdate("Insert into MealCategory (mealId,categoryId) values (:mealId, :categoryId); SELECT LAST_INSERT_ID() from userCategory")
-    int newMealCategory(
+    @SqlUpdate("Insert into MealCategory (mealId,categoryId) values (:mealId, :categoryId);")
+    void newMealCategory(
             @Bind("mealId") int mealId,
             @Bind("categoryId") int categoryId
     );
+
+    @SqlUpdate("Insert into MealIngredient (mealId,ingredientId) values (:mealId, :ingredientId);")
+    void newMealIngredient(
+            @Bind("mealId") int mealId,
+            @Bind("ingredientId") int ingredientId
+    );
+
 
     /**
      * deletes an entry with specified unique ID from the Meal table in the database
@@ -121,7 +128,16 @@ public interface MealDao extends AutoCloseable{
      */
     @SqlUpdate("delete from meal where mealId = :id")
     void deleteMealById(@Bind("id") int id);
-    //TODO: void update()
+
+    @SqlUpdate("delete from MealCategory where mealId = :id")
+    void deleteMealCategoryById(@Bind("id") int id);
+
+    @SqlUpdate("delete from MealIngredient where mealId = :id")
+    void deleteMealIngredientById(@Bind("id") int id);
+
+    @SqlUpdate("delete from mealRestaurant where mealId = :id")
+    void deleteMealRestaurantById(@Bind("id") int id);
+
 
     @SqlUpdate("update meal set mealName = :mealName, image = :image, rating = :rating, healthValue = :healthValue, preparationTime = :preparationTime, offerDate = :offerDate, energy = :energy, protein = :protein, totalFat = :totalFat, saturated = :saturated, totalCarbohydrate = :totalCarbohydrate, sugar = :sugar, sodium = :sodium, price = :price where mealId = :mealId")
         void updateMeal(

@@ -1,4 +1,5 @@
 package com.tum.fbl.core.bdo;
+import java.util.List;
 
 /**
  * Created by MS on 10.07.2017.
@@ -15,14 +16,23 @@ public class VotingIngItem {
 
     private Ingredient ingredient;
 
-    private Vote[] votes;
+    private List<Vote> votes;
 
-    public VotingIngItem(int votingIngItemId, int votingPeriodId, boolean isIgnored, int ingredientId, Ingredient ingredient, Vote[] votes) {
+    public VotingIngItem(int votingIngItemId, int votingPeriodId, boolean isIgnored, int ingredientId, Ingredient ingredient, List<Vote> votes) {
         this.votingIngItemId = votingIngItemId;
         this.votingPeriodId = votingPeriodId;
         this.isIgnored = isIgnored;
         this.ingredientId = ingredientId;
         this.ingredient = ingredient;
+        this.votes = votes;
+    }
+
+    public VotingIngItem(com.tum.fbl.core.persistence.VotingIngItem.VotingIngItem votingIngItem, Ingredient Ingredient, List<Vote> votes) {
+        this.votingIngItemId = votingIngItem.getVotingIngItemId();
+        this.votingPeriodId = votingIngItem.getVotingPeriodId();
+        this.isIgnored = votingIngItem.getIsIgnored();
+        this.ingredientId = votingIngItem.getIngredientId();
+        this.ingredient = Ingredient;
         this.votes = votes;
     }
 
@@ -66,11 +76,11 @@ public class VotingIngItem {
         this.ingredient = ingredient;
     }
 
-    public Vote[] getVotes() {
+    public List<Vote> getVotes() {
         return votes;
     }
 
-    public void setVotes(Vote[] votes) {
+    public void setVotes(List<Vote> votes) {
         this.votes = votes;
     }
 

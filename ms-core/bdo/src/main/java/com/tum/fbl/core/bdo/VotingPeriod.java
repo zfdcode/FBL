@@ -1,6 +1,7 @@
 package com.tum.fbl.core.bdo;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by MS on 10.07.2017.
@@ -17,15 +18,24 @@ public class VotingPeriod {
 
     private int calendarWeek;
 
-    private VotingIngItem[] VotingIngItems;
+    private List<VotingIngItem> VotingIngItems;
 
-    public VotingPeriod(int votingPeriodId, Date startTime, Date endTime, Boolean isFinished, int calendarWeek, VotingIngItem[] votingIngItems) {
+    public VotingPeriod(int votingPeriodId, Date startTime, Date endTime, Boolean isFinished, int calendarWeek, List<VotingIngItem>  votingIngItems) {
         this.votingPeriodId = votingPeriodId;
         this.startTime = startTime;
         this.endTime = endTime;
         this.isFinished = isFinished;
         this.calendarWeek = calendarWeek;
         VotingIngItems = votingIngItems;
+    }
+
+    public VotingPeriod(com.tum.fbl.core.persistence.VotingPeriod.VotingPeriod votingPeriod, List<VotingIngItem> data) {
+        this.votingPeriodId = votingPeriod.getVotingPeriodId();
+        this.startTime = votingPeriod.getStartTime();
+        this.endTime = votingPeriod.getEndTime();
+        this.isFinished = votingPeriod.getIsFinished();
+        this.calendarWeek = votingPeriod.getCalendarWeek();
+        VotingIngItems = data;
     }
 
     public int getVotingPeriodId() {
@@ -68,11 +78,11 @@ public class VotingPeriod {
         this.calendarWeek = calendarWeek;
     }
 
-    public VotingIngItem[] getVotingIngItems() {
+    public List<VotingIngItem>  getVotingIngItems() {
         return VotingIngItems;
     }
 
-    public void setVotingIngItems(VotingIngItem[] votingIngItems) {
+    public void setVotingIngItems(List<VotingIngItem>  votingIngItems) {
         VotingIngItems = votingIngItems;
     }
 

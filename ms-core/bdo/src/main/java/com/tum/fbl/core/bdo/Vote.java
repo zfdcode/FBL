@@ -1,5 +1,7 @@
 package com.tum.fbl.core.bdo;
 
+import com.tum.fbl.core.persistence.vote.VoteMapper;
+
 /**
  * Documented by jie on 01.07.2017.
  */
@@ -20,6 +22,13 @@ public class Vote {
         this.votingIngItemId = votingIngItemId;
         this.userId = userId;
         this.type = type;
+    }
+
+    public Vote(com.tum.fbl.core.persistence.vote.Vote vote){
+        this.voteId = vote.getVoteId();
+        this.votingIngItemId = vote.getvotingIngItemId();
+        this.userId = vote.getUserId();
+        this.type = vote.getType();
     }
 
     public int getVoteId() {

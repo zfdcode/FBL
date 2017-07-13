@@ -1,5 +1,6 @@
 package com.tum.fbl.core.service.resources;
 
+import com.tum.fbl.core.bdo.Vote;
 import com.tum.fbl.core.bdo.VotingPeriod;
 import com.tum.fbl.core.persistence.ConnectionFactory;
 import com.tum.fbl.core.persistence.VotingIngItem.VotingIngItem;
@@ -14,12 +15,13 @@ import io.swagger.annotations.ApiOperation;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
+import java.util.ArrayList;
 
 /**
  * Created by MS on 10.07.2017.
  */
 
-/*
+
 @Path("/votingPeriod")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
@@ -28,10 +30,10 @@ public class VotingPeriodResource {
 
     private final ConnectionFactory connectionFactory;
 
-    /**
+    /*
      * Connects to the factory for VotingPeriod resource.
      * @param connectionFactory the connection of factory
-     /*
+     */
 
     public VotingPeriodResource(ConnectionFactory connectionFactory) {
         this.connectionFactory = connectionFactory;
@@ -43,10 +45,6 @@ public class VotingPeriodResource {
      * @return List of VotingPeriods
      */
 
-/*
-
-/**
->>>>>>> 2e28125f60781b1cedf2edeeaf562a52ab0af4bf
     @GET
     @Path("/{isFinished}")
     @ApiOperation(value = "Get basic vote information")
@@ -66,7 +64,7 @@ public class VotingPeriodResource {
 
                         votingPeriods.forEach((period) -> {
                             //List for VotingIngItems to be added to votingPerods
-                            List<com.tum.fbl.core.bdo.VotingIngItem> votingIngItemList = null;
+                            List<com.tum.fbl.core.bdo.VotingIngItem> votingIngItemList = new ArrayList<com.tum.fbl.core.bdo.VotingIngItem>();
 
                             //Build List with all votingIngItems for this period. n-1 relationship.
                             List<com.tum.fbl.core.persistence.VotingIngItem.VotingIngItem> votingIngItems = votingIngItemDao.findVotingIngItemsByPeriod(period.getVotingPeriodId());
@@ -78,42 +76,40 @@ public class VotingPeriodResource {
                                 //Get the Votes for each votingIngItem. n-1 relationship
                                 List<com.tum.fbl.core.persistence.vote.Vote> votes = voteDao.findVotesByIngItemId(votingIng.getVotingIngItemId());
 
-                                List<com.tum.fbl.core.bdo.Vote> votesList = null;
+                                List<com.tum.fbl.core.bdo.Vote> votesList = new ArrayList<Vote>();
 
                                 //Build ingredient BDO
-                                new Ingredient(ingredient);
+                                if (ingredient != null) {
+                                    com.tum.fbl.core.bdo.Ingredient thatIng = new com.tum.fbl.core.bdo.Ingredient(ingredient);
+
 
                                 //Build votes BDO
                                 votes.forEach((vote) -> {
-                                    new Vote(vote);
-                                    //Push Vote as bdo to list
-                                    votesList.add(Vote);
-
-
-
+                                    if(vote != null){
+                                        Vote thatVote = new Vote(vote);
+                                        //Push Vote as bdo to list
+                                        votesList.add(thatVote);
+                                    }
                                 });
 
-                                //Create VotingIngItem bdo
-                                new VotingIngItem(votingIng);
-
-                                //Set ingredient as attribute to Vote
-                                VotingIngItem.setIngredient(Ingredient);
-
-                                //Set votes as attribute to VotingIngItem
-                                VotingIngItem.setVotes(votesList);
-
-                                //Push VoteIngItem to List
-                                votingIngItemList.add(VotingIngItem);
+                                if(votingIng != null){
+                                    //Create VotingIngItem bdo
+                                    com.tum.fbl.core.bdo.VotingIngItem thatVo = new com.tum.fbl.core.bdo.VotingIngItem(votingIng, thatIng, votesList);
+                                    //Push VoteIngItem to List
+                                    votingIngItemList.add(thatVo);
+                                }
+                            }
 
                             });
 
-                            new VotingPeriod(period);
-                            VotingPeriod.setVotingIngItems(votingIngItemList);
-
-                            VotingPeriodList.add(VotingPeriod);
-
+                            //Build BDO
+                            if(period != null){
+                                VotingPeriod thatVP = new VotingPeriod(period, votingIngItemList);
+                                VotingPeriodList.add(thatVP);
+                            }
                         });
 
+                        //Return Voting Period List for result.
                         return VotingPeriodList;
 
 
@@ -126,8 +122,7 @@ public class VotingPeriodResource {
 
             }
 
-
-            return List;
         }
-    }*/
+    }
+}
 

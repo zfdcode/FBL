@@ -34,6 +34,7 @@ public class Ingredient {
      * @param totalCarbohydrate the ingredient's totalCarbohydrate
      * @param isGarnish true of the ingredient is a garnish/side dish, false otherwise
      */
+
     public Ingredient(int ingredientId, String ingredientName, String description, String ingredientImage, float energy, float totalFat, float protein, float totalCarbohydrate, boolean isGarnish, float sugar) {
         this.ingredientId = ingredientId;
         this.ingredientName = ingredientName;

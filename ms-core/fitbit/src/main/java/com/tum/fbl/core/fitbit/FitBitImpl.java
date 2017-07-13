@@ -1,6 +1,6 @@
 package com.tum.fbl.core.fitbit;
 
-
+/*
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -78,3 +78,4 @@ public class FitBitImpl implements FitBit {
 }
 
 
+*/

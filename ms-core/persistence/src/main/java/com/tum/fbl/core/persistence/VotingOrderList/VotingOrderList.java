@@ -18,11 +18,13 @@ public class VotingOrderList {
      * @param orderedAt when the order was placed
      * @param votingPeriodId the unique ID of the voting period the order was placed in
      */
+
     public VotingOrderList(int votingOrderListId, float orderedAmount, Date orderedAt, int votingPeriodId) {
         this.votingOrderListId = votingOrderListId;
         this.orderedAmount = orderedAmount;
         this.orderedAt = orderedAt;
         this.votingPeriodId = votingPeriodId;
+        //TODO: attribute for ingredient?
     }
 
     public int getVotingOrderListId() {

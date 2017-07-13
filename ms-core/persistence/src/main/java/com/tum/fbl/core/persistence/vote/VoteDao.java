@@ -14,8 +14,8 @@ import java.util.List;
 @RegisterMapper(VoteMapper.class)
 public interface VoteDao extends AutoCloseable {
 
-    @SqlQuery("select * from vote where voteIngItemId = :voteIngItemId")
-    List<Vote> findVotesByIngItemId(@Bind("voteIngItemId") int voteIngItemId);
+    @SqlQuery("select * from vote where votingIngItemId = :votingIngItemId")
+    List<Vote> findVotesByIngItemId(@Bind("votingIngItemId") int votingIngItemId);
 
     @SqlQuery("select * from vote where voteId = :id")
     Vote findVoteById(@Bind("id") int voteId);
@@ -23,10 +23,14 @@ public interface VoteDao extends AutoCloseable {
     @SqlUpdate("Insert into vote (votingIngItemId, userId, type) value (:votingIngItemId, :userId, :type) ; SELECT LAST_INSERT_ID() from vote")
     int newVote(@Bind("votingIngItemId") int votingIngItemId,
                  @Bind("userId") int userId,
-                 @Bind("type") String like);
+                 @Bind("type") String type);
 
     @SqlUpdate("delete from vote where voteId = :id")
     void deleteVoteById(@Bind("id") int voteId);
+
+    @SqlUpdate("delete from vote where votingIngItemId = :votingIngItemId AND userId = :userId")
+    void deleteVoteByIng(@Bind("votingIngItemId") int votingIngItemId,
+                         @Bind("userId") int userId);
 
     //TODO: void update()
 

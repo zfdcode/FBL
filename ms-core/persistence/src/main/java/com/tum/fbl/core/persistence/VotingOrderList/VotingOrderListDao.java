@@ -17,10 +17,13 @@ public interface VotingOrderListDao extends AutoCloseable{
     @SqlQuery("select * from votingOrderList where votingOrderListId = :id")
     VotingOrderList findVotingOrderListById(@Bind("id") int votingOrderListId);
 
-    @SqlUpdate("Insert into voting (orderedAmount, orderedAt, votingPeriodId) value (:orderedAmount, :orderedAt, :votingPeriodId)")
-    void newVoting(@Bind("createdBy") float orderedAmount,
-                   @Bind("createdOn") Date orderedAt,
-                   @Bind("startDate") int votingPeriodId);
+    @SqlQuery("select * from votingOrderList where votingPeriodId = :votingPeriodId")
+    VotingOrderList findVotingOrderListByPeriod(@Bind("votingPeriodId") int votingPeriodId);
+
+    @SqlUpdate("Insert into votingOrderList (orderedAmount, orderedAt, votingPeriodId) value (:orderedAmount, :orderedAt, :votingPeriodId)")
+    void newVoting(@Bind("orderedAmount") float orderedAmount,
+                   @Bind("orderedAt") Date orderedAt,
+                   @Bind("votingPeriodId") int votingPeriodId);
 
     @SqlUpdate("delete from votingOrderList where votingOrderList = :id")
     void deleteVotingOrderListById(@Bind("id") int votingOrderListId);

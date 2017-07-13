@@ -1,43 +1,41 @@
 package com.tum.fbl.core.fitbit;
 
-/*
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
+import org.cloudinary.json.JSONObject;
 
-import java.io.BufferedInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+
+import java.io.*;
+
 
 public class FitBitImpl implements FitBit {
     private String token;
-
-    public void setToken(String token){ this.token = token; }
 
     public FitBitImpl(String token){
     this.token=token;
     }
 
-    public String getBurnedCaloriesValue (){
-        String json = this.burnedCalories();
-
+    public String burnedCaloriesJson () {
+        JSONObject burnedCaloriesJson = new JSONObject(this.apiCall("https://api.fitbit.com/1/user/-/activities/tracker/calories/date/today/1d.json"));
+        JSONObject oneDay = burnedCaloriesJson.getJSONArray("activities-tracker-calories").getJSONObject(0);
+        String ret = oneDay.getString("value");
+        return ret;
     }
 
-    public String burnedCalories () {
-        String burnedCalories = this.apiCall("https://api.fitbit.com/1/user/-/activities/tracker/calories/date/today/1d.json");
-        return (burnedCalories);
+    public String calorieGoalJson () {
+        JSONObject calorieGoalJson = new JSONObject(this.apiCall ("https://api.fitbit.com/1/user/-/activities/goals/daily.json"));
+        JSONObject oneDay = calorieGoalJson.getJSONObject("goals");
+        int ret = oneDay.getInt("caloriesOut");
+        return Integer.toString(ret);
     }
 
-    public String calorieGoal () {
-        String calorieGoal = this.apiCall ("https://api.fitbit.com/1/user/-/activities/goals/daily.json");
-        return (calorieGoal);
-    }
 
     public String apiCall(String address) {
+
         CloseableHttpClient httpclient = HttpClients.createDefault();
-       // HttpGet httpget = new HttpGet("https://api.fitbit.com/1/user/-/activities/goals/caloriesOut/daily.json");
         HttpGet httpget = new HttpGet(address);
         httpget.setHeader("Authorization","Bearer "+token);
         CloseableHttpResponse response = null;
@@ -55,6 +53,7 @@ public class FitBitImpl implements FitBit {
             }catch(IOException ioException){
 
             };
+
             try {
                 int bytesRead = 0;
                 BufferedInputStream bis = new BufferedInputStream(inputStream);
@@ -82,10 +81,7 @@ public class FitBitImpl implements FitBit {
 
         }
         return (chunk);
+
     }
-
-
 }
 
-
-*/

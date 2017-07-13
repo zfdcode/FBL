@@ -1,4 +1,5 @@
 package com.tum.fbl.core.bdo;
+import java.util.List;
 
 /**
  * Created by MS on 10.07.2017.
@@ -17,13 +18,22 @@ public class VotingIngItem {
 
     private Vote[] votes;
 
-    public VotingIngItem(int votingIngItemId, int votingPeriodId, boolean isIgnored, int ingredientId, Ingredient ingredient, Vote[] votes) {
+    public VotingIngItem(int votingIngItemId, int votingPeriodId, boolean isIgnored, int ingredientId, Ingredient ingredient) {
         this.votingIngItemId = votingIngItemId;
         this.votingPeriodId = votingPeriodId;
         this.isIgnored = isIgnored;
         this.ingredientId = ingredientId;
         this.ingredient = ingredient;
-        this.votes = votes;
+        this.votes = new Vote[0];
+    }
+
+    public VotingIngItem(com.tum.fbl.core.persistence.VotingIngItem.VotingIngItem votingIngItem, Ingredient Ingredient) {
+        this.votingIngItemId = votingIngItem.getVotingIngItemId();
+        this.votingPeriodId = votingIngItem.getVotingPeriodId();
+        this.isIgnored = votingIngItem.getIsIgnored();
+        this.ingredientId = votingIngItem.getIngredientId();
+        this.ingredient = Ingredient;
+        this.votes = new Vote[0];
     }
 
     public int getVotingIngItemId() {

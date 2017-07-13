@@ -49,4 +49,21 @@ public class VoteResource {
             return null;
         }
     }
+
+    @POST
+    @ApiOperation (value = "Add a new vote")
+    public void addVote(Vote vote) {
+        try (VoteDao voteDao = this.connectionFactory.getConnection().open(VoteDao.class)) {
+
+            //delete other votes if there are
+            voteDao.deleteVoteByIng(vote.getVotingIngItemId(),vote.getUserId());
+
+            //insert new vote
+            voteDao.newVote(
+                    vote.getVotingIngItemId(),
+                    vote.getUserId(),
+                    vote.getType());
+        }
+    }
+
 }

@@ -1,6 +1,7 @@
 package com.tum.fbl.core.bdo;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by MS on 10.07.2017.
@@ -26,6 +27,15 @@ public class VotingPeriod {
         this.isFinished = isFinished;
         this.calendarWeek = calendarWeek;
         VotingIngItems = votingIngItems;
+    }
+
+    public VotingPeriod(com.tum.fbl.core.persistence.VotingPeriod.VotingPeriod votingPeriod) {
+        this.votingPeriodId = votingPeriod.getVotingPeriodId();
+        this.startTime = votingPeriod.getStartTime();
+        this.endTime = votingPeriod.getEndTime();
+        this.isFinished = votingPeriod.getIsFinished();
+        this.calendarWeek = votingPeriod.getCalendarWeek();
+        VotingIngItems = new VotingIngItem[0];
     }
 
     public int getVotingPeriodId() {
@@ -68,15 +78,13 @@ public class VotingPeriod {
         this.calendarWeek = calendarWeek;
     }
 
-    public VotingIngItem[] getVotingIngItems() {
+    public VotingIngItem[]  getVotingIngItems() {
         return VotingIngItems;
     }
 
-    public void setVotingIngItems(VotingIngItem[] votingIngItems) {
+    public void setVotingIngItems(VotingIngItem[]  votingIngItems) {
         VotingIngItems = votingIngItems;
     }
-
-
 
 
 }

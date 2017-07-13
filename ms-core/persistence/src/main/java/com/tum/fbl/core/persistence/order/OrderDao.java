@@ -31,11 +31,14 @@ public interface OrderDao extends AutoCloseable{
      * @param orderPickupTime the time the order is ready to be picked up
      * @param orderStatus the order's current status
      */
-    @SqlUpdate("Insert into Order (userId, mealId, pickupTime, status, orderNumber) value (:userId, :mealId, :pickupTime, :status, :number); SELECT LAST_INSERT_ID() from order")
-    int newOrder(@Bind("userId") int orderUserId,
+    @SqlUpdate("insert into order ( restaurantId, userId, mealId, pickupTime, status, orderNumber)" +
+            " values (:restaurantId, :userId, :mealId, :pickupTime, :status, :number) ; SELECT LAST_INSERT_ID() from order")
+    int newOrder(@Bind("restaurantId") int orderRestaurantId,
+                 @Bind("userId") int orderUserId,
                   @Bind("mealId") int orderMealId,
                   @Bind("pickupTime") Date orderPickupTime,
-                  @Bind("status") int orderStatus);
+                  @Bind("status") int orderStatus,
+                 @Bind("number") int orderNumber);
 
     /**
      * deletes an entry with specified unique ID in the Order table

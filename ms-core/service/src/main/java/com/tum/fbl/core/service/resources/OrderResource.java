@@ -231,10 +231,12 @@ public class OrderResource {
 
         if (order != null) {
             try (OrderDao orderDao = this.connectionFactory.getConnection().open(OrderDao.class)) {
-                return orderDao.newOrder(order.getOrderUser().getUserId(),
+                return orderDao.newOrder(order.getOrderRestaurant().getRestaurantId(),
+                        order.getOrderUser().getUserId(),
                         order.getOrderMeal().getMealId(),
                         order.getOrderPickupTime(),
-                        order.getOrderStatus());
+                        order.getOrderStatus(),
+                        order.getOrderNumber());
             }
         } else {
             throw new IllegalArgumentExpection();

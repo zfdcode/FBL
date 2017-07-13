@@ -57,13 +57,11 @@ public class Ingredient {
         this.sugar = sugar;
     }
 
-
-
     /**
      *
      * @param ingredient
      */
-    public Ingredient(com.tum.fbl.core.persistence.ingredient.Ingredient ingredient){
+    public Ingredient(com.tum.fbl.core.persistence.ingredient.Ingredient ingredient) {
         this.ingredientId = ingredient.getIngredientId();
         this.ingredientName = ingredient.getIngredientName();
         this.description = ingredient.getDescription();
@@ -72,9 +70,8 @@ public class Ingredient {
         this.totalFat = ingredient.getTotalFat();
         this.protein = ingredient.getProtein();
         this.totalCarbohydrate = ingredient.getTotalCarbohydrate();
-        this.tag = new String[0];
-        //this.sugar = ingredient.getSugar();
-        this.isGarnish = ingredient.isGarnish();
+        this.tag = null;
+        this.sugar = ingredient.getSugar();
     }
 
     /**

@@ -1,5 +1,8 @@
 package com.tum.fbl.core.service.resources;
 
+import com.tum.fbl.core.bdo.Category;
+import com.tum.fbl.core.bdo.Ingredient;
+import com.tum.fbl.core.bdo.Restaurant;
 import com.tum.fbl.core.config.ImageUploadConfiguration;
 import com.tum.fbl.core.imagestorage.ImagePersistenceException;
 import com.tum.fbl.core.imagestorage.ImageStatus;
@@ -21,6 +24,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -76,6 +80,7 @@ public class MealResource {
 
     @GET
     @Path("/{attributeName}/{attributeId}")
+    @ApiOperation(value = "Get all meals where the int attributeName = attributeId")
     public List<Meal> getMealsByAttributeId(@PathParam("attributeName") String attributeName, @PathParam("attributeId") int attributeId) {
         try (MealDao mealDao = this.connectionFactory.getConnection().open(MealDao.class)) {
             List<Meal> meals = new ArrayList<>();
@@ -93,42 +98,114 @@ public class MealResource {
 
     @GET
     @Path("/offerDate/{offerDate}/user/{userId}")
-    public List<Meal> getMealsByOfferDateAndUserId() {
-        return null;
+    @ApiOperation(value = "Get all meals of one User/Restaurant on one Day")
+    public List<Meal> getMealsByOfferDateAndUserId(@PathParam("offerDate") Date offerDate, @PathParam("userId") int userId) {
+        try (MealDao mealDao = this.connectionFactory.getConnection().open(MealDao.class)) {
+            List<Meal> meals = new ArrayList<>();
+
+            List<com.tum.fbl.core.persistence.meal.Meal> mealList = mealDao.getMealsByUserAndDate(offerDate, userId);
+
+            if (mealList != null) {
+                for (com.tum.fbl.core.persistence.meal.Meal meal : mealList) {
+                    meals.add(new Meal(meal));
+                }
+            }
+            return meals;
+        }
     }
 
     @GET
+    @ApiOperation(value = "Get all meals of one Category on one Day")
     @Path("/offerDate/{offerDate}/category/{categoryId}")
-    public List<Meal> getMealsByOfferDateAndCategory() {
-        return null;
+    public List<Meal> getMealsByOfferDateAndCategory(@PathParam("offerDate") Date offerDate, @PathParam("categoryId") int categoryId) {
+        try (MealDao mealDao = this.connectionFactory.getConnection().open(MealDao.class)) {
+            List<Meal> meals = new ArrayList<>();
+
+            List<com.tum.fbl.core.persistence.meal.Meal> mealList = mealDao.getMealsByCategoryAndDate(offerDate, categoryId);
+
+            if (mealList != null) {
+                for (com.tum.fbl.core.persistence.meal.Meal meal : mealList) {
+                    meals.add(new Meal(meal));
+                }
+            }
+            return meals;
+        }
     }
 
     @GET
     @Path("/offerDate/{offerDate}")
-    public List<Meal> getMealsByOfferDate() {
-        return null;
+    @ApiOperation(value = "Get all meals on one Day")
+    public List<Meal> getMealsByOfferDate(@PathParam("offerDate") Date offerDate) {
+        try (MealDao mealDao = this.connectionFactory.getConnection().open(MealDao.class)) {
+            List<Meal> meals = new ArrayList<>();
+
+            List<com.tum.fbl.core.persistence.meal.Meal> mealList = mealDao.getAllMealForDate(offerDate);
+
+            if (mealList != null) {
+                for (com.tum.fbl.core.persistence.meal.Meal meal : mealList) {
+                    meals.add(new Meal(meal));
+                }
+            }
+            return meals;
+        }
     }
 
     @GET
     @Path("/rating/{rating}")
-    public List<Meal> getMealsByRating() {
-        return null;
+    @ApiOperation(value = "Get all meals with a higher rating than X")
+    public List<Meal> getMealsByMinRating(@PathParam("rating") float rating) {
+        try (MealDao mealDao = this.connectionFactory.getConnection().open(MealDao.class)) {
+            List<Meal> meals = new ArrayList<>();
+
+            List<com.tum.fbl.core.persistence.meal.Meal> mealList = mealDao.getMealByRating(rating);
+
+            if (mealList != null) {
+                for (com.tum.fbl.core.persistence.meal.Meal meal : mealList) {
+                    meals.add(new Meal(meal));
+                }
+            }
+            return meals;
+        }
     }
 
     @GET
     @Path("/calories/{calories}")
-    public List<Meal> getMealsByCalories() {
-        return null;
+    @ApiOperation(value = "Get all meals with a fewer calories than X")
+    public List<Meal> getMealsByMaxCalories(@PathParam("calories") float calories) {
+        try (MealDao mealDao = this.connectionFactory.getConnection().open(MealDao.class)) {
+            List<Meal> meals = new ArrayList<>();
+
+            List<com.tum.fbl.core.persistence.meal.Meal> mealList = mealDao.getMealMaxCalories(calories);
+
+            if (mealList != null) {
+                for (com.tum.fbl.core.persistence.meal.Meal meal : mealList) {
+                    meals.add(new Meal(meal));
+                }
+            }
+            return meals;
+        }
     }
 
     @GET
     @Path("/order/{orderId}")
-    public List<Meal> getMealsByOrder() {
-        return null;
+    @ApiOperation(value = "Get all meals by one User/Restaurant")
+    public List<Meal> getMealsByOrder(@PathParam("orderId") int orderId) {
+        try (MealDao mealDao = this.connectionFactory.getConnection().open(MealDao.class)) {
+            List<Meal> users = new ArrayList<>();
+
+            List<com.tum.fbl.core.persistence.meal.Meal> mealList = mealDao.getMealsByOrder(orderId);
+            if (mealList != null) {
+                for (com.tum.fbl.core.persistence.meal.Meal meal : mealList) {
+                    users.add(new Meal(meal));
+                }
+            }
+            return users;
+        }
     }
 
     @GET
     @Path("/ingredient/{ingredientId}")
+    @ApiOperation(value = "Get all meals which contain one ingredient")
     public List<Meal> getMealsByIngredient(@PathParam("ingredientId") int ingredientId) {
         try (MealDao mealDao = this.connectionFactory.getConnection().open(MealDao.class)) {
             List<Meal> users = new ArrayList<>();
@@ -144,15 +221,37 @@ public class MealResource {
     }
 
     @GET
-    @Path("/ingredientException/{ingredientIds}")
-    public List<Meal> getMealsByIngredientExceptions() {
-        return null;
+    @Path("/ingredientException/{ingredientId}")
+    @ApiOperation(value = "Get all meals which do not contain one ingredient")
+    public List<Meal> getMealsByIngredientException(@PathParam("ingredientId") int ingredientId) {
+        try (MealDao mealDao = this.connectionFactory.getConnection().open(MealDao.class)) {
+            List<Meal> users = new ArrayList<>();
+
+            List<com.tum.fbl.core.persistence.meal.Meal> mealList = mealDao.getMealsWithIngredientExeption(ingredientId);
+            if (mealList != null) {
+                for (com.tum.fbl.core.persistence.meal.Meal meal : mealList) {
+                    users.add(new Meal(meal));
+                }
+            }
+            return users;
+        }
     }
 
     @GET
     @Path("/name/{name}")
-    public List<Meal> getMealsByName() {
-        return null;
+    @ApiOperation(value = "Get all meals with one Name")
+    public List<Meal> getMealsByName(@PathParam("name") String name) {
+        try (MealDao mealDao = this.connectionFactory.getConnection().open(MealDao.class)) {
+            List<Meal> users = new ArrayList<>();
+
+            List<com.tum.fbl.core.persistence.meal.Meal> mealList = mealDao.getMealByName(name);
+            if (mealList != null) {
+                for (com.tum.fbl.core.persistence.meal.Meal meal : mealList) {
+                    users.add(new Meal(meal));
+                }
+            }
+            return users;
+        }
     }
 
     /**
@@ -165,9 +264,18 @@ public class MealResource {
     @Path("/user/{userId}")
     @ApiOperation(value = "Get information of meals by a user id or restaurant id")
     public List<Meal> getMealsByUser(@PathParam("userId") int userId) {
-        return null;
-    }
+        try (MealDao mealDao = this.connectionFactory.getConnection().open(MealDao.class)) {
+            List<Meal> users = new ArrayList<>();
 
+            List<com.tum.fbl.core.persistence.meal.Meal> mealList = mealDao.getMealsByUser(userId);
+            if (mealList != null) {
+                for (com.tum.fbl.core.persistence.meal.Meal meal : mealList) {
+                    users.add(new Meal(meal));
+                }
+            }
+            return users;
+        }
+    }
     /**
      * Gets meal.
      *
@@ -178,33 +286,13 @@ public class MealResource {
     @Path("/meal/{mealId}")
     @ApiOperation(value = "Get information of a meal")
     public Meal getMeal(@PathParam("mealId") int mealId) {
-
-        /*
         try (MealDao mealDao = this.connectionFactory.getConnection().open(MealDao.class)) {
-            com.tum.fbl.core.persistence.meal.Meal meal = mealDao.findMealById(mealId);
-            return new Meal(
-                    meal.getMealId(),
-                    meal.getMealName(),
-                    meal.getMealImage(),
-                    meal.getMealRating(),
-                    meal.getMealHelathValue(),
-                    meal.getMealPreparationTime(),
-                    meal.getOfferDate(),
-                    meal.getMealEnergy(),
-                    meal.getMealProtein(),
-                    meal.getMealTotalFat(),
-                    meal.getMealSaturated(),
-                    meal.getMealTotalCarbohydrate(),
-                    meal.getMealSugar(),
-                    meal.getMealSodium(),
-                    //TODO:
-                    null,
-                    null,
-                    null
-            );
-            */
-        return null;
-
+            com.tum.fbl.core.persistence.meal.Meal meal =  mealDao.findMealById(mealId);
+            if (meal != null) {
+                return new Meal(meal);
+            }
+            return new Meal();
+        }
     }
 
     /**
@@ -218,6 +306,9 @@ public class MealResource {
     public void deleteMeal(@PathParam("mealId") int mealId) {
         try (MealDao mealDao = this.connectionFactory.getConnection().open(MealDao.class)) {
             mealDao.deleteMealById(mealId);
+            mealDao.deleteMealRestaurantById(mealId);
+            mealDao.deleteMealIngredientById(mealId);
+            mealDao.deleteMealIngredientById(mealId);
         }
     }
 
@@ -230,6 +321,7 @@ public class MealResource {
      */
     @Path("/img")
     @POST
+    @ApiOperation(value = "Set a meal image")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     public ImageStatus uploadFile(
             @FormDataParam("file") InputStream uploadedInputStream,
@@ -255,22 +347,39 @@ public class MealResource {
         if (meal != null) {
             try (MealDao mealDao = this.connectionFactory.getConnection().open(MealDao.class)) {
 
-                return mealDao.newMeal(
-                        meal.getMealName(),
-                        "",
-                        meal.getMealRating(),
-                        0,
-                        meal.getMealPreparationTime(),
-                        meal.getOfferDate(),
-                        meal.getMealEnergy(),
-                        meal.getMealProtein(),
-                        meal.getMealTotalFat(),
-                        meal.getMealSaturated(),
-                        meal.getMealTotalCarbohydrate(),
-                        meal.getMealSugar(),
-                        meal.getMealSodium(),
-                        meal.getMealPrice()
+                int mealId = mealDao.newMeal(
+                            meal.getMealName(),
+                            "",
+                            meal.getMealRating(),
+                            0,
+                            meal.getMealPreparationTime(),
+                            meal.getOfferDate(),
+                            meal.getMealEnergy(),
+                            meal.getMealProtein(),
+                            meal.getMealTotalFat(),
+                            meal.getMealSaturated(),
+                            meal.getMealTotalCarbohydrate(),
+                            meal.getMealSugar(),
+                            meal.getMealSodium(),
+                            meal.getMealPrice()
                 );
+                Restaurant restaurant = meal.getMealRestaurant();
+
+                Category[] categories = meal.getMealCategories();
+
+                Ingredient[] ingredients = meal.getMealIngredients();
+
+                mealDao.newRestaurantMeal(mealId, restaurant.getRestaurantId(), meal.getOfferDate());
+
+                for(Category c: categories){
+                    mealDao.newMealCategory(mealId, c.getCategoryId());
+                }
+
+                for(Ingredient i: ingredients){
+                    mealDao.newMealIngredient(mealId, i.getIngredientId());
+                }
+
+                return mealId;
             }
         } else {
             throw new IllegalArgumentExpection();
@@ -286,8 +395,30 @@ public class MealResource {
     @PUT
     @ApiOperation(value = "Update an existing meal")
     public void updateMeal(Meal meal) {
-        try (MealDao mealDao = this.connectionFactory.getConnection().open(MealDao.class)) {
-            //TODO:update
+
+        if (meal != null) {
+            try (MealDao mealDao = this.connectionFactory.getConnection().open(MealDao.class)) {
+
+                 mealDao.updateMeal(
+                         meal.getMealName(),
+                        "",
+                        meal.getMealRating(),
+                        0,
+                        meal.getMealPreparationTime(),
+                        meal.getOfferDate(),
+                        meal.getMealEnergy(),
+                        meal.getMealProtein(),
+                        meal.getMealTotalFat(),
+                        meal.getMealSaturated(),
+                        meal.getMealTotalCarbohydrate(),
+                        meal.getMealSugar(),
+                        meal.getMealSodium(),
+                        meal.getMealPrice(),
+                        meal.getMealId()
+                );
+            }
+        } else {
+            throw new IllegalArgumentExpection();
         }
     }
 }

@@ -32,7 +32,7 @@ public interface OrderDao extends AutoCloseable{
      * @param orderStatus the order's current status
      */
     @SqlUpdate("insert into order ( restaurantId, userId, mealId, pickupTime, status, orderNumber)" +
-            " values (:restaurantId, :userId, :mealId, :pickupTime, :status, :number) ; SELECT LAST_INSERT_ID() from order")
+            " values (:restaurantId, :userId, :mealId, :pickupTime, :status, :number)")
     int newOrder(@Bind("restaurantId") int orderRestaurantId,
                  @Bind("userId") int orderUserId,
                   @Bind("mealId") int orderMealId,

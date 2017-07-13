@@ -1,6 +1,7 @@
 package com.tum.fbl.core.persistence.meal;
 
 import org.skife.jdbi.v2.sqlobject.Bind;
+import org.skife.jdbi.v2.sqlobject.GetGeneratedKeys;
 import org.skife.jdbi.v2.sqlobject.SqlQuery;
 import org.skife.jdbi.v2.sqlobject.SqlUpdate;
 import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapper;
@@ -22,13 +23,13 @@ public interface MealDao extends AutoCloseable{
     Meal findMealById(@Bind("id") int id);
 
     @SqlQuery("select * from meal where mealName = :name")
-    Meal getMealByName(@Bind("name") int name);
+    List<Meal> getMealByName(@Bind("name") String name);
 
     @SqlQuery("select * from meal where rating > :rating")
-    Meal getMealByRating(@Bind("rating") int rating);
+    List<Meal> getMealByRating(@Bind("rating") float rating);
 
     @SqlQuery("select * from meal where energy < :energy")
-    Meal getMealMaxCalories(@Bind("energy") int energy);
+    List<Meal> getMealMaxCalories(@Bind("energy") float energy);
 
     /**
      * gets all meals offered on a specified date from the database
@@ -37,6 +38,9 @@ public interface MealDao extends AutoCloseable{
      */
     @SqlQuery("select * from meal where offerDate = :offerDate)")
     List<Meal> getAllMealForDate(@Bind("offerDate") Date offerDate);
+
+    @SqlQuery("select * from Meal where :attributeName = :attributeId")
+    List<Meal> findMealsByAttributte(@Bind("attributeName") String attributeName, @Bind("attributeId") int id);
 
     @SqlQuery("select * from meal")
     List<Meal> getAllMeals();
@@ -63,7 +67,7 @@ public interface MealDao extends AutoCloseable{
 
     @SqlQuery("select m.mealId, m.mealName, m.image, m.rating, m.healthValue, m.preparationTime, m.offerDate, m.energy, m.protein, m.totalFat, m.saturated, m.totalCarbohydrate, m.sugar, m.sodium, m.price " +
             "from Meal m natural join (Select * from Order where orderId= :id)")
-    Meal getMealsByOrder(@Bind("id") int orderId);
+    List<Meal> getMealsByOrder(@Bind("id") int orderId);
 
 
     /**
@@ -82,8 +86,9 @@ public interface MealDao extends AutoCloseable{
      * @param mealSugar
      * @param mealSodium
      */
-    @SqlUpdate("insert into meal ( mealName, image, rating, healthValue, preparationTime, offerDate, energy, protein, totalFat, saturated, totalCarbohydrate, sugar, sodium, price) " +
-            "values ( :mealName, :image, :rating, :healthValue, :preparationTime, :offerDate, :energy, :protein, :totalFat, :saturated, :totalCarbohydrate, :sugar, :sodium, :price) ; SELECT LAST_INSERT_ID()")
+    @SqlUpdate("insert into meal (mealName, image, rating, healthValue, preparationTime, offerDate, energy, protein, totalFat, saturated, totalCarbohydrate, sugar, sodium, price) " +
+            "values ( :mealName, :image, :rating, :healthValue, :preparationTime, :offerDate, :energy, :protein, :totalFat, :saturated, :totalCarbohydrate, :sugar, :sodium, :price) ;")
+    @GetGeneratedKeys
     int newMeal(
             @Bind("mealName") String mealName,
             @Bind("image") String image,
@@ -118,8 +123,24 @@ public interface MealDao extends AutoCloseable{
     void deleteMealById(@Bind("id") int id);
     //TODO: void update()
 
-    @SqlQuery("select * from Meal where :attributeName = :attributeId")
-    List<Meal> findMealsByAttributte(@Bind("attributeName") String attributeName, @Bind("attributeId") int id);
+    @SqlUpdate("update meal set mealName = :mealName, image = :image, rating = :rating, healthValue = :healthValue, preparationTime = :preparationTime, offerDate = :offerDate, energy = :energy, protein = :protein, totalFat = :totalFat, saturated = :saturated, totalCarbohydrate = :totalCarbohydrate, sugar = :sugar, sodium = :sodium, price = :price where mealId = :mealId")
+        void updateMeal(
+            @Bind("mealName") String mealName,
+            @Bind("image") String image,
+            @Bind("rating") float rating,
+            @Bind("healthValue") int healthValue,
+            @Bind("preparationTime") Date preparationTime,
+            @Bind("offerDate") Date offerDate,
+            @Bind("energy") float energy,
+            @Bind("protein") float protein,
+            @Bind("totalFat") float totalFat,
+            @Bind("saturated") float saturated,
+            @Bind("totalCarbohydrate") float totalCarbohydrate,
+            @Bind("sugar") float sugar,
+            @Bind("sodium") float sodium,
+            @Bind("price") float price,
+            @Bind("mealId") int mealId);
+
 
     public void close();
 }

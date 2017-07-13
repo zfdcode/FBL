@@ -18,9 +18,9 @@ public class VotingPeriod {
 
     private int calendarWeek;
 
-    private List<VotingIngItem> VotingIngItems;
+    private VotingIngItem[] VotingIngItems;
 
-    public VotingPeriod(int votingPeriodId, Date startTime, Date endTime, Boolean isFinished, int calendarWeek, List<VotingIngItem>  votingIngItems) {
+    public VotingPeriod(int votingPeriodId, Date startTime, Date endTime, Boolean isFinished, int calendarWeek, VotingIngItem[] votingIngItems) {
         this.votingPeriodId = votingPeriodId;
         this.startTime = startTime;
         this.endTime = endTime;
@@ -29,13 +29,13 @@ public class VotingPeriod {
         VotingIngItems = votingIngItems;
     }
 
-    public VotingPeriod(com.tum.fbl.core.persistence.VotingPeriod.VotingPeriod votingPeriod, List<VotingIngItem> data) {
+    public VotingPeriod(com.tum.fbl.core.persistence.VotingPeriod.VotingPeriod votingPeriod) {
         this.votingPeriodId = votingPeriod.getVotingPeriodId();
         this.startTime = votingPeriod.getStartTime();
         this.endTime = votingPeriod.getEndTime();
         this.isFinished = votingPeriod.getIsFinished();
         this.calendarWeek = votingPeriod.getCalendarWeek();
-        VotingIngItems = data;
+        VotingIngItems = new VotingIngItem[0];
     }
 
     public int getVotingPeriodId() {
@@ -78,15 +78,13 @@ public class VotingPeriod {
         this.calendarWeek = calendarWeek;
     }
 
-    public List<VotingIngItem>  getVotingIngItems() {
+    public VotingIngItem[]  getVotingIngItems() {
         return VotingIngItems;
     }
 
-    public void setVotingIngItems(List<VotingIngItem>  votingIngItems) {
+    public void setVotingIngItems(VotingIngItem[]  votingIngItems) {
         VotingIngItems = votingIngItems;
     }
-
-
 
 
 }

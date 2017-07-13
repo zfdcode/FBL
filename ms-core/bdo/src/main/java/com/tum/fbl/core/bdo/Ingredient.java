@@ -70,7 +70,7 @@ public class Ingredient {
         this.totalFat = ingredient.getTotalFat();
         this.protein = ingredient.getProtein();
         this.totalCarbohydrate = ingredient.getTotalCarbohydrate();
-        //this.tag = IngredientTag.getTags();
+        this.tag = null;
         this.sugar = ingredient.getSugar();
     }
 

@@ -6,12 +6,20 @@ import org.skife.jdbi.v2.sqlobject.SqlQuery;
 import org.skife.jdbi.v2.sqlobject.SqlUpdate;
 import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapper;
 
+import java.util.List;
+
 /**
  * Created by malte on 13.06.2017.
  */
 
 @RegisterMapper(TagMapper.class)
 public interface TagDao extends AutoCloseable{
+
+    @SqlQuery("select * from tag")
+    List<Tag> getAllTags();
+
+    @SqlQuery("select tagName from (Ingredient join (IngredientTag join Tag on tagId) on ingredientId) where ingredientId = :ingredientId")
+    List<Tag> getTagNameByIngredient (@Bind("ingredientId") int ingredientId);
 
     @SqlQuery("select * from tag where tagId = :id")
     Tag findTagById(@Bind("id") int tagId);

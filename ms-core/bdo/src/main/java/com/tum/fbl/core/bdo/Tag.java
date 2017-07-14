@@ -4,27 +4,27 @@ package com.tum.fbl.core.bdo;
  * Documented by jie on 25.06.2017.
  */
 
-public class IngredientTag {
+public class Tag {
     private int tagId;
     private String tagName;
     private String tagDescription;
 
-    public IngredientTag(){
+    public Tag(){
 
     }
 
     /**
-     * Constructs IngredientTag that specifies the features of the ingredient.
+     * Constructs Tag that specifies the features of the ingredient.
      * @param tagId unique ID of the tag
      * @param tagName name of the tag for users to recognize the feature of the ingredient
      */
-    public IngredientTag(int tagId, String tagName, String tagDescription) {
+    public Tag(int tagId, String tagName, String tagDescription) {
         this.tagId = tagId;
         this.tagName = tagName;
         this.tagDescription = tagDescription;
     }
 
-    public IngredientTag(com.tum.fbl.core.persistence.tag.Tag tag){
+    public Tag(com.tum.fbl.core.persistence.tag.Tag tag){
         this.tagId = tag.getTagId();
         this.tagName = tag.getTagName();
         this.tagDescription = tag.getTagDescription();

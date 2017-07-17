@@ -7,5 +7,7 @@ package com.tum.fbl.core.fitbit;
 
 public interface FitBit {
 
+    public String getsCalorieGoalValue () throws Exception;
+    public String getsBurnedCaloriesValue () throws Exception;
 
 }

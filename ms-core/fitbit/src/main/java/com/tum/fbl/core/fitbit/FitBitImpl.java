@@ -1,5 +1,6 @@
 package com.tum.fbl.core.fitbit;
 
+import com.tum.fbl.core.persistence.healthdata.HealthData;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -15,17 +16,17 @@ public class FitBitImpl implements FitBit {
     private String token;
 
     public FitBitImpl(String token){
-    this.token=token;
+        this.token=token;
     }
 
-    public String burnedCaloriesJson () {
+    public String getsBurnedCaloriesValue () {
         JSONObject burnedCaloriesJson = new JSONObject(this.apiCall("https://api.fitbit.com/1/user/-/activities/tracker/calories/date/today/1d.json"));
         JSONObject oneDay = burnedCaloriesJson.getJSONArray("activities-tracker-calories").getJSONObject(0);
         String ret = oneDay.getString("value");
         return ret;
     }
 
-    public String calorieGoalJson () {
+    public String getsCalorieGoalValue () {
         JSONObject calorieGoalJson = new JSONObject(this.apiCall ("https://api.fitbit.com/1/user/-/activities/goals/daily.json"));
         JSONObject oneDay = calorieGoalJson.getJSONObject("goals");
         int ret = oneDay.getInt("caloriesOut");
@@ -33,7 +34,7 @@ public class FitBitImpl implements FitBit {
     }
 
 
-    public String apiCall(String address) {
+    private String apiCall(String address) {
 
         CloseableHttpClient httpclient = HttpClients.createDefault();
         HttpGet httpget = new HttpGet(address);

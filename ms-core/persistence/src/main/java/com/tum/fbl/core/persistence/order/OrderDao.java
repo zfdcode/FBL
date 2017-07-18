@@ -55,7 +55,7 @@ public interface OrderDao extends AutoCloseable{
      * gets all open orders from the database
      * @return List of Order objects
      */
-    @SqlQuery("select * from orderTable where NOT(status = 'pickedUp' or status = 'canceled')")
+    @SqlQuery("select * from orderTable where NOT(status = 3)")
     List<Order> getOrderList();
 
     /**

@@ -8,6 +8,8 @@ import com.tum.fbl.core.persistence.VotingIngItem.VotingIngItemDao;
 import com.tum.fbl.core.persistence.VotingPeriod.VotingPeriodDao;
 import com.tum.fbl.core.persistence.ingredient.Ingredient;
 import com.tum.fbl.core.persistence.ingredient.IngredientDao;
+import com.tum.fbl.core.persistence.tag.Tag;
+import com.tum.fbl.core.persistence.tag.TagDao;
 import com.tum.fbl.core.persistence.vote.VoteDao;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -84,6 +86,13 @@ public class VotingPeriodResource {
                                 //Build ingredient BDO
                                 if (ingredient != null) {
                                     com.tum.fbl.core.bdo.Ingredient thatIng = new com.tum.fbl.core.bdo.Ingredient(ingredient);
+
+                                    //Get TagNames and save to tag attribute
+                                    try(TagDao tagDao =this.connectionFactory.getConnection().open(TagDao.class)){
+                                    List<Tag> tags = tagDao.getTagNameByIngredient(ingredient.getIngredientId());
+                                    String[] tagNames = tags.toArray(new String[0]);
+                                    thatIng.setTag(tagNames);
+                                    }
 
 
                                 //Build votes BDO

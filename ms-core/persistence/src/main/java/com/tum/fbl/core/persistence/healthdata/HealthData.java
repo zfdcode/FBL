@@ -92,9 +92,7 @@ public class HealthData {
      *
      * @param burnedCalories
      */
-    public void setBurnedCalories(float burnedCalories) {
-        this.burnedCalories = burnedCalories;
-    }
+    public void setBurnedCalories(float burnedCalories) { this.burnedCalories = burnedCalories;}
 
     /**
      *

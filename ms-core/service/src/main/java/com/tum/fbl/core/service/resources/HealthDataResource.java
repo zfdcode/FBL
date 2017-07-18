@@ -1,6 +1,7 @@
 package com.tum.fbl.core.service.resources;
 
 import com.tum.fbl.core.bdo.HealthData;
+import com.tum.fbl.core.fitbit.FitBitImpl;
 import com.tum.fbl.core.persistence.ConnectionFactory;
 import com.tum.fbl.core.persistence.healthdata.HealthDataDao;
 import com.tum.fbl.core.service.exceptions.IllegalArgumentExpection;
@@ -117,11 +118,18 @@ public class HealthDataResource {
     @ApiOperation(value = "get left calories by user")
     public float getLeftCalories(@PathParam("userId") int userId) throws IllegalArgumentExpection {
         try (HealthDataDao healthDataDao = this.connectionFactory.getConnection().open(HealthDataDao.class)){
-
+            //fitbit call, update database
             com.tum.fbl.core.persistence.healthdata.HealthData healthDataDb = healthDataDao.findHealthDataById(userId);
+            String token = healthDataDb.getDeviceUserPassword();
+            FitBitImpl fbCall= new FitBitImpl(token);
 
             if (healthDataDb != null) {
                 HealthData healthData = new HealthData(healthDataDao.findHealthDataById(userId));
+                //update healthdata
+                float cg = Float.parseFloat(fbCall.getsCalorieGoalValue());
+                float bc = Float.parseFloat(fbCall.getsBurnedCaloriesValue());
+                healthDataDao.updateHealthData(healthDataDb.getUserId(), token, healthDataDb.getDeviceUserId(), bc, healthDataDb.getTrackedCaloriesTimeRange(), cg);
+                healthData = new HealthData(healthDataDao.findHealthDataById(userId));
                 return healthData.getCalorieGoal() - healthData.getBurnedCalories();
             } else {
                 throw new IllegalArgumentExpection();

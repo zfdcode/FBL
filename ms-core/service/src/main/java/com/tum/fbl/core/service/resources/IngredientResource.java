@@ -3,6 +3,8 @@ package com.tum.fbl.core.service.resources;
 import com.tum.fbl.core.bdo.Ingredient;
 import com.tum.fbl.core.persistence.ConnectionFactory;
 import com.tum.fbl.core.persistence.ingredient.IngredientDao;
+import com.tum.fbl.core.persistence.tag.Tag;
+import com.tum.fbl.core.persistence.tag.TagDao;
 import com.tum.fbl.core.service.auth.User;
 import com.tum.fbl.core.service.exceptions.IllegalArgumentExpection;
 import io.dropwizard.auth.Auth;
@@ -43,7 +45,9 @@ public class IngredientResource {
     @ApiOperation(value = "Get all offered ingredients")
     public List<Ingredient> getAllIngredients() {
 
-        try (IngredientDao ingredientDao = this.connectionFactory.getConnection().open(IngredientDao.class)) {
+        try (
+                IngredientDao ingredientDao = this.connectionFactory.getConnection().open(IngredientDao.class);
+                TagDao tagDao = this.connectionFactory.getConnection().open(TagDao.class)) {
             List<Ingredient> ingredients = new ArrayList<>();
 
             List<com.tum.fbl.core.persistence.ingredient.Ingredient> ingredientList = ingredientDao.getAllIngredients();
@@ -115,8 +119,11 @@ public class IngredientResource {
     public int addIngredient(Ingredient ingredient) throws IllegalArgumentExpection {
 
         if (ingredient != null) {
-            try (IngredientDao ingredientDao = this.connectionFactory.getConnection().open(IngredientDao.class)) {
-                return ingredientDao.newIngredient(
+            try (
+                    IngredientDao ingredientDao = this.connectionFactory.getConnection().open(IngredientDao.class);
+                    TagDao tagDao = this.connectionFactory.getConnection().open(TagDao.class)
+            ) {
+                int ingredientId = ingredientDao.newIngredient(
                         ingredient.getIngredientName(),
                         ingredient.getDescription(),
                         ingredient.getIngredientImage(),
@@ -127,6 +134,19 @@ public class IngredientResource {
                         ingredient.isGarnish(),
                         ingredient.getSugar()
                 );
+
+                if (ingredient.getTag()!=null) {
+                    for (String tagName:ingredient.getTag()) {
+                        Tag tag = tagDao.findTagByName(tagName);
+                        if (tag != null) {
+                            ingredientDao.newIngredientTag(ingredientId,tag.getTagId());
+                        } else {
+                            int tagId = tagDao.newTag(tagName);
+                            ingredientDao.newIngredientTag(ingredientId,tagId);
+                        }
+                    }
+                }
+                return ingredientId;
             }
         } else {
             throw new IllegalArgumentExpection();
@@ -142,7 +162,10 @@ public class IngredientResource {
     public void updateIngredient(Ingredient ingredient) throws IllegalArgumentExpection {
 
         if (ingredient != null) {
-            try (IngredientDao ingredientDao = this.connectionFactory.getConnection().open(IngredientDao.class)) {
+            try (
+                    IngredientDao ingredientDao = this.connectionFactory.getConnection().open(IngredientDao.class);
+                    TagDao tagDao = this.connectionFactory.getConnection().open(TagDao.class)
+            ) {
                 ingredientDao.updateIngredient(ingredient.getIngredientId(), ingredient.getDescription());
             }
         } else {

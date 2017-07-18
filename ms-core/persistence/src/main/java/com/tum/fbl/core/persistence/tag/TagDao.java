@@ -24,18 +24,19 @@ public interface TagDao extends AutoCloseable{
     @SqlQuery("select * from tag where tagId = :id")
     Tag findTagById(@Bind("id") int tagId);
 
-    @SqlQuery("select * frome tag where name = :name")
+    @SqlQuery("select * from tag where name = :name")
     Tag findTagByName(@Bind("name") String name);
 
     @SqlUpdate("Insert into tag (tagName) value (:tagName) ; SELECT LAST_INSERT_ID() from tag")
-    int newTag(@Bind("tagName") int tagName);
+    int newTag(@Bind("tagName") String tagName);
 
     @SqlUpdate("delete from tag where tagId = :id")
     void deleteTagById(@Bind("id") int tagId);
 
+    @SqlQuery("select * from ")
+    List<Tag> gitTagsByIngredientId(@Bind("ingredientId") int ingredientId);
+
     //TODO: void update()
 
     public void close();
-    @SqlQuery("select * from (Select *  form IngredientTag where tagId = :id) natural join ingredient")
-    Ingredient findIngredientByTag(@Bind("id") int tagId);
 }

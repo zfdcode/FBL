@@ -1,6 +1,6 @@
 package com.tum.fbl.core.persistence.voting;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Voting {
     private int votingId;

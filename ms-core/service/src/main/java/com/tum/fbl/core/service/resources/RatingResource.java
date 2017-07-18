@@ -14,7 +14,7 @@ import io.swagger.annotations.ApiOperation;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
 /**
@@ -153,7 +153,7 @@ public class RatingResource {
     @ApiOperation(value = "Add a new rating to the store")
     public int addRating(@QueryParam("userId") int userId, @QueryParam("mealId") int mealId, @QueryParam("rating") float rating) {
         try (RatingDao ratingDao = this.connectionFactory.getConnection().open(RatingDao.class)) {
-            return ratingDao.newRating(userId, mealId, new Date(), rating);
+            return ratingDao.newRating(userId, mealId, new Date(0), rating);
         }
     }
 

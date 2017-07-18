@@ -6,7 +6,7 @@ import org.skife.jdbi.v2.sqlobject.SqlQuery;
 import org.skife.jdbi.v2.sqlobject.SqlUpdate;
 import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapper;
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
 /**
@@ -36,7 +36,7 @@ public interface MealDao extends AutoCloseable{
      * @param offerDate the specified date
      * @return List of Meal objects
      */
-    @SqlQuery("select * from meal where offerDate = :offerDate)")
+    @SqlQuery("select * from Meal where offerDate = :offerDate")
     List<Meal> getAllMealForDate(@Bind("offerDate") Date offerDate);
 
     @SqlQuery("select * from Meal where :attributeName = :attributeId")
@@ -58,15 +58,15 @@ public interface MealDao extends AutoCloseable{
     List<Meal> getMealsByUser(@Bind("id") int id);
 
     @SqlQuery("select m.mealId, m.mealName, m.image, m.rating, m.healthValue, m.preparationTime, m.offerDate, m.energy, m.protein, m.totalFat, m.saturated, m.totalCarbohydrate, m.sugar, m.sodium, m.price " +
-            "from Meal m where offerDate = :date natural join (Select * from MealRestaurant where userId= :id)")
+            "from Meal m natural join (Select * from MealRestaurant where userId= :id) where offerDate = :date")
     List<Meal> getMealsByUserAndDate(@Bind("date") Date date, @Bind("id") int id);
 
     @SqlQuery("select m.mealId, m.mealName, m.image, m.rating, m.healthValue, m.preparationTime, m.offerDate, m.energy, m.protein, m.totalFat, m.saturated, m.totalCarbohydrate, m.sugar, m.sodium, m.price " +
-            "from Meal m where offerDate = :date natural join (Select * from MealCategory where categoryId= :id)")
+            "from Meal m natural join (Select * from MealCategory where categoryId= :id) where offerDate = :date")
     List<Meal> getMealsByCategoryAndDate(@Bind("date") Date date, @Bind("id") int id);
 
     @SqlQuery("select m.mealId, m.mealName, m.image, m.rating, m.healthValue, m.preparationTime, m.offerDate, m.energy, m.protein, m.totalFat, m.saturated, m.totalCarbohydrate, m.sugar, m.sodium, m.price " +
-            "from Meal m natural join (Select * from Order where orderId= :id)")
+            "from Meal m natural join (Select * from OrderTabel o where o.orderId= :id)")
     List<Meal> getMealsByOrder(@Bind("id") int orderId);
 
 

@@ -1,6 +1,6 @@
 package com.tum.fbl.core.persistence.meal;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Meal {
 

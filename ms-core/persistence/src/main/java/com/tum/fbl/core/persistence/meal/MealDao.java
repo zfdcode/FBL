@@ -66,7 +66,7 @@ public interface MealDao extends AutoCloseable{
     List<Meal> getMealsByCategoryAndDate(@Bind("date") Date date, @Bind("id") int id);
 
     @SqlQuery("select m.mealId, m.mealName, m.image, m.rating, m.healthValue, m.preparationTime, m.offerDate, m.energy, m.protein, m.totalFat, m.saturated, m.totalCarbohydrate, m.sugar, m.sodium, m.price " +
-            "from Meal m natural join (Select * from OrderTabel o where o.orderId= :id)")
+            "from Meal m natural join (Select * from OrderTable o where o.orderId= :id)")
     List<Meal> getMealsByOrder(@Bind("id") int orderId);
 
 

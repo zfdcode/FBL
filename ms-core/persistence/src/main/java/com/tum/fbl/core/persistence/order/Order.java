@@ -3,7 +3,7 @@ package com.tum.fbl.core.persistence.order;
 import com.tum.fbl.core.persistence.meal.Meal;
 import com.tum.fbl.core.persistence.user.User;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Order {
 

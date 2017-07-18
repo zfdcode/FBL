@@ -24,7 +24,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
 /**

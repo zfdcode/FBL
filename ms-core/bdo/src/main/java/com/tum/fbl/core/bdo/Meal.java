@@ -1,6 +1,6 @@
 package com.tum.fbl.core.bdo;
 
-import java.util.Date;
+import java.sql.Date;
 
 /**
  * Created by patrickmelchner on 30.05.17.

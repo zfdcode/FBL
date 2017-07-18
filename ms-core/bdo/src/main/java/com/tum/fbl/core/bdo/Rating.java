@@ -1,6 +1,6 @@
 package com.tum.fbl.core.bdo;
 
-import java.util.Date;
+import java.sql.Date;
 
 /**
  * Created by zfngd on 2017/6/4.
@@ -33,7 +33,7 @@ public class Rating {
         this.meal = meal;
         this.rate = rate;
         //TODO:
-        this.ratingTimestamp = new Date();
+        this.ratingTimestamp = new Date(0);
     }
 
     /**

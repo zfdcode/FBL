@@ -27,7 +27,7 @@ public interface TagDao extends AutoCloseable{
     @SqlQuery("select * from tag where name = :name")
     Tag findTagByName(@Bind("name") String name);
 
-    @SqlUpdate("Insert into tag (tagName) value (:tagName) ; SELECT LAST_INSERT_ID() from tag")
+    @SqlUpdate("Insert into tag (tagName) values (:tagName) ; SELECT LAST_INSERT_ID() from tag")
     int newTag(@Bind("tagName") String tagName);
 
     @SqlUpdate("delete from tag where tagId = :id")

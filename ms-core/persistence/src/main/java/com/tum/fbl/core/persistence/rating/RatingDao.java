@@ -23,7 +23,7 @@ public interface RatingDao extends AutoCloseable{
     @SqlQuery("select * from rating where mealId= :mealId")
     List<Rating> findRatingsByMealId(@Bind("mealId") int mealId);
 
-    @SqlUpdate("Insert into rating (userId, mealId, ratingTimestamp, rating) value (:userId, :mealId, :ratingTimestamp, :rating) ; SELECT LAST_INSERT_ID() from rating")
+    @SqlUpdate("Insert into rating (userId, mealId, ratingTimestamp, rating) values (:userId, :mealId, :ratingTimestamp, :rating) ; SELECT LAST_INSERT_ID() from rating")
     int newRating(@Bind("userId") int userId,
                   @Bind("mealId") int mealId,
                   @Bind("ratingTimestamp") Date ratingTimestamp,

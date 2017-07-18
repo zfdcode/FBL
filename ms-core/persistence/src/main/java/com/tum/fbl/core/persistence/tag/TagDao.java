@@ -33,8 +33,8 @@ public interface TagDao extends AutoCloseable{
     @SqlUpdate("delete from tag where tagId = :id")
     void deleteTagById(@Bind("id") int tagId);
 
-    @SqlQuery("select * from ")
-    List<Tag> gitTagsByIngredientId(@Bind("ingredientId") int ingredientId);
+    @SqlQuery("select t.* from Tag t, IngredientTag i where t.tagId=ingredient.tagId AND i.ingredientId=:ingredientId")
+    List<Tag> getTagsByIngredientId(@Bind("ingredientId") int ingredientId);
 
     //TODO: void update()
 

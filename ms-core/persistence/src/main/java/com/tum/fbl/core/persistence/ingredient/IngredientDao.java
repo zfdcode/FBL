@@ -60,14 +60,6 @@ public interface IngredientDao extends AutoCloseable {
     @SqlUpdate("delete from Ingredient where ingredientId = :id")
     void deleteIngredientById(@Bind("id") int ingredientId);
 
-    /**
-     * Inserts a new entry into the IngredientTag table in the database
-     * @param ingredientId the unique ID of the ingredient the tag belongs to
-     * @param tagId the unique ID of the tag
-     */
-    @SqlUpdate("Insert into IngredientTag (ingredientId, tagId) value (:ingredientId, : tagId) ")
-    void setIngredientTag(@Bind("ingredientId") int ingredientId, @Bind("tagId") int tagId);
-
     @SqlUpdate("update Ingredient set description= :description where ingredientId= : ingredientId")
     void updateIngredient(@Bind("ingredientId") int ingredientId, @Bind("description") String description);
 
@@ -77,7 +69,8 @@ public interface IngredientDao extends AutoCloseable {
     @SqlUpdate("delete from IngredientTag where ingredientId= :ingredientId")
     void deleteAllIngredientTag(@Bind("ingredientId") int ingredientId);
 
-    List<Ingredient> getIngredientbyMealID();
+    @SqlQuery("select i.* from Ingredient i, MealIngredient m where i.ingredientId=m.ingredientId AND m.mealId=:mealId")
+    List<Ingredient> getIngrediensByMealID(@Bind("mealId") int mealId);
 
     void close();
 }

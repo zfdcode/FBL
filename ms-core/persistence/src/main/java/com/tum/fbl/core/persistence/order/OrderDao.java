@@ -3,6 +3,7 @@ package com.tum.fbl.core.persistence.order;
 import com.sun.org.apache.xpath.internal.operations.Or;
 import com.tum.fbl.core.persistence.order.Order;
 import org.skife.jdbi.v2.sqlobject.Bind;
+import org.skife.jdbi.v2.sqlobject.GetGeneratedKeys;
 import org.skife.jdbi.v2.sqlobject.SqlQuery;
 import org.skife.jdbi.v2.sqlobject.SqlUpdate;
 import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapper;
@@ -33,6 +34,7 @@ public interface OrderDao extends AutoCloseable{
      */
     @SqlUpdate("insert into order ( restaurantId, userId, mealId, pickupTime, status, orderNumber)" +
             " values (:restaurantId, :userId, :mealId, :pickupTime, :status, :number)")
+    @GetGeneratedKeys
     int newOrder(@Bind("restaurantId") int orderRestaurantId,
                  @Bind("userId") int orderUserId,
                   @Bind("mealId") int orderMealId,

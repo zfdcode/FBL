@@ -80,7 +80,7 @@
             </column>
         </createTable>
 
-        <createTable tableName="Order">
+        <createTable tableName="OrderTable">
             <column name="orderId" type="int" autoIncrement="true">
                 <constraints nullable="false" primaryKey="true"/>
             </column>

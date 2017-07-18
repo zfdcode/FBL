@@ -1,15 +1,13 @@
 package com.tum.fbl.core.service.resources;
 
-import com.tum.fbl.core.bdo.Category;
-import com.tum.fbl.core.bdo.Ingredient;
-import com.tum.fbl.core.bdo.Restaurant;
+import com.tum.fbl.core.bdo.*;
 import com.tum.fbl.core.config.ImageUploadConfiguration;
 import com.tum.fbl.core.imagestorage.ImagePersistenceException;
 import com.tum.fbl.core.imagestorage.ImageStatus;
 import com.tum.fbl.core.imagestorage.ImageStorage;
 import com.tum.fbl.core.imagestorage.ImageStorageImpl;
-import com.tum.fbl.core.bdo.Meal;
 import com.tum.fbl.core.persistence.ConnectionFactory;
+import com.tum.fbl.core.persistence.ingredient.IngredientDao;
 import com.tum.fbl.core.persistence.meal.MealDao;
 import com.tum.fbl.core.service.exceptions.IllegalArgumentExpection;
 import com.tum.fbl.core.service.exceptions.ImageException;
@@ -24,7 +22,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
 /**
@@ -64,15 +62,16 @@ public class MealResource {
     @ApiOperation(value = "Get all offered meals")
     public List<Meal> getAllMeals() {
         try (MealDao mealDao = this.connectionFactory.getConnection().open(MealDao.class)) {
-            List<Meal> users = new ArrayList<>();
+            List<Meal> meals = new ArrayList<>();
 
-            List<com.tum.fbl.core.persistence.meal.Meal> meals = mealDao.getAllMeals();
+            List<com.tum.fbl.core.persistence.meal.Meal> mealsList = mealDao.getAllMeals();
             if (meals != null) {
-                for (com.tum.fbl.core.persistence.meal.Meal meal : meals) {
-                    users.add(new Meal(meal));
+                for (com.tum.fbl.core.persistence.meal.Meal meal : mealsList) {
+                    meals.add(new Meal(meal));
+
                 }
             }
-            return users;
+            return meals;
         }
 
 
@@ -286,10 +285,24 @@ public class MealResource {
     @Path("/meal/{mealId}")
     @ApiOperation(value = "Get information of a meal")
     public Meal getMeal(@PathParam("mealId") int mealId) {
-        try (MealDao mealDao = this.connectionFactory.getConnection().open(MealDao.class)) {
+        try (MealDao mealDao = this.connectionFactory.getConnection().open(MealDao.class);
+             IngredientDao ingredientDao = this.connectionFactory.getConnection().open(IngredientDao.class);
+
+        ) {
             com.tum.fbl.core.persistence.meal.Meal meal =  mealDao.findMealById(mealId);
             if (meal != null) {
-                return new Meal(meal);
+                Meal meal1 = new Meal(meal);
+                /*List<com.tum.fbl.core.persistence.ingredient.Ingredient> ingredients = ingredientDao.getIngredientbyMealID();
+                Ingredient[] ingredientsArr= new Ingredient[ingredients.size()];
+                List<Category> categories = null;
+                Category[] categoriesArr = new Category[categories.size()];
+                List<Rating> ratings = null;
+                Restaurant restaurant = null;
+                meal1.setMealIngredients(ingredients.toArray(ingredientsArr));
+                meal1.setMealCategories(categories.toArray(categoriesArr));
+                meal1.setMealRestaurant(restaurant);*/
+                return meal1;
+
             }
             return new Meal();
         }

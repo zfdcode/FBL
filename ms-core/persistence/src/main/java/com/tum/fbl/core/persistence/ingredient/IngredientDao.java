@@ -77,5 +77,7 @@ public interface IngredientDao extends AutoCloseable {
     @SqlUpdate("delete from IngredientTag where ingredientId= :ingredientId and tagId = :tagId")
     void deleteAllIngredientTag(@Bind("ingredientId") int ingredientId, @Bind("tagId") int tagId);
 
+    List<Ingredient> getIngredientbyMealID();
+
     void close();
 }

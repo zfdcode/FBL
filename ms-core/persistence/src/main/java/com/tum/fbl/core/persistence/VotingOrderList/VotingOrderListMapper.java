@@ -26,7 +26,8 @@ public class VotingOrderListMapper implements ResultSetMapper<VotingOrderList> {
                 r.getInt("votingOrderListId"),
                 r.getFloat("orderedAmount"),
                 r.getDate("orderedAt"),
-                r.getInt("votingPeriodId"));
+                r.getInt("votingPeriodId"),
+                r.getInt("ingredientId"));
     }
 
 }

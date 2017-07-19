@@ -1,8 +1,12 @@
-package com.tum.fbl.core.persistence.VotingOrderList;
+package com.tum.fbl.core.bdo;
 
 import java.util.Date;
 
+/**
+ * Created by MS on 14.07.2017.
+ */
 public class VotingOrderList {
+
     private int votingOrderListId;
 
     private float orderedAmount;
@@ -13,20 +17,20 @@ public class VotingOrderList {
 
     private int ingredientId;
 
-    /**
-     *
-     * @param votingOrderListId the votingOrderList's unique ID
-     * @param orderedAmount the amount that was ordered
-     * @param orderedAt when the order was placed
-     * @param votingPeriodId the unique ID of the voting period the order was placed in
-     */
-
     public VotingOrderList(int votingOrderListId, float orderedAmount, Date orderedAt, int votingPeriodId, int ingredientId) {
         this.votingOrderListId = votingOrderListId;
         this.orderedAmount = orderedAmount;
         this.orderedAt = orderedAt;
         this.votingPeriodId = votingPeriodId;
         this.ingredientId = ingredientId;
+    }
+
+    public VotingOrderList(com.tum.fbl.core.persistence.VotingOrderList.VotingOrderList votingOrderList){
+        this.votingOrderListId = votingOrderList.getVotingOrderListId();
+        this.orderedAmount = votingOrderList.getOrderedAmount();
+        this.orderedAt = votingOrderList.getOrderedAt();
+        this.votingPeriodId = votingOrderList.getVotingPeriodId();
+        this.ingredientId = votingOrderList.getIngredientId();
     }
 
     public int getVotingOrderListId() {
@@ -37,11 +41,11 @@ public class VotingOrderList {
         this.votingOrderListId = votingOrderListId;
     }
 
-    public Float getOrderedAmount() {
+    public float getOrderedAmount() {
         return orderedAmount;
     }
 
-    public void setOrderedAmount(Float orderedAmount) {
+    public void setOrderedAmount(float orderedAmount) {
         this.orderedAmount = orderedAmount;
     }
 
@@ -61,8 +65,11 @@ public class VotingOrderList {
         this.votingPeriodId = votingPeriodId;
     }
 
-    public int getIngredientId(){ return ingredientId; }
+    public int getIngredientId() {
+        return ingredientId;
+    }
 
-    public void setIngredientId(int ingredientId){ this.ingredientId = ingredientId; }
-
+    public void setIngredientId(int ingredientId) {
+        this.ingredientId = ingredientId;
+    }
 }

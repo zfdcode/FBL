@@ -6,6 +6,7 @@ import org.skife.jdbi.v2.sqlobject.SqlUpdate;
 import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapper;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by marcel on 09.07.2017.votingOrderListId, float orderedAmount, Date orderedAt, int votingPeriodId
@@ -18,15 +19,16 @@ public interface VotingOrderListDao extends AutoCloseable{
     VotingOrderList findVotingOrderListById(@Bind("id") int votingOrderListId);
 
     @SqlQuery("select * from votingOrderList where votingPeriodId = :votingPeriodId")
-    VotingOrderList findVotingOrderListByPeriod(@Bind("votingPeriodId") int votingPeriodId);
+    List<VotingOrderList> findVotingOrderListByPeriod(@Bind("votingPeriodId") int votingPeriodId);
 
-    @SqlUpdate("Insert into votingOrderList (orderedAmount, orderedAt, votingPeriodId) value (:orderedAmount, :orderedAt, :votingPeriodId)")
-    void newVoting(@Bind("orderedAmount") float orderedAmount,
+    @SqlUpdate("Insert into votingOrderList (orderedAmount, orderedAt, votingPeriodId, ingredientId) value (:orderedAmount, :orderedAt, :votingPeriodId, :ingredientId)")
+    void newVotingOrderList(@Bind("orderedAmount") float orderedAmount,
                    @Bind("orderedAt") Date orderedAt,
-                   @Bind("votingPeriodId") int votingPeriodId);
+                   @Bind("votingPeriodId") int votingPeriodId,
+                   @Bind("ingredientId") int ingredientId);
 
-    @SqlUpdate("delete from votingOrderList where votingOrderList = :id")
+    @SqlUpdate("delete from votingOrderList where votingOrderListId = :id")
     void deleteVotingOrderListById(@Bind("id") int votingOrderListId);
 
-    void close();
+    public void close();
 }

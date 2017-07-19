@@ -103,7 +103,6 @@ public class UserResource {
                     user.getHeight(),
                     user.getWeight(),
                     user.getDisplayName(),
-                    //TODO:
                     "",
                     0,
                     0,

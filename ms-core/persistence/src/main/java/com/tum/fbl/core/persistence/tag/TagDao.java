@@ -36,7 +36,6 @@ public interface TagDao extends AutoCloseable{
     @SqlQuery("select t.* from Tag t, IngredientTag i where t.tagId=ingredient.tagId AND i.ingredientId=:ingredientId")
     List<Tag> getTagsByIngredientId(@Bind("ingredientId") int ingredientId);
 
-    //TODO: void update()
 
     public void close();
 }

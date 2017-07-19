@@ -131,7 +131,7 @@ public class RestaurantResource {
                         restaurant.getRestaurantName(),
                         restaurant.getRestaurantPassword(),
                         restaurant.getRestaurantEmail(),
-                        //TODO:
+                        //note: a restaurant has no such informations
                         null,
                         0,
                         0,

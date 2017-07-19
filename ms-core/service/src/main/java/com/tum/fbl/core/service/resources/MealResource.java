@@ -504,9 +504,12 @@ public class MealResource {
         List<com.tum.fbl.core.persistence.ingredient.Ingredient> ingredients = ingredientDao.getIngrediensByMealID(meal.getMealId());
         if (ingredients!=null){
             List<Ingredient> ingredientList = new ArrayList<>();
+            //for all ingredients with this mealId
             for (com.tum.fbl.core.persistence.ingredient.Ingredient ingredient:ingredients){
+                //create new ingredient bdo and add it into ingredientList
                 ingredientList.add(new Ingredient(ingredient));
             }
+            //set mealBDO ingredients infos
             mealBDO.setMealIngredients(ingredientList.toArray(new Ingredient[ingredientList.size()]));
         }
         //add category
@@ -520,7 +523,7 @@ public class MealResource {
         }
 
         //add rating
-        //TODO:
+        //TODO: add rating
 
         //add restaurant
         com.tum.fbl.core.persistence.user.User restaurant = userDao.findUserByMealId(meal.getMealId());

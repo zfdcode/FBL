@@ -32,7 +32,5 @@ public interface VoteDao extends AutoCloseable {
     void deleteVoteByIng(@Bind("votingIngItemId") int votingIngItemId,
                          @Bind("userId") int userId);
 
-    //TODO: void update()
-
     public void close();
 }

@@ -154,7 +154,7 @@
             <column name="mealName" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
-            <column name="image" type="image">
+            <column name="image" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
             <column name="rating" type="float">
@@ -244,7 +244,7 @@
             <column name="description" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
-            <column name="image" type="image">
+            <column name="image" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
             <column name="energy" type="float">

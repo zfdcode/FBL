@@ -1,6 +1,7 @@
 package com.tum.fbl.core.persistence.healthdata;
 
 import org.skife.jdbi.v2.sqlobject.Bind;
+import org.skife.jdbi.v2.sqlobject.GetGeneratedKeys;
 import org.skife.jdbi.v2.sqlobject.SqlQuery;
 import org.skife.jdbi.v2.sqlobject.SqlUpdate;
 import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapper;
@@ -14,8 +15,9 @@ public interface HealthDataDao extends AutoCloseable {
     @SqlQuery("select * from healthTrackerData where userId = :id")
     HealthData findHealthDataById(@Bind("id") int userId);
 
+    @GetGeneratedKeys
     @SqlUpdate("Insert into healthTrackerData (userId, deviceUserPassword, deviceUserId, burnedCalories, trackedCaloriesRange, calorieGoal) " +
-            "values (:userId, :deviceUserPassword, :deviceUserId, :burnedCalories, :trackedCaloriesRange, :calorieGoal) ; SELECT LAST_INSERT_ID() from healthTrackerData")
+            "values (:userId, :deviceUserPassword, :deviceUserId, :burnedCalories, :trackedCaloriesRange, :calorieGoal) ")
     int newHealthData(
             @Bind("userId") int userId,
             @Bind("deviceUserPassword") String deviceUserPassword,

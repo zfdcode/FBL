@@ -1,7 +1,7 @@
 package com.tum.fbl.core.service.resources;
 
+import com.tum.fbl.core.bdo.Tag;
 import com.tum.fbl.core.persistence.ConnectionFactory;
-import com.tum.fbl.core.persistence.tag.Tag;
 import com.tum.fbl.core.persistence.tag.TagDao;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -36,12 +36,12 @@ public class TagResource {
     /**
      * Gets all special needs.
      *
-     * @return List<Categoryy> the list of special needs
+     * @return List<Tag> the list of tags
      */
     @GET
     @Path("/all")
     @ApiOperation(value = "Get all offered tags")
-    public List<com.tum.fbl.core.bdo.Tag> getAllTags() {
+    public List<Tag> getAllTags() {
         try (TagDao tagDao = this.connectionFactory.getConnection().open(TagDao.class)) {
             List<com.tum.fbl.core.persistence.tag.Tag> tags = tagDao.getAllTags();
 

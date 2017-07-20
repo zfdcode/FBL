@@ -1,6 +1,7 @@
 package com.tum.fbl.core.persistence.user;
 
 import org.skife.jdbi.v2.sqlobject.Bind;
+import org.skife.jdbi.v2.sqlobject.GetGeneratedKeys;
 import org.skife.jdbi.v2.sqlobject.SqlQuery;
 import org.skife.jdbi.v2.sqlobject.SqlUpdate;
 import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapper;
@@ -36,8 +37,9 @@ public interface UserDao extends AutoCloseable {
     @SqlQuery("select u.* from (select * from UserCategory where categoryId = :categoryId) natural join user u ")
     List<User> findUsersByCategory(@Bind("categoryId") int categoryId);
 
+    @GetGeneratedKeys
     @SqlUpdate("insert into user (userName, userPassword, email, birthday, height, weight, displayName, address, longitude, latitude, roleId) " +
-            " values (:userName, :userPassword, :email, :birthday, :height, :weight, :displayName, :address, :longitude, :latitude, :roleId); SELECT LAST_INSERT_ID() from user; ")
+            " values (:userName, :userPassword, :email, :birthday, :height, :weight, :displayName, :address, :longitude, :latitude, :roleId)")
     int newUser(@Bind("userName") String userName,
                  @Bind("userPassword") String userPassword,
                  @Bind("email") String email,

@@ -86,6 +86,7 @@ public interface MealDao extends AutoCloseable{
      * @param mealSugar
      * @param mealSodium
      */
+
     @SqlUpdate("insert into meal (mealName, image, rating, healthValue, preparationTime, offerDate, energy, protein, totalFat, saturated, totalCarbohydrate, sugar, sodium, price) " +
             "values ( :mealName, :image, :rating, :healthValue, :preparationTime, :offerDate, :energy, :protein, :totalFat, :saturated, :totalCarbohydrate, :sugar, :sodium, :price) ;")
     @GetGeneratedKeys

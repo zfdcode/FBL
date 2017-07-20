@@ -1,6 +1,7 @@
 package com.tum.fbl.core.persistence.category;
 
 import org.skife.jdbi.v2.sqlobject.Bind;
+import org.skife.jdbi.v2.sqlobject.GetGeneratedKeys;
 import org.skife.jdbi.v2.sqlobject.SqlQuery;
 import org.skife.jdbi.v2.sqlobject.SqlUpdate;
 import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapper;
@@ -45,7 +46,8 @@ public interface CategoryDao extends AutoCloseable{
      * @param categoryName the new category's name
      * @param categoryDescription the new category's description
      */
-    @SqlUpdate("Insert into Category (categoryName, categoryDescription) values (:categoryName, :categoryDescription); SELECT LAST_INSERT_ID() from userCategory")
+    @GetGeneratedKeys
+    @SqlUpdate("Insert into Category (categoryName, categoryDescription) values (:categoryName, :categoryDescription)")
     int newCategory(@Bind("categoryName") String categoryName, @Bind("categoryDescription") String categoryDescription);
 
     /**

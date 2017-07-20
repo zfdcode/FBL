@@ -2,6 +2,7 @@ package com.tum.fbl.core.persistence.ingredient;
 
 import com.google.common.primitives.Bytes;
 import org.skife.jdbi.v2.sqlobject.Bind;
+import org.skife.jdbi.v2.sqlobject.GetGeneratedKeys;
 import org.skife.jdbi.v2.sqlobject.SqlQuery;
 import org.skife.jdbi.v2.sqlobject.SqlUpdate;
 import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapper;
@@ -63,7 +64,8 @@ public interface IngredientDao extends AutoCloseable {
     @SqlUpdate("update Ingredient set description= :description where ingredientId= : ingredientId")
     void updateIngredient(@Bind("ingredientId") int ingredientId, @Bind("description") String description);
 
-    @SqlUpdate("Insert into IngredientTag (ingredientId, tagId) values (:ingredientId, :tagId); SELECT LAST_INSERT_ID() from ingredientTag")
+    @GetGeneratedKeys
+    @SqlUpdate("Insert into IngredientTag (ingredientId, tagId) values (:ingredientId, :tagId)")
     int newIngredientTag(@Bind("ingredientId") int ingredientID, @Bind("tagId") int tagId);
 
     @SqlUpdate("delete from IngredientTag where ingredientId= :ingredientId")

@@ -1,6 +1,7 @@
 package com.tum.fbl.core.persistence.rating;
 
 import org.skife.jdbi.v2.sqlobject.Bind;
+import org.skife.jdbi.v2.sqlobject.GetGeneratedKeys;
 import org.skife.jdbi.v2.sqlobject.SqlQuery;
 import org.skife.jdbi.v2.sqlobject.SqlUpdate;
 import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapper;
@@ -23,7 +24,8 @@ public interface RatingDao extends AutoCloseable{
     @SqlQuery("select * from rating where mealId= :mealId")
     List<Rating> findRatingsByMealId(@Bind("mealId") int mealId);
 
-    @SqlUpdate("Insert into rating (userId, mealId, ratingTimestamp, rating) values (:userId, :mealId, :ratingTimestamp, :rating) ; SELECT LAST_INSERT_ID() from rating")
+    @GetGeneratedKeys
+    @SqlUpdate("Insert into rating (userId, mealId, ratingTimestamp, rating) values (:userId, :mealId, :ratingTimestamp, :rating)")
     int newRating(@Bind("userId") int userId,
                   @Bind("mealId") int mealId,
                   @Bind("ratingTimestamp") Date ratingTimestamp,

@@ -2,6 +2,7 @@ package com.tum.fbl.core.persistence.tag;
 
 import com.tum.fbl.core.persistence.ingredient.Ingredient;
 import org.skife.jdbi.v2.sqlobject.Bind;
+import org.skife.jdbi.v2.sqlobject.GetGeneratedKeys;
 import org.skife.jdbi.v2.sqlobject.SqlQuery;
 import org.skife.jdbi.v2.sqlobject.SqlUpdate;
 import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapper;
@@ -24,10 +25,11 @@ public interface TagDao extends AutoCloseable{
     @SqlQuery("select * from tag where tagId = :id")
     Tag findTagById(@Bind("id") int tagId);
 
-    @SqlQuery("select * from tag where name = :name")
+    @SqlQuery("select * from tag where tagName = :name")
     Tag findTagByName(@Bind("name") String name);
 
-    @SqlUpdate("Insert into tag (tagName) values (:tagName) ; SELECT LAST_INSERT_ID() from tag")
+    @GetGeneratedKeys
+    @SqlUpdate("Insert into tag (tagName) values (:tagName)")
     int newTag(@Bind("tagName") String tagName);
 
     @SqlUpdate("delete from tag where tagId = :id")

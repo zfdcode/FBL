@@ -20,6 +20,8 @@ public class VotingPeriod {
 
     private VotingIngItem[] VotingIngItems;
 
+    public VotingPeriod(){}
+
     public VotingPeriod(int votingPeriodId, Date startTime, Date endTime, Boolean isFinished, int calendarWeek, VotingIngItem[] votingIngItems) {
         this.votingPeriodId = votingPeriodId;
         this.startTime = startTime;

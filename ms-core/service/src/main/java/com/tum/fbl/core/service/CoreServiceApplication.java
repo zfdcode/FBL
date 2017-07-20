@@ -126,6 +126,15 @@ public class CoreServiceApplication extends Application<CoreServiceConfiguration
 
         final AuthResource authResource = new AuthResource(authenticator);
         environment.jersey().register(authResource);
+
+        final VoteResource voteResource = new VoteResource(connectionFactory);
+        environment.jersey().register(voteResource);
+
+        final VotingOrderListResource votingOrderListResource = new VotingOrderListResource(connectionFactory);
+        environment.jersey().register(votingOrderListResource);
+
+        final VotingPeriodResource votingPeriodResource = new VotingPeriodResource(connectionFactory);
+        environment.jersey().register(votingPeriodResource);
     }
 
     private void configureCors(Environment environment) {

@@ -1,6 +1,7 @@
 package com.tum.fbl.core.persistence.voting;
 
 import org.skife.jdbi.v2.sqlobject.Bind;
+import org.skife.jdbi.v2.sqlobject.GetGeneratedKeys;
 import org.skife.jdbi.v2.sqlobject.SqlQuery;
 import org.skife.jdbi.v2.sqlobject.SqlUpdate;
 import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapper;
@@ -17,7 +18,8 @@ public interface  VotingDao extends AutoCloseable{
     @SqlQuery("select * from voting where votingId = :id")
     Voting findVotingById(@Bind("id") int votingId);
 
-    @SqlUpdate("Insert into voting (createdBy, createdOn, userId, like) value (:createdBy, :createdOn, :startDate, :location) ; SELECT LAST_INSERT_ID() from voting")
+    @GetGeneratedKeys
+    @SqlUpdate("Insert into voting (createdBy, createdOn, userId, like) value (:createdBy, :createdOn, :startDate, :location)")
     int newVoting(@Bind("createdBy") int createdBy,
                  @Bind("createdOn") Date createdOn,
                  @Bind("startDate") Date startDate,

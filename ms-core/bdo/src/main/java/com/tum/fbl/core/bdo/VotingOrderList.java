@@ -17,6 +17,8 @@ public class VotingOrderList {
 
     private int ingredientId;
 
+    public  VotingOrderList(){}
+
     public VotingOrderList(int votingOrderListId, float orderedAmount, Date orderedAt, int votingPeriodId, int ingredientId) {
         this.votingOrderListId = votingOrderListId;
         this.orderedAmount = orderedAmount;

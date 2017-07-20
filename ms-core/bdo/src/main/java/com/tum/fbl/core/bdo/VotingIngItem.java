@@ -18,6 +18,8 @@ public class VotingIngItem {
 
     private Vote[] votes;
 
+    public  VotingIngItem(){}
+
     public VotingIngItem(int votingIngItemId, int votingPeriodId, boolean isIgnored, int ingredientId, Ingredient ingredient) {
         this.votingIngItemId = votingIngItemId;
         this.votingPeriodId = votingPeriodId;

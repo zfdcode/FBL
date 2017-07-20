@@ -501,7 +501,7 @@ public class MealResource {
                                CategoryDao categoryDao, RatingDao ratingDao, UserDao userDao){
         Meal mealBDO = new Meal(meal);
         //add ingredients
-        List<com.tum.fbl.core.persistence.ingredient.Ingredient> ingredients = ingredientDao.getIngrediensByMealID(meal.getMealId());
+        List<com.tum.fbl.core.persistence.ingredient.Ingredient> ingredients = ingredientDao.getIngredientsByMealID(meal.getMealId());
         if (ingredients!=null){
             List<Ingredient> ingredientList = new ArrayList<>();
             //for all ingredients with this mealId

@@ -70,7 +70,7 @@ public interface IngredientDao extends AutoCloseable {
     void deleteAllIngredientTag(@Bind("ingredientId") int ingredientId);
 
     @SqlQuery("select i.* from Ingredient i, MealIngredient m where i.ingredientId=m.ingredientId AND m.mealId=:mealId")
-    List<Ingredient> getIngrediensByMealID(@Bind("mealId") int mealId);
+    List<Ingredient> getIngredientsByMealID(@Bind("mealId") int mealId);
 
     void close();
 }

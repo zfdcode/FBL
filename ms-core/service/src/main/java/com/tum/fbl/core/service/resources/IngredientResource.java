@@ -30,6 +30,7 @@ public class IngredientResource {
 
     /**
      * Connects to the factory for ingredient resource.
+     *
      * @param connectionFactory the connection of factory
      */
     public IngredientResource(ConnectionFactory connectionFactory) {
@@ -38,6 +39,7 @@ public class IngredientResource {
 
     /**
      * Gets all ingredients.
+     *
      * @return list of ingredient
      */
     @GET
@@ -54,7 +56,8 @@ public class IngredientResource {
 
             if (ingredientList != null) {
                 for (com.tum.fbl.core.persistence.ingredient.Ingredient ingredient : ingredientList) {
-                    ingredients.add(new Ingredient(ingredient));
+                    Ingredient ingredientBDO = updateIngredientBDO(ingredient, tagDao);
+                    ingredients.add(ingredientBDO);
                 }
             }
             return ingredients;
@@ -63,6 +66,7 @@ public class IngredientResource {
 
     /**
      * Gets ingredient.
+     *
      * @param ingredientId the ingredient id
      * @return Ingredient
      */
@@ -70,11 +74,13 @@ public class IngredientResource {
     @Path("/id/{ingredientId}")
     @ApiOperation(value = "Get information of a ingredient")
     public Ingredient getIngredient(@PathParam("ingredientId") int ingredientId) {
-        try (IngredientDao ingredientDao = this.connectionFactory.getConnection().open(IngredientDao.class)) {
+        try (IngredientDao ingredientDao = this.connectionFactory.getConnection().open(IngredientDao.class);
+             TagDao tagDao = this.connectionFactory.getConnection().open(TagDao.class)
+        ) {
             com.tum.fbl.core.persistence.ingredient.Ingredient ingredient = ingredientDao.findIngredientById(ingredientId);
 
             if (ingredient != null) {
-                return new Ingredient(ingredient);
+                return updateIngredientBDO(ingredient, tagDao);
             } else {
                 return null;
             }
@@ -83,6 +89,7 @@ public class IngredientResource {
 
     /**
      * Gets ingredient by tags
+     *
      * @param ingredientTagID the ingredient tag id
      * @return Ingredient
      */
@@ -95,10 +102,28 @@ public class IngredientResource {
 
     @GET
     @Path("/meal/{mealId}")
-    public Ingredient getIngredientByMealId(@PathParam("mealId") int mealId) {return null;}
+    public List<Ingredient> getIngredientsByMealId(@PathParam("mealId") int mealId) {
+        try (
+                IngredientDao ingredientDao = this.connectionFactory.getConnection().open(IngredientDao.class);
+                TagDao tagDao = this.connectionFactory.getConnection().open(TagDao.class)
+        ) {
+            List<Ingredient> ingredients = new ArrayList<>();
+
+            List<com.tum.fbl.core.persistence.ingredient.Ingredient> ingredientList = ingredientDao.getIngredientsByMealID(mealId);
+
+            if (ingredientList != null) {
+                for (com.tum.fbl.core.persistence.ingredient.Ingredient ingredient : ingredientList) {
+                    Ingredient ingredientBDO = updateIngredientBDO(ingredient, tagDao);
+                    ingredients.add(ingredientBDO);
+                }
+            }
+            return ingredients;
+        }
+    }
 
     /**
      * Deletes ingredient.
+     *
      * @param ingredientId the ingredient id
      */
     @DELETE
@@ -107,11 +132,13 @@ public class IngredientResource {
     public void deleteIngredient(@PathParam("ingredientId") int ingredientId) {
         try (IngredientDao ingredientDao = this.connectionFactory.getConnection().open(IngredientDao.class)) {
             ingredientDao.deleteIngredientById(ingredientId);
+            ingredientDao.deleteAllIngredientTag(ingredientId);
         }
     }
 
     /**
      * Adds ingredient.
+     *
      * @param ingredient the ingredient
      */
     @POST
@@ -135,14 +162,14 @@ public class IngredientResource {
                         ingredient.getSugar()
                 );
 
-                if (ingredient.getTag()!=null) {
-                    for (String tagName:ingredient.getTag()) {
+                if (ingredient.getTag() != null) {
+                    for (String tagName : ingredient.getTag()) {
                         Tag tag = tagDao.findTagByName(tagName);
                         if (tag != null) {
-                            ingredientDao.newIngredientTag(ingredientId,tag.getTagId());
+                            ingredientDao.newIngredientTag(ingredientId, tag.getTagId());
                         } else {
                             int tagId = tagDao.newTag(tagName);
-                            ingredientDao.newIngredientTag(ingredientId,tagId);
+                            ingredientDao.newIngredientTag(ingredientId, tagId);
                         }
                     }
                 }
@@ -155,6 +182,7 @@ public class IngredientResource {
 
     /**
      * Updates ingredient.
+     *
      * @param ingredient the ingredient
      */
     @PUT
@@ -173,6 +201,19 @@ public class IngredientResource {
         }
     }
 
+    private Ingredient updateIngredientBDO(com.tum.fbl.core.persistence.ingredient.Ingredient ingredient, TagDao tagDao) {
+        Ingredient ingredientBDO = new Ingredient(ingredient);
+        List<Tag> tags = tagDao.getTagsByIngredientId(ingredient.getIngredientId());
+
+        if (tags != null) {
+            List<String> tagNames = new ArrayList<>();
+            for (Tag tag : tags) {
+                tagNames.add(tag.getTagName());
+            }
+            ingredientBDO.setTag(tagNames.toArray(new String[tagNames.size()]));
+        }
+        return ingredientBDO;
+    }
 
 
 }

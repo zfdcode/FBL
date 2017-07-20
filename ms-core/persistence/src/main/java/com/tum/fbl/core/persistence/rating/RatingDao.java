@@ -29,7 +29,7 @@ public interface RatingDao extends AutoCloseable{
     int newRating(@Bind("userId") int userId,
                   @Bind("mealId") int mealId,
                   @Bind("ratingTimestamp") Date ratingTimestamp,
-                  @Bind("rating") float rating);
+                  @Bind("rating") boolean rating);
 
     @SqlUpdate("delete from rating where ratingId = :id")
     void deleteRatingById(@Bind("id") int ratingId);
@@ -37,7 +37,7 @@ public interface RatingDao extends AutoCloseable{
     @SqlUpdate("update rating set ratingTimestamp= :timestamp, rating= :rating  where ratingId = :id")
     void updateRating(
             @Bind("id") int id,
-            @Bind("rating") float rating,
+            @Bind("rating") boolean rating,
             @Bind("timestamp") Date timestamp
     );
 

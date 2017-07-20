@@ -139,6 +139,7 @@ public class UserResource {
         if (user != null) {
             try (UserDao userDao = this.connectionFactory.getConnection().open(UserDao.class)) {
                 userDao.updateUser(
+                        user.getUserId(),
                         user.getUserName(),
                         user.getUserPassword(),
                         user.getEmail(),
@@ -146,7 +147,7 @@ public class UserResource {
                         user.getDisplayName()
                 );
             }
-        } throw new IllegalArgumentExpection();
+        } else {throw new IllegalArgumentExpection();}
     }
 
     /**

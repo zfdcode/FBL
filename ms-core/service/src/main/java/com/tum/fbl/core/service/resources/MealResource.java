@@ -13,7 +13,8 @@ import com.tum.fbl.core.persistence.ConnectionFactory;
 import com.tum.fbl.core.persistence.category.*;
 import com.tum.fbl.core.persistence.ingredient.*;
 import com.tum.fbl.core.persistence.meal.*;
-import com.tum.fbl.core.persistence.rating.RatingDao;
+import com.tum.fbl.core.persistence.rating.*;
+import com.tum.fbl.core.persistence.rating.Rating;
 import com.tum.fbl.core.persistence.user.*;
 import com.tum.fbl.core.service.exceptions.IllegalArgumentExpection;
 import com.tum.fbl.core.service.exceptions.ImageException;
@@ -444,15 +445,22 @@ public class MealResource {
 
                 Ingredient[] ingredients = meal.getMealIngredients();
 
+                com.tum.fbl.core.bdo.Rating[] ratings = meal.getMealRatings();
+
                 mealDao.newRestaurantMeal(mealId, restaurant.getRestaurantId(), meal.getOfferDate());
 
-                for(Category c: categories){
-                    mealDao.newMealCategory(mealId, c.getCategoryId());
+                if(categories!=null){
+                    for(Category c: categories){
+                        mealDao.newMealCategory(mealId, c.getCategoryId());
+                    }
                 }
 
-                for(Ingredient i: ingredients){
-                    mealDao.newMealIngredient(mealId, i.getIngredientId());
+                if(ingredients!=null){
+                    for(Ingredient i: ingredients){
+                        mealDao.newMealIngredient(mealId, i.getIngredientId());
+                    }
                 }
+
 
                 return mealId;
             }
@@ -523,7 +531,18 @@ public class MealResource {
         }
 
         //add rating
-        //TODO: add rating
+        float mealRating = 0;
+        List<com.tum.fbl.core.persistence.rating.Rating> ratings = ratingDao.findRatingsByMealId(meal.getMealId());
+        if (ratings != null) {
+            int positiveRatings = 0;
+            for (Rating raing : ratings) {
+                if (raing.isRating()){
+                    positiveRatings++;
+                }
+            }
+            mealRating=positiveRatings/ratings.size();
+        }
+        meal.setMealRating(mealRating);
 
         //add restaurant
         com.tum.fbl.core.persistence.user.User restaurant = userDao.findUserByMealId(meal.getMealId());

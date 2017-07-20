@@ -29,13 +29,13 @@ public interface TagDao extends AutoCloseable{
     Tag findTagByName(@Bind("name") String name);
 
     @GetGeneratedKeys
-    @SqlUpdate("Insert into tag (tagName) values (:tagName)")
-    int newTag(@Bind("tagName") String tagName);
+    @SqlUpdate("Insert into tag (tagName, tagDescription) values (:tagName, :tagDescription)")
+    int newTag(@Bind("tagName") String tagName, @Bind("tagDescription") String tagDescription);
 
     @SqlUpdate("delete from tag where tagId = :id")
     void deleteTagById(@Bind("id") int tagId);
 
-    @SqlQuery("select t.* from Tag t, IngredientTag i where t.tagId=ingredient.tagId AND i.ingredientId=:ingredientId")
+    @SqlQuery("select t.* from Tag t, IngredientTag i where t.tagId=i.tagId AND i.ingredientId=:ingredientId")
     List<Tag> getTagsByIngredientId(@Bind("ingredientId") int ingredientId);
 
 

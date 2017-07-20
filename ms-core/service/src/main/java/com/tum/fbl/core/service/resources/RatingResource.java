@@ -55,9 +55,10 @@ public class RatingResource {
         ) {
             List<Rating> ratings = new ArrayList<>();
             for (com.tum.fbl.core.persistence.rating.Rating rating : ratingDao.findRatingsByUserId(userId)) {
+
                 User user = new User(userDao.findUserById(rating.getUserId()));
                 Meal meal = new Meal(mealDao.findMealById(rating.getMealId()));
-                ratings.add(new Rating(rating.getRatingId(), user, meal, rating.isRating() ? 1 : 0));
+                ratings.add(new Rating(rating.getRatingId(), user, meal, rating.isRating()));
             }
             return ratings;
         }
@@ -79,10 +80,11 @@ public class RatingResource {
                 MealDao mealDao = this.connectionFactory.getConnection().open(MealDao.class)
         ) {
             List<Rating> ratings = new ArrayList<>();
-            for (com.tum.fbl.core.persistence.rating.Rating rating : ratingDao.findRatingsByMealId(mealId)) {
+            for (com.tum.fbl.core.persistence.rating.Rating rating : ratingDao.findRatingsByMealId(1)) {
+
                 User user = new User(userDao.findUserById(rating.getUserId()));
                 Meal meal = new Meal(mealDao.findMealById(rating.getMealId()));
-                ratings.add(new Rating(rating.getRatingId(), user, meal, rating.isRating() ? 1 : 0));
+                ratings.add(new Rating(rating.getRatingId(), user, meal, rating.isRating()));
             }
             return ratings;
         }
@@ -122,7 +124,7 @@ public class RatingResource {
                     meal = new Meal();
                 }
 
-                return new Rating(rating.getRatingId(), user, meal, rating.isRating() ? 1 : 0);
+                return new Rating(rating.getRatingId(), user, meal, rating.isRating());
             } else {
                 return null;
             }
@@ -151,7 +153,7 @@ public class RatingResource {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @ApiOperation(value = "Add a new rating to the store")
-    public int addRating(@QueryParam("userId") int userId, @QueryParam("mealId") int mealId, @QueryParam("rating") float rating) {
+    public int addRating(@QueryParam("userId") int userId, @QueryParam("mealId") int mealId, @QueryParam("rating") boolean rating) {
         try (RatingDao ratingDao = this.connectionFactory.getConnection().open(RatingDao.class)) {
             return ratingDao.newRating(userId, mealId, new Date(0), rating);
         }
@@ -170,6 +172,8 @@ public class RatingResource {
                     RatingDao ratingDao = this.connectionFactory.getConnection().open(RatingDao.class)
             ) {
                 ratingDao.updateRating(rating.getRatingId(), rating.getRate(), rating.getRatingTimestamp());
+                //update meal rating
+                //TODO:
             }
         } else {
             throw new IllegalArgumentExpection();

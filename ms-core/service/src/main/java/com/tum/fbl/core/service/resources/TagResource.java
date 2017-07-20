@@ -6,10 +6,7 @@ import com.tum.fbl.core.persistence.tag.TagDao;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.ArrayList;
 import java.util.List;
@@ -57,6 +54,18 @@ public class TagResource {
         }
     }
 
+    @POST
+    @ApiOperation(value = "Get all offered tags")
+    public int addTag(Tag tag) {
+        try (TagDao tagDao = this.connectionFactory.getConnection().open(TagDao.class)) {
+            if (tag!=null) {
+                String tagDescription = tag.getTagDescription()==null?"":tag.getTagDescription();
+                return tagDao.newTag(tag.getTagName(),tagDescription);
+            } else {
+                return -1;
+            }
+        }
+    }
 
     //select tagDescription, name from (Ingredient join (Tag join Tag on tagId) on ingredientId) where ingridientId = X
 

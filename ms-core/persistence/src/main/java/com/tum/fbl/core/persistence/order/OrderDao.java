@@ -23,7 +23,7 @@ public interface OrderDao extends AutoCloseable{
     @SqlQuery("select * from orderTable where orderId = :id")
     Order findOrderById(@Bind("id") int orderId);
 
-    @SqlQuery("select * from orderTable where restaurant = :restaurant")
+    @SqlQuery("select * from orderTable where restaurantId = :restaurant")
     List<Order> findOrdersByRestaurant(@Bind("restaurant") int restaurant);
     /**
      * inserts a new entry into the Order table in the database
@@ -33,14 +33,14 @@ public interface OrderDao extends AutoCloseable{
      * @param orderStatus the order's current status
      */
     @SqlUpdate("insert into orderTable ( restaurantId, userId, mealId, pickupTime, status, orderNumber)" +
-            " values (:restaurantId, :userId, :mealId, :pickupTime, :status, :number)")
+            " values (:restaurantId, :userId, :mealId, :pickupTime, :status, :orderNumber)")
     @GetGeneratedKeys
     int newOrder(@Bind("restaurantId") int orderRestaurantId,
                  @Bind("userId") int orderUserId,
                   @Bind("mealId") int orderMealId,
                   @Bind("pickupTime") Date orderPickupTime,
                   @Bind("status") int orderStatus,
-                 @Bind("number") int orderNumber);
+                 @Bind("orderNumber") int orderNumber);
 
     /**
      * deletes an entry with specified unique ID in the Order table

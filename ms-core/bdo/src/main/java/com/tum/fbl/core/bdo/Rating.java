@@ -14,7 +14,7 @@ public class Rating {
 
     private Meal meal;
 
-    private float rate;
+    private boolean rate;
 
     private Date ratingTimestamp;
 
@@ -27,7 +27,7 @@ public class Rating {
      * @param meal meal that is rated
      * @param rate marks of the rate
      */
-    public Rating(int ratingId, User user, Meal meal, float rate) {
+    public Rating(int ratingId, User user, Meal meal, boolean rate) {
         this.ratingId = ratingId;
         this.user = user;
         this.meal = meal;
@@ -86,7 +86,7 @@ public class Rating {
      * Gets Rate.
      * @return rate marks of the rate
      */
-    public float getRate() {
+    public boolean getRate() {
         return rate;
     }
 
@@ -94,7 +94,7 @@ public class Rating {
      * Sets Rate.
      * @param rate marks of the rate
      */
-    public void setRate(float rate) {
+    public void setRate(boolean rate) {
         this.rate = rate;
     }
 

@@ -94,7 +94,8 @@ public class CoreServiceApplication extends Application<CoreServiceConfiguration
     }
 
 
-    private void registerResources (Environment environment, ConnectionFactory connectionFactory, CoreServiceConfiguration config, Authenticator<BasicCredentials, User> authenticator) {
+    private void registerResources (Environment environment, ConnectionFactory connectionFactory, CoreServiceConfiguration config,
+                                    Authenticator<BasicCredentials, User> authenticator) {
 
         final HealthDataResource healthDataResource = new HealthDataResource(connectionFactory);
         environment.jersey().register(healthDataResource);
@@ -119,6 +120,9 @@ public class CoreServiceApplication extends Application<CoreServiceConfiguration
 
         final UserResource userResource = new UserResource(connectionFactory);
         environment.jersey().register(userResource);
+
+        final TagResource tagResource = new TagResource(connectionFactory);
+        environment.jersey().register(tagResource);
 
         final AuthResource authResource = new AuthResource(authenticator);
         environment.jersey().register(authResource);

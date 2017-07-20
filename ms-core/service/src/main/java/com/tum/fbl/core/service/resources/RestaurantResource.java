@@ -10,7 +10,9 @@ import io.swagger.annotations.ApiOperation;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -132,7 +134,7 @@ public class RestaurantResource {
                         restaurant.getRestaurantPassword(),
                         restaurant.getRestaurantEmail(),
                         //note: a restaurant has no such informations
-                        null,
+                        new Date(Calendar.getInstance().getTimeInMillis()),
                         0,
                         0,
                         restaurant.getRestaurantDisplayName(),
@@ -158,6 +160,7 @@ public class RestaurantResource {
         if (restaurant != null) {
             try (UserDao userDao = this.connectionFactory.getConnection().open(UserDao.class)) {
                 userDao.updateUser(
+                        restaurant.getRestaurantId(),
                         restaurant.getRestaurantName(),
                         restaurant.getRestaurantPassword(),
                         restaurant.getRestaurantEmail(),

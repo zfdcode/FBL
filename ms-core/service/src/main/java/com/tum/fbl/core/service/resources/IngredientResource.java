@@ -90,14 +90,27 @@ public class IngredientResource {
     /**
      * Gets ingredient by tags
      *
-     * @param ingredientTagID the ingredient tag id
+     * @param tagID the ingredient tag id
      * @return Ingredient
      */
     @GET
-    @Path("/tag/{ingredientTagID}")
-    @ApiOperation(value = "Get information of a ingredient by tag id")
-    public Ingredient getIngredientByTagID(@PathParam("ingredientTagID") int ingredientTagID) {
-        return null;
+    @Path("/tag/{tagID}")
+    @ApiOperation(value = "Get information of a ingredients by tag id")
+    public List<Ingredient> getIngredientsByTagID(@PathParam("tagID") int tagID) {
+        try (
+                IngredientDao ingredientDao = this.connectionFactory.getConnection().open(IngredientDao.class);
+                TagDao tagDao = this.connectionFactory.getConnection().open(TagDao.class)) {
+            List<Ingredient> ingredients = new ArrayList<>();
+            List<com.tum.fbl.core.persistence.ingredient.Ingredient> ingredientList = ingredientDao.findIngredientByTagId(tagID);
+
+            if (ingredientList != null) {
+                for (com.tum.fbl.core.persistence.ingredient.Ingredient ingredient : ingredientList) {
+                    Ingredient ingredientBDO = updateIngredientBDO(ingredient, tagDao);
+                    ingredients.add(ingredientBDO);
+                }
+            }
+            return ingredients;
+        }
     }
 
     @GET
@@ -168,7 +181,7 @@ public class IngredientResource {
                         if (tag != null) {
                             ingredientDao.newIngredientTag(ingredientId, tag.getTagId());
                         } else {
-                            int tagId = tagDao.newTag(tagName);
+                            int tagId = tagDao.newTag(tagName, "");
                             ingredientDao.newIngredientTag(ingredientId, tagId);
                         }
                     }

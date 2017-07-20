@@ -51,7 +51,7 @@ public class Rating {
      * @return userId
      */
     public int getUserId() {
-        return userId;
+        return this.userId;
     }
 
     /**

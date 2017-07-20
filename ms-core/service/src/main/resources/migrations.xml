@@ -277,7 +277,7 @@
         </createTable>
 
         <createTable tableName="Tag">
-            <column name="tagId" type="int">
+            <column name="tagId" type="int" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="tagName" type="varchar(255)">

@@ -22,6 +22,9 @@ public interface IngredientDao extends AutoCloseable {
     @SqlQuery("select * from Ingredient where ingredientId = :id")
     Ingredient findIngredientById(@Bind("id") int ingredientId);
 
+    @SqlQuery("select i.* from Ingredient i, IngredientTag it where it.tagId=:tagId AND it.ingredientId=i.ingredientId")
+    List<Ingredient> findIngredientByTagId(@Bind("tagId") int tagId);
+
     /**
      * gets all ingredients
      * @return List of Ingredient objects
@@ -42,8 +45,9 @@ public interface IngredientDao extends AutoCloseable {
      * @param sugar the total amount of sugar the ingredient contains
      * @return the unique ID of the newly added ingredient
      */
+    @GetGeneratedKeys
     @SqlUpdate("Insert into Ingredient (ingredientName, description, image, energy, totalFat, protein, totalCarbohydrate, isGarnish, sugar) " +
-            "values (:ingredientName, :description, :image, :energy, :totalFat, :protein, :totalCarbohydrate, :isGarnish, :sugar); SELECT LAST_INSERT_ID() from Ingredient")
+            "values (:ingredientName, :description, :image, :energy, :totalFat, :protein, :totalCarbohydrate, :isGarnish, :sugar)")
     int newIngredient(@Bind("ingredientName") String ingredientName,
                        @Bind("description") String description,
                        @Bind("image") String ingredientImage,

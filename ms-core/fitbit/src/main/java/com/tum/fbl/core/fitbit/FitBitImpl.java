@@ -28,6 +28,7 @@ public class FitBitImpl implements FitBit {
 
     public String getsCalorieGoalValue () {
         JSONObject calorieGoalJson = new JSONObject(this.apiCall ("https://api.fitbit.com/1/user/-/activities/goals/daily.json"));
+        //TODO: JSONException: JSONObject["goals"] not found.
         JSONObject oneDay = calorieGoalJson.getJSONObject("goals");
         int ret = oneDay.getInt("caloriesOut");
         return Integer.toString(ret);

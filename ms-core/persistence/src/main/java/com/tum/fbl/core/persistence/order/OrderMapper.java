@@ -29,7 +29,7 @@ public class OrderMapper implements ResultSetMapper<Order> {
                 r.getInt("mealId"),
                 r.getDate("pickupTime"),
                 r.getInt("status"),
-                r.getInt("number")
+                r.getInt("orderNumber")
                 );
     }
 

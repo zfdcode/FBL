@@ -120,17 +120,20 @@ public class HealthDataResource {
         try (HealthDataDao healthDataDao = this.connectionFactory.getConnection().open(HealthDataDao.class)){
             //fitbit call, update database
             com.tum.fbl.core.persistence.healthdata.HealthData healthDataDb = healthDataDao.findHealthDataById(userId);
-            String token = healthDataDb.getDeviceUserPassword();
-            FitBitImpl fbCall= new FitBitImpl(token);
 
             if (healthDataDb != null) {
-                HealthData healthData = new HealthData(healthDataDao.findHealthDataById(userId));
+                FitBitImpl fbCall= new FitBitImpl(healthDataDb.getDeviceUserPassword());
                 //update healthdata
                 float cg = Float.parseFloat(fbCall.getsCalorieGoalValue());
                 float bc = Float.parseFloat(fbCall.getsBurnedCaloriesValue());
-                healthDataDao.updateHealthData(healthDataDb.getUserId(), token, healthDataDb.getDeviceUserId(), bc, healthDataDb.getTrackedCaloriesTimeRange(), cg);
-                healthData = new HealthData(healthDataDao.findHealthDataById(userId));
-                return healthData.getCalorieGoal() - healthData.getBurnedCalories();
+                healthDataDao.updateHealthData(
+                        healthDataDb.getUserId(),
+                        healthDataDb.getDeviceUserPassword(),
+                        healthDataDb.getDeviceUserId(),
+                        bc,
+                        healthDataDb.getTrackedCaloriesTimeRange(),
+                        cg);
+                return cg-bc;
             } else {
                 throw new IllegalArgumentExpection();
             }

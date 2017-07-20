@@ -29,7 +29,7 @@ public interface HealthDataDao extends AutoCloseable {
     @SqlUpdate("delete from healthTrackerData where userId = :id")
     void deleteHealthData(@Bind("id") int userId);
 
-    @SqlUpdate("update healthTrackerData set deviceUserPassword = :deviceUserPassword, deviceUserId = :deviceUserId, burnedCalorie = :burnedCalories, trackedCaloriesRange = :trackedCaloriesRange, calorieGoal= :calorieGoal where userId = :id")
+    @SqlUpdate("update healthTrackerData set deviceUserPassword = :deviceUserPassword, deviceUserId = :deviceUserId, burnedCalories = :burnedCalories, trackedCaloriesRange = :trackedCaloriesRange, calorieGoal= :calorieGoal where userId = :userId")
     void updateHealthData(@Bind("userId") int userId,
                           @Bind("deviceUserPassword") String deviceUserPassword,
                           @Bind("deviceUserId") int deviceUserId,

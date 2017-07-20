@@ -104,7 +104,7 @@
             <column name="userId" type="varchar(255)">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
-            <column name="deviceUserPassword" type="varchar(255)"/>
+            <column name="deviceUserPassword" type="varchar(1024)"/>
             <column name="deviceUserId" type="varchar(255)"/>
             <column name="calorieGoal" type="float">
                 <constraints nullable="false"/>

@@ -80,12 +80,14 @@ public class RatingResource {
                 MealDao mealDao = this.connectionFactory.getConnection().open(MealDao.class)
         ) {
             List<Rating> ratings = new ArrayList<>();
-            for (com.tum.fbl.core.persistence.rating.Rating rating : ratingDao.findRatingsByMealId(1)) {
-
+            List<Integer> ids = new ArrayList<>();
+            for (com.tum.fbl.core.persistence.rating.Rating rating : ratingDao.findRatingsByMealId(mealId)) {
+                //ids.add(rating.getUserId());
                 User user = new User(userDao.findUserById(rating.getUserId()));
                 Meal meal = new Meal(mealDao.findMealById(rating.getMealId()));
                 ratings.add(new Rating(rating.getRatingId(), user, meal, rating.isRating()));
             }
+            //return ids;
             return ratings;
         }
     }

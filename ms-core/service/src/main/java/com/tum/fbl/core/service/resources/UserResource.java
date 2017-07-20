@@ -3,7 +3,10 @@ package com.tum.fbl.core.service.resources;
 import com.tum.fbl.core.bdo.User;
 import com.tum.fbl.core.persistence.ConnectionFactory;
 import com.tum.fbl.core.persistence.user.UserDao;
+import com.tum.fbl.core.service.auth.PBKDF2WithHmacSHA1Hasher;
+import com.tum.fbl.core.service.auth.PasswordHasher;
 import com.tum.fbl.core.service.exceptions.IllegalArgumentExpection;
+import de.qaware.heimdall.PasswordException;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.skife.jdbi.v2.DBI;
@@ -28,21 +31,26 @@ public class UserResource {
 
     private final ConnectionFactory connectionFactory;
 
+    private final PasswordHasher passwordHasher;
+
     /**
      * Connects the factory for user resource.
+     *
      * @param connectionFactory the connection factory
      */
-    public UserResource (ConnectionFactory connectionFactory) {
+    public UserResource(ConnectionFactory connectionFactory) {
         this.connectionFactory = connectionFactory;
+
+        this.passwordHasher = new PBKDF2WithHmacSHA1Hasher();
     }
 
     @GET
     @Path("/all")
     @ApiOperation(value = "Get basic user information")
-    public List< User> getUsers() {
+    public List<User> getUsers() {
 
         try (UserDao userDao = this.connectionFactory.getConnection().open(UserDao.class)) {
-            List<User> users = new ArrayList<User>();
+            List<User> users = new ArrayList<>();
 
             List<com.tum.fbl.core.persistence.user.User> userList = userDao.getAllUser(this.role);
             if (userList != null) {
@@ -53,8 +61,10 @@ public class UserResource {
             return users;
         }
     }
+
     /**
      * Gets user.
+     *
      * @param userId the user id
      * @return User
      */
@@ -76,6 +86,7 @@ public class UserResource {
 
     /**
      * Deletes user.
+     *
      * @param userId the user id
      */
     @DELETE
@@ -89,26 +100,40 @@ public class UserResource {
 
     /**
      * Adds user.
+     *
      * @param user the user
      */
     @POST
     @ApiOperation(value = "Add a new user to the store")
-    public int addUser(User user) {
-        try (UserDao userDao = this.connectionFactory.getConnection().open(UserDao.class)) {
-              return userDao.newUser(
-                    user.getUserName(),
-                    user.getUserPassword(),
-                    user.getEmail(),
-                    user.getBirthday(),
-                    user.getHeight(),
-                    user.getWeight(),
-                    user.getDisplayName(),
-                    "",
-                    0,
-                    0,
-                    this.role
-            );
+    public int addUser(User user) throws IllegalArgumentExpection {
+
+        if (user != null) {
+
+            try {
+                String hashedPasswd = this.passwordHasher.hashPassword(user.getUserPassword());
+
+                try (UserDao userDao = this.connectionFactory.getConnection().open(UserDao.class)) {
+                    return userDao.newUser(
+                            user.getUserName(),
+                            hashedPasswd,
+                            user.getEmail(),
+                            user.getBirthday(),
+                            user.getHeight(),
+                            user.getWeight(),
+                            user.getDisplayName(),
+                            "",
+                            0,
+                            0,
+                            this.role
+                    );
+                }
+            } catch (PasswordException e) {
+                throw new IllegalArgumentExpection("Password is invalid");
+            }
+        } else {
+            throw new IllegalArgumentExpection();
         }
+
     }
 
     @GET
@@ -130,6 +155,7 @@ public class UserResource {
 
     /**
      * Updates user.
+     *
      * @param user the user
      */
     @PUT
@@ -137,21 +163,31 @@ public class UserResource {
     public void updateUser(User user) throws IllegalArgumentExpection {
 
         if (user != null) {
-            try (UserDao userDao = this.connectionFactory.getConnection().open(UserDao.class)) {
-                userDao.updateUser(
-                        user.getUserId(),
-                        user.getUserName(),
-                        user.getUserPassword(),
-                        user.getEmail(),
-                        user.getWeight(),
-                        user.getDisplayName()
-                );
+
+            try {
+                String hashedPasswd = this.passwordHasher.hashPassword(user.getUserPassword());
+
+                try (UserDao userDao = this.connectionFactory.getConnection().open(UserDao.class)) {
+                    userDao.updateUser(
+                            user.getUserId(),
+                            user.getUserName(),
+                            hashedPasswd,
+                            user.getEmail(),
+                            user.getWeight(),
+                            user.getDisplayName()
+                    );
+                }
+            } catch (PasswordException e) {
+                throw new IllegalArgumentExpection("Password is invalid");
             }
-        } else {throw new IllegalArgumentExpection();}
+        } else {
+            throw new IllegalArgumentExpection();
+        }
     }
 
     /**
      * Gets user by special need.
+     *
      * @param categoryId the special need id
      * @return List<User> the list of users
      */

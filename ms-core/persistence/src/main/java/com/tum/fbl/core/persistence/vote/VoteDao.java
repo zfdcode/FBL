@@ -22,7 +22,7 @@ public interface VoteDao extends AutoCloseable {
     Vote findVoteById(@Bind("id") int voteId);
 
     @GetGeneratedKeys
-    @SqlUpdate("Insert into vote (votingIngItemId, userId, type) value (:votingIngItemId, :userId, :type)")
+    @SqlUpdate("Insert into vote (votingIngItemId, userId, type) values (:votingIngItemId, :userId, :type)")
     int newVote(@Bind("votingIngItemId") int votingIngItemId,
                  @Bind("userId") int userId,
                  @Bind("type") String type);

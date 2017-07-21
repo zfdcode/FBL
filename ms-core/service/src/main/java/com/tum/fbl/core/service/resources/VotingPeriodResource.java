@@ -149,7 +149,7 @@ public class VotingPeriodResource {
      * Adds VotingPeriod.
      */
 
-    @GET
+    @POST
     @ApiOperation(value = "Add a new VotingPeriod")
     public int addVotingPeriod (VotingPeriod votingPeriod) {
         try (VotingPeriodDao votingPeriodDao = this.connectionFactory.getConnection().open(VotingPeriodDao.class)) {

@@ -41,11 +41,11 @@ public class VotingIngItem {
         this.votingPeriodId = votingPeriodId;
     }
 
-    public Boolean getIsIgnored() {
+    public boolean getIsIgnored() {
         return isIgnored;
     }
 
-    public void setIsIgnored(Boolean isIgnored) {
+    public void setIsIgnored(boolean isIgnored) {
         this.isIgnored = isIgnored;
     }
 

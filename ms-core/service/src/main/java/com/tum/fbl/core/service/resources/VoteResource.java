@@ -5,6 +5,7 @@ package com.tum.fbl.core.service.resources;
  */
 
 import com.tum.fbl.core.bdo.Vote;
+import com.tum.fbl.core.bdo.VotingIngItem;
 import com.tum.fbl.core.bdo.VotingPeriod;
 import com.tum.fbl.core.persistence.ConnectionFactory;
 import com.tum.fbl.core.persistence.vote.VoteDao;

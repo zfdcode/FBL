@@ -26,11 +26,12 @@ public interface VotingPeriodDao extends AutoCloseable{
     VotingPeriod findVotingPeriodById(@Bind("id") int votingPeriodId);
 
     @GetGeneratedKeys
-    @SqlUpdate("Insert into voting (startTime, endTime, isFinished, calendarWeek) value (:startTime, :endTime, :isFinished, :calendarWeek)")
-    int newVoting(@Bind("createdBy") Date startTime,
-                   @Bind("createdOn") Date endTime,
-                   @Bind("startDate") Boolean isFinished,
-                   @Bind("location") int calendarWeek);
+    @SqlUpdate("Insert into votingPeriod (votingPeriodId, startTime, endTime, isFinished, calendarWeek) value (:votingPeriodId, :startTime, :endTime, :isFinished, :calendarWeek)")
+    int newVotingPeriod(  @Bind("votingPeriodId") int votingPeriodId,
+                    @Bind("createdBy") Date startTime,
+                    @Bind("createdOn") Date endTime,
+                    @Bind("startDate") Boolean isFinished,
+                    @Bind("location") int calendarWeek);
 
     @SqlUpdate("delete from votingPeriod where votingPeriodId = :id")
     void deleteVotingById(@Bind("id") int votingPeriodId);

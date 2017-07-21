@@ -22,10 +22,12 @@ public interface VotingIngItemDao extends AutoCloseable{
     VotingIngItem findVotingIngItemById(@Bind("id") int votingIngItemId);
 
     @GetGeneratedKeys
-    @SqlUpdate("Insert into votingIngItem (votingPeriodId, isIgnored, ingredientId) value (:votingPeriodId, :isIgnored, :ingredientId)")
-    int newVoting(@Bind("createdBy") int votingPeriodId,
-                   @Bind("createdOn") Boolean isIgnored,
-                   @Bind("startDate") int ingredientId);
+    @SqlUpdate("Insert into votingIngItem (votingIngItemId, votingPeriodId, isIgnored, ingredientId) value (:votingIngItemId, :votingPeriodId, :isIgnored, :ingredientId)")
+    int newVotingIngItem(
+                    @Bind("votingIngItemId") int votingIngItemId,
+                    @Bind("votingPeriodId") int votingPeriodId,
+                    @Bind("isIgnored") boolean isIgnored,
+                    @Bind("ingredientId") int ingredientId);
 
     @SqlUpdate("delete from votingIngItem where votingIngItemId = :id")
     void deleteVotingIngItemById(@Bind("id") int votingIngItemId);

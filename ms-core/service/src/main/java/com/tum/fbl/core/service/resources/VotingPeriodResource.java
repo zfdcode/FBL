@@ -144,5 +144,25 @@ public class VotingPeriodResource {
 
         }
     }
+
+    /**
+     * Adds VotingPeriod.
+     */
+
+    @GET
+    @ApiOperation(value = "Add a new VotingPeriod")
+    public int addVotingPeriod (VotingPeriod votingPeriod) {
+        try (VotingPeriodDao votingPeriodDao = this.connectionFactory.getConnection().open(VotingPeriodDao.class)) {
+
+            //insert new vote
+            return votingPeriodDao.newVotingPeriod(
+                    votingPeriod.getVotingPeriodId(),
+                    votingPeriod.getStartTime(),
+                    votingPeriod.getEndTime(),
+                    votingPeriod.getFinished(),
+                    votingPeriod.getCalendarWeek());
+        }
+    }
+
 }
 

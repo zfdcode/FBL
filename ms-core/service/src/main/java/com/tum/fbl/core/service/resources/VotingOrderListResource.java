@@ -39,6 +39,7 @@ public class VotingOrderListResource {
 
             //insert new vote
             votingOrderListDao.newVotingOrderList(
+                    votingOrder.getVotingOrderListId(),
                     votingOrder.getOrderedAmount(),
                     votingOrder.getOrderedAt(),
                     votingOrder.getVotingPeriodId(),

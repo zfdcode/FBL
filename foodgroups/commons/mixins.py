@@ -1,4 +1,4 @@
-from rest_framework.authentication import TokenAuthentication
+from users.authentication import FBLAuthentication
 from rest_framework.permissions import IsAuthenticated
 
 
@@ -15,7 +15,7 @@ class ActionSerializerAPIMixin(object):
 
 
 class AuthRequiredMixin(object):
-    authentication_classes = [TokenAuthentication]
+    authentication_classes = [FBLAuthentication]
     permission_classes = [IsAuthenticated]
 
 

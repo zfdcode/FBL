@@ -26,7 +26,7 @@ class FoodPreferenceView(
 class UserFoodPreferenceView(
     mixins.ListModelMixin,
     mixins.CreateModelMixin,
-    common_views.BaseGenericViewSet
+    common_views.AuthBaseGenericViewSet
 ):
     """
     Class which contain all REST APIs related to Food preferences of User
@@ -40,8 +40,7 @@ class UserFoodPreferenceView(
 
     @property
     def user_id(self):
-        # TODO: Remove the default 1 when we add permission as IsAuthenticated
-        return 1 if self.request.user.is_anonymous else self.request.user.user_id
+        return self.request.user.user_id
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)

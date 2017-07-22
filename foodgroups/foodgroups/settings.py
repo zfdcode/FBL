@@ -141,3 +141,6 @@ REST_FRAMEWORK = {
     'TIME_FORMAT': "%H:%M:%S",
     'TIME_INPUT_FORMATS': ["%H:%M:%S"],
 }
+
+# JAVA User API
+JAVA_API_URL = "http://46.101.141.5/core"

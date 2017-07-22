@@ -1,11 +1,7 @@
-import random
-import traceback
-
 from django.core.exceptions import ObjectDoesNotExist
 from rest_framework import (
     mixins,
     status,
-    exceptions,
 )
 from rest_framework.decorators import list_route, detail_route
 from rest_framework.response import Response
@@ -42,7 +38,7 @@ class EventView(
     mixins.CreateModelMixin,
     mixins.UpdateModelMixin,
     mixins.DestroyModelMixin,
-    common_views.BaseGenericViewSet
+    common_views.AuthBaseGenericViewSet
 ):
     """
     Class which contain all REST APIs related to Events
@@ -59,13 +55,9 @@ class EventView(
 
     @property
     def user_id(self):
-        # TODO: Remove the default 1 when we add permission as IsAuthenticated
-        return 1 if self.request.user.is_anonymous else self.request.user.user_id
+        return self.request.user.user_id
 
-    def get_user_id(self):  # TODO: Replace with authenticated user id later
-        return random.choice([2, 3, 4, 5])
-
-    @list_route()
+    @list_route(authentication_classes=[], permission_classes=[])
     def all(self, request, *args, **kwargs):
         """
         Returns all available events
@@ -79,14 +71,14 @@ class EventView(
         Returns new user of the Event
         """
         event_obj = self.get_object()
-        user_id = self.get_user_id()
+        user_id = self.user_id
         try:
             event_user = event_obj.users.get(user_id=user_id)
         except ObjectDoesNotExist:
             # Create a Event user object on POST
             users_serializer = self.users_serializer_class(data={
                 'event': event_obj.id,
-                'user_id': user_id      # TODO: Replace with authenticated user id later
+                'user_id': user_id
             })
 
             users_serializer.is_valid(raise_exception=True)
@@ -103,7 +95,7 @@ class EventView(
         Returns code 204
         """
         event_obj = self.get_object()
-        user_id = self.get_user_id()
+        user_id = self.user_id
         models.EventUser.objects.filter(event=event_obj, user_id=user_id).delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
@@ -193,8 +185,11 @@ class EventView(
 class EventMessageView(
     mixins.RetrieveModelMixin,
     mixins.DestroyModelMixin,
-    common_views.BaseGenericViewSet
+    common_views.AuthBaseGenericViewSet
 ):
+    """
+    Class for API to Retrieve and delete an event message
+    """
     model = models.EventMessage
     serializer_class = serializers.EventMessageSerializer
     queryset = models.EventMessage.objects.all()
@@ -203,8 +198,11 @@ class EventMessageView(
 class EventShoppingItemView(
     mixins.RetrieveModelMixin,
     mixins.DestroyModelMixin,
-    common_views.BaseGenericViewSet
+    common_views.AuthBaseGenericViewSet
 ):
+    """
+    Class for API to Retrieve and delete an event shopping item
+    """
     model = models.EventShoppingItem
     serializer_class = serializers.EventShoppingItemSerializer
     bring_serializer_class = serializers.EventShoppingItemBringSerializer
@@ -212,8 +210,7 @@ class EventShoppingItemView(
 
     @property
     def user_id(self):
-        # TODO: Remove the default 1 when we add permission as IsAuthenticated
-        return 1 if self.request.user.is_anonymous else self.request.user.user_id
+        return self.request.user.user_id
 
     @detail_route(methods=['post'])
     def bring(self, request, *args, **kwargs):
@@ -238,8 +235,11 @@ class EventShoppingItemView(
 class EventMealView(
     mixins.RetrieveModelMixin,
     mixins.DestroyModelMixin,
-    common_views.BaseGenericViewSet
+    common_views.AuthBaseGenericViewSet
 ):
+    """
+    Class for API to Retrieve and delete an event meal
+    """
     model = models.EventMeal
     serializer_class = serializers.EventMealSerializer
     vote_serializer_class = serializers.EventMealVoteSerializer
@@ -247,8 +247,7 @@ class EventMealView(
 
     @property
     def user_id(self):
-        # TODO: Remove the default 1 when we add permission as IsAuthenticated
-        return 1 if self.request.user.is_anonymous else self.request.user.user_id
+        return self.request.user.user_id
 
     @detail_route(methods=['post'])
     def vote(self, request, *args, **kwargs):
@@ -274,7 +273,7 @@ class EventLocationView(
     mixins.ListModelMixin,
     mixins.RetrieveModelMixin,
     mixins.CreateModelMixin,
-    common_views.BaseGenericViewSet
+    common_views.AuthBaseGenericViewSet
 ):
     """
     Class which contain all REST APIs related to Event Locations
@@ -286,13 +285,12 @@ class EventLocationView(
 
     @property
     def user_id(self):
-        # TODO: Remove the default 1 when we add permission as IsAuthenticated
-        return 1 if self.request.user.is_anonymous else self.request.user.user_id
+        return self.request.user.user_id
 
     def get_queryset(self):
         return models.EventLocation.objects.filter(user_id=self.user_id)
 
-    @list_route()
+    @list_route(authentication_classes=[], permission_classes=[])
     def all(self, request, *args, **kwargs):
         """
         Returns all Public event locations
@@ -309,6 +307,9 @@ class CampusView(
     mixins.RetrieveModelMixin,
     common_views.BaseGenericViewSet
 ):
+    """
+    Class for Campus APIs 
+    """
     model = models.Campus
     serializer_class = serializers.CampusSerializer
     queryset = models.Campus.objects.all()

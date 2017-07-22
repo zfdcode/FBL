@@ -1,2 +1,7 @@
 .idea
 .DS_Store
+.idea
+foodgroups/env/
+foodgroups/static/
+__pycache__
+*.pyc

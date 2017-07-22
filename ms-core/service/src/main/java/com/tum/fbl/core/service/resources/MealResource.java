@@ -30,6 +30,7 @@ import javax.ws.rs.core.MediaType;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.sql.Date;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -460,7 +461,10 @@ public class MealResource {
                         mealDao.newMealIngredient(mealId, i.getIngredientId());
                     }
                 }
-
+                
+                if (restaurant!=null){
+                    mealDao.newRestaurantMeal(mealId,restaurant.getRestaurantId(),new Date(Calendar.getInstance().getTimeInMillis()) );
+                }
 
                 return mealId;
             }
